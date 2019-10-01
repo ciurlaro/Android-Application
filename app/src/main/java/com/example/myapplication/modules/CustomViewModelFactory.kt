@@ -1,0 +1,21 @@
+package com.example.myapplication.modules
+
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import com.example.myapplication.ui.home.HomeViewModel
+import com.example.myapplication.ui.search.SearchViewModel
+import com.example.myapplication.ui.userprofle.UserProfileViewModel
+import org.kodein.di.DKodein
+import org.kodein.di.generic.instance
+
+@Suppress("UNCHECKED_CAST")
+class CustomViewModelFactory(private val injector: DKodein) : ViewModelProvider.Factory {
+
+    override fun <T : ViewModel> create(modelClass: Class<T>): T = when (modelClass.kotlin) {
+        HomeViewModel::class -> HomeViewModel(injector.instance())
+        SearchViewModel::class -> SearchViewModel()
+        UserProfileViewModel::class -> UserProfileViewModel()
+        else -> throw IllegalArgumentException("${modelClass.canonicalName} has not been implemented in this factory")
+    } as T
+
+}
