@@ -32,6 +32,14 @@ android {
                 "proguard-rules.pro"
             )
         }
+
+        create("mock") {
+            isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
     }
 
     packagingOptions {
@@ -77,12 +85,15 @@ dependencies {
     implementation("androidx.navigation", "navigation-fragment", androidxNavigationVersion)
     implementation("androidx.navigation", "navigation-ui", androidxNavigationVersion)
     implementation("androidx.lifecycle", "lifecycle-extensions", androidxLifecycleVersion)
+    implementation("androidx.lifecycle", "lifecycle-viewmodel-ktx", androidxLifecycleVersion)
     implementation("androidx.navigation", "navigation-fragment-ktx", androidxNavigationVersion)
     implementation("androidx.navigation", "navigation-ui-ktx", androidxNavigationVersion)
 
     implementation(ktor("client-okhttp", ktorVersion))
     implementation(ktor("client-json", ktorVersion))
     implementation(ktor("client-serialization-jvm", ktorVersion))
+    implementation(ktor("client-mock-jvm", ktorVersion))
+
 
     implementation("org.kodein.di", "kodein-di-generic-jvm", kodeinVersion)
     implementation("org.kodein.di", "kodein-di-framework-android-x", kodeinVersion)
