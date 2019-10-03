@@ -1,0 +1,54 @@
+{
+  "_embedded": {
+    "matchEntities": [
+      {
+        "id": 65,
+        "matchDateTime": "2007-12-03T11:15:30",
+        "_links": {
+          "self": {
+            "href": "http://localhost:8080/match/65"
+          },
+          "matchEntity": {
+            "href": "http://localhost:8080/match/65"
+          },
+          "tournamentInvolved": {
+            "href": "http://localhost:8080/match/65/tournamentInvolved"
+          }
+        }
+      },
+      {
+        "id": 193,
+        "matchDateTime": "1985-04-12T23:20:22",
+        "_links": {
+          "self": {
+            "href": "http://localhost:8080/match/193"
+          },
+          "matchEntity": {
+            "href": "http://localhost:8080/match/193"
+          },
+          "tournamentInvolved": {
+            "href": "http://localhost:8080/match/193/tournamentInvolved"
+          }
+        }
+      }
+    ]
+  },
+  "_links": {
+    "self": {
+      "href": "http://localhost:8080/match{?page,size,sort}",
+      "templated": true
+    },
+    "profile": {
+      "href": "http://localhost:8080/profile/match"
+    },
+    "search": {
+      "href": "http://localhost:8080/match/search"
+    }
+  },
+  "page": {
+    "size": 20,
+    "totalElements": 2,
+    "totalPages": 1,
+    "number": 0
+  }
+}

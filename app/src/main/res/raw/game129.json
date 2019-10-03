@@ -1,0 +1,14 @@
+{
+  "id": 129,
+  "gameName": "CS",
+  "availableModes": "String",
+  "image": "String",
+  "_links": {
+    "self": {
+      "href": "http://localhost:8080/game/129"
+    },
+    "gameEntity": {
+      "href": "http://localhost:8080/game/129"
+    }
+  }
+}

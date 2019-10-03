@@ -5,20 +5,16 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.data.MatchEntity
-import io.ktor.client.HttpClient
-import io.ktor.client.request.post
+import com.example.myapplication.usecases.GetAllTournamentsUseCase
 import kotlinx.coroutines.launch
 
-class HomeViewModel(private val httpClient: HttpClient) : ViewModel() {
+class HomeViewModel(private val useCase: GetAllTournamentsUseCase) : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
-    }
-    val text: LiveData<String> = _text
+    private val _matches = MutableLiveData<List<MatchEntity>>()
+    val text: LiveData<List<MatchEntity>> = _matches
 
     fun loadMatches() = viewModelScope.launch {
-        val matches = httpClient.post<Collection<MatchEntity>>("http://localhost:8080/match")
-
-
+        _matches.value = useCase.buildAction()
     }
+
 }

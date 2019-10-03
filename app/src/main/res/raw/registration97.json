@@ -1,0 +1,16 @@
+{
+  "id": 97,
+  "userId": 9999,
+  "outcome": "42",
+  "_links": {
+    "self": {
+      "href": "http://localhost:8080/registration/97"
+    },
+    "registrationEntity": {
+      "href": "http://localhost:8080/registration/97"
+    },
+    "matchId": {
+      "href": "http://localhost:8080/registration/97/matchId"
+    }
+  }
+}

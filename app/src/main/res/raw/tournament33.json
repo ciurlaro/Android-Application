@@ -1,0 +1,15 @@
+{
+  "id": 33,
+  "playersNumber": 32,
+  "tournamentDescription": "description",
+  "tournamentMode": "mode",
+  "adminId": 42,
+  "_links": {
+    "self": {
+      "href": "http://localhost:8080/tournament/33"
+    },
+    "tournamentEntity": {
+      "href": "http://localhost:8080/tournament/33"
+    }
+  }
+}

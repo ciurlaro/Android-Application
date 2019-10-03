@@ -1,0 +1,53 @@
+{
+  "_embedded": {
+    "registrationEntities": [
+      {
+        "id": 97,
+        "userId": 9999,
+        "outcome": "42",
+        "_links": {
+          "self": {
+            "href": "http://localhost:8080/registration/97"
+          },
+          "registrationEntity": {
+            "href": "http://localhost:8080/registration/97"
+          },
+          "matchId": {
+            "href": "http://localhost:8080/registration/97/matchId"
+          }
+        }
+      },
+      {
+        "id": 98,
+        "userId": 99919,
+        "outcome": "Winner",
+        "_links": {
+          "self": {
+            "href": "http://localhost:8080/registration/98"
+          },
+          "registrationEntity": {
+            "href": "http://localhost:8080/registration/98"
+          },
+          "matchId": {
+            "href": "http://localhost:8080/registration/98/matchId"
+          }
+        }
+      }
+    ]
+  },
+  "_links": {
+    "self": {
+      "href": "http://localhost:8080/registration{?page,size,sort}",
+      "templated": true
+    },
+    "profile": {
+      "href": "http://localhost:8080/profile/registration"
+    }
+  },
+  "page": {
+    "size": 20,
+    "totalElements": 2,
+    "totalPages": 1,
+    "number": 0
+  }
+}

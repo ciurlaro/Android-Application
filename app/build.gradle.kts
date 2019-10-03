@@ -24,21 +24,39 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        create("default") {
+            storeFile = file("my-release-key.keystore")
+            storePassword = "abcdef1234"
+            keyAlias = "alias_name"
+            keyPassword = "abcdef1234"
+        }
+    }
+
     buildTypes {
+
         getByName("release") {
             isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
         }
 
         create("mock") {
             isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
+            isDebuggable = true
+            buildConfigField("String", "SERVER_PROTOCOL", "\"http\"")
+            buildConfigField("String", "SERVER_URL", "\"mock\"")
+            buildConfigField("int", "SERVER_PORT", "42")
+        }
+
+        create("localTesting") {
+            isMinifyEnabled = false
+            isDebuggable = true
+            buildConfigField("String", "SERVER_PROTOCOL", "\"http\"")
+            buildConfigField("String", "SERVER_URL", "\"localhost\"")
+            buildConfigField("int", "SERVER_PORT", "8080")
+        }
+
+        all {
+            signingConfig = signingConfigs["default"]
         }
     }
 
