@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
     id("com.android.application")
     kotlin("android")
@@ -92,7 +90,8 @@ dependencies {
     val androidTestRunnerVersion: String by project
 
 
-    implementation(kotlin("stdlib-jdk8"))
+    implementation(project(":data"))
+
     implementation(kotlin("reflect"))
 
     implementation("androidx.appcompat", "appcompat", androidxAppCompatVersion)
@@ -121,12 +120,6 @@ dependencies {
     androidTestImplementation("androidx.test.ext", "junit", androidTestRunnerVersion)
     androidTestImplementation("androidx.test.espresso", "espresso-core", espressoVersion)
 
-}
-
-tasks.withType<KotlinCompile> {
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
 }
 
 @Suppress("unused")

@@ -11,7 +11,7 @@ pluginManagement {
     resolutionStrategy {
         eachPlugin {
             when (requested.id.id) {
-                "org.jetbrains.kotlin.android", "org.jetbrains.kotlin.android.extensions" ->
+                "org.jetbrains.kotlin.jvm", "org.jetbrains.kotlin.android", "org.jetbrains.kotlin.android.extensions" ->
                     useModule("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
                 "com.android.application" ->
                     useModule("com.android.tools.build:gradle:$androidGradlePluginVersion")
@@ -20,6 +20,6 @@ pluginManagement {
     }
 }
 
-include(":app")
+include(":app", ":data", ":domain")
 rootProject.name = "My Application"
 enableFeaturePreview("GRADLE_METADATA")
