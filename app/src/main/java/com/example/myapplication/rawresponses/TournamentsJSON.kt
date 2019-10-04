@@ -1,16 +1,16 @@
 package com.example.myapplication.rawresponses
 
 data class MultipleTournamentsJSON(
-    val _embedded: TournamentEntitiesJSON,
+    val _embedded: TournamentEmbeddedJSON,
     val _links: LinksJSON,
     val page: PageJSON
 )
 
-data class TournamentEntitiesJSON(
-    val tournamentEntities: List<TournamentEntityJSON>
+data class TournamentEmbeddedJSON(
+    val tournamentEntities: List<TournamentJSON>
 )
 
-data class TournamentEntityJSON(
+data class TournamentJSON(
     val id: Long,
     val playersNumber: Int,
     val tournamentDescription: String,
@@ -18,10 +18,3 @@ data class TournamentEntityJSON(
     val adminId: Long,
     val _links: LinksJSON
 )
-
-data class LinksJSON(
-    val self: HrefJSON,
-    val tournamentEntity: HrefJSON? = null,
-    val profile: HrefJSON? = null
-)
-

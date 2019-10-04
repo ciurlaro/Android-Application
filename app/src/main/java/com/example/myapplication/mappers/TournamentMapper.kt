@@ -1,11 +1,11 @@
 package com.example.myapplication.mappers
 
 import com.example.myapplication.data.TournamentEntity
-import com.example.myapplication.rawresponses.TournamentEntityJSON
+import com.example.myapplication.rawresponses.TournamentJSON
 
 class TournamentMapper :
-    BaseMapper<TournamentEntityJSON, TournamentEntity> {
-    override fun fromRemote(remote: TournamentEntityJSON) =
+    BaseMapper<TournamentJSON, TournamentEntity> {
+    override fun fromRemote(remote: TournamentJSON) =
         TournamentEntity(
             remote.id,
             remote.playersNumber,

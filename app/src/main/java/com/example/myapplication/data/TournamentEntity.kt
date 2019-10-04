@@ -5,5 +5,6 @@ class TournamentEntity(
     val playersNumber: Int,
     val tournamentDescription: String,
     val tournamentMode: String,
-    val adminId: Long
+    val adminId: Long,
+    val game: GameEntity
 )
