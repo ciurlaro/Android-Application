@@ -1,16 +1,22 @@
 package com.example.myapplication.mappers
 
 import com.example.myapplication.data.TournamentEntity
+import com.example.myapplication.rawresponses.GameJSON
 import com.example.myapplication.rawresponses.TournamentJSON
 
-class TournamentMapper :
-    BaseMapper<TournamentJSON, TournamentEntity> {
-    override fun fromRemote(remote: TournamentJSON) =
+class TournamentMapper(
+    private val gameMapper: GameMapper
+) : SingleFromRemoteMapper<Pair<TournamentJSON, GameJSON>, TournamentEntity> {
+
+    override fun fromRemoteSingle(remote: Pair<TournamentJSON, GameJSON>) = with(remote) {
         TournamentEntity(
-            remote.id,
-            remote.playersNumber,
-            remote.tournamentDescription,
-            remote.tournamentMode,
-            remote.adminId
+            first.id,
+            first.playersNumber,
+            first.tournamentDescription,
+            first.tournamentMode,
+            first.adminId,
+            gameMapper.fromRemoteSingle(second)
         )
+    }
+
 }

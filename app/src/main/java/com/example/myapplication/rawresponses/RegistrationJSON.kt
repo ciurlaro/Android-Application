@@ -3,7 +3,7 @@ package com.example.myapplication.rawresponses
 data class MultipleRegistrationsJSON(
     val _embedded: MultipleEmbeddedJSON,
     val _links: LinksJSON,
-    val _page: PageJSON
+    val page: PageJSON
 )
 
 data class MultipleEmbeddedJSON(

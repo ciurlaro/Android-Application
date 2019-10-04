@@ -14,7 +14,6 @@ class HomeViewModel(private val useCase: GetAllTournamentsUseCase) : ViewModel()
     val text: LiveData<List<MatchEntity>> = _matches
 
     fun loadMatches() = viewModelScope.launch {
-        _matches.value = useCase.buildAction()
     }
 
 }

@@ -16,5 +16,6 @@ data class TournamentJSON(
     val tournamentDescription: String,
     val tournamentMode: String,
     val adminId: Long,
+    val gameId: String,
     val _links: LinksJSON
 )

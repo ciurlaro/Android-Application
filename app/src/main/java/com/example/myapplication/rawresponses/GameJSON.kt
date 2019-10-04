@@ -4,7 +4,7 @@ package com.example.myapplication.rawresponses
 data class MultipleGamesJSON(
     val _embedded: GameEmbeddedJSON,
     val _links: LinksJSON,
-    val pageJSON: PageJSON
+    val page: PageJSON
 )
 
 data class GameEmbeddedJSON(

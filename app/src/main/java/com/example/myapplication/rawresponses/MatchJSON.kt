@@ -3,7 +3,7 @@ package com.example.myapplication.rawresponses
 data class MultipleMatchJSON(
     val _embedded: MatchEmbeddedJSON,
     val _links: LinksJSON,
-    val pageJSON: PageJSON
+    val page: PageJSON
 )
 
 data class MatchEmbeddedJSON(

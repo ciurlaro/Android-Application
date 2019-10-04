@@ -5,21 +5,23 @@ import java.time.LocalDateTime
 
 interface EntityRepository {
 
-    fun getGameByName(name: String): GameEntity
+    suspend fun getGameByName(name: String): GameEntity
+    suspend fun searchGameByName(name: String, page: Int): List<GameEntity>
 
-    fun getTournamentById(id: Long): TournamentEntity
-    fun getTournamentsByMode(id: Long): List<TournamentEntity>
-    fun getTournamentsByGame(gameName: String): List<TournamentEntity>
+    suspend fun getTournamentById(id: Long): TournamentEntity
+    suspend fun getTournamentsByMode(mode: String, page: Int): List<TournamentEntity>
+    suspend fun getTournamentsByGame(gameName: String, page: Int): List<TournamentEntity>
 
-    fun getMatchById(id: Long): MatchEntity
-    fun getMatchesByTournament(tournamentId: Long): List<TournamentEntity>
-    fun getMatchesByGame(gameName: String): List<TournamentEntity>
-    fun getMatchesAfterDate(dateTime: LocalDateTime): List<TournamentEntity>
+    suspend fun getMatchById(id: Long): MatchEntity
+    suspend fun getMatchesByTournament(tournamentId: Long, page: Int): List<MatchEntity>
+    suspend fun getMatchesByGame(gameName: String, page: Int): List<MatchEntity>
+    suspend fun getMatchesAfterDate(dateTime: LocalDateTime, page: Int): List<MatchEntity>
 
-    fun getRegistrationById(id: Long): RegistrationEntity
-    fun getRegistrationByMatch(matchId: Long): List<RegistrationEntity>
-    fun getRegistrationsByUser(userId: String): List<RegistrationEntity>
+    suspend fun getRegistrationById(id: Long): RegistrationEntity
+    suspend fun getRegistrationByMatch(matchId: Long, page: Int): List<RegistrationEntity>
+    suspend fun getRegistrationsByUser(userId: String, page: Int): List<RegistrationEntity>
 
-    fun getUserById(id: String): UserEntity
+    suspend fun getUserById(id: String): UserEntity
+    suspend fun getCurrentUser(): UserEntity
 
 }
