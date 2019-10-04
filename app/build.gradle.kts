@@ -43,6 +43,7 @@ android {
             buildConfigField("String", "SERVER_PROTOCOL", "\"http\"")
             buildConfigField("String", "SERVER_URL", "\"mock\"")
             buildConfigField("int", "SERVER_PORT", "42")
+            matchingFallbacks = listOf("release", "debug")
         }
 
         create("localTesting") {
@@ -51,6 +52,7 @@ android {
             buildConfigField("String", "SERVER_PROTOCOL", "\"http\"")
             buildConfigField("String", "SERVER_URL", "\"localhost\"")
             buildConfigField("int", "SERVER_PORT", "8080")
+            matchingFallbacks = listOf("release", "debug")
         }
 
         all {
@@ -90,7 +92,7 @@ dependencies {
     val androidTestRunnerVersion: String by project
 
 
-    implementation(project(":data"))
+    implementation(project(":android-lib"))
 
     implementation(kotlin("reflect"))
 

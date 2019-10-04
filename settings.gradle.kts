@@ -20,6 +20,6 @@ pluginManagement {
     }
 }
 
-include(":app", ":data", ":domain")
+include(":app", ":data", ":domain", "android-lib")
 rootProject.name = "My Application"
 enableFeaturePreview("GRADLE_METADATA")

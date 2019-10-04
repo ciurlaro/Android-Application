@@ -40,7 +40,7 @@ class EntityRepositoryImplementation private constructor(
 
     override suspend fun getTournamentsByGame(gameName: String, page: Int) =
         atDS.getGameByName(gameName)
-            .let { atDS.getTournamentByGameLink(it._links.self.href, page) }
+            .let { atDS.getTournamentsByGameLink(it._links.self.href, page) }
             .transformTournaments()
 
     override suspend fun getMatchById(id: Long) =
@@ -58,7 +58,7 @@ class EntityRepositoryImplementation private constructor(
     override suspend fun getMatchesByTournament(
         tournamentId: Long,
         page: Int
-    ) = atDS.getMatchesByTournamentId(tournamentId)
+    ) = atDS.getMatchesByTournamentId(tournamentId, page)
         .transformMatches()
 
     override suspend fun getMatchesByGame(gameName: String, page: Int) =
@@ -96,7 +96,7 @@ class EntityRepositoryImplementation private constructor(
         matchId: Long,
         page: Int
     ) = atDS.getMatchById(matchId)
-        .let { atDS.getRegistrationsByMatch(it._links.registrationEntity!!.href, page) }
+        .let { atDS.getRegistrationsByMatchLink(it._links.registrationEntity!!.href, page) }
         .transformRegistrations()
 
 

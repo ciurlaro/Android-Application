@@ -9,6 +9,7 @@ subprojects {
     repositories {
         google()
         jcenter()
+        mavenCentral()
     }
 
     tasks.withType<KotlinCompile> {
