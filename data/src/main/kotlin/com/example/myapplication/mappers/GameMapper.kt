@@ -6,13 +6,12 @@ import com.example.myapplication.rawresponses.MultipleGamesJSON
 
 class GameMapper : MultipleFromRemoteMapper<MultipleGamesJSON, GameJSON, GameEntity> {
 
-    override fun fromRemoteSingle(remote: GameJSON): GameEntity {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun fromRemoteSingle(remote: GameJSON) = with(remote) {
+        GameEntity(id, availableModes, image)
     }
 
-    override fun fromRemoteMultiple(remote: MultipleGamesJSON): List<GameEntity> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun fromRemoteMultiple(remote: MultipleGamesJSON) =
+        remote._embedded.gameEntities.map { fromRemoteSingle(it) }
 
 
 }

@@ -1,9 +1,9 @@
 package com.example.myapplication.data
 
-import java.util.*
+import com.soywiz.klock.DateTimeTz
 
 class MatchEntity(
     val id: Long,
-    val matchDateTime: Date,
+    val matchDateTime: DateTimeTz,
     val tournament: TournamentEntity
 )

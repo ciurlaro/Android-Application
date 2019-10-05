@@ -1,9 +1,13 @@
 package com.example.myapplication.datasource
 
 import com.example.myapplication.rawresponses.*
+import com.soywiz.klock.DateFormat
+import io.ktor.http.Url
 import java.time.LocalDateTime
 
 interface ArenaTournamentDatasource {
+
+    val DEFAULT_DATE_TIME_PATTERN: DateFormat
 
     suspend fun getGameByName(name: String): GameJSON
     suspend fun getGameByLink(link: String): GameJSON
@@ -43,36 +47,36 @@ interface ArenaTournamentDatasource {
         val host: String
         val port: Int
 
-        fun allGamesUrl(page: Int): String
-        fun gameByNameUrl(name: String): String
-        fun searchGamesByNameUrl(query: String, page: Int): String
+        fun allGamesUrl(page: Int): Url
+        fun gameByNameUrl(name: String): Url
+        fun searchGamesByNameUrl(query: String, page: Int): Url
 
-        fun allTournamentsUrl(page: Int): String
-        fun tournamentByIdUrl(id: Long): String
-        fun tournamentsByGameLinkUrl(gameLink: String, page: Int): String
-        fun tournamentsByModeUrl(mode: String, page: Int): String
-        fun searchTournamentsByNameUrl(query: String, page: Int): String
+        fun allTournamentsUrl(page: Int): Url
+        fun tournamentByIdUrl(id: Long): Url
+        fun tournamentsByGameLinkUrl(gameLink: String, page: Int): Url
+        fun tournamentsByModeUrl(mode: String, page: Int): Url
+        fun searchTournamentsByNameUrl(query: String, page: Int): Url
 
-        fun matchByIdUrl(id: Long): String
-        fun matchesByTournamentLinkUrl(tournamentLink: String, page: Int): String
-        fun matchesByTournamentIdUrl(tournamentId: Long, page: Int): String
-        fun matchesByGameLinkUrl(gameLink: String, page: Int): String
-        fun matchesByGameIdUrl(gameId: Long, page: Int): String
-        fun allMatchesUrl(page: Int): String
-        fun matchesAfterDateUrl(dateTime: LocalDateTime, page: Int): String
-        fun matchesAvailableUrl(page: Int): String
+        fun matchByIdUrl(id: Long): Url
+        fun matchesByTournamentLinkUrl(tournamentLink: String, page: Int): Url
+        fun matchesByTournamentIdUrl(tournamentId: Long, page: Int): Url
+        fun matchesByGameLinkUrl(gameLink: String, page: Int): Url
+        fun matchesByGameIdUrl(gameId: Long, page: Int): Url
+        fun allMatchesUrl(page: Int): Url
+        fun matchesAfterDateUrl(dateTime: LocalDateTime, page: Int): Url
+        fun matchesAvailableUrl(page: Int): Url
 
-        fun allRegistrationsUrl(page: Int): String
-        fun registrationByIdUrl(id: Long): String
-        fun matchesNotFullUrl(page: Int): String
-        fun registrationsByUserUrl(userId: String, page: Int): String
-        fun registrationsByMatchLinkUrl(matchLink: String, page: Int): String
-        fun registrationsByMatchIdUrl(matchId: Long, page: Int): String
+        fun allRegistrationsUrl(page: Int): Url
+        fun registrationByIdUrl(id: Long): Url
+        fun matchesNotFullUrl(page: Int): Url
+        fun registrationsByUserUrl(userId: String, page: Int): Url
+        fun registrationsByMatchLinkUrl(matchLink: String, page: Int): Url
+        fun registrationsByMatchIdUrl(matchId: Long, page: Int): Url
 
-        fun currentUserUrl(): String
-        fun userByIdUrl(userId: String): String
-        fun usersByMatchLinkUrl(matchLink: String, page: Int): String
-        fun usersByMatchIdUrl(matchId: Long, page: Int): String
+        fun currentUserUrl(): Url
+        fun userByIdUrl(userId: String): Url
+        fun usersByMatchLinkUrl(matchLink: String, page: Int): Url
+        fun usersByMatchIdUrl(matchId: Long, page: Int): Url
 
     }
 }
