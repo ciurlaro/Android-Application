@@ -9,10 +9,10 @@ import com.example.myapplication.ui.home.HomeViewModel
 import com.example.myapplication.ui.search.SearchViewModel
 import com.example.myapplication.ui.userprofle.UserProfileViewModel
 import org.kodein.di.Kodein
-import org.kodein.di.generic.bind
-import org.kodein.di.generic.factory
-import org.kodein.di.generic.instance
-import org.kodein.di.generic.singleton
+import org.kodein.di.erased.bind
+import org.kodein.di.erased.factory
+import org.kodein.di.erased.instance
+import org.kodein.di.erased.singleton
 
 object ViewModelModule : KodeinModuleProvider {
 

@@ -5,8 +5,8 @@ import io.ktor.client.engine.okhttp.OkHttp
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
 import org.kodein.di.Kodein
-import org.kodein.di.generic.bind
-import org.kodein.di.generic.singleton
+import org.kodein.di.erased.bind
+import org.kodein.di.erased.singleton
 
 object NetworkModule : KodeinModuleProvider {
 

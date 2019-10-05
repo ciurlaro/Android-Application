@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein
-import org.kodein.di.generic.instance
+import org.kodein.di.erased.instance
 
 abstract class BaseActivity : AppCompatActivity(), KodeinAware {
 

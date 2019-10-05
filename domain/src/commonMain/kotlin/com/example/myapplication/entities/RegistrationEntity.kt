@@ -1,4 +1,4 @@
-package com.example.myapplication.data
+package com.example.myapplication.entities
 
 class RegistrationEntity(
     val user: UserEntity,

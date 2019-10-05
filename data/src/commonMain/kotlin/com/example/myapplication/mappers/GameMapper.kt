@@ -1,6 +1,6 @@
 package com.example.myapplication.mappers
 
-import com.example.myapplication.data.GameEntity
+import com.example.myapplication.entities.GameEntity
 import com.example.myapplication.rawresponses.GameJSON
 import com.example.myapplication.rawresponses.MultipleGamesJSON
 

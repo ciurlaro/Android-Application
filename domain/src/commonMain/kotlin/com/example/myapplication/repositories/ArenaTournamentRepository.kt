@@ -1,6 +1,6 @@
 package com.example.myapplication.repositories
 
-import com.example.myapplication.data.*
+import com.example.myapplication.entities.*
 import com.soywiz.klock.DateTimeTz
 
 interface ArenaTournamentRepository {

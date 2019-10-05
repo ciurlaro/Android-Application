@@ -12,6 +12,14 @@ kotlin {
     sourceSets {
 
         val ktorVersion: String by project
+        val kodeinVersion: String by project
+
+        all {
+            dependencies {
+                api("org.kodein.di:kodein-di-core:$kodeinVersion")
+                api("org.kodein.di:kodein-di-erased:$kodeinVersion")
+            }
+        }
 
         val commonMain by getting {
             dependencies {

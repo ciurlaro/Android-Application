@@ -92,7 +92,7 @@ dependencies {
     val androidTestRunnerVersion: String by project
 
 
-    implementation(project(":android-lib"))
+    implementation(project(":mpp-lib"))
 
     implementation(kotlin("reflect"))
 
@@ -114,8 +114,6 @@ dependencies {
     implementation(ktor("client-serialization-jvm", ktorVersion))
     implementation(ktor("client-mock-jvm", ktorVersion))
 
-
-    implementation("org.kodein.di", "kodein-di-generic-jvm", kodeinVersion)
     implementation("org.kodein.di", "kodein-di-framework-android-x", kodeinVersion)
 
     testImplementation("junit", "junit", junitVersion)

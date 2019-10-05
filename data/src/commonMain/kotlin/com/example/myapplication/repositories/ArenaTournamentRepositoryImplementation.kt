@@ -2,7 +2,12 @@ package com.example.myapplication.repositories
 
 import com.example.myapplication.datasource.ArenaTournamentDatasource
 import com.example.myapplication.mappers.*
-import com.example.myapplication.rawresponses.*
+import com.example.myapplication.rawresponses.MultipleMatchJSON
+import com.example.myapplication.rawresponses.MultipleRegistrationsJSON
+import com.example.myapplication.rawresponses.MultipleTournamentsJSON
+import com.example.myapplication.splitters.MatchSplitter
+import com.example.myapplication.splitters.RegistrationSplitter
+import com.example.myapplication.splitters.TournamentSplitter
 import com.example.myapplication.utils.Quintuple
 import com.soywiz.klock.DateTimeTz
 import kotlinx.coroutines.async
@@ -19,9 +24,9 @@ class ArenaTournamentRepositoryImplementation(
     private val registrationMapper: RegistrationMapper,
     private val userMapper: UserMapper,
     private val accountStatusMapper: AccountStatusMapper,
-    private val tournamentSplitter: Splitter<MultipleTournamentsJSON, TournamentJSON>,
-    private val matchSplitter: Splitter<MultipleMatchJSON, MatchJSON>,
-    private val registrationSplitter: Splitter<MultipleRegistrationsJSON, RegistrationJSON>
+    private val tournamentSplitter: TournamentSplitter,
+    private val matchSplitter: MatchSplitter,
+    private val registrationSplitter: RegistrationSplitter
 ) : ArenaTournamentRepository {
 
     override suspend fun getGameByName(name: String) =

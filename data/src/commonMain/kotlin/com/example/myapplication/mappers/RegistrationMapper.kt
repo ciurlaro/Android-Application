@@ -1,6 +1,6 @@
 package com.example.myapplication.mappers
 
-import com.example.myapplication.data.RegistrationEntity
+import com.example.myapplication.entities.RegistrationEntity
 import com.example.myapplication.rawresponses.*
 import com.example.myapplication.utils.Quintuple
 

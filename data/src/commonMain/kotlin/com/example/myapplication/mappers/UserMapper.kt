@@ -1,6 +1,6 @@
 package com.example.myapplication.mappers
 
-import com.example.myapplication.data.UserEntity
+import com.example.myapplication.entities.UserEntity
 import com.example.myapplication.rawresponses.UserJSON
 
 class UserMapper : SingleFromRemoteMapper<UserJSON, UserEntity> {
