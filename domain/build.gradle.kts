@@ -1,12 +1,46 @@
 plugins {
-    kotlin("jvm")
+    kotlin("multiplatform")
 }
 
-dependencies {
+kotlin {
+    jvm()
+    js()
+    sourceSets {
 
-    val klockVersion: String by project
+        val commonMain by getting {
+            dependencies {
 
-    api(kotlin("stdlib-jdk8"))
-    api("com.soywiz.korlibs.klock", "klock-jvm", klockVersion)
+                val klockVersion: String by project
+
+                api(kotlin("stdlib-common"))
+                api("com.soywiz.korlibs.klock:klock:$klockVersion")
+
+            }
+        }
+
+        val jvmMain by getting {
+            dependencies {
+                api(kotlin("stdlib-jdk8"))
+            }
+        }
+
+        val jsMain by getting {
+            dependencies {
+                api(kotlin("stdlib-js"))
+            }
+        }
+    }
+
+//    val jvmMain by getting {
+//        dependencies {
+//            api(kotlin("stdlib-jdk8"))
+//        }
+//    }
+//
+//    val jsMain by getting {
+//        dependencies {
+//            api(kotlin("stdlib-js"))
+//        }
+//    }
 
 }

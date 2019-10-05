@@ -11,36 +11,28 @@ kotlin {
 
     sourceSets {
 
-        val coroutinesVersion: String by project
         val ktorVersion: String by project
 
         val commonMain by getting {
             dependencies {
-
-                api(project(":domain"))
-                api("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
-                api(ktor("http", ktorVersion))
-                api(ktor("utils", ktorVersion))
-
+                api(project(":data"))
+                api(ktor("client-core", ktorVersion))
             }
         }
 
         val jvmMain by getting {
             dependencies {
-                api(project(":domain"))
-                api(ktor("http-jvm", ktorVersion))
-                api(ktor("utils-jvm", ktorVersion))
+                api(project(":data"))
+                api(ktor("client-core-jvm", ktorVersion))
             }
         }
 
         val jsMain by getting {
             dependencies {
-                api(project(":domain"))
-                api(ktor("http-js", ktorVersion))
-                api(ktor("utils-js", ktorVersion))
+                api(project(":data"))
+                api(ktor("client-core-js", ktorVersion))
             }
         }
-
     }
 
 }

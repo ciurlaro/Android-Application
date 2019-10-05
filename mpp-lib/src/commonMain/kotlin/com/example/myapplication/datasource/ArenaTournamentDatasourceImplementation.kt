@@ -2,6 +2,7 @@ package com.example.myapplication.datasource
 
 import com.example.myapplication.rawresponses.*
 import com.soywiz.klock.DateFormat
+import com.soywiz.klock.DateTimeTz
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
 import io.ktor.client.request.header
@@ -9,13 +10,12 @@ import io.ktor.http.HttpHeaders
 import io.ktor.http.Url
 import io.ktor.util.InternalAPI
 import io.ktor.util.encodeBase64
-import java.time.LocalDateTime
 
 class ArenaTournamentDatasourceImplementation(
     private val httpClient: HttpClient,
-    private val endpoints: ArenaTournamentPublicDatasource.Endpoints,
+    private val endpoints: ArenaTournamentDatasource.Endpoints,
     override val tokenFactory: () -> String?
-) : ArenaTournamentPublicDatasource {
+) : ArenaTournamentDatasource {
 
     override val DEFAULT_DATE_TIME_PATTERN: DateFormat
         get() = DateFormat.FORMAT1
@@ -72,7 +72,7 @@ class ArenaTournamentDatasourceImplementation(
         httpClient.get(endpoints.matchesByGameIdUrl(gameId, page))
 
     override suspend fun getMatchesAfterDate(
-        dateTime: LocalDateTime,
+        dateTime: DateTimeTz,
         page: Int
     ): MultipleMatchJSON =
         httpClient.get(endpoints.matchesAfterDateUrl(dateTime, page))

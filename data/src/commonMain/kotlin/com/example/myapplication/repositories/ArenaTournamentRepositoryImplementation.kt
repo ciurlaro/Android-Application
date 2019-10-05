@@ -1,18 +1,18 @@
 package com.example.myapplication.repositories
 
-import com.example.myapplication.datasource.ArenaTournamentPublicDatasource
+import com.example.myapplication.datasource.ArenaTournamentDatasource
 import com.example.myapplication.mappers.*
 import com.example.myapplication.rawresponses.*
 import com.example.myapplication.utils.Quintuple
+import com.soywiz.klock.DateTimeTz
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.toList
-import java.time.LocalDateTime
 
 class ArenaTournamentRepositoryImplementation(
-    private val atDS: ArenaTournamentPublicDatasource,
+    private val atDS: ArenaTournamentDatasource,
     private val gameMapper: GameMapper,
     private val matchMapper: MatchMapper,
     private val tournamentMapper: TournamentMapper,
@@ -70,7 +70,7 @@ class ArenaTournamentRepositoryImplementation(
             .transformMatches()
 
     override suspend fun getMatchesAfterDate(
-        dateTime: LocalDateTime,
+        dateTime: DateTimeTz,
         page: Int
     ) = atDS.getMatchesAfterDate(dateTime, page)
         .transformMatches()

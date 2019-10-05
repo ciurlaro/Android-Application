@@ -2,10 +2,10 @@ package com.example.myapplication.datasource
 
 import com.example.myapplication.rawresponses.*
 import com.soywiz.klock.DateFormat
+import com.soywiz.klock.DateTimeTz
 import io.ktor.http.Url
-import java.time.LocalDateTime
 
-interface ArenaTournamentPublicDatasource {
+interface ArenaTournamentDatasource {
 
     @Suppress("PropertyName")
     val DEFAULT_DATE_TIME_PATTERN: DateFormat
@@ -28,7 +28,7 @@ interface ArenaTournamentPublicDatasource {
     suspend fun getMatchesByTournamentLink(tournamentLink: String, page: Int): MatchJSON
     suspend fun getMatchesByGameLink(gameLink: String, page: Int): MultipleMatchJSON
     suspend fun getMatchesByGameId(gameId: Long, page: Int): MultipleMatchJSON
-    suspend fun getMatchesAfterDate(dateTime: LocalDateTime, page: Int): MultipleMatchJSON
+    suspend fun getMatchesAfterDate(dateTime: DateTimeTz, page: Int): MultipleMatchJSON
     suspend fun getMatchesAvailable(page: Int): MultipleMatchJSON
     suspend fun getMatchesByTournamentId(tournamentId: Long, page: Int): MultipleMatchJSON
 
@@ -68,7 +68,7 @@ interface ArenaTournamentPublicDatasource {
         fun matchesByGameLinkUrl(gameLink: String, page: Int): Url
         fun matchesByGameIdUrl(gameId: Long, page: Int): Url
         fun allMatchesUrl(page: Int): Url
-        fun matchesAfterDateUrl(dateTime: LocalDateTime, page: Int): Url
+        fun matchesAfterDateUrl(dateTime: DateTimeTz, page: Int): Url
         fun matchesAvailableUrl(page: Int): Url
 
         fun allRegistrationsUrl(page: Int): Url

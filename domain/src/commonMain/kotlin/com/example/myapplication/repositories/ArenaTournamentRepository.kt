@@ -1,7 +1,7 @@
 package com.example.myapplication.repositories
 
 import com.example.myapplication.data.*
-import java.time.LocalDateTime
+import com.soywiz.klock.DateTimeTz
 
 interface ArenaTournamentRepository {
 
@@ -15,7 +15,7 @@ interface ArenaTournamentRepository {
     suspend fun getMatchById(id: Long): MatchEntity
     suspend fun getMatchesByTournament(tournamentId: Long, page: Int): List<MatchEntity>
     suspend fun getMatchesByGame(gameName: String, page: Int): List<MatchEntity>
-    suspend fun getMatchesAfterDate(dateTime: LocalDateTime, page: Int): List<MatchEntity>
+    suspend fun getMatchesAfterDate(dateTime: DateTimeTz, page: Int): List<MatchEntity>
 
     suspend fun getRegistrationById(id: Long): RegistrationEntity
     suspend fun getRegistrationByMatch(matchId: Long, page: Int): List<RegistrationEntity>

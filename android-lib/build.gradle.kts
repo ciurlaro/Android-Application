@@ -15,12 +15,10 @@ android {
 
 dependencies {
 
-    val ktorVersion: String by project
     val firebaseVersion: String by project
 
-    api(project(":data"))
+    api(project(":mpp-lib"))
 
-    api(ktor("client-core-jvm", ktorVersion))
     api(firebase("auth", firebaseVersion))
 
 }

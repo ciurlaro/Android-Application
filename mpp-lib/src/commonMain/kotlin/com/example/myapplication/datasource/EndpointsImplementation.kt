@@ -1,31 +1,23 @@
 package com.example.myapplication.datasource
 
-import android.annotation.SuppressLint
+import com.example.myapplication.mappers.DateTimeMapper
+import com.soywiz.klock.DateTimeTz
 import io.ktor.http.Parameters
 import io.ktor.http.URLProtocol
 import io.ktor.http.Url
-import java.text.SimpleDateFormat
-import java.time.LocalDateTime
 
 data class EndpointsImplementation(
     override val protocol: String,
     override val host: String,
-    override val port: Int
-) : ArenaTournamentPublicDatasource.Endpoints {
+    override val port: Int,
+    private val dateTimeMapper: DateTimeMapper
+) : ArenaTournamentDatasource.Endpoints {
 
     private fun parametersOf(vararg headers: Pair<String, Any>) =
         io.ktor.http.parametersOf(*headers.map { it.first to listOf(it.second.toString()) }.toTypedArray())
 
     private fun buildUrl(path: String, parameters: Parameters = parametersOf()) =
         Url(URLProtocol(protocol, port), host, port, path, parameters, "", null, null, false)
-
-    @SuppressLint("SimpleDateFormat")
-    private fun dateTimeToString(dateTime: LocalDateTime, pattern: String = "yyyy-MM-dd'T'HH:mm:ss" ): String {
-        val parser = SimpleDateFormat(pattern)
-        val formatter = SimpleDateFormat(pattern)
-        return formatter.format(parser.parse(dateTime.toString())!!)
-
-    }
 
     override fun allGamesUrl(page: Int) =
         buildUrl("/game", parametersOf("page" to page))
@@ -70,8 +62,11 @@ data class EndpointsImplementation(
     override fun allMatchesUrl(page: Int) =
         buildUrl("/match")
 
-    override fun matchesAfterDateUrl(dateTime: LocalDateTime, page: Int) =
-        buildUrl("/match/search/byMatchDateTimeIsAfter", parametersOf("matchDateTime" to dateTimeToString(dateTime), "page" to page))
+    override fun matchesAfterDateUrl(dateTime: DateTimeTz, page: Int) =
+        buildUrl(
+            "/match/search/byMatchDateTimeIsAfter",
+            parametersOf("matchDateTime" to dateTimeMapper.toRemote(dateTime), "page" to page)
+        )
 
     //TODO: current time server side
     override fun matchesAvailableUrl(page: Int) =
