@@ -2,6 +2,6 @@ package com.example.myapplication.datasource
 
 interface FirebaseDatasource {
 
-    suspend fun getToken(): String
+    suspend fun getToken(): String?
 
 }

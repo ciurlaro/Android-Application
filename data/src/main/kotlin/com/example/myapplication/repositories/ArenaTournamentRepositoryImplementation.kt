@@ -1,25 +1,28 @@
 package com.example.myapplication.repositories
 
-import com.example.myapplication.datasource.ArenaTournamentDatasource
+import com.example.myapplication.datasource.ArenaTournamentPublicDatasource
 import com.example.myapplication.mappers.*
 import com.example.myapplication.rawresponses.*
-import com.example.myapplication.utils.Quadruple
+import com.example.myapplication.utils.Quintuple
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.toList
 import java.time.LocalDateTime
 
-class EntityRepositoryImplementation private constructor(
-    private val atDS: ArenaTournamentDatasource,
+class ArenaTournamentRepositoryImplementation(
+    private val atDS: ArenaTournamentPublicDatasource,
     private val gameMapper: GameMapper,
     private val matchMapper: MatchMapper,
     private val tournamentMapper: TournamentMapper,
     private val registrationMapper: RegistrationMapper,
     private val userMapper: UserMapper,
+    private val accountStatusMapper: AccountStatusMapper,
     private val tournamentSplitter: Splitter<MultipleTournamentsJSON, TournamentJSON>,
     private val matchSplitter: Splitter<MultipleMatchJSON, MatchJSON>,
     private val registrationSplitter: Splitter<MultipleRegistrationsJSON, RegistrationJSON>
-) : EntityRepository {
+) : ArenaTournamentRepository {
 
     override suspend fun getGameByName(name: String) =
         atDS.getGameByName(name)
@@ -72,7 +75,7 @@ class EntityRepositoryImplementation private constructor(
     ) = atDS.getMatchesAfterDate(dateTime, page)
         .transformMatches()
 
-    override suspend fun getRegistrationById(id: Long) =
+    override suspend fun getRegistrationById(id: Long) = coroutineScope {
         atDS.getRegistrationById(id)
             .let { it to atDS.getMatchByLink(it._links.matchEntity!!.href) }
             .let {
@@ -83,14 +86,25 @@ class EntityRepositoryImplementation private constructor(
                 )
             }
             .let {
-                Quadruple(
+                Quintuple(
                     it.first,
                     it.second,
                     it.third,
-                    atDS.getGameByLink(it.third._links.gameEntity!!.href)
+                    async { atDS.getGameByLink(it.third._links.gameEntity!!.href) },
+                    async { atDS.getUserById(it.first._links.userEntity!!.href) }
+                )
+            }
+            .let {
+                Quintuple(
+                    it.first,
+                    it.second,
+                    it.third,
+                    it.fourth.await(),
+                    it.fifth.await()
                 )
             }
             .let { registrationMapper.fromRemoteSingle(it) }
+    }
 
     override suspend fun getRegistrationByMatch(
         matchId: Long,
@@ -113,6 +127,10 @@ class EntityRepositoryImplementation private constructor(
     override suspend fun getCurrentUser() =
         atDS.getCurrentUser()
             .let { userMapper.fromRemoteSingle(it) }
+
+    override suspend fun isAccountVerified() =
+        atDS.getAccountVerificationStatus()
+            .let { accountStatusMapper.fromRemoteSingle(it) }
 
     private suspend fun MultipleTournamentsJSON.transformTournaments() =
         tournamentSplitter(this)
@@ -147,11 +165,23 @@ class EntityRepositoryImplementation private constructor(
                 )
             }
             .map {
-                Quadruple(
+                coroutineScope {
+                    Quintuple(
+                        it.first,
+                        it.second,
+                        it.third,
+                        async { atDS.getGameByLink(it.third._links.gameEntity!!.href) },
+                        async { atDS.getUserById(it.first._links.userEntity!!.href) }
+                    )
+                }
+            }
+            .map {
+                Quintuple(
                     it.first,
                     it.second,
                     it.third,
-                    atDS.getGameByLink(it.third._links.gameEntity!!.href)
+                    it.fourth.await(),
+                    it.fifth.await()
                 )
             }
             .map { registrationMapper.fromRemoteSingle(it) }

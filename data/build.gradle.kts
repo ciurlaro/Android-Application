@@ -10,6 +10,7 @@ dependencies {
     api(project(":domain"))
 
     api(ktor("http-jvm", ktorVersion))
+    api(ktor("utils", ktorVersion))
 
 }
 

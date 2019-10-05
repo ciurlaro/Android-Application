@@ -4,12 +4,18 @@ import com.example.myapplication.rawresponses.*
 import com.soywiz.klock.DateFormat
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
+import io.ktor.client.request.header
+import io.ktor.http.HttpHeaders
+import io.ktor.http.Url
+import io.ktor.util.InternalAPI
+import io.ktor.util.encodeBase64
 import java.time.LocalDateTime
 
 class ArenaTournamentDatasourceImplementation(
     private val httpClient: HttpClient,
-    private val endpoints: ArenaTournamentDatasource.Endpoints
-) : ArenaTournamentDatasource {
+    private val endpoints: ArenaTournamentPublicDatasource.Endpoints,
+    override val tokenFactory: () -> String?
+) : ArenaTournamentPublicDatasource {
 
     override val DEFAULT_DATE_TIME_PATTERN: DateFormat
         get() = DateFormat.FORMAT1
@@ -96,7 +102,7 @@ class ArenaTournamentDatasourceImplementation(
         httpClient.get(endpoints.registrationsByMatchLinkUrl(matchLink, page))
 
     override suspend fun getCurrentUser(): UserJSON =
-        httpClient.get(endpoints.currentUserUrl())
+        httpClient.authenticatedGet(endpoints.currentUserUrl())
 
     override suspend fun getUserById(id: String): UserJSON =
         httpClient.get(endpoints.userByIdUrl(id))
@@ -109,5 +115,16 @@ class ArenaTournamentDatasourceImplementation(
 
     override suspend fun getUsersByMatchId(matchId: Long, page: Int): MultipleUsersJSON =
         httpClient.get(endpoints.usersByMatchIdUrl(matchId, page))
+
+    override suspend fun getAccountVerificationStatus(): AccountStatusJSON =
+        httpClient.authenticatedGet(endpoints.isAccountVerifiedUrl())
+
+    @UseExperimental(InternalAPI::class)
+    private suspend inline fun <reified T> HttpClient.authenticatedGet(url: Url) =
+        get<T>(url) {
+            tokenFactory()?.let {
+                header(HttpHeaders.Authorization, "Bearer: ${"${tokenFactory()}:".encodeBase64()}")
+            }
+        }
 
 }

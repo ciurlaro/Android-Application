@@ -11,5 +11,10 @@ data class UserEmbeddedJSON(
 )
 
 data class UserJSON(
-    val id: String
+    val id: String,
+    val email: String,
+    val nickname: String,
+    val image: String? = null,
+    val isSubscriber: Boolean,
+    val _links: LinksJSON
 )

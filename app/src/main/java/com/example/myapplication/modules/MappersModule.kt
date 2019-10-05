@@ -10,7 +10,6 @@ object MappersModule : KodeinModuleProvider {
 
     override fun provideModule(): Kodein.Builder.() -> Unit = {
         bind<TournamentMapper>() with singleton { TournamentMapper(instance()) }
-        bind<TournamentMapper>() with singleton { TournamentMapper() }
     }
 
 }

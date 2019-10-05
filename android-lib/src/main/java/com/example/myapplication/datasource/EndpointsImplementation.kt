@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import io.ktor.http.Parameters
 import io.ktor.http.URLProtocol
 import io.ktor.http.Url
-import io.ktor.http.parametersOf
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 
@@ -12,7 +11,7 @@ data class EndpointsImplementation(
     override val protocol: String,
     override val host: String,
     override val port: Int
-) : ArenaTournamentDatasource.Endpoints {
+) : ArenaTournamentPublicDatasource.Endpoints {
 
     private fun parametersOf(vararg headers: Pair<String, Any>) =
         io.ktor.http.parametersOf(*headers.map { it.first to listOf(it.second.toString()) }.toTypedArray())
@@ -109,4 +108,7 @@ data class EndpointsImplementation(
 
     override fun usersByMatchIdUrl(matchId: Long, page: Int) =
         buildUrl("/user/search/byMatchId", parametersOf("matchId" to matchId))
+
+    override fun isAccountVerifiedUrl() =
+        buildUrl("isAccountVerified")
 }

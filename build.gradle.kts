@@ -15,10 +15,13 @@ subprojects {
     tasks.withType<KotlinCompile> {
         kotlinOptions {
             jvmTarget = "1.8"
+            freeCompilerArgs = listOf("-Xuse-experimental=kotlin.Experimental")
         }
     }
 }
 
 tasks.create<Delete>("clean") {
-    delete(rootProject.buildDir)
+    allprojects {
+        delete(buildDir)
+    }
 }

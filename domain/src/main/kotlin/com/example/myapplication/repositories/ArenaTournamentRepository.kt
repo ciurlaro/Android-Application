@@ -3,7 +3,7 @@ package com.example.myapplication.repositories
 import com.example.myapplication.data.*
 import java.time.LocalDateTime
 
-interface EntityRepository {
+interface ArenaTournamentRepository {
 
     suspend fun getGameByName(name: String): GameEntity
     suspend fun searchGameByName(name: String, page: Int): List<GameEntity>
@@ -23,5 +23,7 @@ interface EntityRepository {
 
     suspend fun getUserById(id: String): UserEntity
     suspend fun getCurrentUser(): UserEntity
+
+    suspend fun isAccountVerified(): Boolean
 
 }

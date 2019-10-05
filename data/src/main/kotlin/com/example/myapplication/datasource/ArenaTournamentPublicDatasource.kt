@@ -5,9 +5,12 @@ import com.soywiz.klock.DateFormat
 import io.ktor.http.Url
 import java.time.LocalDateTime
 
-interface ArenaTournamentDatasource {
+interface ArenaTournamentPublicDatasource {
 
+    @Suppress("PropertyName")
     val DEFAULT_DATE_TIME_PATTERN: DateFormat
+
+    val tokenFactory: () -> String?
 
     suspend fun getGameByName(name: String): GameJSON
     suspend fun getGameByLink(link: String): GameJSON
@@ -40,6 +43,8 @@ interface ArenaTournamentDatasource {
     suspend fun getUserByLink(link: String): UserJSON
     suspend fun getUsersByMatchLink(matchLink: String, page: Int): MultipleUsersJSON
     suspend fun getUsersByMatchId(matchId: Long, page: Int): MultipleUsersJSON
+
+    suspend fun getAccountVerificationStatus(): AccountStatusJSON
 
     interface Endpoints {
 
@@ -74,6 +79,7 @@ interface ArenaTournamentDatasource {
         fun registrationsByMatchIdUrl(matchId: Long, page: Int): Url
 
         fun currentUserUrl(): Url
+        fun isAccountVerifiedUrl(): Url
         fun userByIdUrl(userId: String): Url
         fun usersByMatchLinkUrl(matchLink: String, page: Int): Url
         fun usersByMatchIdUrl(matchId: Long, page: Int): Url

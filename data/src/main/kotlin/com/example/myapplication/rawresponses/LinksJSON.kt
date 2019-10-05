@@ -6,6 +6,7 @@ data class LinksJSON(
     val gameEntity: HrefJSON? = null,
     val matchEntity: HrefJSON? = null,
     val registrationEntity: HrefJSON? = null,
+    val userEntity: HrefJSON? = null,
     val tournamentInvolved: HrefJSON? = null,
     val matchId: HrefJSON? = null,
     val profile: HrefJSON? = null,

@@ -109,6 +109,7 @@ dependencies {
     implementation("androidx.navigation", "navigation-ui-ktx", androidxNavigationVersion)
 
     implementation(ktor("client-okhttp", ktorVersion))
+    implementation(ktor("client-auth", ktorVersion))
     implementation(ktor("client-json", ktorVersion))
     implementation(ktor("client-serialization-jvm", ktorVersion))
     implementation(ktor("client-mock-jvm", ktorVersion))
