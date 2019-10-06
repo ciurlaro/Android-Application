@@ -13,6 +13,7 @@ kotlin {
 
         val ktorVersion: String by project
         val kodeinVersion: String by project
+        val firebaseJsVersion: String by project
 
         all {
             dependencies {
@@ -32,6 +33,7 @@ kotlin {
             dependencies {
                 api(project(":data"))
                 api(ktor("client-core-jvm", ktorVersion))
+                api(kotlin("reflect"))
             }
         }
 
@@ -39,6 +41,7 @@ kotlin {
             dependencies {
                 api(project(":data"))
                 api(ktor("client-core-js", ktorVersion))
+                api(npm("firebase", firebaseJsVersion))
             }
         }
     }

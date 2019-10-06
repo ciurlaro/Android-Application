@@ -14,7 +14,7 @@ import io.ktor.util.encodeBase64
 class ArenaTournamentDatasourceImplementation(
     private val httpClient: HttpClient,
     private val endpoints: ArenaTournamentDatasource.Endpoints,
-    override val tokenFactory: () -> String?
+    override val tokenFactory: TokenFactory
 ) : ArenaTournamentDatasource {
 
     override val DEFAULT_DATE_TIME_PATTERN: DateFormat

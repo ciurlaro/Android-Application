@@ -10,7 +10,7 @@ interface ArenaTournamentDatasource {
     @Suppress("PropertyName")
     val DEFAULT_DATE_TIME_PATTERN: DateFormat
 
-    val tokenFactory: () -> String?
+    val tokenFactory: TokenFactory
 
     suspend fun getGameByName(name: String): GameJSON
     suspend fun getGameByLink(link: String): GameJSON

@@ -1,7 +1,8 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.kotlin.gradle.dsl.KotlinJsCompile
+import org.jetbrains.kotlin.gradle.dsl.KotlinJvmCompile
 
 plugins {
-    kotlin("jvm") apply false
+    kotlin("multiplatform") apply false
     id("com.android.application") apply false
 }
 
@@ -12,15 +13,20 @@ subprojects {
         mavenCentral()
     }
 
-    tasks.withType<KotlinCompile> {
+    tasks.withType<KotlinJvmCompile> {
         kotlinOptions {
             jvmTarget = "1.8"
             freeCompilerArgs = listOf("-Xuse-experimental=kotlin.Experimental")
         }
     }
+    tasks.withType<KotlinJsCompile> {
+        kotlinOptions {
+            freeCompilerArgs = listOf("-Xuse-experimental=kotlin.Experimental")
+        }
+    }
 }
 
-tasks.create<Delete>("clean") {
+tasks.create<Delete>("turboClean") {
     allprojects {
         delete(buildDir)
     }

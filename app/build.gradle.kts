@@ -35,6 +35,18 @@ android {
 
         getByName("release") {
             isMinifyEnabled = false
+            buildConfigField("String", "SERVER_PROTOCOL", "\"http\"")
+            buildConfigField("String", "SERVER_URL", "\"mock\"")
+            buildConfigField("int", "SERVER_PORT", "42")
+            matchingFallbacks = listOf("release", "debug")
+        }
+
+        getByName("debug") {
+            isMinifyEnabled = false
+            buildConfigField("String", "SERVER_PROTOCOL", "\"http\"")
+            buildConfigField("String", "SERVER_URL", "\"mock\"")
+            buildConfigField("int", "SERVER_PORT", "42")
+            matchingFallbacks = listOf("release", "debug")
         }
 
         create("mock") {
