@@ -122,8 +122,8 @@ class ArenaTournamentDatasourceImplementation(
     @UseExperimental(InternalAPI::class)
     private suspend inline fun <reified T> HttpClient.authenticatedGet(url: Url) =
         get<T>(url) {
-            tokenFactory()?.let {
-                header(HttpHeaders.Authorization, "Bearer: ${"${tokenFactory()}:".encodeBase64()}")
+            tokenFactory.factory()?.let {
+                header(HttpHeaders.Authorization, "Bearer: ${"$it:".encodeBase64()}")
             }
         }
 

@@ -33,29 +33,29 @@ android {
 
     buildTypes {
 
-        getByName("release") {
-            isMinifyEnabled = false
+        all {
+            manifestPlaceholders = mapOf("ApplicationName" to "Application")
             buildConfigField("String", "SERVER_PROTOCOL", "\"http\"")
             buildConfigField("String", "SERVER_URL", "\"mock\"")
             buildConfigField("int", "SERVER_PORT", "42")
+        }
+
+        getByName("release") {
+            isMinifyEnabled = true
+            isDebuggable = false
             matchingFallbacks = listOf("release", "debug")
         }
 
         getByName("debug") {
             isMinifyEnabled = false
-            buildConfigField("String", "SERVER_PROTOCOL", "\"http\"")
-            buildConfigField("String", "SERVER_URL", "\"mock\"")
-            buildConfigField("int", "SERVER_PORT", "42")
             matchingFallbacks = listOf("release", "debug")
         }
 
         create("mock") {
             isMinifyEnabled = false
             isDebuggable = true
-            buildConfigField("String", "SERVER_PROTOCOL", "\"http\"")
-            buildConfigField("String", "SERVER_URL", "\"mock\"")
-            buildConfigField("int", "SERVER_PORT", "42")
             matchingFallbacks = listOf("release", "debug")
+            manifestPlaceholders = mapOf("ApplicationName" to "MockApplication")
         }
 
         create("localTesting") {
@@ -83,6 +83,7 @@ android {
         exclude("META-INF/ktor-http-cio.kotlin_module")
         exclude("META-INF/ktor-client-json.kotlin_module")
         exclude("META-INF/ktor-client-core.kotlin_module")
+        exclude("META-INF/ktor-client-serialization.kotlin_module")
     }
 
 }

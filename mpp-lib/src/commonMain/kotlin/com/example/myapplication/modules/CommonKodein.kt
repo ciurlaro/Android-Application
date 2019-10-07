@@ -6,4 +6,6 @@ val COMMON_KODEIN by Kodein.lazy {
     import(MappersModule)
     import(SpittersModule)
     import(RepositoriesModule)
+    import(DatasourcesModule)
+    import(NetworkModule)
 }
