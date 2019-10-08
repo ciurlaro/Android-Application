@@ -170,7 +170,9 @@ class ArenaTournamentRepositoryImplementation(
     private suspend fun MultipleMatchJSON.transformMatches() =
         matchSplitter(this)
             .asFlow()
-            .map { it to atDS.getTournamentByLink(it._links.tournamentEntity!!.href) }
+            .map {
+                it to atDS.getTournamentByLink(it._links.tournamentInvolved!!.href)
+            }
             .map {
                 coroutineScope {
                     Quadruple(
@@ -181,8 +183,12 @@ class ArenaTournamentRepositoryImplementation(
                     )
                 }
             }
-            .map { Quadruple(it.first, it.second, it.third.await(), it.fourth.await()) }
-            .map { matchMapper.fromRemoteSingle(it) }
+            .map {
+                Quadruple(it.first, it.second, it.third.await(), it.fourth.await())
+            }
+            .map {
+                matchMapper.fromRemoteSingle(it)
+            }
             .toList()
 
     private suspend fun MultipleRegistrationsJSON.transformRegistrations() =

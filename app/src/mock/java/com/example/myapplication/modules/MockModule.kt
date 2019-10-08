@@ -1,6 +1,7 @@
 package com.example.myapplication.modules
 
 import android.content.res.Resources
+import android.util.Log
 import androidx.annotation.RawRes
 import com.example.myapplication.R
 import io.ktor.client.HttpClient
@@ -29,6 +30,7 @@ object MockModule : KodeinModuleProvider {
                 }
                 engine {
                     addHandler {
+                        Log.d("MockEngine", "$it")
                         handleMockEngineRequest(it, instance())
                     }
                 }
@@ -46,38 +48,38 @@ object MockModule : KodeinModuleProvider {
 
     private fun handleMockEngineRequest(request: HttpRequestData, res: Resources) = when {
         "tournament" == request.url.fullPath -> when (request.method) {
-            Get -> respondJsonFromRawResources(R.raw.tournament_response, res)
+            Get -> respondJsonFromRawResources(R.raw.multiple_matches_response, res)
             else -> buildMockEngineError(request)
         }
         "tournament" in request.url.fullPath -> when (request.method) {
-            Get, Post, Put -> respondJsonFromRawResources(R.raw.multiple_tournaments_response, res)
+            Get, Post, Put -> respondJsonFromRawResources(R.raw.tournament_response, res)
             Delete -> respond("", HttpStatusCode.NoContent)
             else -> buildMockEngineError(request)
         }
         "game" == request.url.fullPath -> when (request.method) {
-            Get -> respondJsonFromRawResources(R.raw.game_response, res)
+            Get -> respondJsonFromRawResources(R.raw.multiple_games_response, res)
             else -> buildMockEngineError(request)
         }
         "game" in request.url.fullPath -> when (request.method) {
-            Get, Post, Put -> respondJsonFromRawResources(R.raw.multiple_games_response, res)
+            Get, Post, Put -> respondJsonFromRawResources(R.raw.game_response, res)
             Delete -> respond("", HttpStatusCode.NoContent)
             else -> buildMockEngineError(request)
         }
         "match" == request.url.fullPath -> when (request.method) {
-            Get -> respondJsonFromRawResources(R.raw.match_response, res)
+            Get -> respondJsonFromRawResources(R.raw.multiple_matches_response, res)
             else -> buildMockEngineError(request)
         }
         "match" in request.url.fullPath -> when (request.method) {
-            Get, Post, Put -> respondJsonFromRawResources(R.raw.multiple_matches_response, res)
+            Get, Post, Put -> respondJsonFromRawResources(R.raw.match_response, res)
             Delete -> respond("", HttpStatusCode.NoContent)
             else -> buildMockEngineError(request)
         }
         "registration" == request.url.fullPath -> when (request.method) {
-            Get -> respondJsonFromRawResources(R.raw.registration_response, res)
+            Get -> respondJsonFromRawResources(R.raw.multiple_registrations_response, res)
             else -> buildMockEngineError(request)
         }
         "registration" in request.url.fullPath -> when (request.method) {
-            Get, Post, Put -> respondJsonFromRawResources(R.raw.multiple_registrations_response, res)
+            Get, Post, Put -> respondJsonFromRawResources(R.raw.registration_response, res)
             Delete -> respond("", HttpStatusCode.NoContent)
             else -> buildMockEngineError(request)
         }

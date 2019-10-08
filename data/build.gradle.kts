@@ -2,6 +2,7 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
 
 plugins {
     kotlin("multiplatform")
+    kotlin("plugin.serialization")
 }
 
 kotlin {
@@ -14,6 +15,7 @@ kotlin {
     sourceSets {
 
         val ktorVersion: String by project
+        val kotlinxSerializationVersion: String by project
 
         val commonMain by getting {
             dependencies {
@@ -21,6 +23,7 @@ kotlin {
                 api(project(":domain"))
                 api(ktor("http", ktorVersion))
                 api(ktor("utils", ktorVersion))
+                api(serialization("runtime-common", kotlinxSerializationVersion))
 
             }
         }
@@ -30,6 +33,7 @@ kotlin {
                 api(project(":domain"))
                 api(ktor("http-jvm", ktorVersion))
                 api(ktor("utils-jvm", ktorVersion))
+                api(serialization("runtime", kotlinxSerializationVersion))
             }
         }
 
@@ -38,6 +42,7 @@ kotlin {
                 api(project(":domain"))
                 api(ktor("http-js", ktorVersion))
                 api(ktor("utils-js", ktorVersion))
+                api(serialization("runtime-js", kotlinxSerializationVersion))
             }
         }
 
@@ -48,3 +53,7 @@ kotlin {
 @Suppress("unused")
 fun KotlinDependencyHandler.ktor(module: String, version: String? = null): Any =
     "io.ktor:ktor-$module${version?.let { ":$version" } ?: ""}"
+
+@Suppress("unused")
+fun KotlinDependencyHandler.serialization(module: String, version: String? = null): Any =
+    "org.jetbrains.kotlinx:kotlinx-serialization-$module${version?.let { ":$version" } ?: ""}"

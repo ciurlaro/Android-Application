@@ -17,6 +17,7 @@ pluginManagement {
                 "com.android.application", "com.android.library" ->
                     useModule("com.android.tools.build:gradle:$androidGradlePluginVersion")
                 "com.google.gms.google-services" -> useModule("com.google.gms:google-services:$gmsGradlePluginVersion")
+                "org.jetbrains.kotlin.plugin.serialization" -> useModule("org.jetbrains.kotlin:kotlin-serialization:$kotlinVersion")
             }
         }
     }

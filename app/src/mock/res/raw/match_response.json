@@ -1,15 +1,17 @@
 {
-  "id" : 3,
-  "matchDateTime" : "2019-10-04T16:05:22",
-  "_links" : {
-    "self" : {
-      "href" : "http://localhost:8080/match/3"
+  "id": 3,
+  "playersCount": 12,
+  "isRegistrationPossible": true,
+  "matchDateTime": "2019-10-04T16:05:22",
+  "_links": {
+    "self": {
+      "href": "http://localhost:8080/match/3"
     },
-    "matchEntity" : {
-      "href" : "http://localhost:8080/match/3"
+    "matchEntity": {
+      "href": "http://localhost:8080/match/3"
     },
-    "tournamentInvolved" : {
-      "href" : "http://localhost:8080/match/3/tournamentInvolved"
+    "tournamentInvolved": {
+      "href": "http://localhost:8080/match/3/tournamentInvolved"
     }
   }
 }

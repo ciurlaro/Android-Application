@@ -1,5 +1,8 @@
 package com.example.myapplication.rawresponses
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class LinksJSON(
     val self: HrefJSON,
     val tournamentEntity: HrefJSON? = null,
