@@ -92,6 +92,10 @@ class ArenaTournamentRepositoryImplementation(
     ) = atDS.getMatchesAfterDate(dateTime, page)
         .transformMatches()
 
+    override suspend fun getMatchesAvailable(page: Int) =
+        atDS.getMatchesAvailable(page)
+            .transformMatches()
+
     override suspend fun getRegistrationById(id: Long) = coroutineScope {
         atDS.getRegistrationById(id)
             .let { it to atDS.getMatchByLink(it._links.matchEntity!!.href) }
@@ -123,7 +127,7 @@ class ArenaTournamentRepositoryImplementation(
             .let { registrationMapper.fromRemoteSingle(it) }
     }
 
-    override suspend fun getRegistrationByMatch(
+    override suspend fun getRegistrationsByMatch(
         matchId: Long,
         page: Int
     ) = atDS.getMatchById(matchId)

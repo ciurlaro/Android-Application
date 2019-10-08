@@ -7,8 +7,10 @@ import io.ktor.http.Url
 
 interface ArenaTournamentDatasource {
 
-    @Suppress("PropertyName")
-    val DEFAULT_DATE_TIME_PATTERN: DateFormat
+    companion object {
+        val DEFAULT_DATE_TIME_PATTERN = DateFormat.FORMAT1
+    }
+
 
     val tokenFactory: TokenFactory
 

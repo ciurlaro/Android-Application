@@ -1,5 +1,13 @@
 package com.example.myapplication.usecases
 
-interface UseCaseWithParams<T, R> {
-    suspend fun buildAction(params: R): T
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+
+interface UseCaseWithParams<P, O> {
+    suspend fun buildAction(params: P): O
+
+    fun buildActionAsync(params: P, callback: (O) -> Unit) {
+        GlobalScope.launch { callback(buildAction(params)) }
+    }
+
 }

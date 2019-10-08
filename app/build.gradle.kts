@@ -99,6 +99,7 @@ dependencies {
     val constraintLayoutVersion: String by project
     val ktorVersion: String by project
     val kodeinVersion: String by project
+    val picassoVersion: String by project
 
     val junitVersion: String by project
     val espressoVersion: String by project
@@ -120,6 +121,8 @@ dependencies {
     implementation("androidx.lifecycle", "lifecycle-viewmodel-ktx", androidxLifecycleVersion)
     implementation("androidx.navigation", "navigation-fragment-ktx", androidxNavigationVersion)
     implementation("androidx.navigation", "navigation-ui-ktx", androidxNavigationVersion)
+
+    implementation("com.squareup.picasso", "picasso", picassoVersion)
 
     implementation(ktor("client-okhttp", ktorVersion))
     implementation(ktor("client-auth", ktorVersion))

@@ -1,7 +1,6 @@
 package com.example.myapplication.datasource
 
 import com.example.myapplication.rawresponses.*
-import com.soywiz.klock.DateFormat
 import com.soywiz.klock.DateTimeTz
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
@@ -16,9 +15,6 @@ class ArenaTournamentDatasourceImplementation(
     private val endpoints: ArenaTournamentDatasource.Endpoints,
     override val tokenFactory: TokenFactory
 ) : ArenaTournamentDatasource {
-
-    override val DEFAULT_DATE_TIME_PATTERN: DateFormat
-        get() = DateFormat.FORMAT1
 
     override suspend fun getGameByName(name: String): GameJSON =
         httpClient.get(endpoints.gameByNameUrl(name))

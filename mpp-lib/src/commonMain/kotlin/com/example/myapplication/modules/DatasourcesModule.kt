@@ -16,7 +16,7 @@ object DatasourcesModule : KodeinModuleProvider {
         bind<ArenaTournamentDatasource.Endpoints>() with singleton {
             EndpointsImplementation(
                 instance("serverProtocol"),
-                instance("serverHost"),
+                instance("serverUrl"),
                 instance("serverPort"),
                 instance()
             )

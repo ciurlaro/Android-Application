@@ -19,4 +19,7 @@
     <string name="title_notifications">Notifications</string>
     <string name="search">Search</string>
     <string name="user_profile">Profile</string>
+    <string name="date_text">Date: %1$s</string>
+    <string name="time_text">Time: %1$s</string>
+    <string name="players_text_fraction">%1$d/%2$d</string>
 </resources>

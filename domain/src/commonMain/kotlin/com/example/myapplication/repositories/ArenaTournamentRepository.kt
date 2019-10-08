@@ -16,9 +16,10 @@ interface ArenaTournamentRepository {
     suspend fun getMatchesByTournament(tournamentId: Long, page: Int): List<MatchEntity>
     suspend fun getMatchesByGame(gameName: String, page: Int): List<MatchEntity>
     suspend fun getMatchesAfterDate(dateTime: DateTimeTz, page: Int): List<MatchEntity>
+    suspend fun getMatchesAvailable(page: Int): List<MatchEntity>
 
     suspend fun getRegistrationById(id: Long): RegistrationEntity
-    suspend fun getRegistrationByMatch(matchId: Long, page: Int): List<RegistrationEntity>
+    suspend fun getRegistrationsByMatch(matchId: Long, page: Int): List<RegistrationEntity>
     suspend fun getRegistrationsByUser(userId: String, page: Int): List<RegistrationEntity>
 
     suspend fun getUserById(id: String): UserEntity

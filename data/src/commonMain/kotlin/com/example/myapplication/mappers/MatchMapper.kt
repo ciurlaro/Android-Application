@@ -17,6 +17,8 @@ class MatchMapper(
             MatchEntity(
                 first.id,
                 dtMapper.fromRemoteSingle(first.matchDateTime),
+                first.playersCount,
+                first.isRegistrationPossible,
                 tournamentMapper.fromRemoteSingle(Triple(second, third, fourth))
             )
         }

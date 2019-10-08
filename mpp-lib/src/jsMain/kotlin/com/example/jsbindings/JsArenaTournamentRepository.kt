@@ -39,7 +39,7 @@ class JsArenaTournamentRepository(
         GlobalScope.promise { repo.getRegistrationById(id) }
 
     fun getRegistrationByMatch(matchId: Long, page: Int) =
-        GlobalScope.promise { repo.getRegistrationByMatch(matchId, page) }
+        GlobalScope.promise { repo.getRegistrationsByMatch(matchId, page) }
 
     fun getRegistrationsByUser(userId: String, page: Int) =
         GlobalScope.promise { repo.getRegistrationsByUser(userId, page) }
