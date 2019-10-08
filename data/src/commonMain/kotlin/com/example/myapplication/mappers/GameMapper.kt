@@ -7,7 +7,7 @@ import com.example.myapplication.rawresponses.MultipleGamesJSON
 class GameMapper : MultipleFromRemoteMapper<MultipleGamesJSON, GameJSON, GameEntity> {
 
     override fun fromRemoteSingle(remote: GameJSON) = with(remote) {
-        GameEntity(id, availableModes, image)
+        GameEntity(gameName, availableModes, image)
     }
 
     override fun fromRemoteMultiple(remote: MultipleGamesJSON) =

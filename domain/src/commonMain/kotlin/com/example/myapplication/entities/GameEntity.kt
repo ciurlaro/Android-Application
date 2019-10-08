@@ -1,7 +1,7 @@
 package com.example.myapplication.entities
 
 class GameEntity(
-    val id: Long,
+    val gameName: String,
     val availableModes: String,
     val image: String
 )

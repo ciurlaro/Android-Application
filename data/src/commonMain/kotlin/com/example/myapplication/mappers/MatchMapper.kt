@@ -4,18 +4,20 @@ import com.example.myapplication.entities.MatchEntity
 import com.example.myapplication.rawresponses.GameJSON
 import com.example.myapplication.rawresponses.MatchJSON
 import com.example.myapplication.rawresponses.TournamentJSON
+import com.example.myapplication.rawresponses.UserJSON
+import com.example.myapplication.utils.Quadruple
 
 class MatchMapper(
     private val tournamentMapper: TournamentMapper,
     private val dtMapper: DateTimeMapper
-) : SingleFromRemoteMapper<Triple<MatchJSON, TournamentJSON, GameJSON>, MatchEntity> {
+) : SingleFromRemoteMapper<Quadruple<MatchJSON, TournamentJSON, GameJSON, UserJSON>, MatchEntity> {
 
-    override fun fromRemoteSingle(remote: Triple<MatchJSON, TournamentJSON, GameJSON>) =
+    override fun fromRemoteSingle(remote: Quadruple<MatchJSON, TournamentJSON, GameJSON, UserJSON>) =
         with(remote) {
             MatchEntity(
                 first.id,
                 dtMapper.fromRemoteSingle(first.matchDateTime),
-                tournamentMapper.fromRemoteSingle(second to third)
+                tournamentMapper.fromRemoteSingle(Triple(second, third, fourth))
             )
         }
 

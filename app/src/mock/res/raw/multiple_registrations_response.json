@@ -1,0 +1,113 @@
+{
+  "_embedded" : {
+    "registrationEntities" : [ {
+      "id" : 5,
+      "userId" : "200",
+      "outcome" : "W",
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8080/registration/5"
+        },
+        "registrationEntity" : {
+          "href" : "http://localhost:8080/registration/5"
+        },
+        "matchId" : {
+          "href" : "http://localhost:8080/registration/5/matchId"
+        }
+      }
+    }, {
+      "id" : 6,
+      "userId" : "201",
+      "outcome" : "L",
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8080/registration/6"
+        },
+        "registrationEntity" : {
+          "href" : "http://localhost:8080/registration/6"
+        },
+        "matchId" : {
+          "href" : "http://localhost:8080/registration/6/matchId"
+        }
+      }
+    }, {
+      "id" : 7,
+      "userId" : "202",
+      "outcome" : "L",
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8080/registration/7"
+        },
+        "registrationEntity" : {
+          "href" : "http://localhost:8080/registration/7"
+        },
+        "matchId" : {
+          "href" : "http://localhost:8080/registration/7/matchId"
+        }
+      }
+    }, {
+      "id" : 8,
+      "userId" : "300",
+      "outcome" : "L",
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8080/registration/8"
+        },
+        "registrationEntity" : {
+          "href" : "http://localhost:8080/registration/8"
+        },
+        "matchId" : {
+          "href" : "http://localhost:8080/registration/8/matchId"
+        }
+      }
+    }, {
+      "id" : 9,
+      "userId" : "301",
+      "outcome" : "W",
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8080/registration/9"
+        },
+        "registrationEntity" : {
+          "href" : "http://localhost:8080/registration/9"
+        },
+        "matchId" : {
+          "href" : "http://localhost:8080/registration/9/matchId"
+        }
+      }
+    }, {
+      "id" : 10,
+      "userId" : "302",
+      "outcome" : "L",
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8080/registration/10"
+        },
+        "registrationEntity" : {
+          "href" : "http://localhost:8080/registration/10"
+        },
+        "matchId" : {
+          "href" : "http://localhost:8080/registration/10/matchId"
+        }
+      }
+    } ]
+  },
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/registration{?page,size,sort}",
+      "templated" : true
+    },
+    "profile" : {
+      "href" : "http://localhost:8080/profile/registration"
+    },
+    "search" : {
+      "href" : "http://localhost:8080/registration/search"
+    }
+  },
+  "page" : {
+    "size" : 20,
+    "totalElements" : 6,
+    "totalPages" : 1,
+    "number" : 0
+  }
+}

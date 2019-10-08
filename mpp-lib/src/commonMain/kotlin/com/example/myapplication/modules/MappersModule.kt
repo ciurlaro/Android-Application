@@ -14,7 +14,7 @@ object MappersModule : KodeinModuleProvider {
         bind<GameMapper>() with singleton { GameMapper() }
         bind<MatchMapper>() with singleton { MatchMapper(instance(), instance()) }
         bind<RegistrationMapper>() with singleton { RegistrationMapper(instance(), instance()) }
-        bind<TournamentMapper>() with singleton { TournamentMapper(instance()) }
+        bind<TournamentMapper>() with singleton { TournamentMapper(instance(), instance()) }
         bind<UserMapper>() with singleton { UserMapper() }
     }
 

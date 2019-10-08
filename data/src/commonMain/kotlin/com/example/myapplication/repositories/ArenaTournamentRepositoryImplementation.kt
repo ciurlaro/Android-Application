@@ -8,6 +8,7 @@ import com.example.myapplication.rawresponses.MultipleTournamentsJSON
 import com.example.myapplication.splitters.MatchSplitter
 import com.example.myapplication.splitters.RegistrationSplitter
 import com.example.myapplication.splitters.TournamentSplitter
+import com.example.myapplication.utils.Quadruple
 import com.example.myapplication.utils.Quintuple
 import com.soywiz.klock.DateTimeTz
 import kotlinx.coroutines.async
@@ -37,10 +38,18 @@ class ArenaTournamentRepositoryImplementation(
         atDS.searchGamesByName(name, page)
             .let { gameMapper.fromRemoteMultiple(it) }
 
-    override suspend fun getTournamentById(id: Long) =
+    override suspend fun getTournamentById(id: Long) = coroutineScope {
         atDS.getTournamentById(id)
-            .let { it to atDS.getGameByName(it.gameId) }
+            .let {
+                Triple(
+                    it,
+                    async { atDS.getGameByName(it.gameId) },
+                    async { atDS.getUserByLink(it._links.userEntity!!.href) }
+                )
+            }
+            .let { Triple(it.first, it.second.await(), it.third.await()) }
             .let { tournamentMapper.fromRemoteSingle(it) }
+    }
 
     override suspend fun getTournamentsByMode(mode: String, page: Int) =
         atDS.getTournamentsByMode(mode, page)
@@ -51,17 +60,20 @@ class ArenaTournamentRepositoryImplementation(
             .let { atDS.getTournamentsByGameLink(it._links.self.href, page) }
             .transformTournaments()
 
-    override suspend fun getMatchById(id: Long) =
+    override suspend fun getMatchById(id: Long) = coroutineScope {
         atDS.getMatchById(id)
             .let { it to atDS.getTournamentByLink(it._links.tournamentEntity!!.href) }
             .let {
-                Triple(
+                Quadruple(
                     it.first,
                     it.second,
-                    atDS.getGameByLink(it.second._links.gameEntity!!.href)
+                    async { atDS.getGameByLink(it.second._links.gameEntity!!.href) },
+                    async { atDS.getUserByLink(it.second._links.userEntity!!.href) }
                 )
             }
+            .let { Quadruple(it.first, it.second, it.third.await(), it.fourth.await()) }
             .let { matchMapper.fromRemoteSingle(it) }
+    }
 
     override suspend fun getMatchesByTournament(
         tournamentId: Long,
@@ -140,7 +152,14 @@ class ArenaTournamentRepositoryImplementation(
     private suspend fun MultipleTournamentsJSON.transformTournaments() =
         tournamentSplitter(this)
             .asFlow()
-            .map { it to atDS.getGameByName(it.gameId) }
+            .map {
+                coroutineScope {
+                    Triple(it,
+                        async { atDS.getGameByName(it.gameId) },
+                        async { atDS.getUserByLink(it._links.userEntity!!.href) })
+                }
+            }
+            .map { Triple(it.first, it.second.await(), it.third.await()) }
             .map { tournamentMapper.fromRemoteSingle(it) }
             .toList()
 
@@ -149,12 +168,16 @@ class ArenaTournamentRepositoryImplementation(
             .asFlow()
             .map { it to atDS.getTournamentByLink(it._links.tournamentEntity!!.href) }
             .map {
-                Triple(
-                    it.first,
-                    it.second,
-                    atDS.getGameByLink(it.second._links.gameEntity!!.href)
-                )
+                coroutineScope {
+                    Quadruple(
+                        it.first,
+                        it.second,
+                        async { atDS.getGameByLink(it.second._links.gameEntity!!.href) },
+                        async { atDS.getUserByLink(it.second._links.userEntity!!.href) }
+                    )
+                }
             }
+            .map { Quadruple(it.first, it.second, it.third.await(), it.fourth.await()) }
             .map { matchMapper.fromRemoteSingle(it) }
             .toList()
 

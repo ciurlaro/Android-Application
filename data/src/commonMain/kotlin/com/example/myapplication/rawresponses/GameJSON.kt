@@ -12,7 +12,6 @@ data class GameEmbeddedJSON(
 )
 
 data class GameJSON(
-    val id: Long,
     val gameName: String,
     val availableModes: String,
     val image: String,

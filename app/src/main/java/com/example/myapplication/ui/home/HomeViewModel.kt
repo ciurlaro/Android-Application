@@ -13,6 +13,7 @@ class HomeViewModel() : ViewModel() {
     val text: LiveData<List<MatchEntity>> = _matches
 
     fun loadMatches() = viewModelScope.launch {
+
     }
 
 }

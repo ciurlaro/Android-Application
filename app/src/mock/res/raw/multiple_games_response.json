@@ -1,0 +1,35 @@
+{
+  "_embedded" : {
+    "gameEntities" : [ {
+      "gameName" : "COD",
+      "availableModes" : "modes",
+      "image" : "a",
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8080/game/COD"
+        },
+        "gameEntity" : {
+          "href" : "http://localhost:8080/game/COD"
+        }
+      }
+    } ]
+  },
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/game{?page,size,sort}",
+      "templated" : true
+    },
+    "profile" : {
+      "href" : "http://localhost:8080/profile/game"
+    },
+    "search" : {
+      "href" : "http://localhost:8080/game/search"
+    }
+  },
+  "page" : {
+    "size" : 20,
+    "totalElements" : 1,
+    "totalPages" : 1,
+    "number" : 0
+  }
+}
