@@ -72,6 +72,8 @@ data class EndpointsImplementation(
     override fun matchesAvailableUrl(page: Int) =
         buildUrl("/match/search/availableMatches", parametersOf("page" to page))
 
+    override fun matchesNotFullUrl(page: Int) =
+        buildUrl("/match/search/notFull")
 
     override fun allRegistrationsUrl(page: Int) =
         buildUrl("/registration")
@@ -79,8 +81,6 @@ data class EndpointsImplementation(
     override fun registrationByIdUrl(id: Long) =
         buildUrl("/registration/$id")
 
-    override fun matchesNotFullUrl(page: Int) =
-        buildUrl("/match/search/notFull")
 
     override fun registrationsByUserUrl(userId: String, page: Int) =
         buildUrl("/registration/search/byUserId", parametersOf("userId" to userId))

@@ -1,18 +1,18 @@
 {
-  "id" : 5,
-  "outcome" : "W",
-  "_links" : {
-    "self" : {
-      "href" : "http://localhost:8080/registration/5"
+  "id": 1,
+  "outcome": "Winner",
+  "_links": {
+    "self": {
+      "href": "http://localhost:8080/registration/1"
     },
-    "registrationEntity" : {
-      "href" : "http://localhost:8080/registration/5"
+    "registrationEntity": {
+      "href": "http://localhost:8080/registration/1"
     },
-    "match" : {
-      "href" : "http://localhost:8080/registration/5/matchId"
+    "match": {
+      "href": "http://localhost:8080/registration/1/match"
     },
-    "user" : {
-      "href" : "http://localhost:8080/user/4/matchId"
+    "user": {
+      "href": "http://localhost:8080/registration/1/user"
     }
   }
 }

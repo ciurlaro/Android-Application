@@ -1,113 +1,78 @@
 {
-  "_embedded" : {
-    "registrationEntities" : [ {
-      "id" : 5,
-      "userId" : "200",
-      "outcome" : "W",
-      "_links" : {
-        "self" : {
-          "href" : "http://localhost:8080/registration/5"
-        },
-        "registrationEntity" : {
-          "href" : "http://localhost:8080/registration/5"
-        },
-        match : {
-          "href" : "http://localhost:8080/registration/5/matchId"
+  "_embedded": {
+    "registrationEntities": [
+      {
+        "id": 1,
+        "outcome": "Winner",
+        "_links": {
+          "self": {
+            "href": "http://localhost:8080/registration/1"
+          },
+          "registrationEntity": {
+            "href": "http://localhost:8080/registration/1"
+          },
+          "match": {
+            "href": "http://localhost:8080/registration/1/match"
+          },
+          "user": {
+            "href": "http://localhost:8080/registration/1/user"
+          }
+        }
+      },
+      {
+        "id": 2,
+        "outcome": "Loser",
+        "_links": {
+          "self": {
+            "href": "http://localhost:8080/registration/2"
+          },
+          "registrationEntity": {
+            "href": "http://localhost:8080/registration/2"
+          },
+          "match": {
+            "href": "http://localhost:8080/registration/2/match"
+          },
+          "user": {
+            "href": "http://localhost:8080/registration/2/user"
+          }
+        }
+      },
+      {
+        "id": 3,
+        "outcome": null,
+        "_links": {
+          "self": {
+            "href": "http://localhost:8080/registration/3"
+          },
+          "registrationEntity": {
+            "href": "http://localhost:8080/registration/3"
+          },
+          "match": {
+            "href": "http://localhost:8080/registration/3/match"
+          },
+          "user": {
+            "href": "http://localhost:8080/registration/3/user"
+          }
         }
       }
-    }, {
-      "id" : 6,
-      "userId" : "201",
-      "outcome" : "L",
-      "_links" : {
-        "self" : {
-          "href" : "http://localhost:8080/registration/6"
-        },
-        "registrationEntity" : {
-          "href" : "http://localhost:8080/registration/6"
-        },
-        match : {
-          "href" : "http://localhost:8080/registration/6/matchId"
-        }
-      }
-    }, {
-      "id" : 7,
-      "userId" : "202",
-      "outcome" : "L",
-      "_links" : {
-        "self" : {
-          "href" : "http://localhost:8080/registration/7"
-        },
-        "registrationEntity" : {
-          "href" : "http://localhost:8080/registration/7"
-        },
-        match : {
-          "href" : "http://localhost:8080/registration/7/matchId"
-        }
-      }
-    }, {
-      "id" : 8,
-      "userId" : "300",
-      "outcome" : "L",
-      "_links" : {
-        "self" : {
-          "href" : "http://localhost:8080/registration/8"
-        },
-        "registrationEntity" : {
-          "href" : "http://localhost:8080/registration/8"
-        },
-        match : {
-          "href" : "http://localhost:8080/registration/8/matchId"
-        }
-      }
-    }, {
-      "id" : 9,
-      "userId" : "301",
-      "outcome" : "W",
-      "_links" : {
-        "self" : {
-          "href" : "http://localhost:8080/registration/9"
-        },
-        "registrationEntity" : {
-          "href" : "http://localhost:8080/registration/9"
-        },
-        match : {
-          "href" : "http://localhost:8080/registration/9/matchId"
-        }
-      }
-    }, {
-      "id" : 10,
-      "userId" : "302",
-      "outcome" : "L",
-      "_links" : {
-        "self" : {
-          "href" : "http://localhost:8080/registration/10"
-        },
-        "registrationEntity" : {
-          "href" : "http://localhost:8080/registration/10"
-        },
-        match : {
-          "href" : "http://localhost:8080/registration/10/matchId"
-        }
-      }
-    } ]
+    ]
   },
-  "_links" : {
-    "self" : {
-      "href" : "http://localhost:8080/registration{?page,size,sort}",
-      "templated" : true
+  "_links": {
+    "self": {
+      "href": "http://localhost:8080/registration{?page,size,sort}",
+      "templated": true
     },
-    "profile" : {
-      "href" : "http://localhost:8080/profile/registration"
+    "profile": {
+      "href": "http://localhost:8080/profile/registration"
     },
-    "search" : {
-      "href" : "http://localhost:8080/registration/search"
+    "search": {
+      "href": "http://localhost:8080/registration/search"
     }
   },
-  "page" : {
-    "size" : 20,
-    "totalElements" : 6,
-    "totalPages" : 1,
-    "number" : 0
+  "page": {
+    "size": 20,
+    "totalElements": 3,
+    "totalPages": 1,
+    "number": 0
   }
 }

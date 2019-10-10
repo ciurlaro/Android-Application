@@ -11,10 +11,6 @@ import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
 import io.ktor.client.request.HttpRequestData
 import io.ktor.http.*
-import io.ktor.http.HttpMethod.Companion.Delete
-import io.ktor.http.HttpMethod.Companion.Get
-import io.ktor.http.HttpMethod.Companion.Post
-import io.ktor.http.HttpMethod.Companion.Put
 import org.kodein.di.Kodein
 import org.kodein.di.erased.bind
 import org.kodein.di.erased.instance
@@ -31,7 +27,7 @@ object MockModule : KodeinModuleProvider {
                 engine {
                     addHandler {
                         Log.d("MockEngine", "$it")
-                        handleMockEngineRequest2(it, instance())
+                        handleMockEngineRequest(it, instance())
                     }
                 }
             }
@@ -46,110 +42,97 @@ object MockModule : KodeinModuleProvider {
     private fun buildMockEngineError(request: HttpRequestData): Nothing =
         error("$request cannot be handled by the mock engine")
 
-    private fun handleMockEngineRequest(request: HttpRequestData, res: Resources) = when {
-        "tournament" == request.url.fullPath || "tournament/search" in request.url.fullPath -> when (request.method) {
-            Get -> respondJsonFromRawResources(R.raw.multiple_matches_response, res)
-            else -> buildMockEngineError(request)
-        }
-        "tournament" in request.url.fullPath -> when (request.method) {
-            Get, Post, Put -> respondJsonFromRawResources(R.raw.tournament_response, res)
-            Delete -> respond("", HttpStatusCode.NoContent)
-            else -> buildMockEngineError(request)
-        }
-        "game" == request.url.fullPath || "game/search" in request.url.fullPath -> when (request.method) {
-            Get -> respondJsonFromRawResources(R.raw.multiple_games_response, res)
-            else -> buildMockEngineError(request)
-        }
-        "game" in request.url.fullPath -> when (request.method) {
-            Get, Post, Put -> respondJsonFromRawResources(R.raw.game_response, res)
-            Delete -> respond("", HttpStatusCode.NoContent)
-            else -> buildMockEngineError(request)
-        }
-        "match" == request.url.fullPath || "match/search" in request.url.fullPath -> when (request.method) {
-            Get -> respondJsonFromRawResources(R.raw.multiple_matches_response, res)
-            else -> buildMockEngineError(request)
-        }
-        "match" in request.url.fullPath -> when (request.method) {
-            Get, Post, Put -> respondJsonFromRawResources(R.raw.match_response, res)
-            Delete -> respond("", HttpStatusCode.NoContent)
-            else -> buildMockEngineError(request)
-        }
-        "registration" == request.url.fullPath || "registration/search" in request.url.fullPath -> when (request.method) {
-            Get -> respondJsonFromRawResources(R.raw.multiple_registrations_response, res)
-            else -> buildMockEngineError(request)
-        }
-        "registration" in request.url.fullPath -> when (request.method) {
-            Get, Post, Put -> respondJsonFromRawResources(R.raw.registration_response, res)
-            Delete -> respond("", HttpStatusCode.NoContent)
-            else -> buildMockEngineError(request)
-        }
-        "user" == request.url.fullPath || "user/search" in request.url.fullPath -> when (request.method) {
-            Get -> respondJsonFromRawResources(R.raw.multiple_users_response, res)
-            else -> buildMockEngineError(request)
-        }
-        "currentUser" in request.url.fullPath || "user" in request.url.fullPath -> when (request.method) {
-            Get, Post, Put -> respondJsonFromRawResources(R.raw.user_response, res)
-            Delete -> respond("", HttpStatusCode.NoContent)
-            else -> buildMockEngineError(request)
-        }
-        else -> buildMockEngineError(request)
-    }
+    private fun handleMockEngineRequest(request: HttpRequestData, res: Resources) =
+        when (request.url.fullPath) {
+            "/game" -> respondJsonFromRawResources(R.raw.multiple_games_response, res)
+            "/game/search/byGameName" -> respondJsonFromRawResources(R.raw.game_response, res)
+            "/tournament/1/game" -> respondJsonFromRawResources(R.raw.game_response, res)
 
-    private fun handleMockEngineRequest2(
-        request: HttpRequestData,
-        res: Resources
-    ) = with(request) {
-        when {
-            url.fullPath.startsWith("/user/search") -> when (method) {
-                Get -> respondJsonFromRawResources(R.raw.multiple_users_response, res)
-                else -> buildMockEngineError(request)
-            }
-            url.fullPath.matches(Regex("^/user/\\d")) || url.fullPath == "currentUser"
-                    || url.fullPath.matches(Regex("/tournament/\\d*/admin")) -> when (request.method) {
-                Get, Post, Put -> respondJsonFromRawResources(R.raw.user_response, res)
-                Delete -> respond("", HttpStatusCode.NoContent)
-                else -> buildMockEngineError(request)
-            }
-            url.fullPath.startsWith("/game/search") || url.fullPath == "game" -> when (method) {
-                Get -> respondJsonFromRawResources(R.raw.multiple_games_response, res)
-                else -> buildMockEngineError(request)
-            }
-            url.fullPath.matches(Regex("^/game/\\d*"))
-                    || url.fullPath.matches(Regex("/tournament/\\d*/game")) -> when (request.method) {
-                Get, Post, Put -> respondJsonFromRawResources(R.raw.game_response, res)
-                Delete -> respond("", HttpStatusCode.NoContent)
-                else -> buildMockEngineError(request)
-            }
-            url.fullPath.startsWith("/tournament/search") || url.fullPath == "tournament" -> when (method) {
-                Get -> respondJsonFromRawResources(R.raw.multiple_tournaments_response, res)
-                else -> buildMockEngineError(request)
-            }
-            url.fullPath.matches(Regex("^/tournament/\\d*"))
-                    || url.fullPath.matches(Regex("/match/\\d*/tournamentInvolved")) -> when (request.method) {
-                Get, Post, Put -> respondJsonFromRawResources(R.raw.tournament_response, res)
-                Delete -> respond("", HttpStatusCode.NoContent)
-                else -> buildMockEngineError(request)
-            }
-            url.fullPath.startsWith("/match/search") || url.fullPath == "match" -> when (method) {
-                Get -> respondJsonFromRawResources(R.raw.multiple_matches_response, res)
-                else -> buildMockEngineError(request)
-            }
-            url.fullPath.matches(Regex("^/match/\\d*")) -> when (request.method) {
-                Get, Post, Put -> respondJsonFromRawResources(R.raw.match_response, res)
-                Delete -> respond("", HttpStatusCode.NoContent)
-                else -> buildMockEngineError(request)
-            }
-            url.fullPath.startsWith("/registration/search") || url.fullPath == "match" -> when (method) {
-                Get -> respondJsonFromRawResources(R.raw.multiple_registrations_response, res)
-                else -> buildMockEngineError(request)
-            }
-            url.fullPath.matches(Regex("^/registration/\\d*")) -> when (request.method) {
-                Get, Post, Put -> respondJsonFromRawResources(R.raw.registration_response, res)
-                Delete -> respond("", HttpStatusCode.NoContent)
-                else -> buildMockEngineError(request)
-            }
+
+            "/tournament" -> respondJsonFromRawResources(R.raw.multiple_tournaments_response, res)
+            "/tournament/1" -> respondJsonFromRawResources(R.raw.tournament_response, res)
+            "/tournament/2" -> respondJsonFromRawResources(R.raw.tournament_response, res)
+            "/tournament/search/byMode" -> respondJsonFromRawResources(
+                R.raw.multiple_tournaments_response,
+                res
+            )
+            "/tournament/search/byGame" -> respondJsonFromRawResources(
+                R.raw.multiple_tournaments_response,
+                res
+            )
+            "/tournament/search/byName" -> respondJsonFromRawResources(
+                R.raw.multiple_tournaments_response,
+                res
+            )
+            "/match/1/tournament" -> respondJsonFromRawResources(
+                R.raw.tournament_response,
+                res
+            )
+
+            "/match" -> respondJsonFromRawResources(R.raw.multiple_matches_response, res)
+            "/match/1" -> respondJsonFromRawResources(R.raw.match_response, res)
+            "/match/2" -> respondJsonFromRawResources(R.raw.match_response, res)
+            "/match/search/byTournament" -> respondJsonFromRawResources(
+                R.raw.multiple_matches_response,
+                res
+            )
+            "/match/search/byTournamentId" -> respondJsonFromRawResources(
+                R.raw.multiple_matches_response,
+                res
+            )
+            "/match/search/byGame" -> respondJsonFromRawResources(
+                R.raw.multiple_matches_response,
+                res
+            )
+            "/match/search/byGameId" -> respondJsonFromRawResources(
+                R.raw.multiple_matches_response,
+                res
+            )
+            "/match/search/byMatchDateTimeIsAfter" -> respondJsonFromRawResources(
+                R.raw.multiple_matches_response,
+                res
+            )
+            "/match/search/availableMatches?page=0" -> respondJsonFromRawResources(
+                R.raw.multiple_matches_response,
+                res
+            )
+            "/match/search/notFull" -> respondJsonFromRawResources(
+                R.raw.multiple_matches_response,
+                res
+            )
+
+
+            "/registration" -> respondJsonFromRawResources(
+                R.raw.multiple_registrations_response,
+                res
+            )
+            "/registration/1" -> respondJsonFromRawResources(R.raw.registration_response, res)
+            "/registration/2" -> respondJsonFromRawResources(R.raw.registration_response, res)
+            "/registration/3" -> respondJsonFromRawResources(R.raw.registration_response, res)
+            "/registration/search/byUserId" -> respondJsonFromRawResources(
+                R.raw.multiple_registrations_response,
+                res
+            )
+            //"/registration/search/byMatch/$matchLink" -> respondJsonFromRawResources(R.raw.multiple_registrations_response, res)
+            "/registration/search/byMatchId" -> respondJsonFromRawResources(
+                R.raw.multiple_registrations_response,
+                res
+            )
+
+            "/currentUser" -> respondJsonFromRawResources(R.raw.user_response, res)
+            "/user/Cesare_1" -> respondJsonFromRawResources(R.raw.user_response, res)
+            "/user/Lamba_2" -> respondJsonFromRawResources(R.raw.user_response, res)
+            "/user/Beppe_3" -> respondJsonFromRawResources(R.raw.user_response, res)
+            "/user/search/byMatch" -> respondJsonFromRawResources(
+                R.raw.multiple_users_response,
+                res
+            )
+            "/user/search/byMatchId" -> respondJsonFromRawResources(
+                R.raw.multiple_users_response,
+                res
+            )
+            "isAccountVerified" -> respondJsonFromRawResources(R.raw.multiple_users_response, res)
+
             else -> buildMockEngineError(request)
         }
-    }
-
 }

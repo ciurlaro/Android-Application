@@ -171,7 +171,7 @@ class ArenaTournamentRepositoryImplementation(
         matchSplitter(this)
             .asFlow()
             .map {
-                it to atDS.getTournamentByLink(it._links.tournamentInvolved!!.href)
+                it to atDS.getTournamentByLink(it._links.tournament!!.href)
             }
             .map {
                 coroutineScope {
@@ -199,7 +199,7 @@ class ArenaTournamentRepositoryImplementation(
                 Triple(
                     it.first,
                     it.second,
-                    atDS.getTournamentByLink(it.second._links.tournamentInvolved!!.href)
+                    atDS.getTournamentByLink(it.second._links.tournament!!.href)
                 )
             }
             .map {

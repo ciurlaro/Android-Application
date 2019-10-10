@@ -2,17 +2,47 @@
   "_embedded": {
     "userEntities": [
       {
-        "id": "wjfwunonng",
-        "email": "cesare",
-        "nickname": "CESARE",
-        "image": "cesare",
+        "id": "Cesare_1",
+        "email": "cesare@cesare.cesare",
+        "nickname": "CESA_RHINO",
+        "image": "cesare.png",
         "subscriber": true,
         "_links": {
           "self": {
-            "href": "http://localhost:8080/user/Cesare"
+            "href": "http://localhost:8080/user/Cesare_1"
           },
           "userEntity": {
-            "href": "http://localhost:8080/user/Cesare"
+            "href": "http://localhost:8080/user/Cesare_1"
+          }
+        }
+      },
+      {
+        "id": "Lamba_2",
+        "email": "lamba@lamba.lamba",
+        "nickname": "LAMBA92",
+        "image": "lamba.png",
+        "subscriber": false,
+        "_links": {
+          "self": {
+            "href": "http://localhost:8080/user/Lamba_2"
+          },
+          "userEntity": {
+            "href": "http://localhost:8080/user/Lamba_2"
+          }
+        }
+      },
+      {
+        "id": "Beppe_3",
+        "email": "beppe@beppe.beppe",
+        "nickname": "BEPPE95",
+        "image": "beppe.png",
+        "subscriber": false,
+        "_links": {
+          "self": {
+            "href": "http://localhost:8080/user/Beppe_3"
+          },
+          "userEntity": {
+            "href": "http://localhost:8080/user/Beppe_3"
           }
         }
       }
@@ -29,7 +59,7 @@
   },
   "page": {
     "size": 20,
-    "totalElements": 1,
+    "totalElements": 3,
     "totalPages": 1,
     "number": 0
   }

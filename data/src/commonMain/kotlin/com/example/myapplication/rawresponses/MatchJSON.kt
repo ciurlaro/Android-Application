@@ -19,6 +19,6 @@ data class MatchJSON(
     val id: Long,
     val matchDateTime: String,
     val playersCount: Int,
-    val isRegistrationPossible: Boolean,
+    val registrationPossible: Boolean,
     val _links: LinksJSON
 )

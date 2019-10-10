@@ -1,15 +1,15 @@
 {
-  "id": "dqqwweffw",
-  "email": "cesare",
-  "nickname": "CESARE",
-  "image": "cesare",
+  "id": "Cesare_1",
+  "email": "cesare@cesare.cesare",
+  "nickname": "CESA_RHINO",
+  "image": "cesare.png",
   "subscriber": true,
   "_links": {
     "self": {
-      "href": "http://localhost:8080/user/Cesare"
+      "href": "http://localhost:8080/user/Cesare_1"
     },
     "userEntity": {
-      "href": "http://localhost:8080/user/Cesare"
+      "href": "http://localhost:8080/user/Cesare_1"
     }
   }
 }

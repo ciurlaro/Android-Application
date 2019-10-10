@@ -1,14 +1,16 @@
 {
-  "gameName" : "COD",
-  "availableModes" : "modes",
-  "image" : "a",
-  "icon" : "a",
-  "_links" : {
-    "self" : {
-      "href" : "http://localhost:8080/game/COD"
+  "gameName": "wow",
+  "availableModes": [
+    "OPEN_WORLD"
+  ],
+  "image": "wow.png",
+  "icon": "wow.icon",
+  "_links": {
+    "self": {
+      "href": "http://localhost:8080/game/wow"
     },
-    "gameEntity" : {
-      "href" : "http://localhost:8080/game/COD"
+    "gameEntity": {
+      "href": "http://localhost:8080/game/wow"
     }
   }
 }

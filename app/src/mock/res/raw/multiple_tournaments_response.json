@@ -3,10 +3,10 @@
     "tournamentEntities": [
       {
         "id": 1,
-        "playersNumber": 12,
-        "tournamentDescription": "Free For All",
-        "tournamentMode": "FFA",
-        "adminId": 100,
+        "playersNumber": 16,
+        "tournamentDescription": "Description1",
+        "tournamentMode": "RANKED",
+        "title": "Tournament1",
         "_links": {
           "self": {
             "href": "http://localhost:8080/tournament/1"
@@ -16,51 +16,18 @@
           },
           "game": {
             "href": "http://localhost:8080/tournament/1/game"
-          }
-        }
-      },
-      {
-        "id": 1,
-        "playersNumber": 12,
-        "tournamentDescription": "Free For All",
-        "tournamentMode": "FFA",
-        "adminId": 100,
-        "_links": {
-          "self": {
-            "href": "http://localhost:8080/tournament/1"
           },
-          "tournamentEntity": {
-            "href": "http://localhost:8080/tournament/1"
-          },
-          "game": {
-            "href": "http://localhost:8080/tournament/1/game"
-          }
-        }
-      },
-      {
-        "id": 1,
-        "playersNumber": 12,
-        "tournamentDescription": "Free For All",
-        "tournamentMode": "FFA",
-        "adminId": 100,
-        "_links": {
-          "self": {
-            "href": "http://localhost:8080/tournament/1"
-          },
-          "tournamentEntity": {
-            "href": "http://localhost:8080/tournament/1"
-          },
-          "game": {
-            "href": "http://localhost:8080/tournament/1/game"
+          "admin": {
+            "href": "http://localhost:8080/tournament/1/admin"
           }
         }
       },
       {
         "id": 2,
-        "playersNumber": 18,
-        "tournamentDescription": "Search and Destroy",
-        "tournamentMode": "SnD",
-        "adminId": 101,
+        "playersNumber": 32,
+        "tournamentDescription": "Description2",
+        "tournamentMode": "FREE_FOR_ALL",
+        "title": "Tournament2",
         "_links": {
           "self": {
             "href": "http://localhost:8080/tournament/2"
@@ -70,42 +37,9 @@
           },
           "game": {
             "href": "http://localhost:8080/tournament/2/game"
-          }
-        }
-      },
-      {
-        "id": 2,
-        "playersNumber": 18,
-        "tournamentDescription": "Search and Destroy",
-        "tournamentMode": "SnD",
-        "adminId": 101,
-        "_links": {
-          "self": {
-            "href": "http://localhost:8080/tournament/2"
           },
-          "tournamentEntity": {
-            "href": "http://localhost:8080/tournament/2"
-          },
-          "game": {
-            "href": "http://localhost:8080/tournament/2/game"
-          }
-        }
-      },
-      {
-        "id": 2,
-        "playersNumber": 18,
-        "tournamentDescription": "Search and Destroy",
-        "tournamentMode": "SnD",
-        "adminId": 101,
-        "_links": {
-          "self": {
-            "href": "http://localhost:8080/tournament/2"
-          },
-          "tournamentEntity": {
-            "href": "http://localhost:8080/tournament/2"
-          },
-          "game": {
-            "href": "http://localhost:8080/tournament/2/game"
+          "admin": {
+            "href": "http://localhost:8080/tournament/2/admin"
           }
         }
       }
