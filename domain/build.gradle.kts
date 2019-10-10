@@ -9,6 +9,7 @@ kotlin {
             kotlinOptions {
                 jvmTarget = "1.8"
                 freeCompilerArgs = listOf("-Xuse-experimental=kotlin.Experimental")
+                output
             }
         }
     }
@@ -16,6 +17,7 @@ kotlin {
         browser()
         compilations.all {
             kotlinOptions {
+                moduleKind = "amd"
                 freeCompilerArgs = listOf("-Xuse-experimental=kotlin.Experimental")
             }
         }

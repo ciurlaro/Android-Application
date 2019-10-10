@@ -11,7 +11,7 @@
         "registrationEntity" : {
           "href" : "http://localhost:8080/registration/5"
         },
-        "matchId" : {
+        match : {
           "href" : "http://localhost:8080/registration/5/matchId"
         }
       }
@@ -26,7 +26,7 @@
         "registrationEntity" : {
           "href" : "http://localhost:8080/registration/6"
         },
-        "matchId" : {
+        match : {
           "href" : "http://localhost:8080/registration/6/matchId"
         }
       }
@@ -41,7 +41,7 @@
         "registrationEntity" : {
           "href" : "http://localhost:8080/registration/7"
         },
-        "matchId" : {
+        match : {
           "href" : "http://localhost:8080/registration/7/matchId"
         }
       }
@@ -56,7 +56,7 @@
         "registrationEntity" : {
           "href" : "http://localhost:8080/registration/8"
         },
-        "matchId" : {
+        match : {
           "href" : "http://localhost:8080/registration/8/matchId"
         }
       }
@@ -71,7 +71,7 @@
         "registrationEntity" : {
           "href" : "http://localhost:8080/registration/9"
         },
-        "matchId" : {
+        match : {
           "href" : "http://localhost:8080/registration/9/matchId"
         }
       }
@@ -86,7 +86,7 @@
         "registrationEntity" : {
           "href" : "http://localhost:8080/registration/10"
         },
-        "matchId" : {
+        match : {
           "href" : "http://localhost:8080/registration/10/matchId"
         }
       }

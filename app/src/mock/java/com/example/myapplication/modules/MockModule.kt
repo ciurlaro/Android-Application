@@ -31,7 +31,7 @@ object MockModule : KodeinModuleProvider {
                 engine {
                     addHandler {
                         Log.d("MockEngine", "$it")
-                        handleMockEngineRequest(it, instance())
+                        handleMockEngineRequest2(it, instance())
                     }
                 }
             }
@@ -47,7 +47,7 @@ object MockModule : KodeinModuleProvider {
         error("$request cannot be handled by the mock engine")
 
     private fun handleMockEngineRequest(request: HttpRequestData, res: Resources) = when {
-        "tournament" == request.url.fullPath -> when (request.method) {
+        "tournament" == request.url.fullPath || "tournament/search" in request.url.fullPath -> when (request.method) {
             Get -> respondJsonFromRawResources(R.raw.multiple_matches_response, res)
             else -> buildMockEngineError(request)
         }
@@ -56,7 +56,7 @@ object MockModule : KodeinModuleProvider {
             Delete -> respond("", HttpStatusCode.NoContent)
             else -> buildMockEngineError(request)
         }
-        "game" == request.url.fullPath -> when (request.method) {
+        "game" == request.url.fullPath || "game/search" in request.url.fullPath -> when (request.method) {
             Get -> respondJsonFromRawResources(R.raw.multiple_games_response, res)
             else -> buildMockEngineError(request)
         }
@@ -65,7 +65,7 @@ object MockModule : KodeinModuleProvider {
             Delete -> respond("", HttpStatusCode.NoContent)
             else -> buildMockEngineError(request)
         }
-        "match" == request.url.fullPath -> when (request.method) {
+        "match" == request.url.fullPath || "match/search" in request.url.fullPath -> when (request.method) {
             Get -> respondJsonFromRawResources(R.raw.multiple_matches_response, res)
             else -> buildMockEngineError(request)
         }
@@ -74,7 +74,7 @@ object MockModule : KodeinModuleProvider {
             Delete -> respond("", HttpStatusCode.NoContent)
             else -> buildMockEngineError(request)
         }
-        "registration" == request.url.fullPath -> when (request.method) {
+        "registration" == request.url.fullPath || "registration/search" in request.url.fullPath -> when (request.method) {
             Get -> respondJsonFromRawResources(R.raw.multiple_registrations_response, res)
             else -> buildMockEngineError(request)
         }
@@ -83,6 +83,73 @@ object MockModule : KodeinModuleProvider {
             Delete -> respond("", HttpStatusCode.NoContent)
             else -> buildMockEngineError(request)
         }
+        "user" == request.url.fullPath || "user/search" in request.url.fullPath -> when (request.method) {
+            Get -> respondJsonFromRawResources(R.raw.multiple_users_response, res)
+            else -> buildMockEngineError(request)
+        }
+        "currentUser" in request.url.fullPath || "user" in request.url.fullPath -> when (request.method) {
+            Get, Post, Put -> respondJsonFromRawResources(R.raw.user_response, res)
+            Delete -> respond("", HttpStatusCode.NoContent)
+            else -> buildMockEngineError(request)
+        }
         else -> buildMockEngineError(request)
     }
+
+    private fun handleMockEngineRequest2(
+        request: HttpRequestData,
+        res: Resources
+    ) = with(request) {
+        when {
+            url.fullPath.startsWith("/user/search") -> when (method) {
+                Get -> respondJsonFromRawResources(R.raw.multiple_users_response, res)
+                else -> buildMockEngineError(request)
+            }
+            url.fullPath.matches(Regex("^/user/\\d")) || url.fullPath == "currentUser"
+                    || url.fullPath.matches(Regex("/tournament/\\d*/admin")) -> when (request.method) {
+                Get, Post, Put -> respondJsonFromRawResources(R.raw.user_response, res)
+                Delete -> respond("", HttpStatusCode.NoContent)
+                else -> buildMockEngineError(request)
+            }
+            url.fullPath.startsWith("/game/search") || url.fullPath == "game" -> when (method) {
+                Get -> respondJsonFromRawResources(R.raw.multiple_games_response, res)
+                else -> buildMockEngineError(request)
+            }
+            url.fullPath.matches(Regex("^/game/\\d*"))
+                    || url.fullPath.matches(Regex("/tournament/\\d*/game")) -> when (request.method) {
+                Get, Post, Put -> respondJsonFromRawResources(R.raw.game_response, res)
+                Delete -> respond("", HttpStatusCode.NoContent)
+                else -> buildMockEngineError(request)
+            }
+            url.fullPath.startsWith("/tournament/search") || url.fullPath == "tournament" -> when (method) {
+                Get -> respondJsonFromRawResources(R.raw.multiple_tournaments_response, res)
+                else -> buildMockEngineError(request)
+            }
+            url.fullPath.matches(Regex("^/tournament/\\d*"))
+                    || url.fullPath.matches(Regex("/match/\\d*/tournamentInvolved")) -> when (request.method) {
+                Get, Post, Put -> respondJsonFromRawResources(R.raw.tournament_response, res)
+                Delete -> respond("", HttpStatusCode.NoContent)
+                else -> buildMockEngineError(request)
+            }
+            url.fullPath.startsWith("/match/search") || url.fullPath == "match" -> when (method) {
+                Get -> respondJsonFromRawResources(R.raw.multiple_matches_response, res)
+                else -> buildMockEngineError(request)
+            }
+            url.fullPath.matches(Regex("^/match/\\d*")) -> when (request.method) {
+                Get, Post, Put -> respondJsonFromRawResources(R.raw.match_response, res)
+                Delete -> respond("", HttpStatusCode.NoContent)
+                else -> buildMockEngineError(request)
+            }
+            url.fullPath.startsWith("/registration/search") || url.fullPath == "match" -> when (method) {
+                Get -> respondJsonFromRawResources(R.raw.multiple_registrations_response, res)
+                else -> buildMockEngineError(request)
+            }
+            url.fullPath.matches(Regex("^/registration/\\d*")) -> when (request.method) {
+                Get, Post, Put -> respondJsonFromRawResources(R.raw.registration_response, res)
+                Delete -> respond("", HttpStatusCode.NoContent)
+                else -> buildMockEngineError(request)
+            }
+            else -> buildMockEngineError(request)
+        }
+    }
+
 }

@@ -34,9 +34,7 @@ kotlin {
         }
     }
     js {
-        browser {
-
-        }
+        browser()
         compilations.all {
             kotlinOptions {
                 freeCompilerArgs = listOf("-Xuse-experimental=kotlin.Experimental")

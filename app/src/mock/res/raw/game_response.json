@@ -2,6 +2,7 @@
   "gameName" : "COD",
   "availableModes" : "modes",
   "image" : "a",
+  "icon" : "a",
   "_links" : {
     "self" : {
       "href" : "http://localhost:8080/game/COD"

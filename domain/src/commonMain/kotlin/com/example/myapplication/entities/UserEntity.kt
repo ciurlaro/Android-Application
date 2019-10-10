@@ -1,5 +1,8 @@
 package com.example.myapplication.entities
 
+import kotlin.js.JsName
+
+@JsName("UserEntity")
 data class UserEntity(
     val id: String,
     val email: String,

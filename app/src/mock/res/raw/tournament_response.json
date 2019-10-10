@@ -4,7 +4,6 @@
   "title" : 12,
   "tournamentDescription" : "Free For All",
   "tournamentMode" : "FFA",
-  "adminId" : 100,
   "_links" : {
     "self" : {
       "href" : "http://localhost:8080/tournament/1"
@@ -14,6 +13,9 @@
     },
     "game" : {
       "href" : "http://localhost:8080/tournament/1/game"
+    },
+    "admin" : {
+      "href" : "http://localhost:8080/tournament/1/admin"
     }
   }
 }

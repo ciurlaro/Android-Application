@@ -43,7 +43,7 @@ class ArenaTournamentRepositoryImplementation(
             .let {
                 Triple(
                     it,
-                    async { atDS.getGameByName(it.gameId) },
+                    async { atDS.getGameByLink(it._links.game!!.href) },
                     async { atDS.getUserByLink(it._links.userEntity!!.href) }
                 )
             }
@@ -131,7 +131,7 @@ class ArenaTournamentRepositoryImplementation(
         matchId: Long,
         page: Int
     ) = atDS.getMatchById(matchId)
-        .let { atDS.getRegistrationsByMatchLink(it._links.registrationEntity!!.href, page) }
+        .let { atDS.getRegistrationsByMatchLink(it._links.self.href, page) }
         .transformRegistrations()
 
 
@@ -159,7 +159,7 @@ class ArenaTournamentRepositoryImplementation(
             .map {
                 coroutineScope {
                     Triple(it,
-                        async { atDS.getGameByName(it.gameId) },
+                        async { atDS.getGameByLink(it._links.game!!.href) },
                         async { atDS.getUserByLink(it._links.userEntity!!.href) })
                 }
             }
@@ -178,8 +178,8 @@ class ArenaTournamentRepositoryImplementation(
                     Quadruple(
                         it.first,
                         it.second,
-                        async { atDS.getGameByLink(it.second._links.gameEntity!!.href) },
-                        async { atDS.getUserByLink(it.second._links.userEntity!!.href) }
+                        async { atDS.getGameByLink(it.second._links.game!!.href) },
+                        async { atDS.getUserByLink(it.second._links.admin!!.href) }
                     )
                 }
             }
@@ -194,12 +194,12 @@ class ArenaTournamentRepositoryImplementation(
     private suspend fun MultipleRegistrationsJSON.transformRegistrations() =
         registrationSplitter(this)
             .asFlow()
-            .map { it to atDS.getMatchByLink(it._links.matchEntity!!.href) }
+            .map { it to atDS.getMatchByLink(it._links.match!!.href) }
             .map {
                 Triple(
                     it.first,
                     it.second,
-                    atDS.getTournamentByLink(it.second._links.tournamentEntity!!.href)
+                    atDS.getTournamentByLink(it.second._links.tournamentInvolved!!.href)
                 )
             }
             .map {
@@ -208,8 +208,8 @@ class ArenaTournamentRepositoryImplementation(
                         it.first,
                         it.second,
                         it.third,
-                        async { atDS.getGameByLink(it.third._links.gameEntity!!.href) },
-                        async { atDS.getUserById(it.first._links.userEntity!!.href) }
+                        async { atDS.getGameByLink(it.third._links.game!!.href) },
+                        async { atDS.getUserByLink(it.first._links.admin!!.href) }
                     )
                 }
             }

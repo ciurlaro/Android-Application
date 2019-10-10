@@ -28,7 +28,6 @@ data class EndpointsImplementation(
     override fun searchGamesByNameUrl(query: String, page: Int) =
         buildUrl("/game/search/byGameName", parametersOf("gameName" to query, "page" to page))
 
-
     override fun allTournamentsUrl(page: Int) =
         buildUrl("/tournament")
 
@@ -41,8 +40,9 @@ data class EndpointsImplementation(
     override fun tournamentsByModeUrl(mode: String, page: Int) =
         buildUrl("/tournament/search/byMode", parametersOf("tournamentMode" to mode, "page" to page))
 
+    //TODO: to implement server side
     override fun searchTournamentsByNameUrl(query: String, page: Int)=
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        buildUrl("/tournament/search/byName", parametersOf("tournamentName" to query, "page" to page))
 
     override fun matchByIdUrl(id: Long) =
         buildUrl("/match/$id")

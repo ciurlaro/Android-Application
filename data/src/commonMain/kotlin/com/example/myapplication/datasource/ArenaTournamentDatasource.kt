@@ -8,7 +8,7 @@ import io.ktor.http.Url
 interface ArenaTournamentDatasource {
 
     companion object {
-        val DEFAULT_DATE_TIME_PATTERN = DateFormat.FORMAT1
+        val DEFAULT_DATE_TIME_PATTERN = DateFormat("yyyy-MM-dd'T'HH:mm:ss")
     }
 
 
