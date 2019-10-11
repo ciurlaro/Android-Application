@@ -29,7 +29,7 @@ data class EndpointsImplementation(
         buildUrl("/game/search/byGameName", parametersOf("gameName" to query, "page" to page))
 
     override fun allTournamentsUrl(page: Int) =
-        buildUrl("/tournament")
+        buildUrl("/tournament", parametersOf("page" to page))
 
     override fun tournamentByIdUrl(id: Long) =
         buildUrl("/tournament/$id")
@@ -51,16 +51,16 @@ data class EndpointsImplementation(
         buildUrl("/match/search/byTournament", parametersOf("tournament" to tournamentLink, "page" to page))
 
     override fun matchesByTournamentIdUrl(tournamentId: Long, page: Int) =
-        buildUrl("/match/search/byTournamentId", parametersOf("tournamentId" to tournamentId))
+        buildUrl("/match/search/byTournamentId", parametersOf("tournamentId" to tournamentId, "page" to page))
 
     override fun matchesByGameLinkUrl(gameLink: String, page: Int) =
         buildUrl("/match/search/byGame", parametersOf("game" to gameLink, "page" to page))
 
     override fun matchesByGameIdUrl(gameId: Long, page: Int) =
-        buildUrl("/match/search/byGameId", parametersOf("gameId" to gameId))
+        buildUrl("/match/search/byGameId", parametersOf("gameId" to gameId, "page" to page))
 
     override fun allMatchesUrl(page: Int) =
-        buildUrl("/match")
+        buildUrl("/match", parametersOf("page" to page))
 
     override fun matchesAfterDateUrl(dateTime: DateTimeTz, page: Int) =
         buildUrl(
@@ -73,24 +73,24 @@ data class EndpointsImplementation(
         buildUrl("/match/search/availableMatches", parametersOf("page" to page))
 
     override fun matchesNotFullUrl(page: Int) =
-        buildUrl("/match/search/notFull")
+        buildUrl("/match/search/notFull", parametersOf("page" to page))
 
     override fun allRegistrationsUrl(page: Int) =
-        buildUrl("/registration")
+        buildUrl("/registration", parametersOf("page" to page))
 
     override fun registrationByIdUrl(id: Long) =
         buildUrl("/registration/$id")
 
 
     override fun registrationsByUserUrl(userId: String, page: Int) =
-        buildUrl("/registration/search/byUserId", parametersOf("userId" to userId))
+        buildUrl("/registration/search/byUserId", parametersOf("userId" to userId, "page" to page))
 
 
     override fun registrationsByMatchLinkUrl(matchLink: String, page: Int) =
-        buildUrl("/registration/search/byMatch/$matchLink")
+        buildUrl("/registration/search/byMatch/$matchLink", parametersOf("page" to page))
 
     override fun registrationsByMatchIdUrl(matchId: Long, page: Int) =
-        buildUrl("/registration/search/byMatchId", parametersOf("matchId" to matchId))
+        buildUrl("/registration/search/byMatchId", parametersOf("matchId" to matchId, "page" to page))
 
     override fun currentUserUrl() =
         buildUrl("/currentUser")
@@ -99,10 +99,10 @@ data class EndpointsImplementation(
         buildUrl("/user/$userId")
 
     override fun usersByMatchLinkUrl(matchLink: String, page: Int) =
-        buildUrl("/user/search/byMatch", parametersOf("match" to matchLink))
+        buildUrl("/user/search/byMatch", parametersOf("match" to matchLink, "page" to page))
 
     override fun usersByMatchIdUrl(matchId: Long, page: Int) =
-        buildUrl("/user/search/byMatchId", parametersOf("matchId" to matchId))
+        buildUrl("/user/search/byMatchId", parametersOf("matchId" to matchId, "page" to page))
 
     override fun isAccountVerifiedUrl() =
         buildUrl("isAccountVerified")

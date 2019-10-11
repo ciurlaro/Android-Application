@@ -10,7 +10,10 @@ import io.ktor.client.engine.mock.respond
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
 import io.ktor.client.request.HttpRequestData
-import io.ktor.http.*
+import io.ktor.http.ContentType
+import io.ktor.http.HttpHeaders
+import io.ktor.http.fullPath
+import io.ktor.http.headersOf
 import org.kodein.di.Kodein
 import org.kodein.di.erased.bind
 import org.kodein.di.erased.instance
@@ -68,6 +71,10 @@ object MockModule : KodeinModuleProvider {
                 R.raw.tournament_response,
                 res
             )
+            "/match/2/tournament"-> respondJsonFromRawResources(
+                R.raw.tournament_response,
+                res
+            )
 
             "/match" -> respondJsonFromRawResources(R.raw.multiple_matches_response, res)
             "/match/1" -> respondJsonFromRawResources(R.raw.match_response, res)
@@ -113,8 +120,11 @@ object MockModule : KodeinModuleProvider {
                 R.raw.multiple_registrations_response,
                 res
             )
-            //"/registration/search/byMatch/$matchLink" -> respondJsonFromRawResources(R.raw.multiple_registrations_response, res)
             "/registration/search/byMatchId" -> respondJsonFromRawResources(
+                R.raw.multiple_registrations_response,
+                res
+            )
+            "/registration/search/byMatch/http://localhost:8080/match/1?page=0" -> respondJsonFromRawResources(
                 R.raw.multiple_registrations_response,
                 res
             )
@@ -131,7 +141,8 @@ object MockModule : KodeinModuleProvider {
                 R.raw.multiple_users_response,
                 res
             )
-            "isAccountVerified" -> respondJsonFromRawResources(R.raw.multiple_users_response, res)
+            "/tournament/1/admin" -> respondJsonFromRawResources(R.raw.user_response, res)
+            "/isAccountVerified" -> respondJsonFromRawResources(R.raw.multiple_users_response, res)
 
             else -> buildMockEngineError(request)
         }

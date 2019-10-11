@@ -17,7 +17,7 @@ data class MultipleEmbeddedJSON(
 @Serializable
 data class RegistrationJSON(
     val id: Long,
-    val userId: String,
+    // val userId: String,
     val outcome: String,
     val _links: LinksJSON
 )
