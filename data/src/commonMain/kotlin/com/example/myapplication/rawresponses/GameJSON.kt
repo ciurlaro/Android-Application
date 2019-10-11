@@ -19,6 +19,6 @@ data class GameJSON(
     val gameName: String,
     val availableModes: List<String>,
     val image: String,
-    val _links: LinksJSON,
-    val icon: String
+    val icon: String,
+    val _links: LinksJSON
 )

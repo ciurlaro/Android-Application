@@ -22,9 +22,9 @@ class GetAllRegistrationsByMatch(
         return toReturn
     }
 
-    suspend fun buildAction(match: MatchEntity, maxPage: Int = 10) =
+    suspend fun buildAction(match: MatchEntity, maxPage: Int = 1) =
         buildAction(Params(match, maxPage))
 
-    data class Params(val match: MatchEntity, val maxPage: Int = 10)
+    data class Params(val match: MatchEntity, val maxPage: Int = 1)
 
 }

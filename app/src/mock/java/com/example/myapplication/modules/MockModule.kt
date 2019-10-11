@@ -107,7 +107,9 @@ object MockModule : KodeinModuleProvider {
                 R.raw.multiple_matches_response,
                 res
             )
-
+            "/registration/1/match" -> respondJsonFromRawResources(R.raw.match_response, res)
+            "/registration/2/match" -> respondJsonFromRawResources(R.raw.match_response, res)
+            "/registration/3/match" -> respondJsonFromRawResources(R.raw.match_response, res)
 
             "/registration" -> respondJsonFromRawResources(
                 R.raw.multiple_registrations_response,
@@ -128,6 +130,10 @@ object MockModule : KodeinModuleProvider {
                 R.raw.multiple_registrations_response,
                 res
             )
+            "/registration/search/byMatch/http://localhost:8080/match/1?page=1" -> respondJsonFromRawResources(
+                R.raw.multiple_registrations_response,
+                res
+            )
 
             "/currentUser" -> respondJsonFromRawResources(R.raw.user_response, res)
             "/user/Cesare_1" -> respondJsonFromRawResources(R.raw.user_response, res)
@@ -141,8 +147,11 @@ object MockModule : KodeinModuleProvider {
                 R.raw.multiple_users_response,
                 res
             )
+            "/registration/1/user" -> respondJsonFromRawResources(R.raw.user_response, res)
+            "/registration/2/user" -> respondJsonFromRawResources(R.raw.user_response, res)
+            "/registration/3/user" -> respondJsonFromRawResources(R.raw.user_response, res)
             "/tournament/1/admin" -> respondJsonFromRawResources(R.raw.user_response, res)
-            "/isAccountVerified" -> respondJsonFromRawResources(R.raw.multiple_users_response, res)
+            // "/isAccountVerified" -> respondJsonFromRawResources(R.raw.multiple_users_response, res)
 
             else -> buildMockEngineError(request)
         }

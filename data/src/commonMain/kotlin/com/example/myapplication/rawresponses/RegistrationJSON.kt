@@ -18,6 +18,6 @@ data class MultipleEmbeddedJSON(
 data class RegistrationJSON(
     val id: Long,
     // val userId: String,
-    val outcome: String,
+    val outcome: String? = null,
     val _links: LinksJSON
 )

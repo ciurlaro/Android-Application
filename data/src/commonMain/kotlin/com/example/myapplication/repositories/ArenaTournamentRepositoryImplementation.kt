@@ -206,7 +206,7 @@ class ArenaTournamentRepositoryImplementation(
                     it.second,
                     it.third,
                     async { atDS.getGameByLink(it.third._links.game!!.href) },
-                    async { atDS.getUserByLink(it.first._links.admin!!.href) }
+                    async { atDS.getUserByLink(it.first._links.user!!.href) }
                 )
             }
             .map {
