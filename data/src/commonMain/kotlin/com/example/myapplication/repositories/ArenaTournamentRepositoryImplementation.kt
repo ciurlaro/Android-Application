@@ -11,8 +11,10 @@ import com.example.myapplication.splitters.TournamentSplitter
 import com.example.myapplication.utils.Quadruple
 import com.example.myapplication.utils.Quintuple
 import com.soywiz.klock.DateTimeTz
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.toList
@@ -156,12 +158,10 @@ class ArenaTournamentRepositoryImplementation(
     private suspend fun MultipleTournamentsJSON.transformTournaments() =
         tournamentSplitter(this)
             .asFlow()
-            .map {
-                coroutineScope {
-                    Triple(it,
-                        async { atDS.getGameByLink(it._links.game!!.href) },
-                        async { atDS.getUserByLink(it._links.userEntity!!.href) })
-                }
+            .scopedMap {
+                Triple(it,
+                    async { atDS.getGameByLink(it._links.game!!.href) },
+                    async { atDS.getUserByLink(it._links.userEntity!!.href) })
             }
             .map { Triple(it.first, it.second.await(), it.third.await()) }
             .map { tournamentMapper.fromRemoteSingle(it) }
@@ -173,15 +173,13 @@ class ArenaTournamentRepositoryImplementation(
             .map {
                 it to atDS.getTournamentByLink(it._links.tournament!!.href)
             }
-            .map {
-                coroutineScope {
-                    Quadruple(
-                        it.first,
-                        it.second,
-                        async { atDS.getGameByLink(it.second._links.game!!.href) },
-                        async { atDS.getUserByLink(it.second._links.admin!!.href) }
-                    )
-                }
+            .scopedMap {
+                Quadruple(
+                    it.first,
+                    it.second,
+                    async { atDS.getGameByLink(it.second._links.game!!.href) },
+                    async { atDS.getUserByLink(it.second._links.admin!!.href) }
+                )
             }
             .map {
                 Quadruple(it.first, it.second, it.third.await(), it.fourth.await())
@@ -202,16 +200,14 @@ class ArenaTournamentRepositoryImplementation(
                     atDS.getTournamentByLink(it.second._links.tournament!!.href)
                 )
             }
-            .map {
-                coroutineScope {
-                    Quintuple(
-                        it.first,
-                        it.second,
-                        it.third,
-                        async { atDS.getGameByLink(it.third._links.game!!.href) },
-                        async { atDS.getUserByLink(it.first._links.admin!!.href) }
-                    )
-                }
+            .scopedMap {
+                Quintuple(
+                    it.first,
+                    it.second,
+                    it.third,
+                    async { atDS.getGameByLink(it.third._links.game!!.href) },
+                    async { atDS.getUserByLink(it.first._links.admin!!.href) }
+                )
             }
             .map {
                 Quintuple(
@@ -224,5 +220,16 @@ class ArenaTournamentRepositoryImplementation(
             }
             .map { registrationMapper.fromRemoteSingle(it) }
             .toList()
+
+    /**
+     * Returns a flow containing the results of applying the given [transform] function to each value of the original flow and exposes
+     * the current [CoroutineScope]
+     */
+    private inline fun <T, R> Flow<T>.scopedMap(crossinline transform: suspend CoroutineScope.(value: T) -> R): Flow<R> =
+        map {
+            coroutineScope {
+                transform(it)
+            }
+        }
 
 }
