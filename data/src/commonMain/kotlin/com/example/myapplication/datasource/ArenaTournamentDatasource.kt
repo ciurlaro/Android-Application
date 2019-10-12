@@ -30,13 +30,14 @@ interface ArenaTournamentDatasource {
     suspend fun getMatchesByTournamentLink(tournamentLink: String, page: Int): MatchJSON
     suspend fun getMatchesByGameLink(gameLink: String, page: Int): MultipleMatchJSON
     suspend fun getMatchesByGameId(gameId: Long, page: Int): MultipleMatchJSON
+    suspend fun getMatchesByUser(userId: String, page: Int) : MultipleMatchJSON
     suspend fun getMatchesAfterDate(dateTime: DateTimeTz, page: Int): MultipleMatchJSON
     suspend fun getMatchesAvailable(page: Int): MultipleMatchJSON
     suspend fun getMatchesByTournamentId(tournamentId: Long, page: Int): MultipleMatchJSON
+    suspend fun getMatchesNotFull(page: Int): MultipleMatchJSON
 
     suspend fun getRegistrationById(id: Long): RegistrationJSON
     suspend fun getRegistrationByLink(link: String): RegistrationJSON
-    suspend fun getMatchesNotFull(page: Int): MultipleMatchJSON
     suspend fun getRegistrationsByUser(userId: String, page: Int): MultipleRegistrationsJSON
     suspend fun getRegistrationsByMatchLink(matchLink: String, page: Int): MultipleRegistrationsJSON
 
@@ -69,6 +70,7 @@ interface ArenaTournamentDatasource {
         fun matchesByTournamentIdUrl(tournamentId: Long, page: Int): Url
         fun matchesByGameLinkUrl(gameLink: String, page: Int): Url
         fun matchesByGameIdUrl(gameId: Long, page: Int): Url
+        fun matchesByUserIdUrl(userId: String, page: Int) : Url
         fun allMatchesUrl(page: Int): Url
         fun matchesAfterDateUrl(dateTime: DateTimeTz, page: Int): Url
         fun matchesAvailableUrl(page: Int): Url

@@ -12,7 +12,7 @@ import org.kodein.di.erased.instance
 class CustomViewModelFactory(private val injector: DKodein) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T = when (modelClass.kotlin) {
-        HomeViewModel::class -> HomeViewModel(injector.instance())
+        HomeViewModel::class -> HomeViewModel(injector.instance(), injector.instance())
         SearchViewModel::class -> SearchViewModel()
         UserProfileViewModel::class -> UserProfileViewModel()
         else -> throw IllegalArgumentException("${modelClass.canonicalName} has not been implemented in this factory")

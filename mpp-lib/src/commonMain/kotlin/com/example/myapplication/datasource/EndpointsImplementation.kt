@@ -68,6 +68,9 @@ data class EndpointsImplementation(
             parametersOf("matchDateTime" to dateTimeMapper.toRemote(dateTime), "page" to page)
         )
 
+    override fun matchesByUserIdUrl(userId: String, page: Int): Url =
+        buildUrl("/match/search/byUserId", parametersOf("userId" to userId, "page" to page))
+
     //TODO: current time server side
     override fun matchesAvailableUrl(page: Int) =
         buildUrl("/match/search/availableMatches", parametersOf("page" to page))

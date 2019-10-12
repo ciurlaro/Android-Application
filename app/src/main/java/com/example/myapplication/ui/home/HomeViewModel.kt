@@ -5,11 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.entities.MatchEntity
-import com.example.myapplication.usecases.GetAllAvailableMatchesUseCase
+import com.example.myapplication.usecases.*
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
-    private val getAllAvailableMatchesUseCase: GetAllAvailableMatchesUseCase
+    private val getAllAvailableMatchesUseCase: GetAllAvailableMatchesUseCase,
+    private val getAllMatchesByUserUseCase: GetAllMatchesByUserUseCase
 ) : ViewModel() {
 
     data class MatchWithPlayersCountModel(val matchEntity: MatchEntity, val registeredPlayer: Int)
@@ -28,6 +29,10 @@ class HomeViewModel(
         getAllAvailableMatchesUseCase.buildAction()
             .map { MatchWithPlayersCountModel(it.first, it.second) }
             .let { _matches.value = it }
+    }
+
+    fun testMatches() = viewModelScope.launch {
+        getAllMatchesByUserUseCase.buildAction()
     }
 
 }

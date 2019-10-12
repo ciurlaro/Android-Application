@@ -1,6 +1,7 @@
 package com.example.myapplication.repositories
 
 import com.example.myapplication.datasource.ArenaTournamentDatasource
+import com.example.myapplication.entities.MatchEntity
 import com.example.myapplication.mappers.*
 import com.example.myapplication.rawresponses.MultipleMatchJSON
 import com.example.myapplication.rawresponses.MultipleRegistrationsJSON
@@ -96,6 +97,10 @@ class ArenaTournamentRepositoryImplementation(
 
     override suspend fun getMatchesAvailable(page: Int) =
         atDS.getMatchesAvailable(page)
+            .transformMatches()
+
+    override suspend fun getMatchesByUser(userId: String, page: Int): List<MatchEntity> =
+        atDS.getMatchesByUser(userId, page)
             .transformMatches()
 
     override suspend fun getRegistrationById(id: Long) = coroutineScope {

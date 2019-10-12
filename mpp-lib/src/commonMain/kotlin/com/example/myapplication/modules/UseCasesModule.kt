@@ -1,6 +1,7 @@
 package com.example.myapplication.modules
 
 import com.example.myapplication.usecases.GetAllAvailableMatchesUseCase
+import com.example.myapplication.usecases.GetAllMatchesByUserUseCase
 import com.example.myapplication.usecases.GetAllRegistrationsByMatch
 import com.example.myapplication.usecases.GetAvailableMatchesPerPage
 import org.kodein.di.Kodein
@@ -18,5 +19,6 @@ object UseCasesModule : KodeinModuleProvider {
                 instance()
             )
         }
+        bind<GetAllMatchesByUserUseCase>() with singleton { GetAllMatchesByUserUseCase(instance()) }
     }
 }
