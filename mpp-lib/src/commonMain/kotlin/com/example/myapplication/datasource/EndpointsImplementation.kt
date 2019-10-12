@@ -40,6 +40,9 @@ data class EndpointsImplementation(
     override fun tournamentsByModeUrl(mode: String, page: Int) =
         buildUrl("/tournament/search/byMode", parametersOf("tournamentMode" to mode, "page" to page))
 
+    override fun tournamentsByUserId(userId: String, page: Int) =
+        buildUrl("/tournament/search/byUserId", parametersOf("userId" to userId, "page" to page))
+
     //TODO: to implement server side
     override fun searchTournamentsByNameUrl(query: String, page: Int)=
         buildUrl("/tournament/search/byName", parametersOf("tournamentName" to query, "page" to page))

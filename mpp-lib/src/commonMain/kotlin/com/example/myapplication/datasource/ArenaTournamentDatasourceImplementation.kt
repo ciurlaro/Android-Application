@@ -43,6 +43,10 @@ class ArenaTournamentDatasourceImplementation(
     ): MultipleTournamentsJSON =
         httpClient.get(endpoints.tournamentsByGameLinkUrl(gameLink, page))
 
+    override suspend fun getTournamentsByUser(userId: String, page: Int): MultipleTournamentsJSON =
+        httpClient.get(endpoints.tournamentsByGameLinkUrl(userId, page))
+
+
     override suspend fun searchTournamentsByName(name: String, page: Int): MultipleTournamentsJSON =
         httpClient.get(endpoints.searchTournamentsByNameUrl(name, page))
 

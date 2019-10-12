@@ -2,6 +2,7 @@ package com.example.myapplication.repositories
 
 import com.example.myapplication.datasource.ArenaTournamentDatasource
 import com.example.myapplication.entities.MatchEntity
+import com.example.myapplication.entities.TournamentEntity
 import com.example.myapplication.mappers.*
 import com.example.myapplication.rawresponses.MultipleMatchJSON
 import com.example.myapplication.rawresponses.MultipleRegistrationsJSON
@@ -62,6 +63,11 @@ class ArenaTournamentRepositoryImplementation(
         atDS.getGameByName(gameName)
             .let { atDS.getTournamentsByGameLink(it._links.self.href, page) }
             .transformTournaments()
+
+    override suspend fun getTournamentsByUser(userId: String, page: Int): List<TournamentEntity> =
+        atDS.getTournamentsByUser(userId, page)
+            .transformTournaments()
+
 
     override suspend fun getMatchById(id: Long) = coroutineScope {
         atDS.getMatchById(id)
@@ -166,7 +172,7 @@ class ArenaTournamentRepositoryImplementation(
             .scopedMap {
                 Triple(it,
                     async { atDS.getGameByLink(it._links.game!!.href) },
-                    async { atDS.getUserByLink(it._links.userEntity!!.href) })
+                    async { atDS.getUserByLink(it._links.admin!!.href) })
             }
             .map { Triple(it.first, it.second.await(), it.third.await()) }
             .map { tournamentMapper.fromRemoteSingle(it) }

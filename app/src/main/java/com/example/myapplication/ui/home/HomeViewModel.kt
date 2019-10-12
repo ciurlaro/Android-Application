@@ -6,11 +6,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.entities.MatchEntity
 import com.example.myapplication.usecases.*
+import com.example.myapplication.usecases.tournament.GetTournamentsByUser
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
     private val getAllAvailableMatchesUseCase: GetAllAvailableMatchesUseCase,
-    private val getAllMatchesByUserUseCase: GetAllMatchesByUserUseCase
+    private val getAllMatchesByUserUseCase: GetAllMatchesByUserUseCase,
+    private val getTournamentsByUser: GetTournamentsByUser
 ) : ViewModel() {
 
     data class MatchWithPlayersCountModel(val matchEntity: MatchEntity, val registeredPlayer: Int)
@@ -31,8 +33,12 @@ class HomeViewModel(
             .let { _matches.value = it }
     }
 
-    fun testMatches() = viewModelScope.launch {
+    fun getMatchesByUser() = viewModelScope.launch {
         getAllMatchesByUserUseCase.buildAction()
+    }
+
+    fun getTsByUser() = viewModelScope.launch {
+        getTournamentsByUser.buildAction()
     }
 
 }

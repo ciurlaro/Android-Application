@@ -29,8 +29,9 @@ class HomeFragment : BaseFragment() {
             adapter.data = it
         }
 
-        viewModel.loadMatches()
-
+        //viewModel.loadMatches()
+        //viewModel.getMatchesByUser()
+        viewModel.getTsByUser()
     }
 
 }

@@ -4,6 +4,7 @@ import com.example.myapplication.usecases.GetAllAvailableMatchesUseCase
 import com.example.myapplication.usecases.GetAllMatchesByUserUseCase
 import com.example.myapplication.usecases.GetAllRegistrationsByMatch
 import com.example.myapplication.usecases.GetAvailableMatchesPerPage
+import com.example.myapplication.usecases.tournament.GetTournamentsByUser
 import org.kodein.di.Kodein
 import org.kodein.di.erased.bind
 import org.kodein.di.erased.instance
@@ -20,5 +21,6 @@ object UseCasesModule : KodeinModuleProvider {
             )
         }
         bind<GetAllMatchesByUserUseCase>() with singleton { GetAllMatchesByUserUseCase(instance()) }
+        bind<GetTournamentsByUser>() with singleton { GetTournamentsByUser(instance()) }
     }
 }

@@ -55,11 +55,21 @@ object MockModule : KodeinModuleProvider {
             "/tournament" -> respondJsonFromRawResources(R.raw.multiple_tournaments_response, res)
             "/tournament/1" -> respondJsonFromRawResources(R.raw.tournament_response, res)
             "/tournament/2" -> respondJsonFromRawResources(R.raw.tournament_response, res)
+            "/tournament/2/game" -> respondJsonFromRawResources(R.raw.game_response, res)
+            "/tournament/2/admin" -> respondJsonFromRawResources(R.raw.user_response, res)
             "/tournament/search/byMode" -> respondJsonFromRawResources(
                 R.raw.multiple_tournaments_response,
                 res
             )
             "/tournament/search/byGame" -> respondJsonFromRawResources(
+                R.raw.multiple_tournaments_response,
+                res
+            )
+            "/tournament/search/byGame?game=Cesare_1&page=0" -> respondJsonFromRawResources(
+                R.raw.multiple_tournaments_response,
+                res
+            )
+            "/tournament/search/byGame?game=Cesare_1&page=1" -> respondJsonFromRawResources(
                 R.raw.multiple_tournaments_response,
                 res
             )
@@ -107,6 +117,16 @@ object MockModule : KodeinModuleProvider {
                 R.raw.multiple_matches_response,
                 res
             )
+            "/match/search/byUserId?userId=Cesare_1&page=0" -> respondJsonFromRawResources(
+                R.raw.multiple_matches_response,
+                res
+            )
+
+            "/match/search/byUserId?userId=Cesare_1&page=1" -> respondJsonFromRawResources(
+                R.raw.multiple_matches_response,
+                res
+            )
+
             "/registration/1/match" -> respondJsonFromRawResources(R.raw.match_response, res)
             "/registration/2/match" -> respondJsonFromRawResources(R.raw.match_response, res)
             "/registration/3/match" -> respondJsonFromRawResources(R.raw.match_response, res)
