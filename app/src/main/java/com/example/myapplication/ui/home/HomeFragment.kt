@@ -29,9 +29,14 @@ class HomeFragment : BaseFragment() {
             adapter.data = it
         }
 
-        //viewModel.loadMatches()
-        //viewModel.getMatchesByUser()
-        viewModel.getTsByUser()
+        viewModel.getAllAvailableMatches()
+        viewModel.getMatchesByUser()
+        viewModel.getMatchesByTournament()
+        viewModel.getRegistrationsByMatch()
+        viewModel.getRegistrationByTournament()
+        viewModel.getTournamentsByAdmin()
+        viewModel.getShowcaseTournaments()
+        viewModel.getUserInformation()
     }
 
 }

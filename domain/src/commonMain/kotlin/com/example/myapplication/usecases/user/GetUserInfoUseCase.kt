@@ -1,7 +1,8 @@
-package com.example.myapplication.usecases
+package com.example.myapplication.usecases.user
 
 import com.example.myapplication.entities.UserEntity
 import com.example.myapplication.repositories.ArenaTournamentRepository
+import com.example.myapplication.usecases.UseCase
 import kotlinx.coroutines.FlowPreview
 
 class GetUserInfoUseCase(

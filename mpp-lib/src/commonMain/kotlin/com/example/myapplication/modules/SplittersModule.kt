@@ -7,7 +7,7 @@ import org.kodein.di.Kodein
 import org.kodein.di.erased.bind
 import org.kodein.di.erased.singleton
 
-object SpittersModule : KodeinModuleProvider {
+object SplittersModule : KodeinModuleProvider {
     override fun provideModule(): Kodein.Builder.() -> Unit = {
         bind<MatchSplitter>() with singleton { MatchSplitter() }
         bind<RegistrationSplitter>() with singleton { RegistrationSplitter() }

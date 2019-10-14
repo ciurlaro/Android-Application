@@ -1,8 +1,9 @@
-package com.example.myapplication.usecases
+package com.example.myapplication.usecases.registration
 
 import com.example.myapplication.entities.MatchEntity
 import com.example.myapplication.entities.RegistrationEntity
 import com.example.myapplication.repositories.ArenaTournamentRepository
+import com.example.myapplication.usecases.UseCaseWithParams
 
 class GetAllRegistrationsByMatch(
     private val repository: ArenaTournamentRepository

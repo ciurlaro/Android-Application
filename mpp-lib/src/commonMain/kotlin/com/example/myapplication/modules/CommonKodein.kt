@@ -5,7 +5,7 @@ import org.kodein.di.erased.with
 
 fun buildCommonKodein(serverProtocol: String, serverUrl: String, serverPort: Int) = Kodein.lazy {
     import(MappersModule)
-    import(SpittersModule)
+    import(SplittersModule)
     import(RepositoriesModule)
     import(DatasourcesModule)
     import(NetworkModule)

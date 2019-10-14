@@ -5,9 +5,9 @@ import com.example.myapplication.entities.UserEntity
 import com.example.myapplication.repositories.ArenaTournamentRepository
 import com.example.myapplication.usecases.UseCaseWithParams
 
-class GetTournamentsByUser(
+class GetCreatedTournamentsByAdmin(
     private val repository: ArenaTournamentRepository
-) : UseCaseWithParams<GetTournamentsByUser.Params, List<TournamentEntity>> {
+) : UseCaseWithParams<GetCreatedTournamentsByAdmin.Params, List<TournamentEntity>> {
 
     override suspend fun buildAction(params: Params): List<TournamentEntity> {
         val toReturn = mutableListOf<TournamentEntity>()

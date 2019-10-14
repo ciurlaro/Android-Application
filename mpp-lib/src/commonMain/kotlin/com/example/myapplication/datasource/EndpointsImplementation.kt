@@ -44,8 +44,12 @@ data class EndpointsImplementation(
         buildUrl("/tournament/search/byUserId", parametersOf("userId" to userId, "page" to page))
 
     //TODO: to implement server side
-    override fun searchTournamentsByNameUrl(query: String, page: Int)=
+    override fun searchTournamentsByNameUrl(query: String, page: Int) =
         buildUrl("/tournament/search/byName", parametersOf("tournamentName" to query, "page" to page))
+
+    override fun getShowCaseTournaments(page: Int) =
+        buildUrl("/tournament/search/byShowCase", parametersOf("page" to page))
+
 
     override fun matchByIdUrl(id: Long) =
         buildUrl("/match/$id")

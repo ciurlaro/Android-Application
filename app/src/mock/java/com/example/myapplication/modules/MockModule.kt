@@ -77,11 +77,20 @@ object MockModule : KodeinModuleProvider {
                 R.raw.multiple_tournaments_response,
                 res
             )
+            "/tournament/search/byShowCase?page=0" -> respondJsonFromRawResources(
+                R.raw.multiple_tournaments_response,
+                res
+            )
+            "/tournament/search/byShowCase?page=1" -> respondJsonFromRawResources(
+                R.raw.multiple_tournaments_response,
+                res
+            )
+
             "/match/1/tournament" -> respondJsonFromRawResources(
                 R.raw.tournament_response,
                 res
             )
-            "/match/2/tournament"-> respondJsonFromRawResources(
+            "/match/2/tournament" -> respondJsonFromRawResources(
                 R.raw.tournament_response,
                 res
             )
@@ -89,11 +98,16 @@ object MockModule : KodeinModuleProvider {
             "/match" -> respondJsonFromRawResources(R.raw.multiple_matches_response, res)
             "/match/1" -> respondJsonFromRawResources(R.raw.match_response, res)
             "/match/2" -> respondJsonFromRawResources(R.raw.match_response, res)
+            "/match/42" -> respondJsonFromRawResources(R.raw.match_response, res)
             "/match/search/byTournament" -> respondJsonFromRawResources(
                 R.raw.multiple_matches_response,
                 res
             )
             "/match/search/byTournamentId" -> respondJsonFromRawResources(
+                R.raw.multiple_matches_response,
+                res
+            )
+            "/match/search/byTournamentId?tournamentId=42&page=1" -> respondJsonFromRawResources(
                 R.raw.multiple_matches_response,
                 res
             )
@@ -123,6 +137,11 @@ object MockModule : KodeinModuleProvider {
             )
 
             "/match/search/byUserId?userId=Cesare_1&page=1" -> respondJsonFromRawResources(
+                R.raw.multiple_matches_response,
+                res
+            )
+
+            "/match/search/byTournamentId?tournamentId=42&page=0" -> respondJsonFromRawResources(
                 R.raw.multiple_matches_response,
                 res
             )

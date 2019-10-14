@@ -68,6 +68,10 @@ class ArenaTournamentRepositoryImplementation(
         atDS.getTournamentsByUser(userId, page)
             .transformTournaments()
 
+    override suspend fun getShowCaseTournament(page: Int): List<TournamentEntity> =
+        atDS.getShowCaseTournaments(page)
+            .transformTournaments()
+
 
     override suspend fun getMatchById(id: Long) = coroutineScope {
         atDS.getMatchById(id)

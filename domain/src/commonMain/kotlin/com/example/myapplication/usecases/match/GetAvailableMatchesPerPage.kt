@@ -1,7 +1,8 @@
-package com.example.myapplication.usecases
+package com.example.myapplication.usecases.match
 
 import com.example.myapplication.entities.MatchEntity
 import com.example.myapplication.repositories.ArenaTournamentRepository
+import com.example.myapplication.usecases.UseCaseWithParams
 
 class GetAvailableMatchesPerPage(
     private val repository: ArenaTournamentRepository

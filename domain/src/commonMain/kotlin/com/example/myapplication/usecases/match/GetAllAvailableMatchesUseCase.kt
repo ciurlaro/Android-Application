@@ -1,6 +1,8 @@
-package com.example.myapplication.usecases
+package com.example.myapplication.usecases.match
 
 import com.example.myapplication.entities.MatchEntity
+import com.example.myapplication.usecases.registration.GetAllRegistrationsByMatch
+import com.example.myapplication.usecases.UseCaseWithParams
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.flatMapConcat
