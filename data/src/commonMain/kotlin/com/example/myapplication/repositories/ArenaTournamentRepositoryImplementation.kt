@@ -238,7 +238,7 @@ class ArenaTournamentRepositoryImplementation(
 
     /**
      * Returns a flow containing the results of applying the given [transform] function to each value of the original flow and exposes
-     * the current [CoroutineScope]
+     * the current [CoroutineScope].
      */
     private inline fun <T, R> Flow<T>.scopedMap(crossinline transform: suspend CoroutineScope.(value: T) -> R): Flow<R> =
         map {

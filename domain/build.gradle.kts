@@ -6,53 +6,33 @@ kotlin {
 
     jvm {
         compilations.all {
-            kotlinOptions {
-                jvmTarget = "1.8"
-                freeCompilerArgs = listOf("-Xuse-experimental=kotlin.Experimental")
-                output
-            }
+            kotlinOptions.jvmTarget = "1.8"
         }
     }
-    js {
-        browser()
-        compilations.all {
-            kotlinOptions {
-                moduleKind = "amd"
-                freeCompilerArgs = listOf("-Xuse-experimental=kotlin.Experimental")
-            }
-        }
+    js()
+
+    val kotlinVersion: String by project
+    val coroutinesVersion: String by project
+    val klockVersion: String by project
+
+    sourceSets["commonMain"].dependencies {
+        api(kotlin("stdlib-common", kotlinVersion))
+        api("org.jetbrains.kotlinx:kotlinx-coroutines-core-common:$coroutinesVersion")
+        api("com.soywiz.korlibs.klock:klock:$klockVersion")
     }
 
-    sourceSets {
+    sourceSets["jvmMain"].dependencies {
+        api(kotlin("stdlib-jdk8", kotlinVersion))
+        api("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
+    }
 
-        val kotlinVersion: String by project
-        val coroutinesVersion: String by project
+    sourceSets["jsMain"].dependencies {
+        api(kotlin("stdlib-js", kotlinVersion))
+        api("org.jetbrains.kotlinx:kotlinx-coroutines-core-js:$coroutinesVersion")
+    }
 
-        val commonMain by getting {
-            dependencies {
-
-                val klockVersion: String by project
-
-                api(kotlin("stdlib-common", kotlinVersion))
-                api("org.jetbrains.kotlinx:kotlinx-coroutines-core-common:$coroutinesVersion")
-                api("com.soywiz.korlibs.klock:klock:$klockVersion")
-
-            }
-        }
-
-        val jvmMain by getting {
-            dependencies {
-                api(kotlin("stdlib-jdk8", kotlinVersion))
-                api("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
-            }
-        }
-
-        val jsMain by getting {
-            dependencies {
-                api(kotlin("stdlib-js", kotlinVersion))
-                api("org.jetbrains.kotlinx:kotlinx-coroutines-core-js:$coroutinesVersion")
-            }
-        }
+    sourceSets.all {
+        languageSettings.useExperimentalAnnotation("kotlin.Experimental")
     }
 
 }
