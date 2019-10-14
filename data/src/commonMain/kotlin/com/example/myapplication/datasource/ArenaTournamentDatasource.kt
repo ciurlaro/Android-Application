@@ -14,18 +14,22 @@ interface ArenaTournamentDatasource {
 
     val tokenFactory: TokenFactory
 
+    suspend fun getAllGames(page: Int): MultipleGamesJSON
     suspend fun getGameByName(name: String): GameJSON
-    suspend fun getGameByLink(link: String): GameJSON
     suspend fun searchGamesByName(query: String, page: Int): MultipleGamesJSON
+    suspend fun getGameByLink(link: String): GameJSON
+    suspend fun getGamesContinaingName(gameName: String, page: Int): MultipleGamesJSON
+    suspend fun getGamesByMode(mode: String, page: Int): MultipleGamesJSON
 
+    suspend fun getAllTournaments(page: Int): MultipleTournamentsJSON
     suspend fun getTournamentById(id: Long): TournamentJSON
     suspend fun getTournamentByLink(link: String): TournamentJSON
     suspend fun getTournamentsByMode(mode: String, page: Int): MultipleTournamentsJSON
-    suspend fun getAllTournaments(page: Int): MultipleTournamentsJSON
     suspend fun getTournamentsByGameLink(gameLink: String, page: Int): MultipleTournamentsJSON
     suspend fun getTournamentsByUser(userId: String, page: Int): MultipleTournamentsJSON
     suspend fun searchTournamentsByName(name: String, page: Int): MultipleTournamentsJSON
     suspend fun getShowCaseTournaments(page: Int): MultipleTournamentsJSON
+    suspend fun getTournamentsContainingTitle(title: String, page: Int): MultipleTournamentsJSON
 
     suspend fun getMatchById(id: Long): MatchJSON
     suspend fun getMatchByLink(link: String): MatchJSON
@@ -60,6 +64,8 @@ interface ArenaTournamentDatasource {
         fun allGamesUrl(page: Int): Url
         fun gameByNameUrl(name: String): Url
         fun searchGamesByNameUrl(query: String, page: Int): Url
+        fun gamesContainingName(gameName: String, page: Int): Url
+        fun gamesByMode(mode: String, page: Int): Url
 
         fun allTournamentsUrl(page: Int): Url
         fun tournamentByIdUrl(id: Long): Url
@@ -68,6 +74,7 @@ interface ArenaTournamentDatasource {
         fun tournamentsByUserId(userId: String, page: Int): Url
         fun searchTournamentsByNameUrl(query: String, page: Int): Url
         fun getShowCaseTournaments(page: Int): Url
+        fun getTournamentsContainingTitle(title: String, page: Int): Url
 
         fun matchByIdUrl(id: Long): Url
         fun matchesByTournamentLinkUrl(tournamentLink: String, page: Int): Url

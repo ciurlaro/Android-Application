@@ -1,4 +1,4 @@
-package com.example.myapplication.mappers
+package com.example.myapplication.splitters
 
 interface Splitter<In, Out> {
 

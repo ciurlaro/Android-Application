@@ -48,7 +48,26 @@ object MockModule : KodeinModuleProvider {
     private fun handleMockEngineRequest(request: HttpRequestData, res: Resources) =
         when (request.url.fullPath) {
             "/game" -> respondJsonFromRawResources(R.raw.multiple_games_response, res)
+            "/game/COD" -> respondJsonFromRawResources(R.raw.game_response, res)
             "/game/search/byGameName" -> respondJsonFromRawResources(R.raw.game_response, res)
+            "/game/search/byMode?mode=Free4All&page=0" -> respondJsonFromRawResources(
+                R.raw.multiple_games_response,
+                res
+            )
+            "/game/search/byMode?mode=Free4All&page=1" -> respondJsonFromRawResources(
+                R.raw.multiple_games_response,
+                res
+            )
+            "/game/search/containingGameName?gameName=COD&page=0" -> respondJsonFromRawResources(
+                R.raw.multiple_games_response,
+                res
+            )
+            "/game/search/containingGameName?gameName=COD&page=1" -> respondJsonFromRawResources(
+                R.raw.multiple_games_response,
+                res
+            )
+
+
             "/tournament/1/game" -> respondJsonFromRawResources(R.raw.game_response, res)
 
 
@@ -85,6 +104,15 @@ object MockModule : KodeinModuleProvider {
                 R.raw.multiple_tournaments_response,
                 res
             )
+            "/tournament/search/byGame?game=http%3A%2F%2Flocalhost%3A8080%2Fgame%2Fwow&page=0" -> respondJsonFromRawResources(
+                R.raw.multiple_tournaments_response,
+                res
+            )
+            "/tournament/search/byGame?game=http%3A%2F%2Flocalhost%3A8080%2Fgame%2Fwow&page=1" -> respondJsonFromRawResources(
+                R.raw.multiple_tournaments_response,
+                res
+            )
+
 
             "/match/1/tournament" -> respondJsonFromRawResources(
                 R.raw.tournament_response,
@@ -173,6 +201,15 @@ object MockModule : KodeinModuleProvider {
                 R.raw.multiple_registrations_response,
                 res
             )
+            "/registration/search/byUserId?userId=User&page=0" -> respondJsonFromRawResources(
+                R.raw.multiple_registrations_response,
+                res
+            )
+            "/registration/search/byUserId?userId=User&page=1" -> respondJsonFromRawResources(
+                R.raw.multiple_registrations_response,
+                res
+            )
+
 
             "/currentUser" -> respondJsonFromRawResources(R.raw.user_response, res)
             "/user/Cesare_1" -> respondJsonFromRawResources(R.raw.user_response, res)

@@ -13,11 +13,11 @@ class GetShowCaseTournaments(
     override suspend fun buildAction(params: Params): List<TournamentEntity> {
         val toReturn = mutableListOf<TournamentEntity>()
         var pageNumber = 0
-        var pageContent = repository.getShowCaseTournament(pageNumber)
+        var pageContent = repository.getShowCaseTournaments(pageNumber)
         toReturn.addAll(pageContent)
         pageNumber++
         while (pageContent.isNotEmpty() && pageNumber <= params.maxPage) {
-            pageContent = repository.getShowCaseTournament(pageNumber)
+            pageContent = repository.getShowCaseTournaments(pageNumber)
             toReturn.addAll(pageContent)
             pageNumber++
         }

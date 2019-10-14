@@ -7,40 +7,45 @@ plugins {
 
 kotlin {
 
-    jvm {
-        compilations.all {
-            kotlinOptions.jvmTarget = "1.8"
+    jvm()
+    js {
+        browser()
+    }
+
+    sourceSets {
+
+        val ktorVersion: String by project
+        val kotlinxSerializationVersion: String by project
+
+        val commonMain by getting {
+            dependencies {
+
+                api(project(":domain"))
+                api(ktor("http", ktorVersion))
+                api(ktor("utils", ktorVersion))
+                api(serialization("runtime-common", kotlinxSerializationVersion))
+
+            }
         }
-    }
-    js()
 
-    val ktorVersion: String by project
-    val kotlinxSerializationVersion: String by project
+        val jvmMain by getting {
+            dependencies {
+                api(project(":domain"))
+                api(ktor("http-jvm", ktorVersion))
+                api(ktor("utils-jvm", ktorVersion))
+                api(serialization("runtime", kotlinxSerializationVersion))
+            }
+        }
 
-    sourceSets["commonMain"].dependencies {
-        api(project(":domain"))
-        api(ktor("http", ktorVersion))
-        api(ktor("utils", ktorVersion))
-        api(serialization("runtime-common", kotlinxSerializationVersion))
-    }
+        val jsMain by getting {
+            dependencies {
+                api(project(":domain"))
+                api(ktor("http-js", ktorVersion))
+                api(ktor("utils-js", ktorVersion))
+                api(serialization("runtime-js", kotlinxSerializationVersion))
+            }
+        }
 
-    sourceSets["jvmMain"].dependencies {
-        api(project(":domain"))
-        api(ktor("http-jvm", ktorVersion))
-        api(ktor("utils-jvm", ktorVersion))
-        api(serialization("runtime", kotlinxSerializationVersion))
-    }
-
-    sourceSets["jsMain"].dependencies {
-        api(project(":domain"))
-        api(ktor("http-js", ktorVersion))
-        api(ktor("utils-js", ktorVersion))
-        api(serialization("runtime-js", kotlinxSerializationVersion))
-    }
-
-
-    sourceSets.all {
-        languageSettings.useExperimentalAnnotation("kotlin.Experimental")
     }
 
 }

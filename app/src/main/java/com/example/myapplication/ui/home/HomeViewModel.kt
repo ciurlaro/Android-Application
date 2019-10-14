@@ -8,25 +8,33 @@ import com.example.myapplication.entities.GameEntity
 import com.example.myapplication.entities.MatchEntity
 import com.example.myapplication.entities.TournamentEntity
 import com.example.myapplication.entities.UserEntity
+import com.example.myapplication.usecases.game.GetGamesByMode
+import com.example.myapplication.usecases.game.GetGamesContainingName
 import com.example.myapplication.usecases.match.GetAllAvailableMatchesUseCase
 import com.example.myapplication.usecases.match.GetAllMatchesByUserUseCase
 import com.example.myapplication.usecases.match.GetMatchesByTournament
 import com.example.myapplication.usecases.registration.GetAllRegistrationsByMatch
 import com.example.myapplication.usecases.registration.GetRegistrationsByTournamentUseCase
-import com.example.myapplication.usecases.tournament.GetCreatedTournamentsByAdmin
-import com.example.myapplication.usecases.tournament.GetShowCaseTournaments
+import com.example.myapplication.usecases.registration.GetRegistrationsByUser
+import com.example.myapplication.usecases.tournament.*
 import com.example.myapplication.usecases.user.GetUserInfoUseCase
 import com.soywiz.klock.DateTimeTz
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
+    private val getGamesByMode: GetGamesByMode,
+    private val getGamesContainingName: GetGamesContainingName,
     private val getAllAvailableMatchesUseCase: GetAllAvailableMatchesUseCase,
     private val getAllMatchesByUserUseCase: GetAllMatchesByUserUseCase,
-    private val getCreatedTournamentsByAdmin: GetCreatedTournamentsByAdmin,
     private val getUserInfo: GetUserInfoUseCase,
+    private val getCreatedTournamentsByAdmin: GetCreatedTournamentsByAdmin,
     private val getShowcaseTournaments: GetShowCaseTournaments,
     private val getRegistrationsByTournamentUseCase: GetRegistrationsByTournamentUseCase,
+    private val getTournamentsByGame: GetTournamentsByGame,
+    private val getTournamentsByMode: GetTournamentsByMode,
+    private val getTournamentsContainingTitle: GetTournamentsContainingTitle,
     private val getRegistrationsByMatch: GetAllRegistrationsByMatch,
+    private val getRegistrationsByUser: GetRegistrationsByUser,
     private val getMatchesByTournament: GetMatchesByTournament
 ) : ViewModel() {
 
@@ -37,7 +45,7 @@ class HomeViewModel(
 
     val dummyUser = UserEntity("User", "user@user.user", "nickname", "image", true)
 
-    val dummyGame = GameEntity("game", listOf("Free4All"), "image", "icon")
+    val dummyGame = GameEntity("COD", listOf("Free4All"), "image", "icon")
 
     val dummyTournament =
         TournamentEntity(42, 42, "42", "42",
@@ -54,6 +62,14 @@ class HomeViewModel(
             }
         }
      */
+
+    fun getGamesByMode() = viewModelScope.launch {
+        getGamesByMode.buildAction(dummyGame.availableModes[0])
+    }
+
+    fun getGamesContainingName() = viewModelScope.launch {
+        getGamesContainingName.buildAction(dummyGame.name)
+    }
 
     fun getAllAvailableMatches() = viewModelScope.launch {
         getAllAvailableMatchesUseCase.buildAction()
@@ -77,17 +93,36 @@ class HomeViewModel(
         getRegistrationsByTournamentUseCase.buildAction(dummyTournament)
     }
 
+    fun getRegistrationsByUser() = viewModelScope.launch {
+        getRegistrationsByUser.buildAction(dummyUser)
+    }
+
     fun getTournamentsByAdmin() = viewModelScope.launch {
         getCreatedTournamentsByAdmin.buildAction()
     }
+
 
     fun getShowcaseTournaments() = viewModelScope.launch {
         getShowcaseTournaments.buildAction()
     }
 
+    fun getTournamentsByGame() = viewModelScope.launch {
+        getTournamentsByGame.buildAction(dummyGame)
+    }
+
+    fun getTournamentsByMode() = viewModelScope.launch {
+        getTournamentsByMode.buildAction(dummyGame.availableModes[0])
+    }
+
+    fun getTournamentsContainingTitle() = viewModelScope.launch {
+        getTournamentsContainingTitle.buildAction(dummyTournament.title)
+    }
+
     fun getUserInformation() = viewModelScope.launch {
         getUserInfo.buildAction()
     }
+
+
 
 
 }

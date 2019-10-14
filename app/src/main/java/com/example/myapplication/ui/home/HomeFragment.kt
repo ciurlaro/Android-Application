@@ -29,13 +29,23 @@ class HomeFragment : BaseFragment() {
             adapter.data = it
         }
 
+        viewModel.getGamesByMode()
+        viewModel.getGamesContainingName()
+
         viewModel.getAllAvailableMatches()
         viewModel.getMatchesByUser()
         viewModel.getMatchesByTournament()
+
         viewModel.getRegistrationsByMatch()
         viewModel.getRegistrationByTournament()
+        viewModel.getRegistrationsByUser()
+
         viewModel.getTournamentsByAdmin()
         viewModel.getShowcaseTournaments()
+        viewModel.getTournamentsByGame()
+        viewModel.getTournamentsByMode()
+        viewModel.getTournamentsContainingTitle()
+
         viewModel.getUserInformation()
     }
 

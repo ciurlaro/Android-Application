@@ -1,6 +1,7 @@
 package com.example.myapplication.repositories
 
 import com.example.myapplication.datasource.ArenaTournamentDatasource
+import com.example.myapplication.entities.GameEntity
 import com.example.myapplication.entities.MatchEntity
 import com.example.myapplication.entities.TournamentEntity
 import com.example.myapplication.mappers.*
@@ -42,6 +43,14 @@ class ArenaTournamentRepositoryImplementation(
         atDS.searchGamesByName(name, page)
             .let { gameMapper.fromRemoteMultiple(it) }
 
+    override suspend fun getGamesContainingName(name: String, page: Int) =
+        atDS.getGamesContinaingName(name, page)
+            .let { gameMapper.fromRemoteMultiple(it) }
+
+    override suspend fun getGamesByMode(mode: String, page: Int) =
+        atDS.getGamesByMode(mode, page)
+            .let { gameMapper.fromRemoteMultiple(it) }
+
     override suspend fun getTournamentById(id: Long) = coroutineScope {
         atDS.getTournamentById(id)
             .let {
@@ -68,9 +77,14 @@ class ArenaTournamentRepositoryImplementation(
         atDS.getTournamentsByUser(userId, page)
             .transformTournaments()
 
-    override suspend fun getShowCaseTournament(page: Int): List<TournamentEntity> =
+    override suspend fun getShowCaseTournaments(page: Int): List<TournamentEntity> =
         atDS.getShowCaseTournaments(page)
             .transformTournaments()
+
+    override suspend fun getTournamentsContainingTitle(
+        title: String,
+        page: Int
+    ) = atDS.getTournamentsContainingTitle(title, page).transformTournaments()
 
 
     override suspend fun getMatchById(id: Long) = coroutineScope {

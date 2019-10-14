@@ -23,9 +23,9 @@ class GetCreatedTournamentsByAdmin(
         return toReturn
     }
 
-    suspend fun buildAction(page: Int = 1){
+    suspend fun buildAction(page: Int = 1): List<TournamentEntity>{
         val user = repository.getCurrentUser()
-        buildAction(Params(user, page))
+        return buildAction(Params(user, page))
     }
 
     data class Params(val user: UserEntity, val maxPage: Int = 1)

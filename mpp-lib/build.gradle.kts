@@ -29,37 +29,58 @@ kotlin {
         compilations.all {
             kotlinOptions {
                 jvmTarget = "1.8"
+                freeCompilerArgs = listOf("-Xuse-experimental=kotlin.Experimental")
             }
         }
     }
-    js()
-
-    val ktorVersion: String by project
-    val kotlinVersion: String by project
-    val kodeinVersion: String by project
-
-    sourceSets["commonMain"].dependencies {
-        api(kodein("core", kodeinVersion))
-        api(kodein("erased", kodeinVersion))
+    js {
+        browser()
+        compilations.all {
+            kotlinOptions {
+                freeCompilerArgs = listOf("-Xuse-experimental=kotlin.Experimental")
+            }
+        }
     }
 
-    sourceSets["androidMain"].dependencies {
-        api(project(":data"))
-        api(ktor("client-auth", ktorVersion))
-        api(ktor("client-json", ktorVersion))
-        api(ktor("client-serialization", ktorVersion))
-        api(ktor("client-core", ktorVersion))
-    }
+    sourceSets {
 
-    sourceSets["jsMain"].dependencies {
-        api(project(":data"))
-        api(ktor("client-okhttp", ktorVersion))
-        api(ktor("client-serialization-jvm", ktorVersion))
-        api(kotlin("reflect", kotlinVersion))
-    }
+        val ktorVersion: String by project
+        val kotlinVersion: String by project
+        val kodeinVersion: String by project
 
-    sourceSets.all {
-        languageSettings.useExperimentalAnnotation("kotlin.Experimental")
+        all {
+            dependencies {
+                api(kodein("core", kodeinVersion))
+                api(kodein("erased", kodeinVersion))
+            }
+        }
+
+        val commonMain by getting {
+            dependencies {
+                api(project(":data"))
+                api(ktor("client-auth", ktorVersion))
+                api(ktor("client-json", ktorVersion))
+                api(ktor("client-serialization", ktorVersion))
+                api(ktor("client-core", ktorVersion))
+            }
+        }
+
+        val androidMain by getting {
+            dependencies {
+                api(project(":data"))
+                api(ktor("client-okhttp", ktorVersion))
+                api(ktor("client-serialization-jvm", ktorVersion))
+                api(kotlin("reflect", kotlinVersion))
+            }
+        }
+
+        val jsMain by getting {
+            dependencies {
+                api(project(":data"))
+                api(ktor("client-js", ktorVersion))
+                api(ktor("client-serialization-js", ktorVersion))
+            }
+        }
     }
 
 }

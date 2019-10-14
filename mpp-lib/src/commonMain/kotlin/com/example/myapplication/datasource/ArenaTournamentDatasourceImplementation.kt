@@ -16,6 +16,9 @@ class ArenaTournamentDatasourceImplementation(
     override val tokenFactory: TokenFactory
 ) : ArenaTournamentDatasource {
 
+    override suspend fun getAllGames(page: Int): MultipleGamesJSON =
+        httpClient.get(endpoints.allGamesUrl(page))
+
     override suspend fun getGameByName(name: String): GameJSON =
         httpClient.get(endpoints.gameByNameUrl(name))
 
@@ -24,6 +27,13 @@ class ArenaTournamentDatasourceImplementation(
 
     override suspend fun searchGamesByName(query: String, page: Int): MultipleGamesJSON =
         httpClient.get(endpoints.searchGamesByNameUrl(query, page))
+
+    override suspend fun getGamesContinaingName(gameName: String, page: Int): MultipleGamesJSON =
+        httpClient.get(endpoints.gamesContainingName(gameName, page))
+
+    override suspend fun getGamesByMode(mode: String, page: Int): MultipleGamesJSON =
+        httpClient.get(endpoints.gamesByMode(mode, page))
+
 
     override suspend fun getTournamentById(id: Long): TournamentJSON =
         httpClient.get(endpoints.tournamentByIdUrl(id))
@@ -43,14 +53,23 @@ class ArenaTournamentDatasourceImplementation(
     ): MultipleTournamentsJSON =
         httpClient.get(endpoints.tournamentsByGameLinkUrl(gameLink, page))
 
+    /**
+     * Query sbagliata (????)
+     */
     override suspend fun getTournamentsByUser(userId: String, page: Int): MultipleTournamentsJSON =
-        httpClient.get(endpoints.tournamentsByGameLinkUrl(userId, page))
+        httpClient.get(endpoints.tournamentsByUserId(userId, page))
 
     override suspend fun searchTournamentsByName(name: String, page: Int): MultipleTournamentsJSON =
         httpClient.get(endpoints.searchTournamentsByNameUrl(name, page))
 
     override suspend fun getShowCaseTournaments(page: Int): MultipleTournamentsJSON =
         httpClient.get(endpoints.getShowCaseTournaments(page))
+
+    override suspend fun getTournamentsContainingTitle(
+        title: String,
+        page: Int
+    ): MultipleTournamentsJSON =
+        httpClient.get(endpoints.getTournamentsContainingTitle(title, page))
 
     override suspend fun getMatchById(id: Long): MatchJSON =
         httpClient.get(endpoints.matchByIdUrl(id))

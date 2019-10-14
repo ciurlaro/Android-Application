@@ -7,12 +7,15 @@ interface ArenaTournamentRepository {
 
     suspend fun getGameByName(name: String): GameEntity
     suspend fun searchGameByName(name: String, page: Int): List<GameEntity>
+    suspend fun getGamesContainingName(name: String, page: Int): List<GameEntity>
+    suspend fun getGamesByMode(mode: String, page: Int): List<GameEntity>
 
     suspend fun getTournamentById(id: Long): TournamentEntity
     suspend fun getTournamentsByMode(mode: String, page: Int): List<TournamentEntity>
     suspend fun getTournamentsByGame(gameName: String, page: Int): List<TournamentEntity>
     suspend fun getTournamentsByUser(userId: String, page: Int): List<TournamentEntity>
-    suspend fun getShowCaseTournament(page: Int): List<TournamentEntity>
+    suspend fun getShowCaseTournaments(page: Int): List<TournamentEntity>
+    suspend fun getTournamentsContainingTitle(title: String, page: Int): List<TournamentEntity>
 
 
     suspend fun getMatchById(id: Long): MatchEntity
