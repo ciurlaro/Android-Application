@@ -7,10 +7,12 @@ plugins {
 
 kotlin {
 
-    jvm()
-    js {
-        browser()
+    jvm {
+        compilations.all {
+            kotlinOptions.jvmTarget = "1.8"
+        }
     }
+    js()
 
     sourceSets {
 
@@ -19,12 +21,10 @@ kotlin {
 
         val commonMain by getting {
             dependencies {
-
                 api(project(":domain"))
                 api(ktor("http", ktorVersion))
                 api(ktor("utils", ktorVersion))
                 api(serialization("runtime-common", kotlinxSerializationVersion))
-
             }
         }
 
@@ -46,6 +46,9 @@ kotlin {
             }
         }
 
+        all {
+            languageSettings.useExperimentalAnnotation("kotlin.Experimental")
+        }
     }
 
 }

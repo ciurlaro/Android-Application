@@ -6,6 +6,10 @@ plugins {
 
 android {
 
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -43,18 +47,17 @@ android {
         getByName("release") {
             isMinifyEnabled = true
             isDebuggable = false
-            matchingFallbacks = listOf("release", "debug")
         }
 
         getByName("debug") {
             isMinifyEnabled = false
-            matchingFallbacks = listOf("release", "debug")
+            matchingFallbacks = listOf("release")
         }
 
         create("mock") {
             isMinifyEnabled = false
             isDebuggable = true
-            matchingFallbacks = listOf("release", "debug")
+            matchingFallbacks = listOf("debug")
             manifestPlaceholders = mapOf("ApplicationName" to "MockApplication")
         }
 
@@ -64,7 +67,7 @@ android {
             buildConfigField("String", "SERVER_PROTOCOL", "\"http\"")
             buildConfigField("String", "SERVER_URL", "\"localhost\"")
             buildConfigField("int", "SERVER_PORT", "8080")
-            matchingFallbacks = listOf("release", "debug")
+            matchingFallbacks = listOf("debug")
         }
 
         all {
@@ -108,8 +111,6 @@ dependencies {
 
     implementation(project(":mpp-lib"))
 
-    implementation(kotlin("reflect"))
-
     implementation("androidx.appcompat", "appcompat", androidxAppCompatVersion)
     implementation("androidx.core", "core-ktx", androidxCoreVersion)
     implementation("androidx.legacy", "legacy-support-v4", androidxLegacyVersion)
@@ -124,10 +125,6 @@ dependencies {
 
     implementation("com.squareup.picasso", "picasso", picassoVersion)
 
-    implementation(ktor("client-okhttp", ktorVersion))
-    implementation(ktor("client-auth", ktorVersion))
-    implementation(ktor("client-json", ktorVersion))
-    implementation(ktor("client-serialization-jvm", ktorVersion))
     implementation(ktor("client-mock-jvm", ktorVersion))
 
     implementation("org.kodein.di", "kodein-di-framework-android-x", kodeinVersion)

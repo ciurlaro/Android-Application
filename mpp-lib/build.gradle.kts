@@ -27,20 +27,10 @@ kotlin {
 
     android {
         compilations.all {
-            kotlinOptions {
-                jvmTarget = "1.8"
-                freeCompilerArgs = listOf("-Xuse-experimental=kotlin.Experimental")
-            }
+            kotlinOptions.jvmTarget = "1.8"
         }
     }
-    js {
-        browser()
-        compilations.all {
-            kotlinOptions {
-                freeCompilerArgs = listOf("-Xuse-experimental=kotlin.Experimental")
-            }
-        }
-    }
+    js()
 
     sourceSets {
 
@@ -48,20 +38,12 @@ kotlin {
         val kotlinVersion: String by project
         val kodeinVersion: String by project
 
-        all {
-            dependencies {
-                api(kodein("core", kodeinVersion))
-                api(kodein("erased", kodeinVersion))
-            }
-        }
-
         val commonMain by getting {
             dependencies {
                 api(project(":data"))
-                api(ktor("client-auth", ktorVersion))
-                api(ktor("client-json", ktorVersion))
-                api(ktor("client-serialization", ktorVersion))
                 api(ktor("client-core", ktorVersion))
+                api(kodein("core", kodeinVersion))
+                api(kodein("erased", kodeinVersion))
             }
         }
 
@@ -70,6 +52,8 @@ kotlin {
                 api(project(":data"))
                 api(ktor("client-okhttp", ktorVersion))
                 api(ktor("client-serialization-jvm", ktorVersion))
+                api(kodein("core-jvm", kodeinVersion))
+                api(kodein("erased-jvm", kodeinVersion))
                 api(kotlin("reflect", kotlinVersion))
             }
         }
@@ -79,12 +63,17 @@ kotlin {
                 api(project(":data"))
                 api(ktor("client-js", ktorVersion))
                 api(ktor("client-serialization-js", ktorVersion))
+                api(kodein("core-js", kodeinVersion))
+                api(kodein("erased-js", kodeinVersion))
             }
         }
+
+        all {
+            languageSettings.useExperimentalAnnotation("kotlin.Experimental")
+        }
+
     }
-
 }
-
 
 @Suppress("unused")
 fun KotlinDependencyHandler.ktor(module: String, version: String? = null): Any =
