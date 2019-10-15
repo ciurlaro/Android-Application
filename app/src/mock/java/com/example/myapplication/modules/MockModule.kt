@@ -105,21 +105,37 @@ object MockModule : KodeinModuleProvider {
                 res
             )
 
-            /*
-                "/tournament/search/byGame?game=http%3A%2F%2Flocalhost%3A8080%2Fgame%2Fwow&page=0" -> respondJsonFromRawResources(
-                    R.raw.multiple_tournaments_response,
-                    res
-                )
-                "/tournament/search/byGame?game=http%3A%2F%2Flocalhost%3A8080%2Fgame%2Fwow&page=1" -> respondJsonFromRawResources(
-                    R.raw.multiple_tournaments_response,
-                    res
-                )
-             */
+            "/tournament/search/byGame?gameName=wow&page=0" -> respondJsonFromRawResources(
+                R.raw.multiple_tournaments_response,
+                res
+            )
+
+            "/tournament/search/byGame?gameName=wow&page=1" -> respondJsonFromRawResources(
+                R.raw.multiple_tournaments_response,
+                res
+            )
+
             "/tournament/search/byUserId?userId=Cesare_1&page=0" -> respondJsonFromRawResources(
                 R.raw.multiple_tournaments_response,
                 res
             )
             "/tournament/search/byUserId?userId=Cesare_1&page=1" -> respondJsonFromRawResources(
+                R.raw.multiple_tournaments_response,
+                res
+            )
+            "/tournament/search/byMode?tournamentMode=Free4All&page=0" -> respondJsonFromRawResources(
+                R.raw.multiple_tournaments_response,
+                res
+            )
+            "/tournament/search/byMode?tournamentMode=Free4All&page=1" -> respondJsonFromRawResources(
+                R.raw.multiple_tournaments_response,
+                res
+            )
+            "/tournament/search/containingTitle?title=42&page=0" -> respondJsonFromRawResources(
+                R.raw.multiple_tournaments_response,
+                res
+            )
+            "/tournament/search/containingTitle?title=42&page=1" -> respondJsonFromRawResources(
                 R.raw.multiple_tournaments_response,
                 res
             )
