@@ -25,6 +25,7 @@ interface ArenaTournamentDatasource {
     suspend fun getTournamentById(id: Long): TournamentJSON
     suspend fun getTournamentByLink(link: String): TournamentJSON
     suspend fun getTournamentsByMode(mode: String, page: Int): MultipleTournamentsJSON
+    suspend fun getTournamentsByGameName(gameName: String, page: Int): MultipleTournamentsJSON
     suspend fun getTournamentsByGameLink(gameLink: String, page: Int): MultipleTournamentsJSON
     suspend fun getTournamentsByUser(userId: String, page: Int): MultipleTournamentsJSON
     suspend fun searchTournamentsByName(name: String, page: Int): MultipleTournamentsJSON
@@ -69,6 +70,7 @@ interface ArenaTournamentDatasource {
 
         fun allTournamentsUrl(page: Int): Url
         fun tournamentByIdUrl(id: Long): Url
+        fun tournamentsByGameName(gameName: String, page: Int): Url
         fun tournamentsByGameLinkUrl(gameLink: String, page: Int): Url
         fun tournamentsByModeUrl(mode: String, page: Int): Url
         fun tournamentsByUserId(userId: String, page: Int): Url

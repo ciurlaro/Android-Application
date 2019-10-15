@@ -71,7 +71,7 @@ class ArenaTournamentRepositoryImplementation(
     override suspend fun getTournamentsByGame(gameName: String, page: Int) =
         atDS.getGameByName(gameName)
             .let {
-                atDS.getTournamentsByGameLink(it._links.self.href, page) // cercare per nome
+                atDS.getTournamentsByGameName(it.gameName, page) // cercare per nome
             }
             .transformTournaments()
 

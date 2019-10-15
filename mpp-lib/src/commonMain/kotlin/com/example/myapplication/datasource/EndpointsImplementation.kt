@@ -45,8 +45,11 @@ data class EndpointsImplementation(
     override fun tournamentByIdUrl(id: Long) =
         buildUrl("/tournament/$id")
 
+    override fun tournamentsByGameName(gameName: String, page: Int) =
+        buildUrl("/tournament/search/byGame", parametersOf("gameName" to gameName, "page" to page))
+
     override fun tournamentsByGameLinkUrl(gameLink: String, page: Int) =
-        buildUrl("/tournament/search/byGame", parametersOf("game" to gameLink, "page" to page))
+        buildUrl("/tournament/search/byGame", parametersOf("gameName" to gameLink, "page" to page))
 
     override fun tournamentsByModeUrl(mode: String, page: Int) =
         buildUrl(
