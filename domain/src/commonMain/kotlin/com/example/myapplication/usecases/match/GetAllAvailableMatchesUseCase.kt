@@ -19,8 +19,8 @@ class GetAllAvailableMatchesUseCase(
         (0 until params.pages)
             .asFlow()
             .map { getAvailableMatchesPerPage.buildAction(it) }
-            .flatMapConcat {
-                it.asFlow()
+            .flatMapConcat { matchEntities ->
+                matchEntities.asFlow()
                     .map { it to getAllRegistrationsByMatch.buildAction(it).size }
             }
             .toList()

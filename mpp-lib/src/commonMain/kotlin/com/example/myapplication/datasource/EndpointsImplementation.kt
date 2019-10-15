@@ -54,6 +54,9 @@ data class EndpointsImplementation(
             parametersOf("tournamentMode" to mode, "page" to page)
         )
 
+    /*
+        A cui ha partecipato o che gestisce? Non chiaro il nome
+     */
     override fun tournamentsByUserId(userId: String, page: Int) =
         buildUrl("/tournament/search/byUserId", parametersOf("userId" to userId, "page" to page))
 
