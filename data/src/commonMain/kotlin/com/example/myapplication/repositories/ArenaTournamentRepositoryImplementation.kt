@@ -163,7 +163,7 @@ class ArenaTournamentRepositoryImplementation(
         matchId: Long,
         page: Int
     ) = atDS.getMatchById(matchId)
-        .let { atDS.getRegistrationsByMatchLink(it._links.self.href, page) }
+        .let { atDS.getRegistrationsByMatchId(it.id, page) }
         .transformRegistrations()
 
 

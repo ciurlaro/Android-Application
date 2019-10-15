@@ -53,12 +53,6 @@ class ArenaTournamentDatasourceImplementation(
     ): MultipleTournamentsJSON =
         httpClient.get(endpoints.tournamentsByGameName(gameName, page))
 
-    override suspend fun getTournamentsByGameLink(
-        gameLink: String,
-        page: Int
-    ): MultipleTournamentsJSON =
-        httpClient.get(endpoints.tournamentsByGameLinkUrl(gameLink, page))
-
     /**
      * Query sbagliata (????)
      */
@@ -83,17 +77,11 @@ class ArenaTournamentDatasourceImplementation(
     override suspend fun getMatchByLink(link: String): MatchJSON =
         httpClient.get(link)
 
-    override suspend fun getMatchesByTournamentLink(tournamentLink: String, page: Int): MatchJSON =
-        httpClient.get(endpoints.matchesByTournamentLinkUrl(tournamentLink, page))
-
     override suspend fun getMatchesByTournamentId(
         tournamentId: Long,
         page: Int
     ): MultipleMatchJSON =
         httpClient.get(endpoints.matchesByTournamentIdUrl(tournamentId, page))
-
-    override suspend fun getMatchesByGameLink(gameLink: String, page: Int): MultipleMatchJSON =
-        httpClient.get(endpoints.matchesByGameLinkUrl(gameLink, page))
 
     override suspend fun getMatchesByGameName(gameName: String, page: Int): MultipleMatchJSON =
         httpClient.get(endpoints.matchesByGameNameUrl(gameName, page))
@@ -116,6 +104,7 @@ class ArenaTournamentDatasourceImplementation(
     override suspend fun getRegistrationByLink(link: String): RegistrationJSON =
         httpClient.get(link)
 
+
     override suspend fun getMatchesNotFull(page: Int): MultipleMatchJSON =
         httpClient.get(endpoints.matchesNotFullUrl(page))
 
@@ -125,11 +114,11 @@ class ArenaTournamentDatasourceImplementation(
     ): MultipleRegistrationsJSON =
         httpClient.get(endpoints.registrationsByUserUrl(userId, page))
 
-    override suspend fun getRegistrationsByMatchLink(
-        matchLink: String,
+    override suspend fun getRegistrationsByMatchId(
+        matchId: Long,
         page: Int
     ): MultipleRegistrationsJSON =
-        httpClient.get(endpoints.registrationsByMatchLinkUrl(matchLink, page))
+        httpClient.get(endpoints.registrationsByMatchIdUrl(matchId, page))
 
     override suspend fun getCurrentUser(): UserJSON =
         httpClient.authenticatedGet(endpoints.currentUserUrl())
@@ -139,9 +128,6 @@ class ArenaTournamentDatasourceImplementation(
 
     override suspend fun getUserByLink(link: String): UserJSON =
         httpClient.get(link)
-
-    override suspend fun getUsersByMatchLink(matchLink: String, page: Int): MultipleUsersJSON =
-        httpClient.get(endpoints.usersByMatchLinkUrl(matchLink, page))
 
     override suspend fun getUsersByMatchId(matchId: Long, page: Int): MultipleUsersJSON =
         httpClient.get(endpoints.usersByMatchIdUrl(matchId, page))

@@ -220,14 +220,15 @@ object MockModule : KodeinModuleProvider {
                 R.raw.multiple_registrations_response,
                 res
             )
-            "/registration/search/byMatch/http://localhost:8080/match/1?page=0" -> respondJsonFromRawResources(
+            "/registration/search/byMatchId?matchId=1&page=0" -> respondJsonFromRawResources(
                 R.raw.multiple_registrations_response,
                 res
             )
-            "/registration/search/byMatch/http://localhost:8080/match/1?page=1" -> respondJsonFromRawResources(
+            "/registration/search/byMatchId?matchId=1&page=1" -> respondJsonFromRawResources(
                 R.raw.multiple_registrations_response,
                 res
             )
+
             "/registration/search/byUserId?userId=User&page=0" -> respondJsonFromRawResources(
                 R.raw.multiple_registrations_response,
                 res

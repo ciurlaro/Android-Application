@@ -26,7 +26,6 @@ interface ArenaTournamentDatasource {
     suspend fun getTournamentByLink(link: String): TournamentJSON
     suspend fun getTournamentsByMode(mode: String, page: Int): MultipleTournamentsJSON
     suspend fun getTournamentsByGameName(gameName: String, page: Int): MultipleTournamentsJSON
-    suspend fun getTournamentsByGameLink(gameLink: String, page: Int): MultipleTournamentsJSON
     suspend fun getTournamentsByUser(userId: String, page: Int): MultipleTournamentsJSON
     suspend fun searchTournamentsByName(name: String, page: Int): MultipleTournamentsJSON
     suspend fun getShowCaseTournaments(page: Int): MultipleTournamentsJSON
@@ -34,8 +33,6 @@ interface ArenaTournamentDatasource {
 
     suspend fun getMatchById(id: Long): MatchJSON
     suspend fun getMatchByLink(link: String): MatchJSON
-    suspend fun getMatchesByTournamentLink(tournamentLink: String, page: Int): MatchJSON
-    suspend fun getMatchesByGameLink(gameLink: String, page: Int): MultipleMatchJSON
     suspend fun getMatchesByGameName(gameName: String, page: Int): MultipleMatchJSON
     suspend fun getMatchesByUser(userId: String, page: Int) : MultipleMatchJSON
     suspend fun getMatchesAfterDate(dateTime: DateTimeTz, page: Int): MultipleMatchJSON
@@ -46,14 +43,12 @@ interface ArenaTournamentDatasource {
     suspend fun getRegistrationById(id: Long): RegistrationJSON
     suspend fun getRegistrationByLink(link: String): RegistrationJSON
     suspend fun getRegistrationsByUser(userId: String, page: Int): MultipleRegistrationsJSON
-    suspend fun getRegistrationsByMatchLink(matchLink: String, page: Int): MultipleRegistrationsJSON
+    suspend fun getRegistrationsByMatchId(matchId: Long, page: Int): MultipleRegistrationsJSON
 
     suspend fun getCurrentUser(): UserJSON
     suspend fun getUserById(id: String): UserJSON
     suspend fun getUserByLink(link: String): UserJSON
-    suspend fun getUsersByMatchLink(matchLink: String, page: Int): MultipleUsersJSON
     suspend fun getUsersByMatchId(matchId: Long, page: Int): MultipleUsersJSON
-
     suspend fun getAccountVerificationStatus(): AccountStatusJSON
 
     interface Endpoints {
@@ -71,7 +66,6 @@ interface ArenaTournamentDatasource {
         fun allTournamentsUrl(page: Int): Url
         fun tournamentByIdUrl(id: Long): Url
         fun tournamentsByGameName(gameName: String, page: Int): Url
-        fun tournamentsByGameLinkUrl(gameLink: String, page: Int): Url
         fun tournamentsByModeUrl(mode: String, page: Int): Url
         fun tournamentsByUserId(userId: String, page: Int): Url
         fun searchTournamentsByNameUrl(query: String, page: Int): Url
@@ -79,9 +73,7 @@ interface ArenaTournamentDatasource {
         fun getTournamentsContainingTitle(title: String, page: Int): Url
 
         fun matchByIdUrl(id: Long): Url
-        fun matchesByTournamentLinkUrl(tournamentLink: String, page: Int): Url
         fun matchesByTournamentIdUrl(tournamentId: Long, page: Int): Url
-        fun matchesByGameLinkUrl(gameLink: String, page: Int): Url
         fun matchesByGameNameUrl(gameName: String, page: Int): Url
         fun matchesByUserIdUrl(userId: String, page: Int) : Url
         fun allMatchesUrl(page: Int): Url
@@ -95,13 +87,11 @@ interface ArenaTournamentDatasource {
          * UserUrl oppure UserIdUrl
          */
         fun registrationsByUserUrl(userId: String, page: Int): Url
-        fun registrationsByMatchLinkUrl(matchLink: String, page: Int): Url
         fun registrationsByMatchIdUrl(matchId: Long, page: Int): Url
 
         fun currentUserUrl(): Url
         fun isAccountVerifiedUrl(): Url
         fun userByIdUrl(userId: String): Url
-        fun usersByMatchLinkUrl(matchLink: String, page: Int): Url
         fun usersByMatchIdUrl(matchId: Long, page: Int): Url
 
     }
