@@ -17,6 +17,8 @@ import com.example.myapplication.usecases.registration.GetAllRegistrationsByMatc
 import com.example.myapplication.usecases.registration.GetRegistrationsByTournamentUseCase
 import com.example.myapplication.usecases.registration.GetRegistrationsByUser
 import com.example.myapplication.usecases.tournament.*
+import com.example.myapplication.usecases.user.GetAccountVerificationStatusUseCase
+import com.example.myapplication.usecases.user.GetSubscribedAccountUseCase
 import com.example.myapplication.usecases.user.GetUserInfoUseCase
 import com.soywiz.klock.DateTimeTz
 import kotlinx.coroutines.launch
@@ -35,7 +37,9 @@ class HomeViewModel(
     private val getTournamentsContainingTitle: GetTournamentsContainingTitle,
     private val getRegistrationsByMatch: GetAllRegistrationsByMatch,
     private val getRegistrationsByUser: GetRegistrationsByUser,
-    private val getMatchesByTournament: GetMatchesByTournament
+    private val getMatchesByTournament: GetMatchesByTournament,
+    private val isAccountVerified: GetAccountVerificationStatusUseCase,
+    private val isSubscribedAccount: GetSubscribedAccountUseCase
 ) : ViewModel() {
 
     data class MatchWithPlayersCountModel(val matchEntity: MatchEntity, val registeredPlayer: Int)
@@ -43,13 +47,15 @@ class HomeViewModel(
     private val _matches = MutableLiveData<List<MatchWithPlayersCountModel>>()
     val text: LiveData<List<MatchWithPlayersCountModel>> = _matches
 
-    val dummyUser = UserEntity("User", "user@user.user", "nickname", "image", true)
+    val dummyUser = UserEntity("User", "user@user.user", "nickname", "image", true, true)
 
     val dummyGame = GameEntity("COD", listOf("Free4All"), "image", "icon")
 
     val dummyTournament =
-        TournamentEntity(42, 42, "42", "42",
-            "42", dummyUser, dummyGame)
+        TournamentEntity(
+            42, 42, "42", "42",
+            "42", dummyUser, dummyGame
+        )
 
     val dummyMatch =
         MatchEntity(42, DateTimeTz.nowLocal(), 42, true, dummyTournament)
@@ -122,7 +128,12 @@ class HomeViewModel(
         getUserInfo.buildAction()
     }
 
+    fun isAccountVerified() = viewModelScope.launch {
+        isAccountVerified.buildAction()
+    }
 
-
+    fun isSubscribedAccount() = viewModelScope.launch {
+        isSubscribedAccount.buildAction()
+    }
 
 }

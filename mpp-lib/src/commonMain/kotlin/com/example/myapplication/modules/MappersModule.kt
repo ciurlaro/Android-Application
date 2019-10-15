@@ -10,6 +10,7 @@ object MappersModule : KodeinModuleProvider {
 
     override fun provideModule(): Kodein.Builder.() -> Unit = {
         bind<AccountStatusMapper>() with singleton { AccountStatusMapper() }
+        bind<AccountSubscriptionMapper>() with singleton { AccountSubscriptionMapper() }
         bind<DateTimeMapper>() with singleton { DateTimeMapper() }
         bind<GameMapper>() with singleton { GameMapper() }
         bind<MatchMapper>() with singleton { MatchMapper(instance(), instance()) }

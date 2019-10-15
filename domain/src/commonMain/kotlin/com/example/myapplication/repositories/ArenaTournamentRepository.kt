@@ -31,7 +31,7 @@ interface ArenaTournamentRepository {
 
     suspend fun getUserById(id: String): UserEntity
     suspend fun getCurrentUser(): UserEntity
-
     suspend fun isAccountVerified(): Boolean
+    suspend fun isAccountSubscribed(): Boolean
 
 }

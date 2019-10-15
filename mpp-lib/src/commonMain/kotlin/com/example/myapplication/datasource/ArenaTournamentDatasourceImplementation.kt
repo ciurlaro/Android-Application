@@ -57,7 +57,7 @@ class ArenaTournamentDatasourceImplementation(
      * Query sbagliata (????)
      */
     override suspend fun getTournamentsByUser(userId: String, page: Int): MultipleTournamentsJSON =
-        httpClient.get(endpoints.tournamentsByUserId(userId, page))
+        httpClient.get(endpoints.tournamentsByAdmin(userId, page))
 
     override suspend fun searchTournamentsByName(name: String, page: Int): MultipleTournamentsJSON =
         httpClient.get(endpoints.searchTournamentsByNameUrl(name, page))
@@ -134,6 +134,9 @@ class ArenaTournamentDatasourceImplementation(
 
     override suspend fun getAccountVerificationStatus(): AccountStatusJSON =
         httpClient.authenticatedGet(endpoints.isAccountVerifiedUrl())
+
+    override suspend fun getAccountSubscription(): SubscriptionStatusJSON =
+        httpClient.authenticatedGet(endpoints.isAccountSubscribedUrl())
 
     @UseExperimental(InternalAPI::class)
     private suspend inline fun <reified T> HttpClient.authenticatedGet(url: Url) =

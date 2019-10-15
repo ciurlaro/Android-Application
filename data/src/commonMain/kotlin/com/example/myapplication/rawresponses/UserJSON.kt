@@ -20,6 +20,7 @@ data class UserJSON(
     val email: String,
     val nickname: String,
     val image: String? = null,
+    val verified: Boolean,
     val subscriber: Boolean,
     val _links: LinksJSON
 )

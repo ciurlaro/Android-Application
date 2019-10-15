@@ -13,7 +13,8 @@ object RepositoriesModule : KodeinModuleProvider {
         bind<ArenaTournamentRepository>() with singleton {
             ArenaTournamentRepositoryImplementation(
                 instance(), instance(), instance(), instance(), instance(),
-                instance(), instance(), instance(), instance(), instance()
+                instance(), instance(), instance(), instance(), instance(),
+                instance()
             )
         }
     }

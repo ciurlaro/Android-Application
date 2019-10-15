@@ -47,6 +47,9 @@ class HomeFragment : BaseFragment() {
         viewModel.getTournamentsContainingTitle()
 
         viewModel.getUserInformation()
+
+        viewModel.isAccountVerified()
+        viewModel.isSubscribedAccount()
     }
 
 }

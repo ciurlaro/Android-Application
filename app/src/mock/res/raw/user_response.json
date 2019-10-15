@@ -3,6 +3,7 @@
   "email": "cesare@cesare.cesare",
   "nickname": "CESA_RHINO",
   "image": "cesare.png",
+  "verified": true,
   "subscriber": true,
   "_links": {
     "self": {

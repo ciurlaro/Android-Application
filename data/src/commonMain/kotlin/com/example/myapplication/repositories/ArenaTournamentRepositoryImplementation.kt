@@ -29,6 +29,7 @@ class ArenaTournamentRepositoryImplementation(
     private val registrationMapper: RegistrationMapper,
     private val userMapper: UserMapper,
     private val accountStatusMapper: AccountStatusMapper,
+    private val subscriptionMapper: AccountSubscriptionMapper,
     private val tournamentSplitter: TournamentSplitter,
     private val matchSplitter: MatchSplitter,
     private val registrationSplitter: RegistrationSplitter
@@ -184,6 +185,10 @@ class ArenaTournamentRepositoryImplementation(
     override suspend fun isAccountVerified() =
         atDS.getAccountVerificationStatus()
             .let { accountStatusMapper.fromRemoteSingle(it) }
+
+    override suspend fun isAccountSubscribed() =
+        atDS.getAccountSubscription()
+            .let { subscriptionMapper.fromRemoteSingle(it) }
 
     private suspend fun MultipleTournamentsJSON.transformTournaments() =
         tournamentSplitter(this)

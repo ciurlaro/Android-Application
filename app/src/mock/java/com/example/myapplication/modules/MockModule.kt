@@ -255,7 +255,14 @@ object MockModule : KodeinModuleProvider {
             "/registration/2/user" -> respondJsonFromRawResources(R.raw.user_response, res)
             "/registration/3/user" -> respondJsonFromRawResources(R.raw.user_response, res)
             "/tournament/1/admin" -> respondJsonFromRawResources(R.raw.user_response, res)
-            // "/isAccountVerified" -> respondJsonFromRawResources(R.raw.multiple_users_response, res)
+            "/isAccountVerified" -> respondJsonFromRawResources(
+                R.raw.verification_status_response,
+                res
+            )
+            "/isAccountSubscribed" -> respondJsonFromRawResources(
+                R.raw.subscription_status_response,
+                res
+            )
 
             else -> buildMockEngineError(request)
         }

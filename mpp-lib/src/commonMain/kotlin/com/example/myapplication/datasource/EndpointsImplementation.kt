@@ -57,10 +57,7 @@ data class EndpointsImplementation(
             parametersOf("tournamentMode" to mode, "page" to page)
         )
 
-    /*
-        A cui ha partecipato o che gestisce? Non chiaro il nome
-     */
-    override fun tournamentsByUserId(userId: String, page: Int) =
+    override fun tournamentsByAdmin(userId: String, page: Int) =
         buildUrl("/tournament/search/byUserId", parametersOf("admin" to userId, "page" to page))
 
     //TODO: to implement server side
@@ -139,4 +136,8 @@ data class EndpointsImplementation(
 
     override fun isAccountVerifiedUrl() =
         buildUrl("isAccountVerified")
+
+    override fun isAccountSubscribedUrl() =
+        buildUrl("isAccountSubscribed")
+
 }

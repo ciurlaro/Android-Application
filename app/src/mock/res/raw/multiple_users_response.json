@@ -6,6 +6,7 @@
         "email": "cesare@cesare.cesare",
         "nickname": "CESA_RHINO",
         "image": "cesare.png",
+        "verified": true,
         "subscriber": true,
         "_links": {
           "self": {
@@ -21,6 +22,7 @@
         "email": "lamba@lamba.lamba",
         "nickname": "LAMBA92",
         "image": "lamba.png",
+        "verified": false,
         "subscriber": false,
         "_links": {
           "self": {
@@ -36,6 +38,7 @@
         "email": "beppe@beppe.beppe",
         "nickname": "BEPPE95",
         "image": "beppe.png",
+        "verified": false,
         "subscriber": false,
         "_links": {
           "self": {
