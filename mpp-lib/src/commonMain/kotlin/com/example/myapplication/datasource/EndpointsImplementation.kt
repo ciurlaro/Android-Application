@@ -24,30 +24,38 @@ data class EndpointsImplementation(
         Url(URLProtocol(protocol, port), host, port, path, parameters, "", null, null, false)
 
 
+    /*
+    * Post endpoints
+    * */
+
     override fun createGameModeUrl(modeName: String) =
         buildUrl("/mode", parametersOf("modeName" to modeName))
-
 
     override fun createGameUrl(name: String, availableModes: List<String>, image: String, icon: String) =
         buildUrl("/mode",
             parametersOf("name" to name, "availableModes" to availableModes, "image" to image, "icon" to icon))
 
-    override fun createMatchUrl(matchDateTime: DateTimeTz, playersCount: Int, isRegistrationPossible: Boolean, tournament: TournamentEntity) =
+    override fun createMatchUrl(matchDateTime: DateTimeTz, playersCount: Int, isRegistrationPossible: Boolean, tournamentLink: Url) =
         buildUrl("/match",
-            parametersOf("matchDateTime" to matchDateTime, "playersCount" to playersCount, "isRegistrationPossible" to isRegistrationPossible, "tournament" to tournament))
+            parametersOf("matchDateTime" to matchDateTime, "playersCount" to playersCount, "isRegistrationPossible" to isRegistrationPossible, "tournament" to tournamentLink))
 
-    override fun createRegistrationUrl(user: UserEntity, match: MatchEntity, outcome: String?) =
+    override fun createRegistrationUrl(userLink: Url, matchLink: Url, outcome: String?) =
         buildUrl("/registration",
-            parametersOf("user" to user, "match" to match, "outcome" to outcome))
+            parametersOf("user" to userLink, "match" to matchLink, "outcome" to outcome))
 
-    override fun createTournamentUrl(playersNumber: Int, title: String, tournamentDescription: String, tournamentMode: String, admin: UserEntity, game: GameEntity) =
+    override fun createTournamentUrl(playersNumber: Int, title: String, tournamentDescription: String, tournamentMode: String, adminLink: Url, gameLink: Url) =
         buildUrl("/tournament",
             parametersOf("playersNumber" to playersNumber, "title" to title, "tournamentDescription" to tournamentDescription,
-                "tournamentMode" to tournamentDescription, "admin" to admin, "game" to game))
+                "tournamentMode" to tournamentDescription, "admin" to adminLink, "game" to gameLink))
 
     override fun createUserUrl(email: String, password: String, nickname: String, image: String) =
         buildUrl("/createUser",
             parametersOf("email" to email, "password" to password, "nickname" to nickname, "image" to image))
+
+
+    /*
+    * Get endpoints
+    * */
 
 
     override fun allGamesUrl(page: Int) =
@@ -127,7 +135,7 @@ data class EndpointsImplementation(
     override fun matchesAfterDateUrl(dateTime: DateTimeTz, page: Int) =
         buildUrl(
             "/match/search/byMatchDateTimeIsAfter",
-            parametersOf("matchDateTime" to dateTimeMapper.toRemote(dateTime), "page" to page)
+            parametersOf("matchDateTime" to dateTimeMapper.toRemoteSingle(dateTime), "page" to page)
         )
 
     override fun matchesByUserIdUrl(userId: String, page: Int): Url =

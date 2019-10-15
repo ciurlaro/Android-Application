@@ -8,7 +8,7 @@ interface ArenaTournamentRepository {
     suspend fun createGame(name: String, availableModes: List<String>, image: String, icon: String): GameEntity
     suspend fun createMatch(matchDateTime: DateTimeTz, playersCount: Int, isRegistrationPossible: Boolean, tournament: TournamentEntity): MatchEntity
     suspend fun createGameMode(modeName: String): ModeEntity
-    suspend fun createRegistration(user: UserEntity, match: MatchEntity, outcome: String?): RegistrationEntity
+    suspend fun createRegistration(user: UserEntity, match: MatchEntity, outcome: String? = null): RegistrationEntity
     suspend fun createTournament(playersNumber: Int, title: String, tournamentDescription: String, tournamentMode: String, admin: UserEntity, game: GameEntity): TournamentEntity
     suspend fun createUser(email: String, password: String, nickname: String, image: String): UserEntity
 

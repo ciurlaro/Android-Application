@@ -1,10 +1,10 @@
 package com.example.myapplication.datasource
 
-import com.example.myapplication.entities.GameEntity
 import com.example.myapplication.entities.MatchEntity
 import com.example.myapplication.entities.TournamentEntity
 import com.example.myapplication.entities.UserEntity
 import com.example.myapplication.rawresponses.*
+import com.example.myapplication.rawresponses.createresponces.*
 import com.soywiz.klock.DateTimeTz
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
@@ -21,26 +21,40 @@ class ArenaTournamentDatasourceImplementation(
     override val tokenFactory: TokenFactory
 ) : ArenaTournamentDatasource {
 
-    override suspend fun createGame(name: String, availableModes: List<String>, image: String, icon: String): GameJSON =
-        httpClient.authenticatedPost(endpoints.createGameUrl(name, availableModes, image, icon))
+    override suspend fun createUser(userJSON: CreateUserJSON): UserJSON =
+        with(userJSON){
+            httpClient.authenticatedPost(endpoints.createUserUrl(email, password, nickname, image),
+                "poi si vede se mettere il body, forse no")
+        }
 
-    override suspend fun createGame(gameJson: CreateGameJson) =
-        httpClient.authenticatedPost(endpoints.createGameUrl(???), gameJson)
-
-    override suspend fun createMatch(matchDateTime: DateTimeTz, playersCount: Int, isRegistrationPossible: Boolean, tournament: TournamentEntity): MatchJSON =
-        httpClient.authenticatedPost(endpoints.createMatchUrl(matchDateTime, playersCount, isRegistrationPossible, tournament))
+    override suspend fun createGame(gameJSON: CreateGameJSON): GameJSON =
+        with(gameJSON){
+            httpClient.authenticatedPost(endpoints.createGameUrl(gameName, availableModes, image, icon),
+                "poi si vede se mettere il body, forse no")
+        }
 
     override suspend fun createGameMode(modeName: String): ModeJSON =
-        httpClient.authenticatedPost(endpoints.createGameModeUrl(modeName))
+        httpClient.authenticatedPost(endpoints.createGameModeUrl(modeName),
+            "poi si vede se mettere il body, forse no")
 
-    override suspend fun createRegistration(user: UserEntity, match: MatchEntity, outcome: String?): RegistrationJSON =
-        httpClient.authenticatedPost(endpoints.createRegistrationUrl(user, match, outcome))
+    override suspend fun createTournament(tournamentJSON: CreateTournamentJSON): TournamentJSON =
+        with(tournamentJSON) {
+            httpClient.authenticatedPost(endpoints.createTournamentUrl(playersNumber, title, tournamentDescription, tournamentMode, adminLink, gameLink),
+                "poi si vede se mettere il body, forse no")
+        }
 
-    override suspend fun createTournament(playersNumber: Int, title: String, tournamentDescription: String, tournamentMode: String, admin: UserEntity, game: GameEntity): TournamentJSON =
-        httpClient.authenticatedPost(endpoints.createTournamentUrl(playersNumber, title, tournamentDescription, tournamentMode, admin, game))
+    override suspend fun createMatch(matchJSON: CreateMatchJSON): MatchJSON =
+        with(matchJSON){
+            httpClient.authenticatedPost(endpoints.createMatchUrl(matchDateTime, playersCount, isRegistrationPossible, tournamentLink),
+                "poi si vede se mettere il body, forse no")
+        }
 
-    override suspend fun createUser(email: String, password: String, nickname: String, image: String): UserJSON =
-        httpClient.authenticatedPost(endpoints.createUserUrl(email, password, nickname, image))
+    override suspend fun createRegistration(registrationJSON: CreateRegistrationJSON): RegistrationJSON =
+        with(registrationJSON) {
+            httpClient.authenticatedPost(endpoints.createRegistrationUrl(userLink, matchLink, outcome),
+                "poi si vede se mettere il body, forse no")
+        }
+
 
 
     override suspend fun getAllGames(page: Int): MultipleGamesJSON =

@@ -3,9 +3,11 @@ package com.example.myapplication.repositories
 import com.example.myapplication.datasource.ArenaTournamentDatasource
 import com.example.myapplication.entities.*
 import com.example.myapplication.mappers.*
+import com.example.myapplication.mappers.entitieslinkmapper.*
 import com.example.myapplication.rawresponses.MultipleMatchJSON
 import com.example.myapplication.rawresponses.MultipleRegistrationsJSON
 import com.example.myapplication.rawresponses.MultipleTournamentsJSON
+import com.example.myapplication.rawresponses.createresponces.*
 import com.example.myapplication.splitters.MatchSplitter
 import com.example.myapplication.splitters.RegistrationSplitter
 import com.example.myapplication.splitters.TournamentSplitter
@@ -32,33 +34,46 @@ class ArenaTournamentRepositoryImplementation(
     private val subscriptionMapper: AccountSubscriptionMapper,
     private val tournamentSplitter: TournamentSplitter,
     private val matchSplitter: MatchSplitter,
-    private val registrationSplitter: RegistrationSplitter
+    private val registrationSplitter: RegistrationSplitter,
+    private val userLinkMapper: UserLinkMapper,
+    private val gameLinkMapper: GameLinkMapper,
+    private val matchLinkMapper: MatchLinkMapper,
+    private val tournamentLinkMapper: TournamentLinkMapper
 ) : ArenaTournamentRepository {
 
+    override suspend fun createUser(email: String, password: String, nickname: String, image: String) =
+        atDS.createUser(
+            CreateUserJSON(email, password, nickname, image))
+            .let { userMapper.fromRemoteSingle(it) }
+
     override suspend fun createGame(name: String, availableModes: List<String>, image: String, icon: String) =
-        atDS.createGame(name, availableModes, image, icon)
+        atDS.createGame(CreateGameJSON(name, availableModes, image, icon))
             .let { gameMapper.fromRemoteSingle(it) }
+
 
     override suspend fun createGameMode(modeName: String) =
         atDS.createGameMode(modeName)
             .let { modeMapper.fromRemoteSingle(it) }
 
+    override suspend fun createTournament(playersNumber: Int, title: String, tournamentDescription: String, tournamentMode: String, admin: UserEntity, game: GameEntity) =
+        atDS.createTournament(
+            CreateTournamentJSON(playersNumber, title, tournamentDescription, tournamentMode,
+                adminLink = userLinkMapper.toRemoteSingle(admin.id), gameLink = gameLinkMapper.toRemoteSingle(game.name)))
+            .let { return@let TournamentEntity(it.id, playersNumber, title, tournamentDescription, tournamentMode, admin, game) }
 
     override suspend fun createMatch(matchDateTime: DateTimeTz, playersCount: Int, isRegistrationPossible: Boolean, tournament: TournamentEntity) =
-        atDS.createMatch(matchDateTime, playersCount, isRegistrationPossible, tournament)
-            .let { matchMapper.fromRemoteSingle(it) }
+        atDS.createMatch(
+            CreateMatchJSON(matchDateTime, playersCount, isRegistrationPossible,
+                tournamentLink = tournamentLinkMapper.toRemoteSingle(tournament.id)))
+            .let { return@let MatchEntity(it.id, matchDateTime, playersCount, isRegistrationPossible, tournament) }
 
     override suspend fun createRegistration(user: UserEntity, match: MatchEntity, outcome: String?) =
-        atDS.createRegistration(user, match, outcome)
-            .let { registrationMapper.fromRemoteSingle(it) }
-
-    override suspend fun createTournament(playersNumber: Int, title: String, tournamentDescription: String, tournamentMode: String, admin: UserEntity, game: GameEntity): TournamentEntity =
-        atDS.createTournament(playersNumber, title, tournamentDescription, tournamentMode, admin, game)
-            .let { tournamentMapper.fromRemoteSingle(it) }
-
-    override suspend fun createUser(email: String, password: String, nickname: String, image: String) =
-        atDS.createUser(email, password, nickname, image)
-        .let { userMapper.fromRemoteSingle(it) }
+        atDS.createRegistration(
+            CreateRegistrationJSON(
+                userLink = userLinkMapper.toRemoteSingle(user.id),
+                matchLink = matchLinkMapper.toRemoteSingle(match.id),
+                outcome = outcome))
+            .let { return@let RegistrationEntity(user, match, outcome) }
 
 
 

@@ -1,11 +1,13 @@
 package com.example.myapplication.mappers
 
 import com.example.myapplication.entities.GameEntity
-import com.example.myapplication.rawresponses.CreateGameJSON
+import com.example.myapplication.rawresponses.createresponces.CreateGameJSON
 import com.example.myapplication.rawresponses.GameJSON
 import com.example.myapplication.rawresponses.MultipleGamesJSON
 
-class GameMapper : MultipleFromRemoteMapper<MultipleGamesJSON, GameJSON, GameEntity>, SingleToRemoteMapper<CreateGameJSON, GameEntity> {
+class GameMapper :
+    MultipleFromRemoteMapper<MultipleGamesJSON, GameJSON, GameEntity>,
+    SingleToRemoteMapper<CreateGameJSON, GameEntity> {
 
     override fun fromRemoteSingle(remote: GameJSON) = with(remote) {
         GameEntity(gameName, availableModes, image, icon)
@@ -16,10 +18,10 @@ class GameMapper : MultipleFromRemoteMapper<MultipleGamesJSON, GameJSON, GameEnt
 
     override fun toRemoteSingle(entity: GameEntity) =
         CreateGameJSON(
-            entity.name
-//            entity.availableModes,
-//            entity.image,
-//            entity.icon,
+            entity.name,
+            entity.availableModes,
+            entity.image,
+            entity.icon
         )
 
 

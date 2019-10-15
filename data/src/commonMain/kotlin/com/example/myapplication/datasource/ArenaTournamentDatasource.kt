@@ -1,10 +1,7 @@
 package com.example.myapplication.datasource
 
-import com.example.myapplication.entities.GameEntity
-import com.example.myapplication.entities.MatchEntity
-import com.example.myapplication.entities.TournamentEntity
-import com.example.myapplication.entities.UserEntity
 import com.example.myapplication.rawresponses.*
+import com.example.myapplication.rawresponses.createresponces.*
 import com.soywiz.klock.DateFormat
 import com.soywiz.klock.DateTimeTz
 import io.ktor.http.Url
@@ -19,12 +16,11 @@ interface ArenaTournamentDatasource {
     val tokenFactory: TokenFactory
 
     suspend fun createGameMode(modeName: String): ModeJSON
-    suspend fun createGame(name: String, availableModes: List<String>, image: String, icon: String): GameJSON
     suspend fun createGame(gameJSON: CreateGameJSON): GameJSON
-    suspend fun createMatch(matchDateTime: DateTimeTz, playersCount: Int, isRegistrationPossible: Boolean, tournament: TournamentEntity): MatchJSON
-    suspend fun createRegistration(user: UserEntity, match: MatchEntity, outcome: String? = null): RegistrationJSON
-    suspend fun createTournament(playersNumber: Int, title: String, tournamentDescription: String, tournamentMode: String, admin: UserEntity, game: GameEntity): TournamentJSON
-    suspend fun createUser(email: String, password: String, nickname: String, image: String): UserJSON
+    suspend fun createMatch(matchJSON: CreateMatchJSON): MatchJSON
+    suspend fun createRegistration(registrationJSON: CreateRegistrationJSON): RegistrationJSON
+    suspend fun createTournament(tournamentJSON: CreateTournamentJSON): TournamentJSON
+    suspend fun createUser(userJSON: CreateUserJSON): UserJSON
 
     suspend fun getAllGames(page: Int): MultipleGamesJSON
     suspend fun getGameByName(gameName: String): GameJSON
@@ -71,10 +67,10 @@ interface ArenaTournamentDatasource {
         val port: Int
 
         fun createGameUrl(name: String, availableModes: List<String>, image: String, icon: String): Url
-        fun createMatchUrl(matchDateTime: DateTimeTz, playersCount: Int, isRegistrationPossible: Boolean, tournament: TournamentEntity): Url
+        fun createMatchUrl(matchDateTime: DateTimeTz, playersCount: Int, isRegistrationPossible: Boolean, tournamentLink: Url): Url
         fun createGameModeUrl(modeName: String): Url
-        fun createRegistrationUrl(user: UserEntity, match: MatchEntity, outcome: String? = null): Url
-        fun createTournamentUrl(playersNumber: Int, title: String, tournamentDescription: String, tournamentMode: String, admin: UserEntity, game: GameEntity): Url
+        fun createRegistrationUrl(userLink: Url, matchLink: Url, outcome: String?): Url
+        fun createTournamentUrl(playersNumber: Int, title: String, tournamentDescription: String, tournamentMode: String, adminLink: Url, gameLink: Url): Url
         fun createUserUrl(email: String, password: String, nickname: String, image: String): Url
 
 
