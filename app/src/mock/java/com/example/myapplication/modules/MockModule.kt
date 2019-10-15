@@ -67,6 +67,11 @@ object MockModule : KodeinModuleProvider {
                 res
             )
 
+            "/game?name=&availableModes&image&icon" -> respondJsonFromRawResources(
+                R.raw.game_response,
+                res
+            )
+
             "/mode?modeName=FFA" -> respondJsonFromRawResources(R.raw.game_mode_response, res)
 
 

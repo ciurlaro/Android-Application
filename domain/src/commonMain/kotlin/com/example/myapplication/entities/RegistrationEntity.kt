@@ -6,6 +6,7 @@ import kotlin.js.JsName
 class RegistrationEntity(
     val user: UserEntity,
     val match: MatchEntity,
-    val outcome: String?
+    val outcome: String? = null
+
 )
 

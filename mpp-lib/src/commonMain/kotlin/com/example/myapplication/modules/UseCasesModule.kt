@@ -1,16 +1,16 @@
 package com.example.myapplication.modules
 
+import com.example.myapplication.usecases.game.CreateGameUseCase
 import com.example.myapplication.usecases.game.GetGamesByMode
 import com.example.myapplication.usecases.game.GetGamesContainingName
-import com.example.myapplication.usecases.match.GetAllAvailableMatchesUseCase
-import com.example.myapplication.usecases.match.GetAllMatchesByUserUseCase
-import com.example.myapplication.usecases.match.GetAvailableMatchesPerPage
-import com.example.myapplication.usecases.match.GetMatchesByTournament
+import com.example.myapplication.usecases.match.*
 import com.example.myapplication.usecases.mode.CreateGameModeUseCase
+import com.example.myapplication.usecases.registration.CreateRegistrationUseCase
 import com.example.myapplication.usecases.registration.GetAllRegistrationsByMatch
 import com.example.myapplication.usecases.registration.GetRegistrationsByTournamentUseCase
 import com.example.myapplication.usecases.registration.GetRegistrationsByUser
 import com.example.myapplication.usecases.tournament.*
+import com.example.myapplication.usecases.user.CreateUserUseCase
 import com.example.myapplication.usecases.user.GetAccountVerificationStatusUseCase
 import com.example.myapplication.usecases.user.GetSubscribedAccountUseCase
 import com.example.myapplication.usecases.user.GetUserInfoUseCase
@@ -57,7 +57,11 @@ object UseCasesModule : KodeinModuleProvider {
             )
         }
 
+        bind<CreateUserUseCase>() with singleton { CreateUserUseCase(instance()) }
         bind<CreateGameModeUseCase>() with singleton { CreateGameModeUseCase(instance()) }
-
+        bind<CreateGameUseCase>() with singleton { CreateGameUseCase(instance()) }
+        bind<CreateTournamentUseCase>() with singleton { CreateTournamentUseCase(instance()) }
+        bind<CreateMatchUseCase>() with singleton { CreateMatchUseCase(instance()) }
+        bind<CreateRegistrationUseCase>() with singleton { CreateRegistrationUseCase(instance()) }
     }
 }
