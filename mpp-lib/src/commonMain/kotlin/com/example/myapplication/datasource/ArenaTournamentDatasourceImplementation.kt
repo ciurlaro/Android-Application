@@ -1,5 +1,9 @@
 package com.example.myapplication.datasource
 
+import com.example.myapplication.entities.GameEntity
+import com.example.myapplication.entities.MatchEntity
+import com.example.myapplication.entities.TournamentEntity
+import com.example.myapplication.entities.UserEntity
 import com.example.myapplication.rawresponses.*
 import com.soywiz.klock.DateTimeTz
 import io.ktor.client.HttpClient
@@ -17,6 +21,25 @@ class ArenaTournamentDatasourceImplementation(
     override val tokenFactory: TokenFactory
 ) : ArenaTournamentDatasource {
 
+    override suspend fun createGame(name: String, availableModes: List<String>, image: String, icon: String): GameJSON =
+        httpClient.authenticatedPost(endpoints.createGameUrl(name, availableModes, image, icon))
+
+    override suspend fun createMatch(matchDateTime: DateTimeTz, playersCount: Int, isRegistrationPossible: Boolean, tournament: TournamentEntity): MatchJSON =
+        httpClient.authenticatedPost(endpoints.createMatchUrl(matchDateTime, playersCount, isRegistrationPossible, tournament))
+
+    override suspend fun createGameMode(modeName: String): ModeJSON =
+        httpClient.authenticatedPost(endpoints.createGameModeUrl(modeName))
+
+    override suspend fun createRegistration(user: UserEntity, match: MatchEntity, outcome: String?): RegistrationJSON =
+        httpClient.authenticatedPost(endpoints.createRegistrationUrl(user, match, outcome))
+
+    override suspend fun createTournament(playersNumber: Int, title: String, tournamentDescription: String, tournamentMode: String, admin: UserEntity, game: GameEntity): TournamentJSON =
+        httpClient.authenticatedPost(endpoints.createTournamentUrl(playersNumber, title, tournamentDescription, tournamentMode, admin, game))
+
+    override suspend fun createUser(email: String, password: String, nickname: String, image: String): UserJSON =
+        httpClient.authenticatedPost(endpoints.createUserUrl(email, password, nickname, image))
+
+
     override suspend fun getAllGames(page: Int): MultipleGamesJSON =
         httpClient.get(endpoints.allGamesUrl(page))
 
@@ -30,22 +53,10 @@ class ArenaTournamentDatasourceImplementation(
         httpClient.get(endpoints.searchGamesByNameUrl(query, page))
 
     override suspend fun getGamesContainingName(gameName: String, page: Int): MultipleGamesJSON =
-        httpClient.get(endpoints.gamesContainingName(gameName, page))
+        httpClient.get(endpoints.gamesContainingNameUrl(gameName, page))
 
     override suspend fun getGamesByMode(mode: String, page: Int): MultipleGamesJSON =
-        httpClient.get(endpoints.gamesByMode(mode, page))
-
-    override suspend fun createGameMode(modeName: String): ModeJSON =
-        httpClient.authenticatedPost(endpoints.createGameMode(modeName))
-
-    override suspend fun postGame(
-        gameName: String,
-        availableModes: List<String>,
-        image: String,
-        icon: String
-    ): GameJSON {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+        httpClient.get(endpoints.gamesByModeUrl(mode, page))
 
 
     override suspend fun getTournamentById(id: Long): TournamentJSON =

@@ -1,5 +1,9 @@
 package com.example.myapplication.datasource
 
+import com.example.myapplication.entities.GameEntity
+import com.example.myapplication.entities.MatchEntity
+import com.example.myapplication.entities.TournamentEntity
+import com.example.myapplication.entities.UserEntity
 import com.example.myapplication.mappers.DateTimeMapper
 import com.soywiz.klock.DateTimeTz
 import io.ktor.http.Parameters
@@ -13,11 +17,38 @@ data class EndpointsImplementation(
     private val dateTimeMapper: DateTimeMapper
 ) : ArenaTournamentDatasource.Endpoints {
 
-    private fun parametersOf(vararg headers: Pair<String, Any>) =
+    private fun parametersOf(vararg headers: Pair<String, Any?>) =
         io.ktor.http.parametersOf(*headers.map { it.first to listOf(it.second.toString()) }.toTypedArray())
 
     private fun buildUrl(path: String, parameters: Parameters = parametersOf()) =
         Url(URLProtocol(protocol, port), host, port, path, parameters, "", null, null, false)
+
+
+    override fun createGameModeUrl(modeName: String) =
+        buildUrl("/mode", parametersOf("modeName" to modeName))
+
+
+    override fun createGameUrl(name: String, availableModes: List<String>, image: String, icon: String) =
+        buildUrl("/mode",
+            parametersOf("name" to name, "availableModes" to availableModes, "image" to image, "icon" to icon))
+
+    override fun createMatchUrl(matchDateTime: DateTimeTz, playersCount: Int, isRegistrationPossible: Boolean, tournament: TournamentEntity) =
+        buildUrl("/match",
+            parametersOf("matchDateTime" to matchDateTime, "playersCount" to playersCount, "isRegistrationPossible" to isRegistrationPossible, "tournament" to tournament))
+
+    override fun createRegistrationUrl(user: UserEntity, match: MatchEntity, outcome: String?) =
+        buildUrl("/registration",
+            parametersOf("user" to user, "match" to match, "outcome" to outcome))
+
+    override fun createTournamentUrl(playersNumber: Int, title: String, tournamentDescription: String, tournamentMode: String, admin: UserEntity, game: GameEntity) =
+        buildUrl("/tournament",
+            parametersOf("playersNumber" to playersNumber, "title" to title, "tournamentDescription" to tournamentDescription,
+                "tournamentMode" to tournamentDescription, "admin" to admin, "game" to game))
+
+    override fun createUserUrl(email: String, password: String, nickname: String, image: String) =
+        buildUrl("/createUser",
+            parametersOf("email" to email, "password" to password, "nickname" to nickname, "image" to image))
+
 
     override fun allGamesUrl(page: Int) =
         buildUrl("/game", parametersOf("page" to page))
@@ -25,24 +56,21 @@ data class EndpointsImplementation(
     override fun gameByNameUrl(name: String) =
         buildUrl("/game/$name")
 
+
     override fun searchGamesByNameUrl(query: String, page: Int) =
         buildUrl("/game/search/byGameName", parametersOf("gameName" to query, "page" to page))
 
-
-    override fun gamesContainingName(gameName: String, page: Int) =
+    override fun gamesContainingNameUrl(gameName: String, page: Int) =
         buildUrl(
             "/game/search/containingGameName",
             parametersOf("gameName" to gameName, "page" to page)
         )
 
-    override fun gamesByMode(mode: String, page: Int) =
+    override fun gamesByModeUrl(mode: String, page: Int) =
         buildUrl(
             "/game/search/byMode",
             parametersOf("available_modes_mode_name" to mode, "page" to page)
         )
-
-    override fun createGameMode(modeName: String) =
-        buildUrl("/mode", parametersOf("modeName" to modeName))
 
 
     override fun allTournamentsUrl(page: Int) =

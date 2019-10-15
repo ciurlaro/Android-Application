@@ -1,8 +1,7 @@
 package com.example.myapplication.repositories
 
 import com.example.myapplication.datasource.ArenaTournamentDatasource
-import com.example.myapplication.entities.MatchEntity
-import com.example.myapplication.entities.TournamentEntity
+import com.example.myapplication.entities.*
 import com.example.myapplication.mappers.*
 import com.example.myapplication.rawresponses.MultipleMatchJSON
 import com.example.myapplication.rawresponses.MultipleRegistrationsJSON
@@ -36,6 +35,33 @@ class ArenaTournamentRepositoryImplementation(
     private val registrationSplitter: RegistrationSplitter
 ) : ArenaTournamentRepository {
 
+    override suspend fun createGame(name: String, availableModes: List<String>, image: String, icon: String) =
+        atDS.createGame(name, availableModes, image, icon)
+            .let { gameMapper.fromRemoteSingle(it) }
+
+    override suspend fun createGameMode(modeName: String) =
+        atDS.createGameMode(modeName)
+            .let { modeMapper.fromRemoteSingle(it) }
+
+
+    override suspend fun createMatch(matchDateTime: DateTimeTz, playersCount: Int, isRegistrationPossible: Boolean, tournament: TournamentEntity) =
+        atDS.createMatch(matchDateTime, playersCount, isRegistrationPossible, tournament)
+            .let { matchMapper.fromRemoteSingle(it) }
+
+    override suspend fun createRegistration(user: UserEntity, match: MatchEntity, outcome: String?) =
+        atDS.createRegistration(user, match, outcome)
+            .let { registrationMapper.fromRemoteSingle(it) }
+
+    override suspend fun createTournament(playersNumber: Int, title: String, tournamentDescription: String, tournamentMode: String, admin: UserEntity, game: GameEntity): TournamentEntity =
+        atDS.createTournament(playersNumber, title, tournamentDescription, tournamentMode, admin, game)
+            .let { tournamentMapper.fromRemoteSingle(it) }
+
+    override suspend fun createUser(email: String, password: String, nickname: String, image: String) =
+        atDS.createUser(email, password, nickname, image)
+        .let { userMapper.fromRemoteSingle(it) }
+
+
+
     override suspend fun getGameByName(name: String) =
         atDS.getGameByName(name)
             .let { gameMapper.fromRemoteSingle(it) }
@@ -51,10 +77,6 @@ class ArenaTournamentRepositoryImplementation(
     override suspend fun getGamesByMode(mode: String, page: Int) =
         atDS.getGamesByMode(mode, page)
             .let { gameMapper.fromRemoteMultiple(it) }
-
-    override suspend fun createGameMode(modeName: String) =
-        atDS.createGameMode(modeName)
-            .let { modeMapper.fromRemoteSingle(it) }
 
 
     override suspend fun getTournamentById(id: Long) = coroutineScope {

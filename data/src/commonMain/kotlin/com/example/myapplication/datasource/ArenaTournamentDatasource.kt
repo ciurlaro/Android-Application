@@ -1,5 +1,9 @@
 package com.example.myapplication.datasource
 
+import com.example.myapplication.entities.GameEntity
+import com.example.myapplication.entities.MatchEntity
+import com.example.myapplication.entities.TournamentEntity
+import com.example.myapplication.entities.UserEntity
 import com.example.myapplication.rawresponses.*
 import com.soywiz.klock.DateFormat
 import com.soywiz.klock.DateTimeTz
@@ -14,21 +18,19 @@ interface ArenaTournamentDatasource {
 
     val tokenFactory: TokenFactory
 
+    suspend fun createGameMode(modeName: String): ModeJSON
+    suspend fun createGame(name: String, availableModes: List<String>, image: String, icon: String): GameJSON
+    suspend fun createMatch(matchDateTime: DateTimeTz, playersCount: Int, isRegistrationPossible: Boolean, tournament: TournamentEntity): MatchJSON
+    suspend fun createRegistration(user: UserEntity, match: MatchEntity, outcome: String? = null): RegistrationJSON
+    suspend fun createTournament(playersNumber: Int, title: String, tournamentDescription: String, tournamentMode: String, admin: UserEntity, game: GameEntity): TournamentJSON
+    suspend fun createUser(email: String, password: String, nickname: String, image: String): UserJSON
+
     suspend fun getAllGames(page: Int): MultipleGamesJSON
     suspend fun getGameByName(gameName: String): GameJSON
     suspend fun searchGamesByName(query: String, page: Int): MultipleGamesJSON
     suspend fun getGameByLink(link: String): GameJSON
     suspend fun getGamesContainingName(gameName: String, page: Int): MultipleGamesJSON
     suspend fun getGamesByMode(mode: String, page: Int): MultipleGamesJSON
-
-    suspend fun postGame(
-        gameName: String,
-        availableModes: List<String>,
-        image: String,
-        icon: String
-    ): GameJSON
-
-    suspend fun createGameMode(modeName: String): ModeJSON
 
     suspend fun getAllTournaments(page: Int): MultipleTournamentsJSON
     suspend fun getTournamentById(id: Long): TournamentJSON
@@ -67,13 +69,19 @@ interface ArenaTournamentDatasource {
         val host: String
         val port: Int
 
+        fun createGameUrl(name: String, availableModes: List<String>, image: String, icon: String): Url
+        fun createMatchUrl(matchDateTime: DateTimeTz, playersCount: Int, isRegistrationPossible: Boolean, tournament: TournamentEntity): Url
+        fun createGameModeUrl(modeName: String): Url
+        fun createRegistrationUrl(user: UserEntity, match: MatchEntity, outcome: String? = null): Url
+        fun createTournamentUrl(playersNumber: Int, title: String, tournamentDescription: String, tournamentMode: String, admin: UserEntity, game: GameEntity): Url
+        fun createUserUrl(email: String, password: String, nickname: String, image: String): Url
+
+
         fun allGamesUrl(page: Int): Url
         fun gameByNameUrl(name: String): Url
         fun searchGamesByNameUrl(query: String, page: Int): Url
-        fun gamesContainingName(gameName: String, page: Int): Url
-        fun gamesByMode(mode: String, page: Int): Url
-
-        fun createGameMode(modeName: String): Url
+        fun gamesContainingNameUrl(gameName: String, page: Int): Url
+        fun gamesByModeUrl(mode: String, page: Int): Url
 
 
         fun allTournamentsUrl(page: Int): Url

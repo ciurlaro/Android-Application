@@ -5,12 +5,19 @@ import com.soywiz.klock.DateTimeTz
 
 interface ArenaTournamentRepository {
 
+    suspend fun createGame(name: String, availableModes: List<String>, image: String, icon: String): GameEntity
+    suspend fun createMatch(matchDateTime: DateTimeTz, playersCount: Int, isRegistrationPossible: Boolean, tournament: TournamentEntity): MatchEntity
+    suspend fun createGameMode(modeName: String): ModeEntity
+    suspend fun createRegistration(user: UserEntity, match: MatchEntity, outcome: String?): RegistrationEntity
+    suspend fun createTournament(playersNumber: Int, title: String, tournamentDescription: String, tournamentMode: String, admin: UserEntity, game: GameEntity): TournamentEntity
+    suspend fun createUser(email: String, password: String, nickname: String, image: String): UserEntity
+
+
     suspend fun getGameByName(name: String): GameEntity
     suspend fun searchGameByName(name: String, page: Int): List<GameEntity>
     suspend fun getGamesContainingName(name: String, page: Int): List<GameEntity>
     suspend fun getGamesByMode(mode: String, page: Int): List<GameEntity>
 
-    suspend fun createGameMode(modeName: String): ModeEntity
 
     suspend fun getTournamentById(id: Long): TournamentEntity
     suspend fun getTournamentsByMode(mode: String, page: Int): List<TournamentEntity>
