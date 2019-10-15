@@ -16,7 +16,8 @@ class CustomViewModelFactory(private val injector: DKodein) : ViewModelProvider.
             injector.instance(), injector.instance(), injector.instance(), injector.instance(),
             injector.instance(), injector.instance(), injector.instance(), injector.instance(),
             injector.instance(), injector.instance(), injector.instance(), injector.instance(),
-            injector.instance(), injector.instance(), injector.instance(), injector.instance()
+            injector.instance(), injector.instance(), injector.instance(), injector.instance(),
+            injector.instance()
         )
         SearchViewModel::class -> SearchViewModel()
         UserProfileViewModel::class -> UserProfileViewModel()

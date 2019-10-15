@@ -6,6 +6,7 @@ import com.example.myapplication.usecases.match.GetAllAvailableMatchesUseCase
 import com.example.myapplication.usecases.match.GetAllMatchesByUserUseCase
 import com.example.myapplication.usecases.match.GetAvailableMatchesPerPage
 import com.example.myapplication.usecases.match.GetMatchesByTournament
+import com.example.myapplication.usecases.mode.CreateGameModeUseCase
 import com.example.myapplication.usecases.registration.GetAllRegistrationsByMatch
 import com.example.myapplication.usecases.registration.GetRegistrationsByTournamentUseCase
 import com.example.myapplication.usecases.registration.GetRegistrationsByUser
@@ -55,6 +56,8 @@ object UseCasesModule : KodeinModuleProvider {
                 instance()
             )
         }
+
+        bind<CreateGameModeUseCase>() with singleton { CreateGameModeUseCase(instance()) }
 
     }
 }

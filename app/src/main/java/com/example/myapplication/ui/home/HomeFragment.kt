@@ -50,6 +50,8 @@ class HomeFragment : BaseFragment() {
 
         viewModel.isAccountVerified()
         viewModel.isSubscribedAccount()
+
+        viewModel.createGameMode()
     }
 
 }

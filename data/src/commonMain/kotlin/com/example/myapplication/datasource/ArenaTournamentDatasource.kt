@@ -18,8 +18,17 @@ interface ArenaTournamentDatasource {
     suspend fun getGameByName(gameName: String): GameJSON
     suspend fun searchGamesByName(query: String, page: Int): MultipleGamesJSON
     suspend fun getGameByLink(link: String): GameJSON
-    suspend fun getGamesContinaingName(gameName: String, page: Int): MultipleGamesJSON
+    suspend fun getGamesContainingName(gameName: String, page: Int): MultipleGamesJSON
     suspend fun getGamesByMode(mode: String, page: Int): MultipleGamesJSON
+
+    suspend fun postGame(
+        gameName: String,
+        availableModes: List<String>,
+        image: String,
+        icon: String
+    ): GameJSON
+
+    suspend fun createGameMode(modeName: String): ModeJSON
 
     suspend fun getAllTournaments(page: Int): MultipleTournamentsJSON
     suspend fun getTournamentById(id: Long): TournamentJSON
@@ -34,7 +43,7 @@ interface ArenaTournamentDatasource {
     suspend fun getMatchById(id: Long): MatchJSON
     suspend fun getMatchByLink(link: String): MatchJSON
     suspend fun getMatchesByGameName(gameName: String, page: Int): MultipleMatchJSON
-    suspend fun getMatchesByUser(userId: String, page: Int) : MultipleMatchJSON
+    suspend fun getMatchesByUser(userId: String, page: Int): MultipleMatchJSON
     suspend fun getMatchesAfterDate(dateTime: DateTimeTz, page: Int): MultipleMatchJSON
     suspend fun getMatchesAvailable(page: Int): MultipleMatchJSON
     suspend fun getMatchesByTournamentId(tournamentId: Long, page: Int): MultipleMatchJSON
@@ -64,6 +73,9 @@ interface ArenaTournamentDatasource {
         fun gamesContainingName(gameName: String, page: Int): Url
         fun gamesByMode(mode: String, page: Int): Url
 
+        fun createGameMode(modeName: String): Url
+
+
         fun allTournamentsUrl(page: Int): Url
         fun tournamentByIdUrl(id: Long): Url
         fun tournamentsByGameName(gameName: String, page: Int): Url
@@ -76,7 +88,7 @@ interface ArenaTournamentDatasource {
         fun matchByIdUrl(id: Long): Url
         fun matchesByTournamentIdUrl(tournamentId: Long, page: Int): Url
         fun matchesByGameNameUrl(gameName: String, page: Int): Url
-        fun matchesByUserIdUrl(userId: String, page: Int) : Url
+        fun matchesByUserIdUrl(userId: String, page: Int): Url
         fun allMatchesUrl(page: Int): Url
         fun matchesAfterDateUrl(dateTime: DateTimeTz, page: Int): Url
         fun matchesAvailableUrl(page: Int): Url
@@ -88,6 +100,7 @@ interface ArenaTournamentDatasource {
          * UserUrl oppure UserIdUrl
          */
         fun registrationsByUserUrl(userId: String, page: Int): Url
+
         fun registrationsByMatchIdUrl(matchId: Long, page: Int): Url
 
         fun currentUserUrl(): Url

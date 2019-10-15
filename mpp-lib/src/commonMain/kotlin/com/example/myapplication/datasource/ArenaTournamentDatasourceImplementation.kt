@@ -5,6 +5,7 @@ import com.soywiz.klock.DateTimeTz
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
 import io.ktor.client.request.header
+import io.ktor.client.request.post
 import io.ktor.http.HttpHeaders
 import io.ktor.http.Url
 import io.ktor.util.InternalAPI
@@ -28,11 +29,23 @@ class ArenaTournamentDatasourceImplementation(
     override suspend fun searchGamesByName(query: String, page: Int): MultipleGamesJSON =
         httpClient.get(endpoints.searchGamesByNameUrl(query, page))
 
-    override suspend fun getGamesContinaingName(gameName: String, page: Int): MultipleGamesJSON =
+    override suspend fun getGamesContainingName(gameName: String, page: Int): MultipleGamesJSON =
         httpClient.get(endpoints.gamesContainingName(gameName, page))
 
     override suspend fun getGamesByMode(mode: String, page: Int): MultipleGamesJSON =
         httpClient.get(endpoints.gamesByMode(mode, page))
+
+    override suspend fun createGameMode(modeName: String): ModeJSON =
+        httpClient.authenticatedPost(endpoints.createGameMode(modeName))
+
+    override suspend fun postGame(
+        gameName: String,
+        availableModes: List<String>,
+        image: String,
+        icon: String
+    ): GameJSON {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
 
     override suspend fun getTournamentById(id: Long): TournamentJSON =
@@ -120,9 +133,6 @@ class ArenaTournamentDatasourceImplementation(
     ): MultipleRegistrationsJSON =
         httpClient.get(endpoints.registrationsByMatchIdUrl(matchId, page))
 
-    override suspend fun getCurrentUser(): UserJSON =
-        httpClient.authenticatedGet(endpoints.currentUserUrl())
-
     override suspend fun getUserById(id: String): UserJSON =
         httpClient.get(endpoints.userByIdUrl(id))
 
@@ -131,6 +141,9 @@ class ArenaTournamentDatasourceImplementation(
 
     override suspend fun getUsersByMatchId(matchId: Long, page: Int): MultipleUsersJSON =
         httpClient.get(endpoints.usersByMatchIdUrl(matchId, page))
+
+    override suspend fun getCurrentUser(): UserJSON =
+        httpClient.authenticatedGet(endpoints.currentUserUrl())
 
     override suspend fun getAccountVerificationStatus(): AccountStatusJSON =
         httpClient.authenticatedGet(endpoints.isAccountVerifiedUrl())
@@ -141,6 +154,14 @@ class ArenaTournamentDatasourceImplementation(
     @UseExperimental(InternalAPI::class)
     private suspend inline fun <reified T> HttpClient.authenticatedGet(url: Url) =
         get<T>(url) {
+            tokenFactory.factory()?.let {
+                header(HttpHeaders.Authorization, "Bearer: ${"$it:".encodeBase64()}")
+            }
+        }
+
+    @UseExperimental(InternalAPI::class)
+    private suspend inline fun <reified T> HttpClient.authenticatedPost(url: Url) =
+        post<T>(url) {
             tokenFactory.factory()?.let {
                 header(HttpHeaders.Authorization, "Bearer: ${"$it:".encodeBase64()}")
             }

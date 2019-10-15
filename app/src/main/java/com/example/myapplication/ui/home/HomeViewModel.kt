@@ -13,6 +13,7 @@ import com.example.myapplication.usecases.game.GetGamesContainingName
 import com.example.myapplication.usecases.match.GetAllAvailableMatchesUseCase
 import com.example.myapplication.usecases.match.GetAllMatchesByUserUseCase
 import com.example.myapplication.usecases.match.GetMatchesByTournament
+import com.example.myapplication.usecases.mode.CreateGameModeUseCase
 import com.example.myapplication.usecases.registration.GetAllRegistrationsByMatch
 import com.example.myapplication.usecases.registration.GetRegistrationsByTournamentUseCase
 import com.example.myapplication.usecases.registration.GetRegistrationsByUser
@@ -39,7 +40,8 @@ class HomeViewModel(
     private val getRegistrationsByUser: GetRegistrationsByUser,
     private val getMatchesByTournament: GetMatchesByTournament,
     private val isAccountVerified: GetAccountVerificationStatusUseCase,
-    private val isSubscribedAccount: GetSubscribedAccountUseCase
+    private val isSubscribedAccount: GetSubscribedAccountUseCase,
+    private val createGameMode: CreateGameModeUseCase
 ) : ViewModel() {
 
     data class MatchWithPlayersCountModel(val matchEntity: MatchEntity, val registeredPlayer: Int)
@@ -134,6 +136,10 @@ class HomeViewModel(
 
     fun isSubscribedAccount() = viewModelScope.launch {
         isSubscribedAccount.buildAction()
+    }
+
+    fun createGameMode() = viewModelScope.launch {
+        createGameMode.buildAction("FFA")
     }
 
 }

@@ -1,0 +1,43 @@
+{
+  "_embedded": {
+    "modeEntities": [
+      {
+        "modeName": "F4A",
+        "_links": {
+          "self": {
+            "href": "http://localhost:8080/mode/F4A"
+          },
+          "modeEntity": {
+            "href": "http://localhost:8080/mode/F4A"
+          }
+        }
+      },
+      {
+        "modeName": "S&D",
+        "_links": {
+          "self": {
+            "href": "http://localhost:8080/mode/S&D"
+          },
+          "modeEntity": {
+            "href": "http://localhost:8080/mode/S&D"
+          }
+        }
+      }
+    ]
+  },
+  "_links": {
+    "self": {
+      "href": "http://localhost:8080/mode{?page,size,sort}",
+      "templated": true
+    },
+    "profile": {
+      "href": "http://localhost:8080/profile/mode"
+    }
+  },
+  "page": {
+    "size": 20,
+    "totalElements": 2,
+    "totalPages": 1,
+    "number": 0
+  }
+}

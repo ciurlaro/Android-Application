@@ -41,6 +41,9 @@ data class EndpointsImplementation(
             parametersOf("available_modes_mode_name" to mode, "page" to page)
         )
 
+    override fun createGameMode(modeName: String) =
+        buildUrl("/mode", parametersOf("modeName" to modeName))
+
 
     override fun allTournamentsUrl(page: Int) =
         buildUrl("/tournament", parametersOf("page" to page))

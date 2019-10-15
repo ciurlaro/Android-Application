@@ -24,6 +24,7 @@ import kotlinx.coroutines.flow.toList
 class ArenaTournamentRepositoryImplementation(
     private val atDS: ArenaTournamentDatasource,
     private val gameMapper: GameMapper,
+    private val modeMapper: ModeMapper,
     private val matchMapper: MatchMapper,
     private val tournamentMapper: TournamentMapper,
     private val registrationMapper: RegistrationMapper,
@@ -44,12 +45,17 @@ class ArenaTournamentRepositoryImplementation(
             .let { gameMapper.fromRemoteMultiple(it) }
 
     override suspend fun getGamesContainingName(name: String, page: Int) =
-        atDS.getGamesContinaingName(name, page)
+        atDS.getGamesContainingName(name, page)
             .let { gameMapper.fromRemoteMultiple(it) }
 
     override suspend fun getGamesByMode(mode: String, page: Int) =
         atDS.getGamesByMode(mode, page)
             .let { gameMapper.fromRemoteMultiple(it) }
+
+    override suspend fun createGameMode(modeName: String) =
+        atDS.createGameMode(modeName)
+            .let { modeMapper.fromRemoteSingle(it) }
+
 
     override suspend fun getTournamentById(id: Long) = coroutineScope {
         atDS.getTournamentById(id)
