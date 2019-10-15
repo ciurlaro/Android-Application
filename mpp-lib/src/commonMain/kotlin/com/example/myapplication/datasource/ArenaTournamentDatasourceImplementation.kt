@@ -19,8 +19,8 @@ class ArenaTournamentDatasourceImplementation(
     override suspend fun getAllGames(page: Int): MultipleGamesJSON =
         httpClient.get(endpoints.allGamesUrl(page))
 
-    override suspend fun getGameByName(name: String): GameJSON =
-        httpClient.get(endpoints.gameByNameUrl(name))
+    override suspend fun getGameByName(gameName: String): GameJSON =
+        httpClient.get(endpoints.gameByNameUrl(gameName))
 
     override suspend fun getGameByLink(link: String): GameJSON =
         httpClient.get(link)
@@ -47,7 +47,10 @@ class ArenaTournamentDatasourceImplementation(
     override suspend fun getAllTournaments(page: Int): MultipleTournamentsJSON =
         httpClient.get(endpoints.allTournamentsUrl(page))
 
-    override suspend fun getTournamentsByGameName(gameName: String, page: Int): MultipleTournamentsJSON =
+    override suspend fun getTournamentsByGameName(
+        gameName: String,
+        page: Int
+    ): MultipleTournamentsJSON =
         httpClient.get(endpoints.tournamentsByGameName(gameName, page))
 
     override suspend fun getTournamentsByGameLink(
@@ -92,8 +95,8 @@ class ArenaTournamentDatasourceImplementation(
     override suspend fun getMatchesByGameLink(gameLink: String, page: Int): MultipleMatchJSON =
         httpClient.get(endpoints.matchesByGameLinkUrl(gameLink, page))
 
-    override suspend fun getMatchesByGameId(gameId: Long, page: Int): MultipleMatchJSON =
-        httpClient.get(endpoints.matchesByGameIdUrl(gameId, page))
+    override suspend fun getMatchesByGameName(gameName: String, page: Int): MultipleMatchJSON =
+        httpClient.get(endpoints.matchesByGameNameUrl(gameName, page))
 
     override suspend fun getMatchesAfterDate(
         dateTime: DateTimeTz,

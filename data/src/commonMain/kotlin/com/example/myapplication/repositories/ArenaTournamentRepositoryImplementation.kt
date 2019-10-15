@@ -1,7 +1,6 @@
 package com.example.myapplication.repositories
 
 import com.example.myapplication.datasource.ArenaTournamentDatasource
-import com.example.myapplication.entities.GameEntity
 import com.example.myapplication.entities.MatchEntity
 import com.example.myapplication.entities.TournamentEntity
 import com.example.myapplication.mappers.*
@@ -112,7 +111,7 @@ class ArenaTournamentRepositoryImplementation(
 
     override suspend fun getMatchesByGame(gameName: String, page: Int) =
         atDS.getGameByName(gameName)
-            .let { atDS.getMatchesByGameLink(it._links.self.href, page) }
+            .let { atDS.getMatchesByGameName(it.gameName, page) }
             .transformMatches()
 
     override suspend fun getMatchesAfterDate(

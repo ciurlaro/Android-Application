@@ -50,11 +50,11 @@ object MockModule : KodeinModuleProvider {
             "/game" -> respondJsonFromRawResources(R.raw.multiple_games_response, res)
             "/game/COD" -> respondJsonFromRawResources(R.raw.game_response, res)
             "/game/search/byGameName" -> respondJsonFromRawResources(R.raw.game_response, res)
-            "/game/search/byMode?mode=Free4All&page=0" -> respondJsonFromRawResources(
+            "/game/search/byMode?available_modes_mode_name=Free4All&page=0" -> respondJsonFromRawResources(
                 R.raw.multiple_games_response,
                 res
             )
-            "/game/search/byMode?mode=Free4All&page=1" -> respondJsonFromRawResources(
+            "/game/search/byMode?available_modes_mode_name=Free4All&page=1" -> respondJsonFromRawResources(
                 R.raw.multiple_games_response,
                 res
             )
@@ -115,11 +115,11 @@ object MockModule : KodeinModuleProvider {
                 res
             )
 
-            "/tournament/search/byUserId?userId=Cesare_1&page=0" -> respondJsonFromRawResources(
+            "/tournament/search/byUserId?admin=Cesare_1&page=0" -> respondJsonFromRawResources(
                 R.raw.multiple_tournaments_response,
                 res
             )
-            "/tournament/search/byUserId?userId=Cesare_1&page=1" -> respondJsonFromRawResources(
+            "/tournament/search/byUserId?admin=Cesare_1&page=1" -> respondJsonFromRawResources(
                 R.raw.multiple_tournaments_response,
                 res
             )

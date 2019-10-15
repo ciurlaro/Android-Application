@@ -15,7 +15,7 @@ interface ArenaTournamentDatasource {
     val tokenFactory: TokenFactory
 
     suspend fun getAllGames(page: Int): MultipleGamesJSON
-    suspend fun getGameByName(name: String): GameJSON
+    suspend fun getGameByName(gameName: String): GameJSON
     suspend fun searchGamesByName(query: String, page: Int): MultipleGamesJSON
     suspend fun getGameByLink(link: String): GameJSON
     suspend fun getGamesContinaingName(gameName: String, page: Int): MultipleGamesJSON
@@ -36,7 +36,7 @@ interface ArenaTournamentDatasource {
     suspend fun getMatchByLink(link: String): MatchJSON
     suspend fun getMatchesByTournamentLink(tournamentLink: String, page: Int): MatchJSON
     suspend fun getMatchesByGameLink(gameLink: String, page: Int): MultipleMatchJSON
-    suspend fun getMatchesByGameId(gameId: Long, page: Int): MultipleMatchJSON
+    suspend fun getMatchesByGameName(gameName: String, page: Int): MultipleMatchJSON
     suspend fun getMatchesByUser(userId: String, page: Int) : MultipleMatchJSON
     suspend fun getMatchesAfterDate(dateTime: DateTimeTz, page: Int): MultipleMatchJSON
     suspend fun getMatchesAvailable(page: Int): MultipleMatchJSON
@@ -82,7 +82,7 @@ interface ArenaTournamentDatasource {
         fun matchesByTournamentLinkUrl(tournamentLink: String, page: Int): Url
         fun matchesByTournamentIdUrl(tournamentId: Long, page: Int): Url
         fun matchesByGameLinkUrl(gameLink: String, page: Int): Url
-        fun matchesByGameIdUrl(gameId: Long, page: Int): Url
+        fun matchesByGameNameUrl(gameName: String, page: Int): Url
         fun matchesByUserIdUrl(userId: String, page: Int) : Url
         fun allMatchesUrl(page: Int): Url
         fun matchesAfterDateUrl(dateTime: DateTimeTz, page: Int): Url
