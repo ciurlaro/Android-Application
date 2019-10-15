@@ -10,7 +10,7 @@ interface MultipleFromRemoteMapper<MultipleRemote, SingleRemote, Entity> :
 }
 
 interface SingleToRemoteMapper<Remote, Entity> {
-    fun toRemote(entity: Entity): Remote
+    fun toRemoteSingle(entity: Entity): Remote
 }
 
 interface MultipleToRemoteMapper<MultipleRemote, SingleRemote, Entity> :

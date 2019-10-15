@@ -218,6 +218,10 @@ class ArenaTournamentRepositoryImplementation(
         atDS.getAccountSubscription()
             .let { subscriptionMapper.fromRemoteSingle(it) }
 
+    override suspend fun createGame(game: GameEntity) =
+        atDS.createGame(gameMapper.toRemoteSingle(game))
+            .let { gameMapper.fromRemoteSingle(it) }
+
     private suspend fun MultipleTournamentsJSON.transformTournaments() =
         tournamentSplitter(this)
             .asFlow()

@@ -43,4 +43,6 @@ interface ArenaTournamentRepository {
     suspend fun isAccountVerified(): Boolean
     suspend fun isAccountSubscribed(): Boolean
 
+    suspend fun createGame(game: GameEntity): GameEntity
+
 }

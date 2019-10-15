@@ -24,6 +24,9 @@ class ArenaTournamentDatasourceImplementation(
     override suspend fun createGame(name: String, availableModes: List<String>, image: String, icon: String): GameJSON =
         httpClient.authenticatedPost(endpoints.createGameUrl(name, availableModes, image, icon))
 
+    override suspend fun createGame(gameJson: CreateGameJson) =
+        httpClient.authenticatedPost(endpoints.createGameUrl(???), gameJson)
+
     override suspend fun createMatch(matchDateTime: DateTimeTz, playersCount: Int, isRegistrationPossible: Boolean, tournament: TournamentEntity): MatchJSON =
         httpClient.authenticatedPost(endpoints.createMatchUrl(matchDateTime, playersCount, isRegistrationPossible, tournament))
 
@@ -171,11 +174,12 @@ class ArenaTournamentDatasourceImplementation(
         }
 
     @UseExperimental(InternalAPI::class)
-    private suspend inline fun <reified T> HttpClient.authenticatedPost(url: Url) =
+    private suspend inline fun <reified T> HttpClient.authenticatedPost(url: Url, content: Any?) =
         post<T>(url) {
             tokenFactory.factory()?.let {
                 header(HttpHeaders.Authorization, "Bearer: ${"$it:".encodeBase64()}")
             }
+            content?.let { body = it }
         }
 
 }

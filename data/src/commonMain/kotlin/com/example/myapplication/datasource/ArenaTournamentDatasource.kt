@@ -20,6 +20,7 @@ interface ArenaTournamentDatasource {
 
     suspend fun createGameMode(modeName: String): ModeJSON
     suspend fun createGame(name: String, availableModes: List<String>, image: String, icon: String): GameJSON
+    suspend fun createGame(gameJSON: CreateGameJSON): GameJSON
     suspend fun createMatch(matchDateTime: DateTimeTz, playersCount: Int, isRegistrationPossible: Boolean, tournament: TournamentEntity): MatchJSON
     suspend fun createRegistration(user: UserEntity, match: MatchEntity, outcome: String? = null): RegistrationJSON
     suspend fun createTournament(playersNumber: Int, title: String, tournamentDescription: String, tournamentMode: String, admin: UserEntity, game: GameEntity): TournamentJSON
