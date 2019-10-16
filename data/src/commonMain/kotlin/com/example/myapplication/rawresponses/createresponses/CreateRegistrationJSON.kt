@@ -1,10 +1,10 @@
-package com.example.myapplication.rawresponses.createresponces
+package com.example.myapplication.rawresponses.createresponses
 
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class CreateRegistrationJSON(
-    val userLink: String,
-    val matchLink: String,
+    val user: String,
+    val match: String,
     val outcome: String? = null
 )

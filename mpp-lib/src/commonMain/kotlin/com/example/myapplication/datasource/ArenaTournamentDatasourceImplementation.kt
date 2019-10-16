@@ -2,7 +2,7 @@ package com.example.myapplication.datasource
 
 
 import com.example.myapplication.rawresponses.*
-import com.example.myapplication.rawresponses.createresponces.*
+import com.example.myapplication.rawresponses.createresponses.*
 import com.soywiz.klock.DateTimeTz
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get

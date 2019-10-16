@@ -1,7 +1,7 @@
 package com.example.myapplication.datasource
 
 import com.example.myapplication.rawresponses.*
-import com.example.myapplication.rawresponses.createresponces.*
+import com.example.myapplication.rawresponses.createresponses.*
 import com.soywiz.klock.DateFormat
 import com.soywiz.klock.DateTimeTz
 import io.ktor.http.Url

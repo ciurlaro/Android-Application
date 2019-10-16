@@ -1,4 +1,4 @@
-package com.example.myapplication.rawresponses.createresponces
+package com.example.myapplication.rawresponses.createresponses
 
 import kotlinx.serialization.Serializable
 
@@ -8,6 +8,6 @@ data class CreateTournamentJSON(
     val title: String,
     val tournamentDescription: String,
     val tournamentMode: String,
-    val adminLink: String,
-    val gameLink: String
+    val admin: String,
+    val game: String
 )

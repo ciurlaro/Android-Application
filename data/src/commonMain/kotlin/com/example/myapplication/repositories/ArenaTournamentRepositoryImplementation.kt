@@ -7,7 +7,7 @@ import com.example.myapplication.mappers.entitieslinkmapper.*
 import com.example.myapplication.rawresponses.MultipleMatchJSON
 import com.example.myapplication.rawresponses.MultipleRegistrationsJSON
 import com.example.myapplication.rawresponses.MultipleTournamentsJSON
-import com.example.myapplication.rawresponses.createresponces.*
+import com.example.myapplication.rawresponses.createresponses.*
 import com.example.myapplication.splitters.MatchSplitter
 import com.example.myapplication.splitters.RegistrationSplitter
 import com.example.myapplication.splitters.TournamentSplitter
@@ -15,7 +15,6 @@ import com.example.myapplication.utils.Quadruple
 import com.example.myapplication.utils.Quintuple
 import com.soywiz.klock.DateFormat
 import com.soywiz.klock.DateTimeTz
-import io.ktor.http.Url
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
@@ -84,8 +83,8 @@ class ArenaTournamentRepositoryImplementation(
                 title,
                 tournamentDescription,
                 tournamentMode,
-                adminLink = userLinkMapper.toRemoteSingle(admin.id).toString(),
-                gameLink = gameLinkMapper.toRemoteSingle(game.name).toString()
+                admin = userLinkMapper.toRemoteSingle(admin.id).toString(),
+                game = gameLinkMapper.toRemoteSingle(game.name).toString()
             )
         )
             .let {
@@ -111,7 +110,7 @@ class ArenaTournamentRepositoryImplementation(
                 matchDateTime.format(DateFormat("yyyy-MM-dd'T'HH:mm:ss")),
                 playersCount,
                 isRegistrationPossible,
-                tournamentLink = tournamentLinkMapper.toRemoteSingle(tournament.id).toString()
+                tournament = tournamentLinkMapper.toRemoteSingle(tournament.id).toString()
             )
         )
             .let {
@@ -131,8 +130,8 @@ class ArenaTournamentRepositoryImplementation(
     ) =
         atDS.createRegistration(
             CreateRegistrationJSON(
-                userLink = userLinkMapper.toRemoteSingle(user.id).toString(),
-                matchLink = matchLinkMapper.toRemoteSingle(match.id).toString(),
+                user = userLinkMapper.toRemoteSingle(user.id).toString(),
+                match = matchLinkMapper.toRemoteSingle(match.id).toString(),
                 outcome = outcome
             )
         )

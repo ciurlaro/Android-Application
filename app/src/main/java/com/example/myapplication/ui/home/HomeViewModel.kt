@@ -58,17 +58,17 @@ class HomeViewModel(
     private val _matches = MutableLiveData<List<MatchWithPlayersCountModel>>()
     val text: LiveData<List<MatchWithPlayersCountModel>> = _matches
 
-    val dummyUser = UserEntity("User", "user@user.user", "nickname", "image", true, true)
+    private val dummyUser = UserEntity("User", "user@user.user", "nickname", "image", true, true)
 
-    val dummyGame = GameEntity("COD", listOf("Free4All"), "image", "icon")
+    private val dummyGame = GameEntity("COD", listOf("Free4All"), "image", "icon")
 
-    val dummyTournament =
+    private val dummyTournament =
         TournamentEntity(
             42, 42, "42", "42",
             "42", dummyUser, dummyGame
         )
 
-    val dummyMatch =
+    private val dummyMatch =
         MatchEntity(42, DateTimeTz.nowLocal(), 42, true, dummyTournament)
 
     /*

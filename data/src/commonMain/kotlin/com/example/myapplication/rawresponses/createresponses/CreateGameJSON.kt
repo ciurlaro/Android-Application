@@ -1,4 +1,4 @@
-package com.example.myapplication.rawresponses.createresponces
+package com.example.myapplication.rawresponses.createresponses
 
 import kotlinx.serialization.Serializable
 

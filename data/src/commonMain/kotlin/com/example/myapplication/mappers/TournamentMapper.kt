@@ -1,12 +1,9 @@
 package com.example.myapplication.mappers
 
 import com.example.myapplication.entities.TournamentEntity
-import com.example.myapplication.mappers.entitieslinkmapper.GameLinkMapper
-import com.example.myapplication.mappers.entitieslinkmapper.UserLinkMapper
 import com.example.myapplication.rawresponses.GameJSON
 import com.example.myapplication.rawresponses.TournamentJSON
 import com.example.myapplication.rawresponses.UserJSON
-import com.example.myapplication.rawresponses.createresponces.CreateTournamentJSON
 
 class TournamentMapper(
     private val gameMapper: GameMapper,
