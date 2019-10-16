@@ -151,12 +151,12 @@ class HomeViewModel(
         createGameMode.buildAction("S&D")
     }
 
-    fun createUser() = viewModelScope.launch {
-        createUser.buildAction(dummyUser.email, "PWD", dummyUser.nickname, dummyUser.image)
-    }
-
     fun createGame() = viewModelScope.launch {
         createGame.buildAction(dummyGame.name, dummyGame.availableModes, "image", "icon")
+    }
+
+    fun createUser() = viewModelScope.launch {
+        createUser.buildAction(dummyUser.email, "PWD", dummyUser.nickname, dummyUser.image)
     }
 
     fun createTournament() = viewModelScope.launch {

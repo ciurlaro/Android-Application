@@ -1,8 +1,6 @@
 package com.example.myapplication.datasource
 
-import com.example.myapplication.entities.MatchEntity
-import com.example.myapplication.entities.TournamentEntity
-import com.example.myapplication.entities.UserEntity
+
 import com.example.myapplication.rawresponses.*
 import com.example.myapplication.rawresponses.createresponces.*
 import com.soywiz.klock.DateTimeTz
@@ -14,6 +12,8 @@ import io.ktor.http.HttpHeaders
 import io.ktor.http.Url
 import io.ktor.util.InternalAPI
 import io.ktor.util.encodeBase64
+import kotlinx.serialization.UnstableDefault
+import kotlinx.serialization.json.Json
 
 class ArenaTournamentDatasourceImplementation(
     private val httpClient: HttpClient,
@@ -21,40 +21,59 @@ class ArenaTournamentDatasourceImplementation(
     override val tokenFactory: TokenFactory
 ) : ArenaTournamentDatasource {
 
-    override suspend fun createUser(userJSON: CreateUserJSON): UserJSON =
-        with(userJSON){
-            httpClient.authenticatedPost(endpoints.createUserUrl(email, password, nickname, image),
-                "poi si vede se mettere il body, forse no")
+    @UseExperimental(UnstableDefault::class)
+    override suspend fun createGameMode(gameModeJSON: CreateGameModeJSON): ModeJSON =
+        with(gameModeJSON) {
+            httpClient.authenticatedPost(
+                endpoints.createGameModeUrl(),
+                Json.stringify(CreateGameModeJSON.serializer(), this)
+            )
         }
 
+    @UseExperimental(UnstableDefault::class)
     override suspend fun createGame(gameJSON: CreateGameJSON): GameJSON =
-        with(gameJSON){
-            httpClient.authenticatedPost(endpoints.createGameUrl(gameName, availableModes, image, icon),
-                "poi si vede se mettere il body, forse no")
+        with(gameJSON) {
+            httpClient.authenticatedPost(
+                endpoints.createGameUrl(),
+                Json.stringify(CreateGameJSON.serializer(), this)
+            )
         }
 
-    override suspend fun createGameMode(modeName: String): ModeJSON =
-        httpClient.authenticatedPost(endpoints.createGameModeUrl(modeName),
-            "poi si vede se mettere il body, forse no")
+    @UseExperimental(UnstableDefault::class)
+    override suspend fun createUser(userJSON: CreateUserJSON): UserJSON =
+        with(userJSON) {
+            httpClient.authenticatedPost(
+                endpoints.createUserUrl(),
+                Json.stringify(CreateUserJSON.serializer(), this)
+            )
+        }
 
+    @UseExperimental(UnstableDefault::class)
     override suspend fun createTournament(tournamentJSON: CreateTournamentJSON): TournamentJSON =
         with(tournamentJSON) {
-            httpClient.authenticatedPost(endpoints.createTournamentUrl(playersNumber, title, tournamentDescription, tournamentMode, adminLink, gameLink),
-                "poi si vede se mettere il body, forse no")
+            httpClient.authenticatedPost(
+                endpoints.createTournamentUrl(),
+                Json.stringify(CreateTournamentJSON.serializer(), this)
+            )
         }
 
+    @UseExperimental(UnstableDefault::class)
     override suspend fun createMatch(matchJSON: CreateMatchJSON): MatchJSON =
-        with(matchJSON){
-            httpClient.authenticatedPost(endpoints.createMatchUrl(matchDateTime, playersCount, isRegistrationPossible, tournamentLink),
-                "poi si vede se mettere il body, forse no")
+        with(matchJSON) {
+            httpClient.authenticatedPost(
+                endpoints.createMatchUrl(),
+                Json.stringify(CreateMatchJSON.serializer(), this)
+            )
         }
 
+    @UseExperimental(UnstableDefault::class)
     override suspend fun createRegistration(registrationJSON: CreateRegistrationJSON): RegistrationJSON =
         with(registrationJSON) {
-            httpClient.authenticatedPost(endpoints.createRegistrationUrl(userLink, matchLink, outcome),
-                "poi si vede se mettere il body, forse no")
+            httpClient.authenticatedPost(
+                endpoints.createRegistrationUrl(),
+                Json.stringify(CreateRegistrationJSON.serializer(), this)
+            )
         }
-
 
 
     override suspend fun getAllGames(page: Int): MultipleGamesJSON =

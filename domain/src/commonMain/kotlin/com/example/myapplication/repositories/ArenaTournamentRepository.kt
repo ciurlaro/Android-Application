@@ -1,16 +1,47 @@
 package com.example.myapplication.repositories
 
+
 import com.example.myapplication.entities.*
 import com.soywiz.klock.DateTimeTz
-
 interface ArenaTournamentRepository {
 
-    suspend fun createGame(name: String, availableModes: List<String>, image: String, icon: String): GameEntity
-    suspend fun createMatch(matchDateTime: DateTimeTz, playersCount: Int, isRegistrationPossible: Boolean, tournament: TournamentEntity): MatchEntity
     suspend fun createGameMode(modeName: String): ModeEntity
-    suspend fun createRegistration(user: UserEntity, match: MatchEntity, outcome: String? = null): RegistrationEntity
-    suspend fun createTournament(playersNumber: Int, title: String, tournamentDescription: String, tournamentMode: String, admin: UserEntity, game: GameEntity): TournamentEntity
-    suspend fun createUser(email: String, password: String, nickname: String, image: String): UserEntity
+
+    suspend fun createGame(
+        name: String,
+        availableModes: List<String>,
+        image: String,
+        icon: String
+    ): GameEntity
+
+    suspend fun createMatch(
+        matchDateTime: DateTimeTz,
+        playersCount: Int,
+        isRegistrationPossible: Boolean,
+        tournament: TournamentEntity
+    ): MatchEntity
+
+    suspend fun createRegistration(
+        user: UserEntity,
+        match: MatchEntity,
+        outcome: String? = null
+    ): RegistrationEntity
+
+    suspend fun createTournament(
+        playersNumber: Int,
+        title: String,
+        tournamentDescription: String,
+        tournamentMode: String,
+        admin: UserEntity,
+        game: GameEntity
+    ): TournamentEntity
+
+    suspend fun createUser(
+        email: String,
+        password: String,
+        nickname: String,
+        image: String
+    ): UserEntity
 
 
     suspend fun getGameByName(name: String): GameEntity
@@ -32,7 +63,7 @@ interface ArenaTournamentRepository {
     suspend fun getMatchesByGame(gameName: String, page: Int): List<MatchEntity>
     suspend fun getMatchesAfterDate(dateTime: DateTimeTz, page: Int): List<MatchEntity>
     suspend fun getMatchesAvailable(page: Int): List<MatchEntity>
-    suspend fun getMatchesByUser(userId: String, page: Int) : List<MatchEntity>
+    suspend fun getMatchesByUser(userId: String, page: Int): List<MatchEntity>
 
     suspend fun getRegistrationById(id: Long): RegistrationEntity
     suspend fun getRegistrationsByMatch(matchId: Long, page: Int): List<RegistrationEntity>

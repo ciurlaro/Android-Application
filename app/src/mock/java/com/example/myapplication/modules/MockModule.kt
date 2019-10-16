@@ -72,7 +72,7 @@ object MockModule : KodeinModuleProvider {
                 res
             )
 
-            "/mode?modeName=FFA" -> respondJsonFromRawResources(R.raw.game_mode_response, res)
+            "/mode" -> respondJsonFromRawResources(R.raw.game_mode_response, res)
 
 
             "/tournament/1/game" -> respondJsonFromRawResources(R.raw.game_response, res)

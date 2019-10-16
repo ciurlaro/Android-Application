@@ -3,7 +3,10 @@ package com.example.myapplication.repositories
 import com.example.myapplication.datasource.ArenaTournamentDatasource
 import com.example.myapplication.entities.*
 import com.example.myapplication.mappers.*
-import com.example.myapplication.mappers.entitieslinkmapper.*
+import com.example.myapplication.mappers.entitieslinkmapper.GameLinkMapper
+import com.example.myapplication.mappers.entitieslinkmapper.MatchLinkMapper
+import com.example.myapplication.mappers.entitieslinkmapper.TournamentLinkMapper
+import com.example.myapplication.mappers.entitieslinkmapper.UserLinkMapper
 import com.example.myapplication.rawresponses.MultipleMatchJSON
 import com.example.myapplication.rawresponses.MultipleRegistrationsJSON
 import com.example.myapplication.rawresponses.MultipleTournamentsJSON
@@ -13,6 +16,7 @@ import com.example.myapplication.splitters.RegistrationSplitter
 import com.example.myapplication.splitters.TournamentSplitter
 import com.example.myapplication.utils.Quadruple
 import com.example.myapplication.utils.Quintuple
+import com.soywiz.klock.DateFormat
 import com.soywiz.klock.DateTimeTz
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.async
@@ -41,40 +45,98 @@ class ArenaTournamentRepositoryImplementation(
     private val tournamentLinkMapper: TournamentLinkMapper
 ) : ArenaTournamentRepository {
 
-    override suspend fun createUser(email: String, password: String, nickname: String, image: String) =
+    override suspend fun createUser(
+        email: String,
+        password: String,
+        nickname: String,
+        image: String
+    ) =
         atDS.createUser(
-            CreateUserJSON(email, password, nickname, image))
+            CreateUserJSON(email, password, nickname, image)
+        )
             .let { userMapper.fromRemoteSingle(it) }
 
-    override suspend fun createGame(name: String, availableModes: List<String>, image: String, icon: String) =
+    override suspend fun createGame(
+        name: String,
+        availableModes: List<String>,
+        image: String,
+        icon: String
+    ) =
         atDS.createGame(CreateGameJSON(name, availableModes, image, icon))
             .let { gameMapper.fromRemoteSingle(it) }
 
 
     override suspend fun createGameMode(modeName: String) =
-        atDS.createGameMode(modeName)
+        atDS.createGameMode(CreateGameModeJSON(modeName))
             .let { modeMapper.fromRemoteSingle(it) }
 
-    override suspend fun createTournament(playersNumber: Int, title: String, tournamentDescription: String, tournamentMode: String, admin: UserEntity, game: GameEntity) =
+    override suspend fun createTournament(
+        playersNumber: Int,
+        title: String,
+        tournamentDescription: String,
+        tournamentMode: String,
+        admin: UserEntity,
+        game: GameEntity
+    ) =
         atDS.createTournament(
-            CreateTournamentJSON(playersNumber, title, tournamentDescription, tournamentMode,
-                adminLink = userLinkMapper.toRemoteSingle(admin.id), gameLink = gameLinkMapper.toRemoteSingle(game.name)))
-            .let { return@let TournamentEntity(it.id, playersNumber, title, tournamentDescription, tournamentMode, admin, game) }
+            CreateTournamentJSON(
+                playersNumber,
+                title,
+                tournamentDescription,
+                tournamentMode,
+                adminLink = userLinkMapper.toRemoteSingle(admin.id).encodedPath,
+                gameLink = gameLinkMapper.toRemoteSingle(game.name).encodedPath
+            )
+        )
+            .let {
+                return@let TournamentEntity(
+                    it.id,
+                    playersNumber,
+                    title,
+                    tournamentDescription,
+                    tournamentMode,
+                    admin,
+                    game
+                )
+            }
 
-    override suspend fun createMatch(matchDateTime: DateTimeTz, playersCount: Int, isRegistrationPossible: Boolean, tournament: TournamentEntity) =
+    override suspend fun createMatch(
+        matchDateTime: DateTimeTz,
+        playersCount: Int,
+        isRegistrationPossible: Boolean,
+        tournament: TournamentEntity
+    ) =
         atDS.createMatch(
-            CreateMatchJSON(matchDateTime, playersCount, isRegistrationPossible,
-                tournamentLink = tournamentLinkMapper.toRemoteSingle(tournament.id)))
-            .let { return@let MatchEntity(it.id, matchDateTime, playersCount, isRegistrationPossible, tournament) }
+            CreateMatchJSON(
+                matchDateTime.format(DateFormat("yyyy-MM-dd'T'HH:mm:ss")),
+                playersCount,
+                isRegistrationPossible,
+                tournamentLink = tournamentLinkMapper.toRemoteSingle(tournament.id).encodedPath
+            )
+        )
+            .let {
+                return@let MatchEntity(
+                    it.id,
+                    matchDateTime,
+                    playersCount,
+                    isRegistrationPossible,
+                    tournament
+                )
+            }
 
-    override suspend fun createRegistration(user: UserEntity, match: MatchEntity, outcome: String?) =
+    override suspend fun createRegistration(
+        user: UserEntity,
+        match: MatchEntity,
+        outcome: String?
+    ) =
         atDS.createRegistration(
             CreateRegistrationJSON(
-                userLink = userLinkMapper.toRemoteSingle(user.id),
-                matchLink = matchLinkMapper.toRemoteSingle(match.id),
-                outcome = outcome))
+                userLink = userLinkMapper.toRemoteSingle(user.id).encodedPath,
+                matchLink = matchLinkMapper.toRemoteSingle(match.id).encodedPath,
+                outcome = outcome
+            )
+        )
             .let { return@let RegistrationEntity(user, match, outcome) }
-
 
 
     override suspend fun getGameByName(name: String) =

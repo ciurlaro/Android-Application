@@ -15,7 +15,7 @@ interface ArenaTournamentDatasource {
 
     val tokenFactory: TokenFactory
 
-    suspend fun createGameMode(modeName: String): ModeJSON
+    suspend fun createGameMode(gameModeJSON: CreateGameModeJSON): ModeJSON
     suspend fun createGame(gameJSON: CreateGameJSON): GameJSON
     suspend fun createMatch(matchJSON: CreateMatchJSON): MatchJSON
     suspend fun createRegistration(registrationJSON: CreateRegistrationJSON): RegistrationJSON
@@ -66,12 +66,12 @@ interface ArenaTournamentDatasource {
         val host: String
         val port: Int
 
-        fun createGameUrl(name: String, availableModes: List<String>, image: String, icon: String): Url
-        fun createMatchUrl(matchDateTime: DateTimeTz, playersCount: Int, isRegistrationPossible: Boolean, tournamentLink: Url): Url
-        fun createGameModeUrl(modeName: String): Url
-        fun createRegistrationUrl(userLink: Url, matchLink: Url, outcome: String?): Url
-        fun createTournamentUrl(playersNumber: Int, title: String, tournamentDescription: String, tournamentMode: String, adminLink: Url, gameLink: Url): Url
-        fun createUserUrl(email: String, password: String, nickname: String, image: String): Url
+        fun createGameModeUrl(): Url
+        fun createGameUrl(): Url
+        fun createMatchUrl(): Url
+        fun createRegistrationUrl(): Url
+        fun createTournamentUrl(): Url
+        fun createUserUrl(): Url
 
 
         fun allGamesUrl(page: Int): Url

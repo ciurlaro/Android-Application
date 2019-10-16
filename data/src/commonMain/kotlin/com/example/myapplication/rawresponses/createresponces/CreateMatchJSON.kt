@@ -1,11 +1,11 @@
 package com.example.myapplication.rawresponses.createresponces
 
-import com.soywiz.klock.DateTimeTz
-import io.ktor.http.Url
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class CreateMatchJSON(
-    val matchDateTime: DateTimeTz,
+    val matchDateTime: String,
     val playersCount: Int,
     val isRegistrationPossible: Boolean,
-    val tournamentLink: Url
+    val tournamentLink: String
 )

@@ -1,9 +1,5 @@
 package com.example.myapplication.datasource
 
-import com.example.myapplication.entities.GameEntity
-import com.example.myapplication.entities.MatchEntity
-import com.example.myapplication.entities.TournamentEntity
-import com.example.myapplication.entities.UserEntity
 import com.example.myapplication.mappers.DateTimeMapper
 import com.soywiz.klock.DateTimeTz
 import io.ktor.http.Parameters
@@ -28,29 +24,23 @@ data class EndpointsImplementation(
     * Post endpoints
     * */
 
-    override fun createGameModeUrl(modeName: String) =
-        buildUrl("/mode", parametersOf("modeName" to modeName))
+    override fun createGameModeUrl() =
+        buildUrl("/mode")
 
-    override fun createGameUrl(name: String, availableModes: List<String>, image: String, icon: String) =
-        buildUrl("/mode",
-            parametersOf("name" to name, "availableModes" to availableModes, "image" to image, "icon" to icon))
+    override fun createGameUrl() =
+        buildUrl("/game")
 
-    override fun createMatchUrl(matchDateTime: DateTimeTz, playersCount: Int, isRegistrationPossible: Boolean, tournamentLink: Url) =
-        buildUrl("/match",
-            parametersOf("matchDateTime" to matchDateTime, "playersCount" to playersCount, "isRegistrationPossible" to isRegistrationPossible, "tournament" to tournamentLink))
+    override fun createMatchUrl() =
+        buildUrl("/match")
 
-    override fun createRegistrationUrl(userLink: Url, matchLink: Url, outcome: String?) =
-        buildUrl("/registration",
-            parametersOf("user" to userLink, "match" to matchLink, "outcome" to outcome))
+    override fun createRegistrationUrl() =
+        buildUrl("/registration")
 
-    override fun createTournamentUrl(playersNumber: Int, title: String, tournamentDescription: String, tournamentMode: String, adminLink: Url, gameLink: Url) =
-        buildUrl("/tournament",
-            parametersOf("playersNumber" to playersNumber, "title" to title, "tournamentDescription" to tournamentDescription,
-                "tournamentMode" to tournamentDescription, "admin" to adminLink, "game" to gameLink))
+    override fun createTournamentUrl() =
+        buildUrl("/tournament")
 
-    override fun createUserUrl(email: String, password: String, nickname: String, image: String) =
-        buildUrl("/createUser",
-            parametersOf("email" to email, "password" to password, "nickname" to nickname, "image" to image))
+    override fun createUserUrl() =
+        buildUrl("/createUser")
 
 
     /*
