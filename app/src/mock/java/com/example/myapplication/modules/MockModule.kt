@@ -10,10 +10,8 @@ import io.ktor.client.engine.mock.respond
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
 import io.ktor.client.request.HttpRequestData
-import io.ktor.http.ContentType
-import io.ktor.http.HttpHeaders
-import io.ktor.http.fullPath
-import io.ktor.http.headersOf
+import io.ktor.http.*
+import kotlinx.serialization.json.JsonDecodingException
 import org.kodein.di.Kodein
 import org.kodein.di.erased.bind
 import org.kodein.di.erased.instance
@@ -47,7 +45,13 @@ object MockModule : KodeinModuleProvider {
 
     private fun handleMockEngineRequest(request: HttpRequestData, res: Resources) =
         when (request.url.fullPath) {
-            "/game" -> respondJsonFromRawResources(R.raw.multiple_games_response, res)
+
+            "/game" ->
+                if(request.method == HttpMethod.Get) {
+                    respondJsonFromRawResources(R.raw.multiple_games_response, res)
+                } else {
+                    respondJsonFromRawResources(R.raw.game_response, res)
+                }
             "/game/COD" -> respondJsonFromRawResources(R.raw.game_response, res)
             "/game/search/byGameName" -> respondJsonFromRawResources(R.raw.game_response, res)
             "/game/search/byMode?available_modes_mode_name=Free4All&page=0" -> respondJsonFromRawResources(
@@ -72,13 +76,24 @@ object MockModule : KodeinModuleProvider {
                 res
             )
 
-            "/mode" -> respondJsonFromRawResources(R.raw.game_mode_response, res)
+            "/mode" ->
+                if(request.method == HttpMethod.Get) {
+                    respondJsonFromRawResources(R.raw.multiple_game_modes_response, res)
+                } else {
+                    respondJsonFromRawResources(R.raw.game_mode_response, res)
+                }
+
 
 
             "/tournament/1/game" -> respondJsonFromRawResources(R.raw.game_response, res)
 
 
-            "/tournament" -> respondJsonFromRawResources(R.raw.multiple_tournaments_response, res)
+            "/tournament" ->
+                if(request.method == HttpMethod.Get) {
+                    respondJsonFromRawResources(R.raw.multiple_tournaments_response, res)
+                } else {
+                    respondJsonFromRawResources(R.raw.tournament_response, res)
+                }
             "/tournament/1" -> respondJsonFromRawResources(R.raw.tournament_response, res)
             "/tournament/2" -> respondJsonFromRawResources(R.raw.tournament_response, res)
             "/tournament/2/game" -> respondJsonFromRawResources(R.raw.game_response, res)
@@ -157,7 +172,12 @@ object MockModule : KodeinModuleProvider {
                 res
             )
 
-            "/match" -> respondJsonFromRawResources(R.raw.multiple_matches_response, res)
+            "/match" ->
+                if(request.method == HttpMethod.Get) {
+                    respondJsonFromRawResources(R.raw.multiple_matches_response, res)
+                } else {
+                    respondJsonFromRawResources(R.raw.match_response, res)
+                }
             "/match/1" -> respondJsonFromRawResources(R.raw.match_response, res)
             "/match/2" -> respondJsonFromRawResources(R.raw.match_response, res)
             "/match/42" -> respondJsonFromRawResources(R.raw.match_response, res)
@@ -212,10 +232,12 @@ object MockModule : KodeinModuleProvider {
             "/registration/2/match" -> respondJsonFromRawResources(R.raw.match_response, res)
             "/registration/3/match" -> respondJsonFromRawResources(R.raw.match_response, res)
 
-            "/registration" -> respondJsonFromRawResources(
-                R.raw.multiple_registrations_response,
-                res
-            )
+            "/registration" ->
+                if(request.method == HttpMethod.Get) {
+                    respondJsonFromRawResources(R.raw.multiple_registrations_response, res)
+                } else {
+                    respondJsonFromRawResources(R.raw.registration_response, res)
+                }
             "/registration/1" -> respondJsonFromRawResources(R.raw.registration_response, res)
             "/registration/2" -> respondJsonFromRawResources(R.raw.registration_response, res)
             "/registration/3" -> respondJsonFromRawResources(R.raw.registration_response, res)
@@ -246,6 +268,7 @@ object MockModule : KodeinModuleProvider {
             )
 
 
+            "/createUser" -> respondJsonFromRawResources(R.raw.user_response, res)
             "/currentUser" -> respondJsonFromRawResources(R.raw.user_response, res)
             "/user/Cesare_1" -> respondJsonFromRawResources(R.raw.user_response, res)
             "/user/Lamba_2" -> respondJsonFromRawResources(R.raw.user_response, res)

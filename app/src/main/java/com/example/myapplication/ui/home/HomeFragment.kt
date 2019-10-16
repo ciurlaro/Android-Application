@@ -53,6 +53,10 @@ class HomeFragment : BaseFragment() {
 
         viewModel.createGameMode()
         viewModel.createGame()
+        viewModel.createUser()
+        viewModel.createTournament()
+        viewModel.createMatch()
+        viewModel.createRegistration()
     }
 
 }
