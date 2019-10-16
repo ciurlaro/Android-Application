@@ -30,13 +30,16 @@ kotlin {
             kotlinOptions.jvmTarget = "1.8"
         }
     }
-    js()
+    js{
+        browser()
+    }
 
     sourceSets {
 
         val ktorVersion: String by project
         val kotlinVersion: String by project
         val kodeinVersion: String by project
+        val textEncodingVersion: String by project
 
         val commonMain by getting {
             dependencies {
@@ -65,6 +68,7 @@ kotlin {
                 api(ktor("client-serialization-js", ktorVersion))
                 api(kodein("core-js", kodeinVersion))
                 api(kodein("erased-js", kodeinVersion))
+                api(npm("text-encoding", textEncodingVersion))
             }
         }
 

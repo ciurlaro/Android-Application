@@ -8,9 +8,10 @@ subprojects {
         google()
         jcenter()
         mavenCentral()
+        maven("https://dl.bintray.com/kotlin/kotlin-eap")
     }
 }
 
-tasks.create<Delete>("clean") {
+tasks.create<Delete>("turboClean") {
     delete(rootProject.buildDir)
 }

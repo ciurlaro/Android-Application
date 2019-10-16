@@ -9,7 +9,9 @@ kotlin {
             kotlinOptions.jvmTarget = "1.8"
         }
     }
-    js()
+    js{
+        browser()
+    }
 
     sourceSets {
 
