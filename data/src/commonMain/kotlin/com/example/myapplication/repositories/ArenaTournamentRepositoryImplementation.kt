@@ -1,5 +1,6 @@
 package com.example.myapplication.repositories
 
+
 import com.example.myapplication.datasource.ArenaTournamentDatasource
 import com.example.myapplication.entities.*
 import com.example.myapplication.mappers.*
@@ -22,7 +23,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.toList
-
 class ArenaTournamentRepositoryImplementation(
     private val atDS: ArenaTournamentDatasource,
     private val gameMapper: GameMapper,
@@ -54,6 +54,7 @@ class ArenaTournamentRepositoryImplementation(
         )
             .let { userMapper.fromRemoteSingle(it) }
 
+
     override suspend fun createGame(
         name: String,
         availableModes: List<String>,
@@ -63,7 +64,6 @@ class ArenaTournamentRepositoryImplementation(
         atDS.createGame(CreateGameJSON(name, availableModes
             .map { modeLinkMapper.toRemoteSingle(it).toString() }, image, icon))
             .let { gameMapper.fromRemoteSingle(it) }
-
 
     override suspend fun createGameMode(modeName: String) =
         atDS.createGameMode(CreateGameModeJSON(modeName))
@@ -123,6 +123,7 @@ class ArenaTournamentRepositoryImplementation(
                 )
             }
 
+
     override suspend fun createRegistration(
         user: UserEntity,
         match: MatchEntity,
@@ -137,7 +138,6 @@ class ArenaTournamentRepositoryImplementation(
         )
             .let { return@let RegistrationEntity(user, match, outcome) }
 
-
     override suspend fun getGameByName(name: String) =
         atDS.getGameByName(name)
             .let { gameMapper.fromRemoteSingle(it) }
@@ -150,10 +150,10 @@ class ArenaTournamentRepositoryImplementation(
         atDS.getGamesContainingName(name, page)
             .let { gameMapper.fromRemoteMultiple(it) }
 
+
     override suspend fun getGamesByMode(mode: String, page: Int) =
         atDS.getGamesByMode(mode, page)
             .let { gameMapper.fromRemoteMultiple(it) }
-
 
     override suspend fun getTournamentById(id: Long) = coroutineScope {
         atDS.getTournamentById(id)
@@ -187,11 +187,11 @@ class ArenaTournamentRepositoryImplementation(
         atDS.getShowCaseTournaments(page)
             .transformTournaments()
 
+
     override suspend fun getTournamentsContainingTitle(
         title: String,
         page: Int
     ) = atDS.getTournamentsContainingTitle(title, page).transformTournaments()
-
 
     override suspend fun getMatchById(id: Long) = coroutineScope {
         atDS.getMatchById(id)
@@ -264,13 +264,13 @@ class ArenaTournamentRepositoryImplementation(
             .let { registrationMapper.fromRemoteSingle(it) }
     }
 
+
     override suspend fun getRegistrationsByMatch(
         matchId: Long,
         page: Int
     ) = atDS.getMatchById(matchId)
         .let { atDS.getRegistrationsByMatchId(it.id, page) }
         .transformRegistrations()
-
 
     override suspend fun getRegistrationsByUser(
         userId: String,
@@ -293,10 +293,6 @@ class ArenaTournamentRepositoryImplementation(
     override suspend fun isAccountSubscribed() =
         atDS.getAccountSubscription()
             .let { subscriptionMapper.fromRemoteSingle(it) }
-
-    override suspend fun createGame(game: GameEntity) =
-        atDS.createGame(gameMapper.toRemoteSingle(game))
-            .let { gameMapper.fromRemoteSingle(it) }
 
     private suspend fun MultipleTournamentsJSON.transformTournaments() =
         tournamentSplitter(this)
