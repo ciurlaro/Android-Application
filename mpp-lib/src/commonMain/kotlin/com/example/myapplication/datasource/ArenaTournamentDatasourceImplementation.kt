@@ -26,7 +26,7 @@ class ArenaTournamentDatasourceImplementation(
         with(gameModeJSON) {
             httpClient.authenticatedPost(
                 endpoints.createGameModeUrl(),
-                Json.stringify(CreateGameModeJSON.serializer(), this)
+                Json.stringify(CreateGameModeJSON.serializer(), this).apply { println(this) }
             )
         }
 
@@ -35,7 +35,7 @@ class ArenaTournamentDatasourceImplementation(
         with(gameJSON) {
             httpClient.authenticatedPost(
                 endpoints.createGameUrl(),
-                Json.stringify(CreateGameJSON.serializer(), this)
+                Json.stringify(CreateGameJSON.serializer(), this).apply { println(this) }
             )
         }
 
@@ -44,7 +44,7 @@ class ArenaTournamentDatasourceImplementation(
         with(userJSON) {
             httpClient.authenticatedPost(
                 endpoints.createUserUrl(),
-                Json.stringify(CreateUserJSON.serializer(), this)
+                Json.stringify(CreateUserJSON.serializer(), this).apply { println(this) }
             )
         }
 
@@ -53,7 +53,7 @@ class ArenaTournamentDatasourceImplementation(
         with(tournamentJSON) {
             httpClient.authenticatedPost(
                 endpoints.createTournamentUrl(),
-                Json.stringify(CreateTournamentJSON.serializer(), this)
+                Json.stringify(CreateTournamentJSON.serializer(), this).apply { println(this) }
             )
         }
 
@@ -62,7 +62,7 @@ class ArenaTournamentDatasourceImplementation(
         with(matchJSON) {
             httpClient.authenticatedPost(
                 endpoints.createMatchUrl(),
-                Json.stringify(CreateMatchJSON.serializer(), this)
+                Json.stringify(CreateMatchJSON.serializer(), this).apply { println(this) }
             )
         }
 
@@ -71,7 +71,7 @@ class ArenaTournamentDatasourceImplementation(
         with(registrationJSON) {
             httpClient.authenticatedPost(
                 endpoints.createRegistrationUrl(),
-                Json.stringify(CreateRegistrationJSON.serializer(), this)
+                Json.stringify(CreateRegistrationJSON.serializer(), this).apply { println(this) }
             )
         }
 

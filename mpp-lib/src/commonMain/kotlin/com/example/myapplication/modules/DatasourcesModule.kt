@@ -3,6 +3,7 @@ package com.example.myapplication.modules
 import com.example.myapplication.datasource.ArenaTournamentDatasource
 import com.example.myapplication.datasource.ArenaTournamentDatasourceImplementation
 import com.example.myapplication.datasource.EndpointsImplementation
+import com.example.myapplication.datasource.TokenFactory
 import org.kodein.di.Kodein
 import org.kodein.di.erased.bind
 import org.kodein.di.erased.instance

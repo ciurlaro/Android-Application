@@ -1,10 +1,7 @@
 package com.example.myapplication.modules
 
 import com.example.myapplication.mappers.*
-import com.example.myapplication.mappers.entitieslinkmapper.GameLinkMapper
-import com.example.myapplication.mappers.entitieslinkmapper.MatchLinkMapper
-import com.example.myapplication.mappers.entitieslinkmapper.TournamentLinkMapper
-import com.example.myapplication.mappers.entitieslinkmapper.UserLinkMapper
+import com.example.myapplication.mappers.entitieslinkmapper.*
 import org.kodein.di.Kodein
 import org.kodein.di.erased.bind
 import org.kodein.di.erased.instance
@@ -51,6 +48,14 @@ object MappersModule : KodeinModuleProvider {
                 instance("serverPort")
             )
         }
+        bind<ModeLinkMapper>() with singleton {
+            ModeLinkMapper(
+                instance("serverProtocol"),
+                instance("serverUrl"),
+                instance("serverPort")
+            )
+        }
+
     }
 
 }

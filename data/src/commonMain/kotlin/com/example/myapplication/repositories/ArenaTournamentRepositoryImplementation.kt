@@ -3,10 +3,7 @@ package com.example.myapplication.repositories
 import com.example.myapplication.datasource.ArenaTournamentDatasource
 import com.example.myapplication.entities.*
 import com.example.myapplication.mappers.*
-import com.example.myapplication.mappers.entitieslinkmapper.GameLinkMapper
-import com.example.myapplication.mappers.entitieslinkmapper.MatchLinkMapper
-import com.example.myapplication.mappers.entitieslinkmapper.TournamentLinkMapper
-import com.example.myapplication.mappers.entitieslinkmapper.UserLinkMapper
+import com.example.myapplication.mappers.entitieslinkmapper.*
 import com.example.myapplication.rawresponses.MultipleMatchJSON
 import com.example.myapplication.rawresponses.MultipleRegistrationsJSON
 import com.example.myapplication.rawresponses.MultipleTournamentsJSON
@@ -18,6 +15,7 @@ import com.example.myapplication.utils.Quadruple
 import com.example.myapplication.utils.Quintuple
 import com.soywiz.klock.DateFormat
 import com.soywiz.klock.DateTimeTz
+import io.ktor.http.Url
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
@@ -41,8 +39,9 @@ class ArenaTournamentRepositoryImplementation(
     private val registrationSplitter: RegistrationSplitter,
     private val userLinkMapper: UserLinkMapper,
     private val gameLinkMapper: GameLinkMapper,
-    private val matchLinkMapper: MatchLinkMapper,
-    private val tournamentLinkMapper: TournamentLinkMapper
+    private val modeLinkMapper: ModeLinkMapper,
+    private val tournamentLinkMapper: TournamentLinkMapper,
+    private val matchLinkMapper: MatchLinkMapper
 ) : ArenaTournamentRepository {
 
     override suspend fun createUser(
@@ -62,7 +61,8 @@ class ArenaTournamentRepositoryImplementation(
         image: String,
         icon: String
     ) =
-        atDS.createGame(CreateGameJSON(name, availableModes, image, icon))
+        atDS.createGame(CreateGameJSON(name, availableModes
+            .map { modeLinkMapper.toRemoteSingle(it).toString() }, image, icon))
             .let { gameMapper.fromRemoteSingle(it) }
 
 
@@ -84,8 +84,8 @@ class ArenaTournamentRepositoryImplementation(
                 title,
                 tournamentDescription,
                 tournamentMode,
-                adminLink = userLinkMapper.toRemoteSingle(admin.id).encodedPath,
-                gameLink = gameLinkMapper.toRemoteSingle(game.name).encodedPath
+                adminLink = userLinkMapper.toRemoteSingle(admin.id).toString(),
+                gameLink = gameLinkMapper.toRemoteSingle(game.name).toString()
             )
         )
             .let {
@@ -111,7 +111,7 @@ class ArenaTournamentRepositoryImplementation(
                 matchDateTime.format(DateFormat("yyyy-MM-dd'T'HH:mm:ss")),
                 playersCount,
                 isRegistrationPossible,
-                tournamentLink = tournamentLinkMapper.toRemoteSingle(tournament.id).encodedPath
+                tournamentLink = tournamentLinkMapper.toRemoteSingle(tournament.id).toString()
             )
         )
             .let {
@@ -131,8 +131,8 @@ class ArenaTournamentRepositoryImplementation(
     ) =
         atDS.createRegistration(
             CreateRegistrationJSON(
-                userLink = userLinkMapper.toRemoteSingle(user.id).encodedPath,
-                matchLink = matchLinkMapper.toRemoteSingle(match.id).encodedPath,
+                userLink = userLinkMapper.toRemoteSingle(user.id).toString(),
+                matchLink = matchLinkMapper.toRemoteSingle(match.id).toString(),
                 outcome = outcome
             )
         )

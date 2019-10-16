@@ -4,14 +4,14 @@ import com.example.myapplication.mappers.SingleToRemoteMapper
 import io.ktor.http.URLProtocol
 import io.ktor.http.Url
 
-class MatchLinkMapper(
+class ModeLinkMapper(
     private val protocol: String,
     private val host: String,
     private val port: Int
-) : SingleToRemoteMapper<Url, Long> {
+) : SingleToRemoteMapper<Url, String> {
 
-    override fun toRemoteSingle(entity: Long) =
-        Url(URLProtocol(protocol, port), host, port, "/match/$entity",
+    override fun toRemoteSingle(entity: String) =
+        Url(URLProtocol(protocol, port), host, port, "/mode/$entity",
             io.ktor.http.parametersOf(), "", null, null, false)
 
 }
