@@ -4,12 +4,12 @@ import com.example.myapplication.entities.GameEntity
 import com.example.myapplication.entities.TournamentEntity
 import com.example.myapplication.entities.UserEntity
 import com.example.myapplication.repositories.ArenaTournamentRepository
-import com.example.myapplication.usecases.UseCaseWithParams
+import com.example.myapplication.usecases.UseCaseWithParamSuspending
 import kotlinx.coroutines.FlowPreview
 
 class CreateTournamentUseCase(
     private val repository: ArenaTournamentRepository
-) : UseCaseWithParams<CreateTournamentUseCase.Params, TournamentEntity> {
+) : UseCaseWithParamSuspending<CreateTournamentUseCase.Params, TournamentEntity> {
 
     @UseExperimental(FlowPreview::class)
     override suspend fun buildAction(params: Params): TournamentEntity =

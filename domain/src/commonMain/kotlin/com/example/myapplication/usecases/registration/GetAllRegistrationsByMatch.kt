@@ -4,26 +4,26 @@ import com.example.myapplication.entities.MatchEntity
 import com.example.myapplication.entities.RegistrationEntity
 import com.example.myapplication.repositories.ArenaTournamentRepository
 import com.example.myapplication.usecases.UseCaseWithParams
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.flatMapConcat
 
 class GetAllRegistrationsByMatch(
     private val repository: ArenaTournamentRepository
-) : UseCaseWithParams<GetAllRegistrationsByMatch.Params, List<RegistrationEntity>> {
+) : UseCaseWithParams<GetAllRegistrationsByMatch.Params, Flow<RegistrationEntity>> {
 
-    override suspend fun buildAction(params: Params): List<RegistrationEntity> {
-        val toReturn = mutableListOf<RegistrationEntity>()
-        var pageNumber = 0
-        var pageContent = repository.getRegistrationsByMatch(params.match.id, pageNumber)
-        toReturn.addAll(pageContent)
-        pageNumber++
-        while (pageContent.isNotEmpty() && pageNumber <= params.maxPage) {
-            pageContent = repository.getRegistrationsByMatch(params.match.id, pageNumber)
-            toReturn.addAll(pageContent)
-            pageNumber++
-        }
-        return toReturn
-    }
+    @FlowPreview
+    override fun buildAction(params: Params) =
+        (0 until params.maxPage)
+            .asFlow()
+            .flatMapConcat {
+                repository.getRegistrationsByMatch(params.match.id, it)
+            }
 
-    suspend fun buildAction(match: MatchEntity, maxPage: Int = 1) =
+
+    @FlowPreview
+    fun buildAction(match: MatchEntity, maxPage: Int = 1) =
         buildAction(Params(match, maxPage))
 
     data class Params(val match: MatchEntity, val maxPage: Int = 1)

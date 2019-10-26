@@ -3,13 +3,13 @@ package com.example.myapplication.usecases.match
 import com.example.myapplication.entities.MatchEntity
 import com.example.myapplication.entities.TournamentEntity
 import com.example.myapplication.repositories.ArenaTournamentRepository
-import com.example.myapplication.usecases.UseCaseWithParams
+import com.example.myapplication.usecases.UseCaseWithParamSuspending
 import com.soywiz.klock.DateTimeTz
 import kotlinx.coroutines.FlowPreview
 
 class CreateMatchUseCase(
     private val repository: ArenaTournamentRepository
-) : UseCaseWithParams<CreateMatchUseCase.Params, MatchEntity> {
+) : UseCaseWithParamSuspending<CreateMatchUseCase.Params, MatchEntity> {
 
     @UseExperimental(FlowPreview::class)
     override suspend fun buildAction(params: Params): MatchEntity =

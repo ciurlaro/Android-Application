@@ -2,12 +2,12 @@ package com.example.myapplication.usecases.user
 
 import com.example.myapplication.entities.UserEntity
 import com.example.myapplication.repositories.ArenaTournamentRepository
-import com.example.myapplication.usecases.UseCaseWithParams
+import com.example.myapplication.usecases.UseCaseWithParamSuspending
 import kotlinx.coroutines.FlowPreview
 
 class CreateUserUseCase(
     private val repository: ArenaTournamentRepository
-) : UseCaseWithParams<CreateUserUseCase.Params, UserEntity> {
+) : UseCaseWithParamSuspending<CreateUserUseCase.Params, UserEntity> {
 
     @UseExperimental(FlowPreview::class)
     override suspend fun buildAction(params: Params): UserEntity =

@@ -4,28 +4,28 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.example.myapplication.R
+import com.example.myapplication.ui.BaseFragment
+import kotlinx.android.synthetic.main.fragment_search.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-class SearchFragment : Fragment() {
+class SearchFragment : BaseFragment() {
 
-    private lateinit var searchViewModel: SearchViewModel
+    private val searchViewModel: SearchViewModel by viewModelInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        searchViewModel =
-            ViewModelProviders.of(this).get(SearchViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_dashboard, container, false)
-        val textView: TextView = root.findViewById(R.id.text_dashboard)
-        searchViewModel.text.observe(this, Observer {
-            textView.text = it
-        })
-        return root
+    ) = inflater.inflate(R.layout.fragment_search, container, false)!!
+
+    @ExperimentalCoroutinesApi
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        tournaments_rv.adapter = searchViewModel.adapter
+        searchViewModel.getTournamentsByMode("F4A")
     }
+
+
 }

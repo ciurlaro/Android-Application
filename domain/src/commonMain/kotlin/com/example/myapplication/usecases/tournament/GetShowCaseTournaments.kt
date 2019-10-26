@@ -4,28 +4,24 @@ import com.example.myapplication.entities.TournamentEntity
 import com.example.myapplication.repositories.ArenaTournamentRepository
 import com.example.myapplication.usecases.UseCaseWithParams
 import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.flatMapConcat
 
 class GetShowCaseTournaments(
     private val repository: ArenaTournamentRepository
-) : UseCaseWithParams<GetShowCaseTournaments.Params, List<TournamentEntity>> {
+) : UseCaseWithParams<GetShowCaseTournaments.Params, Flow<TournamentEntity>> {
 
     @UseExperimental(FlowPreview::class)
-    override suspend fun buildAction(params: Params): List<TournamentEntity> {
-        val toReturn = mutableListOf<TournamentEntity>()
-        var pageNumber = 0
-        var pageContent = repository.getShowCaseTournaments(pageNumber)
-        toReturn.addAll(pageContent)
-        pageNumber++
-        while (pageContent.isNotEmpty() && pageNumber <= params.maxPage) {
-            pageContent = repository.getShowCaseTournaments(pageNumber)
-            toReturn.addAll(pageContent)
-            pageNumber++
-        }
-        return toReturn
-    }
+    override fun buildAction(params: Params) =
+        (0 until params.maxPage)
+            .asFlow()
+            .flatMapConcat {
+                repository.getShowCaseTournaments(it)
+            }
 
 
-    suspend fun buildAction(maxPage: Int = 1) =
+    fun buildAction(maxPage: Int = 1) =
         buildAction(Params(maxPage))
 
     data class Params(val maxPage: Int = 1)

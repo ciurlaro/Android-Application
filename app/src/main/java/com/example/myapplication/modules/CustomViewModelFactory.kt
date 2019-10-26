@@ -20,7 +20,7 @@ class CustomViewModelFactory(private val injector: DKodein) : ViewModelProvider.
             injector.instance(), injector.instance(), injector.instance(), injector.instance(),
             injector.instance(), injector.instance()
         )
-        SearchViewModel::class -> SearchViewModel()
+        SearchViewModel::class -> SearchViewModel(injector.instance())
         UserProfileViewModel::class -> UserProfileViewModel()
         else -> throw IllegalArgumentException("${modelClass.canonicalName} has not been implemented in this factory")
     } as T

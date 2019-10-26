@@ -4,29 +4,33 @@ import com.example.myapplication.entities.GameEntity
 import com.example.myapplication.repositories.ArenaTournamentRepository
 import com.example.myapplication.usecases.UseCaseWithParams
 import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.InternalCoroutinesApi
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.flatMapConcat
 
 class GetGamesByMode(
     private val repository: ArenaTournamentRepository
-) : UseCaseWithParams<GetGamesByMode.Params, List<GameEntity>> {
+) : UseCaseWithParams<GetGamesByMode.Params, Flow<GameEntity>> {
 
+    @InternalCoroutinesApi
     @UseExperimental(FlowPreview::class)
-    override suspend fun buildAction(params: Params): List<GameEntity> {
-        val toReturn = mutableListOf<GameEntity>()
-        var pageNumber = 0
-        var pageContent = repository.getGamesByMode(params.mode, pageNumber)
-        toReturn.addAll(pageContent)
-        pageNumber++
-        while (pageContent.isNotEmpty() && pageNumber <= params.maxPage) {
-            pageContent = repository.getGamesByMode(params.mode, pageNumber)
-            toReturn.addAll(pageContent)
-            pageNumber++
-        }
-        return toReturn
-    }
+    override fun buildAction(params: Params) =
+        (0 until params.maxPage)
+            .asFlow()
+            .flatMapConcat {
+                repository.getGamesByMode(params.mode, it)
+            }
 
-    suspend fun buildAction(mode: String, maxPage: Int = 1) =
+    @InternalCoroutinesApi
+    fun buildAction(mode: String, maxPage: Int = 1) =
         buildAction(Params(mode, maxPage))
 
     data class Params(val mode: String, val maxPage: Int = 1)
-
 }
+
+
+
+
+
+

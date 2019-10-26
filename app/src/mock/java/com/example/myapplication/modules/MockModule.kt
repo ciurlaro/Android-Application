@@ -180,6 +180,7 @@ object MockModule : KodeinModuleProvider {
                 }
             "/match/1" -> respondJsonFromRawResources(R.raw.match_response, res)
             "/match/2" -> respondJsonFromRawResources(R.raw.match_response, res)
+            "/match/3" -> respondJsonFromRawResources(R.raw.match_response, res)
             "/match/42" -> respondJsonFromRawResources(R.raw.match_response, res)
             "/match/search/byTournament" -> respondJsonFromRawResources(
                 R.raw.multiple_matches_response,

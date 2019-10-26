@@ -1,6 +1,5 @@
 package com.example.myapplication.repositories
 
-
 import com.example.myapplication.datasource.ArenaTournamentDatasource
 import com.example.myapplication.entities.*
 import com.example.myapplication.mappers.*
@@ -17,12 +16,11 @@ import com.example.myapplication.utils.Quintuple
 import com.soywiz.klock.DateFormat
 import com.soywiz.klock.DateTimeTz
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.asFlow
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.toList
+import kotlinx.coroutines.flow.*
+
 class ArenaTournamentRepositoryImplementation(
     private val atDS: ArenaTournamentDatasource,
     private val gameMapper: GameMapper,
@@ -61,8 +59,12 @@ class ArenaTournamentRepositoryImplementation(
         image: String,
         icon: String
     ) =
-        atDS.createGame(CreateGameJSON(name, availableModes
-            .map { modeLinkMapper.toRemoteSingle(it).toString() }, image, icon))
+        atDS.createGame(
+            CreateGameJSON(
+                name, availableModes
+                    .map { modeLinkMapper.toRemoteSingle(it).toString() }, image, icon
+            )
+        )
             .let { gameMapper.fromRemoteSingle(it) }
 
     override suspend fun createGameMode(modeName: String) =
@@ -138,100 +140,152 @@ class ArenaTournamentRepositoryImplementation(
         )
             .let { return@let RegistrationEntity(user, match, outcome) }
 
+    @FlowPreview
     override suspend fun getGameByName(name: String) =
         atDS.getGameByName(name)
             .let { gameMapper.fromRemoteSingle(it) }
 
-    override suspend fun searchGameByName(name: String, page: Int) =
-        atDS.searchGamesByName(name, page)
-            .let { gameMapper.fromRemoteMultiple(it) }
-
-    override suspend fun getGamesContainingName(name: String, page: Int) =
-        atDS.getGamesContainingName(name, page)
-            .let { gameMapper.fromRemoteMultiple(it) }
-
-
-    override suspend fun getGamesByMode(mode: String, page: Int) =
-        atDS.getGamesByMode(mode, page)
-            .let { gameMapper.fromRemoteMultiple(it) }
-
-    override suspend fun getTournamentById(id: Long) = coroutineScope {
-        atDS.getTournamentById(id)
-            .let {
-                Triple(
-                    it,
-                    async { atDS.getGameByLink(it._links.game!!.href) },
-                    async { atDS.getUserByLink(it._links.userEntity!!.href) }
-                )
+    @FlowPreview
+    override fun searchGameByName(name: String, page: Int) =
+        flow { emit(atDS.searchGamesByName(name, page)) }
+            .flatMapIterableConcat {
+                gameMapper.fromRemoteMultiple(it)
             }
-            .let { Triple(it.first, it.second.await(), it.third.await()) }
-            .let { tournamentMapper.fromRemoteSingle(it) }
-    }
 
-    override suspend fun getTournamentsByMode(mode: String, page: Int) =
-        atDS.getTournamentsByMode(mode, page)
-            .transformTournaments()
 
-    override suspend fun getTournamentsByGame(gameName: String, page: Int) =
-        atDS.getGameByName(gameName)
-            .let {
-                atDS.getTournamentsByGameName(it.gameName, page)
+    @FlowPreview
+    override fun getGamesContainingName(name: String, page: Int) =
+        flow { emit(atDS.getGamesContainingName(name, page)) }
+            .flatMapIterableConcat {
+                gameMapper.fromRemoteMultiple(it)
             }
-            .transformTournaments()
-
-    override suspend fun getTournamentsByUser(userId: String, page: Int): List<TournamentEntity> =
-        atDS.getTournamentsByUser(userId, page)
-            .transformTournaments()
-
-    override suspend fun getShowCaseTournaments(page: Int): List<TournamentEntity> =
-        atDS.getShowCaseTournaments(page)
-            .transformTournaments()
 
 
-    override suspend fun getTournamentsContainingTitle(
+    @FlowPreview
+    override fun getGamesByMode(mode: String, page: Int) =
+        flow { emit(atDS.getGamesByMode(mode, page)) }
+            .flatMapIterableConcat {
+                gameMapper.fromRemoteMultiple(it)
+            }
+
+
+    override suspend fun getTournamentById(id: Long) =
+        coroutineScope {
+            atDS.getTournamentById(id)
+                .let {
+                    Triple(
+                        it,
+                        async { atDS.getGameByLink(it._links.game!!.href) },
+                        async { atDS.getUserByLink(it._links.userEntity!!.href) }
+                    )
+                }
+                .let { Triple(it.first, it.second.await(), it.third.await()) }
+                .let { tournamentMapper.fromRemoteSingle(it) }
+        }
+
+
+    @FlowPreview
+    override fun getTournamentsByMode(mode: String, page: Int) =
+        flow { emit(atDS.getTournamentsByMode(mode, page)) }
+            .flatMapConcat {
+                it.transformTournaments()
+            }
+
+    @FlowPreview
+    override fun getTournamentsByGame(gameName: String, page: Int) =
+        flow { emit(atDS.getGameByName(gameName)) }
+            .flatMapConcat {
+                flow { emit(atDS.getTournamentsByGameName(it.gameName, page)) }
+                    .flatMapConcat {
+                        it.transformTournaments()
+                    }
+            }
+
+    @FlowPreview
+    override fun getTournamentsByUser(userId: String, page: Int) =
+        flow { emit(atDS.getTournamentsByUser(userId, page)) }
+            .flatMapConcat {
+                it.transformTournaments()
+            }
+
+    @FlowPreview
+    override fun getShowCaseTournaments(page: Int) =
+        flow { emit(atDS.getShowCaseTournaments(page)) }
+            .flatMapConcat {
+                it.transformTournaments()
+            }
+
+    @FlowPreview
+    override fun getTournamentsContainingTitle(
         title: String,
         page: Int
-    ) = atDS.getTournamentsContainingTitle(title, page).transformTournaments()
-
-    override suspend fun getMatchById(id: Long) = coroutineScope {
-        atDS.getMatchById(id)
-            .let { it to atDS.getTournamentByLink(it._links.tournamentEntity!!.href) }
-            .let {
-                Quadruple(
-                    it.first,
-                    it.second,
-                    async { atDS.getGameByLink(it.second._links.gameEntity!!.href) },
-                    async { atDS.getUserByLink(it.second._links.userEntity!!.href) }
-                )
+    ) =
+        flow { emit(atDS.getTournamentsContainingTitle(title, page)) }
+            .flatMapConcat {
+                it.transformTournaments()
             }
-            .let { Quadruple(it.first, it.second, it.third.await(), it.fourth.await()) }
-            .let { matchMapper.fromRemoteSingle(it) }
-    }
 
-    override suspend fun getMatchesByTournament(
+    override suspend fun getMatchById(id: Long) =
+        coroutineScope {
+            atDS.getMatchById(id)
+                .let { it to atDS.getTournamentByLink(it._links.tournamentEntity!!.href) }
+                .let {
+                    Quadruple(
+                        it.first,
+                        it.second,
+                        async { atDS.getGameByLink(it.second._links.gameEntity!!.href) },
+                        async { atDS.getUserByLink(it.second._links.userEntity!!.href) }
+                    )
+                }
+                .let { Quadruple(it.first, it.second, it.third.await(), it.fourth.await()) }
+                .let { matchMapper.fromRemoteSingle(it) }
+        }
+
+    @FlowPreview
+    override fun getMatchesByTournament(
         tournamentId: Long,
         page: Int
-    ) = atDS.getMatchesByTournamentId(tournamentId, page)
-        .transformMatches()
+    ) =
+        flow { emit(atDS.getMatchesByTournamentId(tournamentId, page)) }
+            .flatMapConcat {
+                it.transformMatches()
+            }
 
-    override suspend fun getMatchesByGame(gameName: String, page: Int) =
-        atDS.getGameByName(gameName)
-            .let { atDS.getMatchesByGameName(it.gameName, page) }
-            .transformMatches()
 
-    override suspend fun getMatchesAfterDate(
+    @FlowPreview
+    override fun getMatchesByGame(gameName: String, page: Int) =
+        flow { emit(atDS.getGameByName(gameName)) }
+            .flatMapConcat {
+                flow { emit(atDS.getMatchesByGameName(it.gameName, page)) }
+                    .flatMapConcat {
+                        it.transformMatches()
+                    }
+            }
+
+    @FlowPreview
+    override fun getMatchesAfterDate(
         dateTime: DateTimeTz,
         page: Int
-    ) = atDS.getMatchesAfterDate(dateTime, page)
-        .transformMatches()
+    ) =
+        flow { emit(atDS.getMatchesAfterDate(dateTime, page)) }
+            .flatMapConcat {
+                it.transformMatches()
+            }
 
-    override suspend fun getMatchesAvailable(page: Int) =
-        atDS.getMatchesAvailable(page)
-            .transformMatches()
+    @FlowPreview
+    override fun getMatchesAvailable(page: Int) =
+        flow { emit(atDS.getMatchesAvailable(page)) }
+            .flatMapConcat {
+                it.transformMatches()
+            }
 
-    override suspend fun getMatchesByUser(userId: String, page: Int): List<MatchEntity> =
-        atDS.getMatchesByUser(userId, page)
-            .transformMatches()
+
+    @FlowPreview
+    override fun getMatchesByUser(userId: String, page: Int) =
+        flow { emit(atDS.getMatchesByUser(userId, page)) }
+            .flatMapConcat {
+                it.transformMatches()
+            }
 
     override suspend fun getRegistrationById(id: Long) = coroutineScope {
         atDS.getRegistrationById(id)
@@ -265,18 +319,28 @@ class ArenaTournamentRepositoryImplementation(
     }
 
 
-    override suspend fun getRegistrationsByMatch(
+    @FlowPreview
+    override fun getRegistrationsByMatch(
         matchId: Long,
         page: Int
-    ) = atDS.getMatchById(matchId)
-        .let { atDS.getRegistrationsByMatchId(it.id, page) }
-        .transformRegistrations()
+    ) =
+        flow { emit(atDS.getMatchById(matchId)) }
+            .flatMapConcat {
+                flow { emit(atDS.getRegistrationsByMatchId(it.id, page)) }
+                    .flatMapConcat {
+                        it.transformRegistrations()
+                    }
+            }
 
-    override suspend fun getRegistrationsByUser(
+    @FlowPreview
+    override fun getRegistrationsByUser(
         userId: String,
         page: Int
-    ) = atDS.getRegistrationsByUser(userId, page)
-        .transformRegistrations()
+    ) =
+        flow { emit(atDS.getRegistrationsByUser(userId, page)) }
+            .flatMapConcat {
+                it.transformRegistrations()
+            }
 
     override suspend fun getUserById(id: String) =
         atDS.getCurrentUser()
@@ -294,7 +358,7 @@ class ArenaTournamentRepositoryImplementation(
         atDS.getAccountSubscription()
             .let { subscriptionMapper.fromRemoteSingle(it) }
 
-    private suspend fun MultipleTournamentsJSON.transformTournaments() =
+    private fun MultipleTournamentsJSON.transformTournaments() =
         tournamentSplitter(this)
             .asFlow()
             .scopedMap {
@@ -304,9 +368,8 @@ class ArenaTournamentRepositoryImplementation(
             }
             .map { Triple(it.first, it.second.await(), it.third.await()) }
             .map { tournamentMapper.fromRemoteSingle(it) }
-            .toList()
 
-    private suspend fun MultipleMatchJSON.transformMatches() =
+    private fun MultipleMatchJSON.transformMatches() =
         matchSplitter(this)
             .asFlow()
             .map {
@@ -326,9 +389,8 @@ class ArenaTournamentRepositoryImplementation(
             .map {
                 matchMapper.fromRemoteSingle(it)
             }
-            .toList()
 
-    private suspend fun MultipleRegistrationsJSON.transformRegistrations() =
+    private fun MultipleRegistrationsJSON.transformRegistrations() =
         registrationSplitter(this)
             .asFlow()
             .map { it to atDS.getMatchByLink(it._links.match!!.href) }
@@ -358,7 +420,6 @@ class ArenaTournamentRepositoryImplementation(
                 )
             }
             .map { registrationMapper.fromRemoteSingle(it) }
-            .toList()
 
     /**
      * Returns a flow containing the results of applying the given [transform] function to each value of the original flow and exposes
@@ -372,3 +433,10 @@ class ArenaTournamentRepositoryImplementation(
         }
 
 }
+
+@FlowPreview
+private fun <T, R> Flow<T>.flatMapIterableConcat(function: (T) -> Iterable<R>) =
+    flatMapConcat {
+        function(it)
+            .asFlow()
+    }

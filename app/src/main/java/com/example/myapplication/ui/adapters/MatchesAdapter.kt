@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.item_match.view.*
 
 class MatchesAdapter : RecyclerView.Adapter<MatchesAdapter.ViewHolder>() {
 
-    var data = listOf<HomeViewModel.MatchWithPlayersCountModel>()
+    var data = listOf<HomeViewModel.Model>()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -29,7 +29,7 @@ class MatchesAdapter : RecyclerView.Adapter<MatchesAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        fun render(data: HomeViewModel.MatchWithPlayersCountModel) = with(itemView) {
+        fun render(data: HomeViewModel.Model) = with(itemView) {
             val (matchEntity, registeredPlayers) = data
             Picasso.get().load(matchEntity.tournament.game.image).into(game_image)
             Picasso.get().load(matchEntity.tournament.game.icon).into(game_icon)

@@ -21,20 +21,22 @@ class HomeFragment : BaseFragment() {
     ) = inflater.inflate(R.layout.fragment_home, container, false)!!
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        matches_rv.adapter = adapter
-
-        viewModel.text.observe {
-            adapter.data = it
+        TODO()
+//        super.onViewCreated(view, savedInstanceState)
+//
+//        matches_rv.adapter = adapter
+//
+//        viewModel.text.observe {
+//            adapter.data = it
         }
+//        viewModel.getAllAvailableMatches()
 
-        viewModel.getGamesByMode()
+        //viewModel.getMatchesByUser()
+        //viewModel.getMatchesByTournament()
+
+        /*viewModel.getGamesByMode()
         viewModel.getGamesContainingName()
 
-        viewModel.getAllAvailableMatches()
-        viewModel.getMatchesByUser()
-        viewModel.getMatchesByTournament()
 
         viewModel.getRegistrationsByMatch()
         viewModel.getRegistrationByTournament()
@@ -50,13 +52,13 @@ class HomeFragment : BaseFragment() {
 
         viewModel.isAccountVerified()
         viewModel.isSubscribedAccount()
-        
+
         viewModel.createGameMode()
         viewModel.createGame()
         viewModel.createUser()
         viewModel.createTournament()
         viewModel.createMatch()
-        viewModel.createRegistration()
-    }
+        viewModel.createRegistration()*/
+
 
 }

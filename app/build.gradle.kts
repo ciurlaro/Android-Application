@@ -107,6 +107,7 @@ dependencies {
     val junitVersion: String by project
     val espressoVersion: String by project
     val androidTestRunnerVersion: String by project
+    val flexibleAdapterVersion: String by project
 
 
     implementation(project(":mpp-lib"))
@@ -128,6 +129,8 @@ dependencies {
     implementation(ktor("client-mock-jvm", ktorVersion))
 
     implementation("org.kodein.di", "kodein-di-framework-android-x", kodeinVersion)
+
+    implementation("eu.davidea", "flexible-adapter", flexibleAdapterVersion)
 
     testImplementation("junit", "junit", junitVersion)
     androidTestImplementation("androidx.test", "runner", androidTestRunnerVersion)

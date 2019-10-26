@@ -4,7 +4,7 @@
       {
         "id": 1,
         "matchDateTime": "2019-10-09T17:16:53",
-        "playersCount": 12,
+        "playersCount": 42,
         "registrationPossible": true,
         "_links": {
           "self": {
@@ -20,6 +20,23 @@
       },
       {
         "id": 2,
+        "matchDateTime": "2019-10-09T19:17:19",
+        "playersCount": 42,
+        "registrationPossible": false,
+        "_links": {
+          "self": {
+            "href": "http://localhost:8080/match/2"
+          },
+          "matchEntity": {
+            "href": "http://localhost:8080/match/2"
+          },
+          "tournament": {
+            "href": "http://localhost:8080/match/2/tournament"
+          }
+        }
+      },
+      {
+        "id": 3,
         "matchDateTime": "2019-10-09T19:17:19",
         "playersCount": 42,
         "registrationPossible": false,
@@ -51,7 +68,7 @@
   },
   "page": {
     "size": 20,
-    "totalElements": 2,
+    "totalElements": 3,
     "totalPages": 1,
     "number": 0
   }

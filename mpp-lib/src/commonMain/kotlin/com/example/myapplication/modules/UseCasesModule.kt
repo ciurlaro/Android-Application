@@ -24,7 +24,7 @@ object UseCasesModule : KodeinModuleProvider {
         bind<GetGamesByMode>() with singleton { GetGamesByMode(instance()) }
         bind<GetGamesContainingName>() with singleton { GetGamesContainingName(instance()) }
         bind<GetTournamentsByGame>() with singleton { GetTournamentsByGame(instance()) }
-        bind<GetTournamentsByMode>() with singleton { GetTournamentsByMode(instance()) }
+        bind<GetTournamentsByMode>() with singleton { GetTournamentsByMode(instance(), instance()) }
         bind<GetTournamentsContainingTitle>() with singleton {
             GetTournamentsContainingTitle(
                 instance()
@@ -36,8 +36,18 @@ object UseCasesModule : KodeinModuleProvider {
                 instance()
             )
         }
-        bind<GetAllMatchesByUserUseCase>() with singleton { GetAllMatchesByUserUseCase(instance()) }
-        bind<GetCreatedTournamentsByAdmin>() with singleton { GetCreatedTournamentsByAdmin(instance()) }
+        bind<GetAllMatchesByUserUseCase>() with singleton {
+            GetAllMatchesByUserUseCase(
+                instance(),
+                instance()
+            )
+        }
+        bind<GetCreatedTournamentsByAdmin>() with singleton {
+            GetCreatedTournamentsByAdmin(
+                instance(),
+                instance()
+            )
+        }
         bind<GetAvailableMatchesPerPage>() with singleton { GetAvailableMatchesPerPage(instance()) }
         bind<GetUserInfoUseCase>() with singleton { GetUserInfoUseCase(instance()) }
         bind<GetAccountVerificationStatusUseCase>() with singleton {

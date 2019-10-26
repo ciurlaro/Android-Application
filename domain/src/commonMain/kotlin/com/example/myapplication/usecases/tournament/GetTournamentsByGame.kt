@@ -4,26 +4,25 @@ import com.example.myapplication.entities.GameEntity
 import com.example.myapplication.entities.TournamentEntity
 import com.example.myapplication.repositories.ArenaTournamentRepository
 import com.example.myapplication.usecases.UseCaseWithParams
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.flatMapConcat
 
 class GetTournamentsByGame(
     private val repository: ArenaTournamentRepository
-) : UseCaseWithParams<GetTournamentsByGame.Params, List<TournamentEntity>> {
+) : UseCaseWithParams<GetTournamentsByGame.Params, Flow<TournamentEntity>> {
 
-    override suspend fun buildAction(params: Params): List<TournamentEntity> {
-        val toReturn = mutableListOf<TournamentEntity>()
-        var pageNumber = 0
-        var pageContent = repository.getTournamentsByGame(params.game.name, pageNumber)
-        toReturn.addAll(pageContent)
-        pageNumber++
-        while (pageContent.isNotEmpty() && pageNumber <= params.maxPage) {
-            pageContent = repository.getTournamentsByGame(params.game.name, pageNumber)
-            toReturn.addAll(pageContent)
-            pageNumber++
-        }
-        return toReturn
-    }
+    @FlowPreview
+    override fun buildAction(params: Params) =
+        (0 until params.maxPage)
+            .asFlow()
+            .flatMapConcat {
+                repository.getTournamentsByGame(params.game.name, it)
+            }
 
-    suspend fun buildAction(game: GameEntity, maxPage: Int = 1) =
+    @FlowPreview
+    fun buildAction(game: GameEntity, maxPage: Int = 1) =
         buildAction(Params(game, maxPage))
 
 

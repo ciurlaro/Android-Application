@@ -1,33 +1,30 @@
 package com.example.myapplication.usecases.match
 
 import com.example.myapplication.entities.MatchEntity
-import com.example.myapplication.entities.UserEntity
 import com.example.myapplication.repositories.ArenaTournamentRepository
 import com.example.myapplication.usecases.UseCaseWithParams
+import com.example.myapplication.usecases.user.GetUserInfoUseCase
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.*
 
 class GetAllMatchesByUserUseCase(
-    private val repository: ArenaTournamentRepository
-) : UseCaseWithParams<GetAllMatchesByUserUseCase.Params, List<MatchEntity>> {
+    private val repository: ArenaTournamentRepository,
+    private val getUserInfo: GetUserInfoUseCase
+) : UseCaseWithParams<GetAllMatchesByUserUseCase.Params, Flow<MatchEntity>> {
 
-    override suspend fun buildAction(params: Params): List<MatchEntity> {
-        val toReturn = mutableListOf<MatchEntity>()
-        var pageNumber = 0
-        var pageContent = repository.getMatchesByUser(params.user.id, pageNumber)
-        toReturn.addAll(pageContent)
-        pageNumber++
-        while (pageContent.isNotEmpty() && pageNumber <= params.maxPage) {
-            pageContent = repository.getMatchesByUser(params.user.id, pageNumber)
-            toReturn.addAll(pageContent)
-            pageNumber++
-        }
-        return toReturn
-    }
+    @FlowPreview
+    override fun buildAction(params: Params) =
+        (0 until params.maxPage)
+            .asFlow()
+            .flatMapConcat {
+                repository.getMatchesByUser(getUserInfo.buildAction().id, it)
+            }
 
-    suspend fun buildAction(page: Int = 1): List<MatchEntity> {
-        val user = repository.getCurrentUser()
-        return buildAction(Params(user, page))
-    }
+    @FlowPreview
+    fun buildAction(maxPage: Int = 1) =
+        buildAction(Params(maxPage))
 
-    data class Params(val user: UserEntity, val maxPage: Int = 1)
+    data class Params(val maxPage: Int = 1)
 
 }
+

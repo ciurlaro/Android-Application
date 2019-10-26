@@ -7,6 +7,5 @@ class RegistrationEntity(
     val user: UserEntity,
     val match: MatchEntity,
     val outcome: String? = null
-
 )
 
