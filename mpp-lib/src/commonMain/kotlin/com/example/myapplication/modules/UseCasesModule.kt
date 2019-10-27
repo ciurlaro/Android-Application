@@ -25,6 +25,7 @@ object UseCasesModule : KodeinModuleProvider {
         bind<GetGamesContainingName>() with singleton { GetGamesContainingName(instance()) }
         bind<GetTournamentsByGame>() with singleton { GetTournamentsByGame(instance()) }
         bind<GetTournamentsByMode>() with singleton { GetTournamentsByMode(instance(), instance()) }
+        bind<GetTournamentsByModePerPage>() with singleton { GetTournamentsByModePerPage(instance()) }
         bind<GetTournamentsContainingTitle>() with singleton {
             GetTournamentsContainingTitle(
                 instance()

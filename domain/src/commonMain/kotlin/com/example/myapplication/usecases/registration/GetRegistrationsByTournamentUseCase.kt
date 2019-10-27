@@ -23,7 +23,6 @@ class GetRegistrationsByTournamentUseCase(
                     .flatMapConcat { match ->
                         getAllRegistrationsByMatch.buildAction(match, it)
                     }
-
             }
 
     fun buildAction(tournament: TournamentEntity, pages: Int = 1) =

@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.targets.js.npm.tasks.KotlinPackageJsonTask
+
 plugins {
     kotlin("multiplatform")
 }
@@ -48,6 +50,24 @@ kotlin {
             languageSettings.useExperimentalAnnotation("kotlin.Experimental")
         }
 
+    }
+
+}
+
+
+tasks.register<Copy>("buildNodePackage") {
+    group = "nodejs"
+    val jsJar by tasks.named<Jar>("jsJar")
+    val jsPackageJson by tasks.named<KotlinPackageJsonTask>("jsPackageJson")
+    dependsOn(jsJar, jsPackageJson)
+
+    into(file("$buildDir/nodePackage"))
+
+    from(jsPackageJson.packageJson)
+
+    from(zipTree(jsJar.archiveFile)) {
+        include("*.js")
+        into("kotlin")
     }
 
 }

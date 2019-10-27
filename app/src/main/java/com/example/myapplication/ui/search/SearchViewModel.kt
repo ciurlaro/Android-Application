@@ -4,16 +4,12 @@ import android.view.View
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.R
-import com.example.myapplication.entities.GameEntity
 import com.example.myapplication.entities.TournamentEntity
 import com.example.myapplication.usecases.tournament.GetTournamentsByMode
-import com.squareup.picasso.Picasso
 import eu.davidea.flexibleadapter.FlexibleAdapter
 import eu.davidea.flexibleadapter.items.AbstractFlexibleItem
 import eu.davidea.flexibleadapter.items.IFlexible
 import eu.davidea.viewholders.FlexibleViewHolder
-import kotlinx.android.synthetic.main.item_match.view.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
@@ -27,16 +23,6 @@ class SearchViewModel(
 
     val adapter
         get() = searchViewAdapter as RecyclerView.Adapter<*>
-
-    @ExperimentalCoroutinesApi
-    fun getTournamentsByMode(modeName: String)= getTournamentsByMode
-        .buildAction(modeName)
-        .map { Model(it.first, it.second) }
-        .onEach {
-            searchViewAdapter.addItem(it)
-        }
-        .launchIn(viewModelScope)
-
 
     data class Model(
         val tournamentEntity: TournamentEntity,
@@ -65,9 +51,19 @@ class SearchViewModel(
             view, adapter
         ) {
             fun render(data: TournamentEntity, count: Int){
-
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
 
         }
     }
+
+
+    @ExperimentalCoroutinesApi
+    fun getTournamentsByMode(modeName: String) = getTournamentsByMode
+        .buildAction(modeName)
+        .map { Model(it.first, it.second) }
+        .onEach {
+            searchViewAdapter.addItem(it)
+        }
+        .launchIn(viewModelScope)
 }

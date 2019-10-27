@@ -4,28 +4,25 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import com.example.myapplication.R
+import com.example.myapplication.ui.BaseFragment
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-class UserProfileFragment : Fragment() {
+class UserProfileFragment : BaseFragment() {
 
-    private lateinit var userProfileViewModel: UserProfileViewModel
+    private val viewModel: UserProfileViewModel by viewModelInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        userProfileViewModel =
-            ViewModelProviders.of(this).get(UserProfileViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_notifications, container, false)
-        val textView: TextView = root.findViewById(R.id.text_notifications)
-        userProfileViewModel.text.observe(this, Observer {
-            textView.text = it
-        })
-        return root
+    ) = inflater.inflate(R.layout.fragment_search, container, false)!!
+
+    @ExperimentalCoroutinesApi
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+//        tournaments_rv.adapter = viewModel.adapter
+//        viewModel.getTournamentsByMode("F4A")
     }
 }

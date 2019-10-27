@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.entities.MatchEntity
-import com.example.myapplication.ui.search.SearchViewModel
 import com.example.myapplication.usecases.game.CreateGameUseCase
 import com.example.myapplication.usecases.game.GetGamesByMode
 import com.example.myapplication.usecases.game.GetGamesContainingName
@@ -27,6 +26,7 @@ import com.example.myapplication.utils.DummyClasses
 import eu.davidea.flexibleadapter.FlexibleAdapter
 import eu.davidea.flexibleadapter.items.AbstractFlexibleItem
 import eu.davidea.flexibleadapter.items.IFlexible
+import eu.davidea.viewholders.FlexibleViewHolder
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.InternalCoroutinesApi
@@ -65,14 +65,36 @@ class HomeViewModel(
     val adapter
         get() = homeViewAdapter as RecyclerView.Adapter<*>
 
-    @InternalCoroutinesApi
-    fun getGamesByMode() = viewModelScope.launch {
-        getGamesByMode.buildAction(DummyClasses.game.availableModes[0])
+    data class Model(val matchEntity: MatchEntity, val registeredPlayer: Int) :
+        AbstractFlexibleItem<Model.ViewHolder>() {
+        override fun bindViewHolder(
+            adapter: FlexibleAdapter<IFlexible<RecyclerView.ViewHolder>>,
+            holder: ViewHolder,
+            position: Int,
+            payloads: MutableList<Any>
+        ) {
+            holder.render(matchEntity, registeredPlayer)
+        }
+
+        override fun createViewHolder(
+            view: View,
+            adapter: FlexibleAdapter<IFlexible<RecyclerView.ViewHolder>>
+        ) = ViewHolder(view, adapter)
+
+        override fun getLayoutRes(): Int {
+            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        }
+
+        class ViewHolder(val view: View, val adapter: FlexibleAdapter<*>) : FlexibleViewHolder(
+            view, adapter
+        ) {
+            fun render(data: MatchEntity, registeredPlayer: Int) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+
+        }
     }
 
-    fun getGamesContainingName() = viewModelScope.launch {
-        getGamesContainingName.buildAction(DummyClasses.game.name)
-    }
 
     @ExperimentalCoroutinesApi
     fun getAllAvailableMatches() =
@@ -83,34 +105,19 @@ class HomeViewModel(
             }
             .launchIn(viewModelScope)
 
+    @InternalCoroutinesApi
+    fun getGamesByMode() = viewModelScope.launch {
+        getGamesByMode.buildAction(DummyClasses.game.availableModes[0])
+    }
+
+    fun getGamesContainingName() = viewModelScope.launch {
+        getGamesContainingName.buildAction(DummyClasses.game.name)
+    }
+
 
     @FlowPreview
     fun getMatchesByUser() = viewModelScope.launch {
         getAllMatchesByUser.buildAction()
-    }
-
-
-    data class Model(val matchEntity: MatchEntity, val registeredPlayer: Int) :
-        AbstractFlexibleItem<SearchViewModel.Model.ViewHolder>() {
-        override fun bindViewHolder(
-            adapter: FlexibleAdapter<IFlexible<RecyclerView.ViewHolder>>?,
-            holder: SearchViewModel.Model.ViewHolder?,
-            position: Int,
-            payloads: MutableList<Any>?
-        ) {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
-
-        override fun createViewHolder(
-            view: View?,
-            adapter: FlexibleAdapter<IFlexible<RecyclerView.ViewHolder>>?
-        ): SearchViewModel.Model.ViewHolder {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
-
-        override fun getLayoutRes(): Int {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
     }
 
     @FlowPreview
@@ -172,11 +179,21 @@ class HomeViewModel(
     }
 
     fun createGame() = viewModelScope.launch {
-        createGame.buildAction(DummyClasses.game.name, DummyClasses.game.availableModes, "image", "icon")
+        createGame.buildAction(
+            DummyClasses.game.name,
+            DummyClasses.game.availableModes,
+            "image",
+            "icon"
+        )
     }
 
     fun createUser() = viewModelScope.launch {
-        createUser.buildAction(DummyClasses.user.email, "PWD", DummyClasses.user.nickname, DummyClasses.user.image)
+        createUser.buildAction(
+            DummyClasses.user.email,
+            "PWD",
+            DummyClasses.user.nickname,
+            DummyClasses.user.image
+        )
     }
 
     fun createTournament() = viewModelScope.launch {

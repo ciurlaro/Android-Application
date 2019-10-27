@@ -11,7 +11,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 class SearchFragment : BaseFragment() {
 
-    private val searchViewModel: SearchViewModel by viewModelInstance()
+    private val viewModel: SearchViewModel by viewModelInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,8 +23,8 @@ class SearchFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        tournaments_rv.adapter = searchViewModel.adapter
-        searchViewModel.getTournamentsByMode("F4A")
+        tournaments_rv.adapter = viewModel.adapter
+        viewModel.getTournamentsByMode("F4A")
     }
 
 
