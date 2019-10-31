@@ -32,7 +32,9 @@ val nodePackagesCopyTask by tasks.register<Copy>("copyNodePackagesFromSubproject
 }
 
 tasks.register<Zip>("zipNodePackages") {
-    dependsOn(tasks.named("build"))
+    subprojects {
+        tasks.findByName("jsJar")?.let { dependsOn(it) }
+    }
     from("$buildDir/js") {
         include("*")
         include("**/*")

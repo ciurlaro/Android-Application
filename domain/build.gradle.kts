@@ -20,6 +20,7 @@ kotlin {
         val kotlinVersion: String by project
         val coroutinesVersion: String by project
         val klockVersion: String by project
+        val rxjsVersion: String by project
 
         val commonMain by getting {
             dependencies {
@@ -43,6 +44,7 @@ kotlin {
                 api(kotlin("stdlib-js", kotlinVersion))
                 api("com.soywiz.korlibs.klock:klock-js:$klockVersion")
                 api("org.jetbrains.kotlinx:kotlinx-coroutines-core-js:$coroutinesVersion")
+                api(npm("rxjs", rxjsVersion))
             }
         }
 

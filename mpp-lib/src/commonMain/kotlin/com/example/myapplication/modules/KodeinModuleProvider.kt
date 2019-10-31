@@ -24,5 +24,9 @@ fun KodeinModuleProvider.getModule() =
 fun Kodein.MainBuilder.import(
     moduleProvider: KodeinModuleProvider,
     allowOverride: Boolean = false
-) =
-    import(moduleProvider.getModule(), allowOverride)
+) = import(moduleProvider.getModule(), allowOverride)
+
+fun Kodein.Builder.import(
+    moduleProvider: KodeinModuleProvider,
+    allowOverride: Boolean = false
+) = import(moduleProvider.getModule(), allowOverride)
