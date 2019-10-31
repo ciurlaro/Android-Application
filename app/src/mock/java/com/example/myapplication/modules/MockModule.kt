@@ -145,11 +145,11 @@ object MockModule : KodeinModuleProvider {
                 R.raw.multiple_tournaments_response,
                 res
             )
-            "/tournament/search/byMode?tournamentMode=Free4All&page=0" -> respondJsonFromRawResources(
+            "/tournament/search/byMode?tournamentMode=F4A&page=0" -> respondJsonFromRawResources(
                 R.raw.multiple_tournaments_response,
                 res
             )
-            "/tournament/search/byMode?tournamentMode=Free4All&page=1" -> respondJsonFromRawResources(
+            "/tournament/search/byMode?tournamentMode=F4A&page=1" -> respondJsonFromRawResources(
                 R.raw.multiple_tournaments_response,
                 res
             )
@@ -191,6 +191,14 @@ object MockModule : KodeinModuleProvider {
                 res
             )
             "/match/search/byTournamentId?tournamentId=42&page=1" -> respondJsonFromRawResources(
+                R.raw.multiple_matches_response,
+                res
+            )
+            "/match/search/byTournamentId?tournamentId=1&page=0" -> respondJsonFromRawResources(
+                R.raw.multiple_matches_response,
+                res
+            )
+            "/match/search/byTournamentId?tournamentId=1&page=1" -> respondJsonFromRawResources(
                 R.raw.multiple_matches_response,
                 res
             )

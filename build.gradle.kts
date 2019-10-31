@@ -32,10 +32,16 @@ val nodePackagesCopyTask by tasks.register<Copy>("copyNodePackagesFromSubproject
 }
 
 tasks.register<Zip>("zipNodePackages") {
-    dependsOn(nodePackagesCopyTask)
-    from(nodePackagesCopyTask.destinationDir)
-    include("")
-    include("/*")
-    archiveBaseName.set("zipNodePackages")
+    dependsOn(tasks.named("build"))
+    from("$buildDir/js") {
+        include("*")
+        include("**/*")
+        exclude("node_modules")
+        exclude("node_modules.state")
+        exclude("yarn.lock")
+        exclude("*/.visited")
+
+    }
+    archiveBaseName.set("node_package")
     destinationDirectory.set(buildDir)
 }

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:layout_width="370dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="30dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/white"
+        android:hint="@string/email_hint"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"/>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:layout_width="370dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="30dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/white"
+        android:hint="@string/nickname_hint"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"/>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:layout_width="370dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="30dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/white"
+        android:inputType="textPassword"
+        android:hint="@string/pwd_hint"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"/>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:layout_width="370dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="30dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/white"
+        android:inputType="textPassword"
+        android:hint="@string/pwd_conf_hint"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"/>
+
+</LinearLayout>

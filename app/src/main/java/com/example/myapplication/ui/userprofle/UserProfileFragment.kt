@@ -16,7 +16,7 @@ class UserProfileFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = inflater.inflate(R.layout.fragment_search, container, false)!!
+    ) = inflater.inflate(R.layout.fragment_user, container, false)!!
 
     @ExperimentalCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

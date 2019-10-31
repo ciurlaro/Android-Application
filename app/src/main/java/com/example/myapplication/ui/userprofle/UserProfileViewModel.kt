@@ -64,7 +64,4 @@ class UserProfileViewModel(
             userProfileViewAdapter.addItem(it)
         }
         .launchIn(viewModelScope)
-
-    // porcata giusto per mettere un metodo. Ho messo suspend altrimenti non compilava
-
 }

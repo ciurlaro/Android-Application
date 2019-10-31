@@ -96,6 +96,7 @@ data class EndpointsImplementation(
             parametersOf("title" to query, "page" to page)
         )
 
+    //TODO: to implement server side
     override fun getShowCaseTournaments(page: Int) =
         buildUrl("/tournament/search/byShowCase", parametersOf("page" to page))
 

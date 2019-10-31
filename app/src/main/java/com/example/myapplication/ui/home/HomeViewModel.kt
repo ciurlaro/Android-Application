@@ -1,9 +1,11 @@
 package com.example.myapplication.ui.home
 
+import android.annotation.SuppressLint
 import android.view.View
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.R
 import com.example.myapplication.entities.MatchEntity
 import com.example.myapplication.usecases.game.CreateGameUseCase
 import com.example.myapplication.usecases.game.GetGamesByMode
@@ -22,18 +24,15 @@ import com.example.myapplication.usecases.user.CreateUserUseCase
 import com.example.myapplication.usecases.user.GetAccountVerificationStatusUseCase
 import com.example.myapplication.usecases.user.GetSubscribedAccountUseCase
 import com.example.myapplication.usecases.user.GetUserInfoUseCase
-import com.example.myapplication.utils.DummyClasses
 import eu.davidea.flexibleadapter.FlexibleAdapter
 import eu.davidea.flexibleadapter.items.AbstractFlexibleItem
 import eu.davidea.flexibleadapter.items.IFlexible
 import eu.davidea.viewholders.FlexibleViewHolder
+import kotlinx.android.synthetic.main.item_match.view.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
 
 class HomeViewModel(
     private val getGamesByMode: GetGamesByMode,
@@ -74,6 +73,7 @@ class HomeViewModel(
             payloads: MutableList<Any>
         ) {
             holder.render(matchEntity, registeredPlayer)
+
         }
 
         override fun createViewHolder(
@@ -81,143 +81,172 @@ class HomeViewModel(
             adapter: FlexibleAdapter<IFlexible<RecyclerView.ViewHolder>>
         ) = ViewHolder(view, adapter)
 
-        override fun getLayoutRes(): Int {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
+        override fun getLayoutRes() = R.layout.item_match
 
         class ViewHolder(val view: View, val adapter: FlexibleAdapter<*>) : FlexibleViewHolder(
             view, adapter
         ) {
+            @SuppressLint("SetTextI18n")
             fun render(data: MatchEntity, registeredPlayer: Int) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                view.game_image.setImageResource(R.drawable.doggo)
+                view.game_icon.setImageResource(R.drawable.wow)
+                view.tournament_name.text = data.tournament.title
+
+                val matchInfo = "${data.matchDateTime}".split("T")
+                view.match_date.text = matchInfo[0]
+                view.match_time.text = matchInfo[1]
+
+                view.match_players.text = "$registeredPlayer|2"
+                //view.match_players.text = Resources.getSystem().getString(R.string.players_number_text, registeredPlayer, 2)
+                view.game_name.text = data.tournament.game.name
             }
 
         }
     }
 
-
     @ExperimentalCoroutinesApi
     fun getAllAvailableMatches() =
         getAllAvailableMatches.buildAction()
-            .map { Model(it.first, it.second) }
+            .map {
+                Model(it.first, it.second) }
             .onEach {
                 homeViewAdapter.addItem(it)
             }
             .launchIn(viewModelScope)
 
-    @InternalCoroutinesApi
+    /**fun getShowcaseTournaments() =
+        getShowcaseTournaments.buildAction()
+            .map {
+
+            }
+            .onEach {
+                homeViewAdapter.addItem(it)
+            }
+            .launchIn(viewModelScope)*/
+
+    /** @ExperimentalCoroutinesApi
+    fun getAllAvailableMatches() =
+    getAllAvailableMatches.buildAction()
+    .map {
+    Model(it.first, it.second) }
+    .onEach {
+    homeViewAdapter.addItem(it)
+    }
+    .launchIn(viewModelScope)*/
+
+    /**@InternalCoroutinesApi
     fun getGamesByMode() = viewModelScope.launch {
-        getGamesByMode.buildAction(DummyClasses.game.availableModes[0])
+    getGamesByMode.buildAction(DummyClasses.game.availableModes[0])
     }
 
     fun getGamesContainingName() = viewModelScope.launch {
-        getGamesContainingName.buildAction(DummyClasses.game.name)
+    getGamesContainingName.buildAction(DummyClasses.game.name)
     }
 
 
     @FlowPreview
     fun getMatchesByUser() = viewModelScope.launch {
-        getAllMatchesByUser.buildAction()
+    getAllMatchesByUser.buildAction()
     }
 
     @FlowPreview
     fun getMatchesByTournament() = viewModelScope.launch {
-        getMatchesByTournament.buildAction(DummyClasses.tournament)
+    getMatchesByTournament.buildAction(DummyClasses.tournament)
     }
 
     @FlowPreview
     fun getRegistrationsByMatch() = viewModelScope.launch {
-        getRegistrationsByMatch.buildAction(DummyClasses.match)
+    getRegistrationsByMatch.buildAction(DummyClasses.match)
     }
 
     fun getRegistrationByTournament() = viewModelScope.launch {
-        getRegistrationsByTournament.buildAction(DummyClasses.tournament)
+    getRegistrationsByTournament.buildAction(DummyClasses.tournament)
     }
 
     @FlowPreview
     fun getRegistrationsByUser() = viewModelScope.launch {
-        getRegistrationsByUser.buildAction(DummyClasses.user)
+    getRegistrationsByUser.buildAction(DummyClasses.user)
     }
 
     @FlowPreview
     fun getTournamentsByAdmin() = viewModelScope.launch {
-        getCreatedTournamentsByAdmin.buildAction()
+    getCreatedTournamentsByAdmin.buildAction()
     }
 
     fun getShowcaseTournaments() = viewModelScope.launch {
-        getShowcaseTournaments.buildAction()
+    getShowcaseTournaments.buildAction()
     }
 
     @FlowPreview
     fun getTournamentsByGame() = viewModelScope.launch {
-        getTournamentsByGame.buildAction(DummyClasses.game)
+    getTournamentsByGame.buildAction(DummyClasses.game)
     }
 
     fun getTournamentsByMode() = viewModelScope.launch {
-        getTournamentsByMode.buildAction(DummyClasses.game.availableModes[0])
+    getTournamentsByMode.buildAction(DummyClasses.game.availableModes[0])
     }
 
     @FlowPreview
     fun getTournamentsContainingTitle() = viewModelScope.launch {
-        getTournamentsContainingTitle.buildAction(DummyClasses.tournament.title)
+    getTournamentsContainingTitle.buildAction(DummyClasses.tournament.title)
     }
 
     fun getUserInformation() = viewModelScope.launch {
-        getUserInfo.buildAction()
+    getUserInfo.buildAction()
     }
 
     fun isAccountVerified() = viewModelScope.launch {
-        isAccountVerified.buildAction()
+    isAccountVerified.buildAction()
     }
 
     fun isSubscribedAccount() = viewModelScope.launch {
-        isSubscribedAccount.buildAction()
+    isSubscribedAccount.buildAction()
     }
 
     fun createGameMode() = viewModelScope.launch {
-        createGameMode.buildAction("S&D")
+    createGameMode.buildAction("S&D")
     }
 
     fun createGame() = viewModelScope.launch {
-        createGame.buildAction(
-            DummyClasses.game.name,
-            DummyClasses.game.availableModes,
-            "image",
-            "icon"
-        )
+    createGame.buildAction(
+    DummyClasses.game.name,
+    DummyClasses.game.availableModes,
+    "image",
+    "icon"
+    )
     }
 
     fun createUser() = viewModelScope.launch {
-        createUser.buildAction(
-            DummyClasses.user.email,
-            "PWD",
-            DummyClasses.user.nickname,
-            DummyClasses.user.image
-        )
+    createUser.buildAction(
+    DummyClasses.user.email,
+    "PWD",
+    DummyClasses.user.nickname,
+    DummyClasses.user.image
+    )
     }
 
     fun createTournament() = viewModelScope.launch {
-        createTournament.buildAction(
-            DummyClasses.tournament.playersNumber,
-            DummyClasses.tournament.title,
-            DummyClasses.tournament.tournamentDescription,
-            DummyClasses.tournament.tournamentMode,
-            DummyClasses.tournament.admin,
-            DummyClasses.game
-        )
+    createTournament.buildAction(
+    DummyClasses.tournament.playersNumber,
+    DummyClasses.tournament.title,
+    DummyClasses.tournament.tournamentDescription,
+    DummyClasses.tournament.tournamentMode,
+    DummyClasses.tournament.admin,
+    DummyClasses.game
+    )
     }
 
     fun createMatch() = viewModelScope.launch {
-        createMatch.buildAction(
-            DummyClasses.match.matchDateTime,
-            DummyClasses.match.playersCount,
-            DummyClasses.match.isRegistrationPossible,
-            DummyClasses.tournament
-        )
+    createMatch.buildAction(
+    DummyClasses.match.matchDateTime,
+    DummyClasses.match.playersCount,
+    DummyClasses.match.isRegistrationPossible,
+    DummyClasses.tournament
+    )
     }
 
     fun createRegistration() = viewModelScope.launch {
-        createRegistration.buildAction(DummyClasses.user, DummyClasses.match)
-    }
+    createRegistration.buildAction(DummyClasses.user, DummyClasses.match)
+    }*/
 
 }

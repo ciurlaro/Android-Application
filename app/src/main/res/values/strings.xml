@@ -22,4 +22,22 @@
     <string name="date_text">Date: %1$s</string>
     <string name="time_text">Time: %1$s</string>
     <string name="players_text_fraction">%1$d/%2$d</string>
+
+    <string name="players_number_text">%1$d|%2$d</string>
+    <string name="sign_in">SIGN IN</string>
+    <string name="sign_up">SIGN UP</string>
+    <string name="boh">BOH</string>
+
+    <string name="email_hint">Email</string>
+    <string name="nickname_hint">Nickname</string>
+    <string name="pwd_hint">Password</string>
+    <string name="pwd_conf_hint">Confirm Password</string>
+
+    <string name="nickname">User Nickname</string>
+    <string name="subs">Subscriber</string>
+    <string name="verified">Verified</string>
+    <string name="new_tournament">New tournament</string>
+    <string name="update_info">Update Info</string>
+    <string name="logout">Logout</string>
+
 </resources>
