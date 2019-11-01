@@ -5,9 +5,9 @@ import com.example.myapplication.repositories.ArenaTournamentRepository
 import com.example.myapplication.usecases.UseCaseWithParams
 import kotlinx.coroutines.flow.Flow
 
-class GetTournamentsByModePerPage(
+class GetTournamentsByModePerPageUseCase(
     private val repository: ArenaTournamentRepository
-) : UseCaseWithParams<GetTournamentsByModePerPage.Params, Flow<TournamentEntity>> {
+) : UseCaseWithParams<GetTournamentsByModePerPageUseCase.Params, Flow<TournamentEntity>> {
 
     override fun buildAction(params: Params) =
         repository.getTournamentsByMode(params.mode, params.page)

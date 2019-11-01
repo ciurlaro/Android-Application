@@ -4,10 +4,11 @@ import com.example.myapplication.usecases.JsUseCasePromise
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.promise
 
-class JsGetAccountVerificationStatusUseCase(
-    override val useCase: GetAccountVerificationStatusUseCase
+class JsGetAccountVerificationStatus(
+    override val usecase: GetAccountVerificationStatusUseCase
 ) : JsUseCasePromise<GetAccountVerificationStatusUseCase, Boolean> {
+
     override fun buildAction() = GlobalScope.promise {
-        useCase.buildAction()
+        usecase.buildAction()
     }
 }

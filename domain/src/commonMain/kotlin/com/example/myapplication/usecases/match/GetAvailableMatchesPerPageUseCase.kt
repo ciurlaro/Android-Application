@@ -5,9 +5,9 @@ import com.example.myapplication.repositories.ArenaTournamentRepository
 import com.example.myapplication.usecases.UseCaseWithParams
 import kotlinx.coroutines.flow.Flow
 
-class GetAvailableMatchesPerPage(
+class GetAvailableMatchesPerPageUseCase(
     private val repository: ArenaTournamentRepository
-) : UseCaseWithParams<GetAvailableMatchesPerPage.Params, Flow<MatchEntity>> {
+) : UseCaseWithParams<GetAvailableMatchesPerPageUseCase.Params, Flow<MatchEntity>> {
 
     override fun buildAction(params: Params) =
         repository.getMatchesAvailable(params.page)

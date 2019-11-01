@@ -8,22 +8,22 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.flatMapConcat
 
-class GetShowCaseTournaments(
+class GetTournamentsContainingTitleUseCase(
     private val repository: ArenaTournamentRepository
-) : UseCaseWithParams<GetShowCaseTournaments.Params, Flow<TournamentEntity>> {
+) : UseCaseWithParams<GetTournamentsContainingTitleUseCase.Params, Flow<TournamentEntity>> {
 
-    @UseExperimental(FlowPreview::class)
+    @FlowPreview
     override fun buildAction(params: Params) =
         (0 until params.maxPage)
             .asFlow()
             .flatMapConcat {
-                repository.getShowCaseTournaments(it)
+                repository.getTournamentsContainingTitle(params.title, it)
             }
 
+    @FlowPreview
+    fun buildAction(title: String, maxPage: Int = 1) =
+        buildAction(Params(title, maxPage))
 
-    fun buildAction(maxPage: Int = 1) =
-        buildAction(Params(maxPage))
-
-    data class Params(val maxPage: Int = 1)
+    data class Params(val title: String, val maxPage: Int = 1)
 
 }

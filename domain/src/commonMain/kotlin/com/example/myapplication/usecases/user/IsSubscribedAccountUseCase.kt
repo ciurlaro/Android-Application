@@ -4,7 +4,7 @@ import com.example.myapplication.repositories.ArenaTournamentRepository
 import com.example.myapplication.usecases.UseCaseSuspending
 import kotlinx.coroutines.FlowPreview
 
-class GetSubscribedAccountUseCase(
+class IsSubscribedAccountUseCase(
     private val repository: ArenaTournamentRepository
 ) : UseCaseSuspending<Boolean> {
 

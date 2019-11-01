@@ -9,9 +9,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.flatMapConcat
 
-class GetAllRegistrationsByMatch(
+class GetAllRegistrationsByMatchUseCase(
     private val repository: ArenaTournamentRepository
-) : UseCaseWithParams<GetAllRegistrationsByMatch.Params, Flow<RegistrationEntity>> {
+) : UseCaseWithParams<GetAllRegistrationsByMatchUseCase.Params, Flow<RegistrationEntity>> {
 
     @FlowPreview
     override fun buildAction(params: Params) =

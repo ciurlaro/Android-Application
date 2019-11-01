@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.entities.TournamentEntity
-import com.example.myapplication.usecases.tournament.GetTournamentsByMode
+import com.example.myapplication.usecases.tournament.GetTournamentsByModeUseCase
 import eu.davidea.flexibleadapter.FlexibleAdapter
 import eu.davidea.flexibleadapter.items.AbstractFlexibleItem
 import eu.davidea.flexibleadapter.items.IFlexible
@@ -16,7 +16,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 
 class SearchViewModel(
-    private val getTournamentsByMode: GetTournamentsByMode
+    private val getTournamentsByModeUseCase: GetTournamentsByModeUseCase
 ) : ViewModel() {
 
     private val searchViewAdapter = FlexibleAdapter<Model>(emptyList())
@@ -59,7 +59,7 @@ class SearchViewModel(
 
 
     @ExperimentalCoroutinesApi
-    fun getTournamentsByMode(modeName: String) = getTournamentsByMode
+    fun getTournamentsByMode(modeName: String) = getTournamentsByModeUseCase
         .buildAction(modeName)
         .map { Model(it.first, it.second) }
         .onEach {

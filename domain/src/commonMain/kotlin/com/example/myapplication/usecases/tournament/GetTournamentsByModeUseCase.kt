@@ -2,25 +2,25 @@ package com.example.myapplication.usecases.tournament
 
 import com.example.myapplication.entities.TournamentEntity
 import com.example.myapplication.usecases.UseCaseWithParams
-import com.example.myapplication.usecases.match.GetMatchesByTournament
+import com.example.myapplication.usecases.match.GetMatchesByTournamentUseCase
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
 
-class GetTournamentsByMode(
-    private val getTournamentsByModePerPage: GetTournamentsByModePerPage,
-    private val getMatchesByTournament: GetMatchesByTournament
+class GetTournamentsByModeUseCase(
+    private val getTournamentsByModePerPageUseCase: GetTournamentsByModePerPageUseCase,
+    private val getMatchesByTournamentUseCase: GetMatchesByTournamentUseCase
 
-) : UseCaseWithParams<GetTournamentsByMode.Params, Flow<Pair<TournamentEntity, Int>>> {
+) : UseCaseWithParams<GetTournamentsByModeUseCase.Params, Flow<Pair<TournamentEntity, Int>>> {
 
     @UseExperimental(FlowPreview::class)
     override fun buildAction(params: Params) =
         (0 until params.maxPage)
             .asFlow()
             .flatMapConcat { page ->
-                getTournamentsByModePerPage.buildAction(
-                    GetTournamentsByModePerPage.Params(params.mode, page)
+                getTournamentsByModePerPageUseCase.buildAction(
+                    GetTournamentsByModePerPageUseCase.Params(params.mode, page)
                 ).map { tournament ->
-                    tournament to getMatchesByTournament.buildAction(tournament).toList()
+                    tournament to getMatchesByTournamentUseCase.buildAction(tournament).toList()
                         .sumBy { it.playersCount }
                 }
             }

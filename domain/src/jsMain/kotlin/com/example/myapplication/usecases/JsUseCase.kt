@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface JsUseCase<U : UseCase<Flow<T>>, T> {
 
-    val useCase: U
+    val usecase: U
 
     fun buildAction(): Observable<T>
 

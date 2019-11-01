@@ -1,18 +1,18 @@
 package com.example.myapplication.modules
 
 import com.example.myapplication.usecases.game.CreateGameUseCase
-import com.example.myapplication.usecases.game.GetGamesByMode
-import com.example.myapplication.usecases.game.GetGamesContainingName
+import com.example.myapplication.usecases.game.GetGamesByModeUseCase
+import com.example.myapplication.usecases.game.GetGamesContainingNameUseCase
 import com.example.myapplication.usecases.match.*
 import com.example.myapplication.usecases.mode.CreateGameModeUseCase
 import com.example.myapplication.usecases.registration.CreateRegistrationUseCase
-import com.example.myapplication.usecases.registration.GetAllRegistrationsByMatch
+import com.example.myapplication.usecases.registration.GetAllRegistrationsByMatchUseCase
 import com.example.myapplication.usecases.registration.GetRegistrationsByTournamentUseCase
-import com.example.myapplication.usecases.registration.GetRegistrationsByUser
+import com.example.myapplication.usecases.registration.GetRegistrationsByUserUseCase
 import com.example.myapplication.usecases.tournament.*
 import com.example.myapplication.usecases.user.CreateUserUseCase
 import com.example.myapplication.usecases.user.GetAccountVerificationStatusUseCase
-import com.example.myapplication.usecases.user.GetSubscribedAccountUseCase
+import com.example.myapplication.usecases.user.IsSubscribedAccountUseCase
 import com.example.myapplication.usecases.user.GetUserInfoUseCase
 import org.kodein.di.Kodein
 import org.kodein.di.erased.bind
@@ -21,13 +21,13 @@ import org.kodein.di.erased.singleton
 
 object UseCasesModule : KodeinModuleProvider {
     override fun provideModule(): Kodein.Builder.() -> Unit = {
-        bind<GetGamesByMode>() with singleton { GetGamesByMode(instance()) }
-        bind<GetGamesContainingName>() with singleton { GetGamesContainingName(instance()) }
-        bind<GetTournamentsByGame>() with singleton { GetTournamentsByGame(instance()) }
-        bind<GetTournamentsByMode>() with singleton { GetTournamentsByMode(instance(), instance()) }
-        bind<GetTournamentsByModePerPage>() with singleton { GetTournamentsByModePerPage(instance()) }
-        bind<GetTournamentsContainingTitle>() with singleton {
-            GetTournamentsContainingTitle(
+        bind<GetGamesByModeUseCase>() with singleton { GetGamesByModeUseCase(instance()) }
+        bind<GetGamesContainingNameUseCase>() with singleton { GetGamesContainingNameUseCase(instance()) }
+        bind<GetTournamentsByGameUseCase>() with singleton { GetTournamentsByGameUseCase(instance()) }
+        bind<GetTournamentsByModeUseCase>() with singleton { GetTournamentsByModeUseCase(instance(), instance()) }
+        bind<GetTournamentsByModePerPageUseCase>() with singleton { GetTournamentsByModePerPageUseCase(instance()) }
+        bind<GetTournamentsContainingTitleUseCase>() with singleton {
+            GetTournamentsContainingTitleUseCase(
                 instance()
             )
         }
@@ -43,24 +43,24 @@ object UseCasesModule : KodeinModuleProvider {
                 instance()
             )
         }
-        bind<GetCreatedTournamentsByAdmin>() with singleton {
-            GetCreatedTournamentsByAdmin(
+        bind<GetCreatedTournamentsByAdminUseCase>() with singleton {
+            GetCreatedTournamentsByAdminUseCase(
                 instance(),
                 instance()
             )
         }
-        bind<GetAvailableMatchesPerPage>() with singleton { GetAvailableMatchesPerPage(instance()) }
+        bind<GetAvailableMatchesPerPageUseCase>() with singleton { GetAvailableMatchesPerPageUseCase(instance()) }
         bind<GetUserInfoUseCase>() with singleton { GetUserInfoUseCase(instance()) }
         bind<GetAccountVerificationStatusUseCase>() with singleton {
             GetAccountVerificationStatusUseCase(
                 instance()
             )
         }
-        bind<GetSubscribedAccountUseCase>() with singleton { GetSubscribedAccountUseCase(instance()) }
-        bind<GetShowCaseTournaments>() with singleton { GetShowCaseTournaments(instance()) }
-        bind<GetMatchesByTournament>() with singleton { GetMatchesByTournament(instance()) }
-        bind<GetAllRegistrationsByMatch>() with singleton { GetAllRegistrationsByMatch(instance()) }
-        bind<GetRegistrationsByUser>() with singleton { GetRegistrationsByUser(instance()) }
+        bind<IsSubscribedAccountUseCase>() with singleton { IsSubscribedAccountUseCase(instance()) }
+        bind<GetShowCaseTournamentsUseCase>() with singleton { GetShowCaseTournamentsUseCase(instance()) }
+        bind<GetMatchesByTournamentUseCase>() with singleton { GetMatchesByTournamentUseCase(instance()) }
+        bind<GetAllRegistrationsByMatchUseCase>() with singleton { GetAllRegistrationsByMatchUseCase(instance()) }
+        bind<GetRegistrationsByUserUseCase>() with singleton { GetRegistrationsByUserUseCase(instance()) }
         bind<GetRegistrationsByTournamentUseCase>() with singleton {
             GetRegistrationsByTournamentUseCase(
                 instance(),

@@ -8,21 +8,21 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 import com.example.myapplication.entities.MatchEntity
 import com.example.myapplication.usecases.game.CreateGameUseCase
-import com.example.myapplication.usecases.game.GetGamesByMode
-import com.example.myapplication.usecases.game.GetGamesContainingName
+import com.example.myapplication.usecases.game.GetGamesByModeUseCase
+import com.example.myapplication.usecases.game.GetGamesContainingNameUseCase
 import com.example.myapplication.usecases.match.CreateMatchUseCase
 import com.example.myapplication.usecases.match.GetAllAvailableMatchesUseCase
 import com.example.myapplication.usecases.match.GetAllMatchesByUserUseCase
-import com.example.myapplication.usecases.match.GetMatchesByTournament
+import com.example.myapplication.usecases.match.GetMatchesByTournamentUseCase
 import com.example.myapplication.usecases.mode.CreateGameModeUseCase
 import com.example.myapplication.usecases.registration.CreateRegistrationUseCase
-import com.example.myapplication.usecases.registration.GetAllRegistrationsByMatch
+import com.example.myapplication.usecases.registration.GetAllRegistrationsByMatchUseCase
 import com.example.myapplication.usecases.registration.GetRegistrationsByTournamentUseCase
-import com.example.myapplication.usecases.registration.GetRegistrationsByUser
+import com.example.myapplication.usecases.registration.GetRegistrationsByUserUseCase
 import com.example.myapplication.usecases.tournament.*
 import com.example.myapplication.usecases.user.CreateUserUseCase
 import com.example.myapplication.usecases.user.GetAccountVerificationStatusUseCase
-import com.example.myapplication.usecases.user.GetSubscribedAccountUseCase
+import com.example.myapplication.usecases.user.IsSubscribedAccountUseCase
 import com.example.myapplication.usecases.user.GetUserInfoUseCase
 import eu.davidea.flexibleadapter.FlexibleAdapter
 import eu.davidea.flexibleadapter.items.AbstractFlexibleItem
@@ -35,22 +35,22 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 
 class HomeViewModel(
-    private val getGamesByMode: GetGamesByMode,
-    private val getGamesContainingName: GetGamesContainingName,
+    private val getGamesByModeUseCase: GetGamesByModeUseCase,
+    private val getGamesContainingNameUseCase: GetGamesContainingNameUseCase,
     private val getAllAvailableMatches: GetAllAvailableMatchesUseCase,
     private val getAllMatchesByUser: GetAllMatchesByUserUseCase,
     private val getUserInfo: GetUserInfoUseCase,
-    private val getCreatedTournamentsByAdmin: GetCreatedTournamentsByAdmin,
-    private val getShowcaseTournaments: GetShowCaseTournaments,
+    private val getCreatedTournamentsByAdmin: GetCreatedTournamentsByAdminUseCase,
+    private val getShowcaseTournamentsUseCase: GetShowCaseTournamentsUseCase,
     private val getRegistrationsByTournament: GetRegistrationsByTournamentUseCase,
-    private val getTournamentsByGame: GetTournamentsByGame,
-    private val getTournamentsByMode: GetTournamentsByMode,
-    private val getTournamentsContainingTitle: GetTournamentsContainingTitle,
-    private val getRegistrationsByMatch: GetAllRegistrationsByMatch,
-    private val getRegistrationsByUser: GetRegistrationsByUser,
-    private val getMatchesByTournament: GetMatchesByTournament,
+    private val getTournamentsByGameUseCase: GetTournamentsByGameUseCase,
+    private val getTournamentsByModeUseCase: GetTournamentsByModeUseCase,
+    private val getTournamentsContainingTitleUseCase: GetTournamentsContainingTitleUseCase,
+    private val getRegistrationsByMatchUseCase: GetAllRegistrationsByMatchUseCase,
+    private val getRegistrationsByUserUseCase: GetRegistrationsByUserUseCase,
+    private val getMatchesByTournamentUseCase: GetMatchesByTournamentUseCase,
     private val isAccountVerified: GetAccountVerificationStatusUseCase,
-    private val isSubscribedAccount: GetSubscribedAccountUseCase,
+    private val isSubscribedAccount: IsSubscribedAccountUseCase,
     private val createUser: CreateUserUseCase,
     private val createGameMode: CreateGameModeUseCase,
     private val createGame: CreateGameUseCase,
@@ -83,7 +83,7 @@ class HomeViewModel(
 
         override fun getLayoutRes() = R.layout.item_match
 
-        class ViewHolder(val view: View, val adapter: FlexibleAdapter<*>) : FlexibleViewHolder(
+        class ViewHolder(val view: View, private val adapter: FlexibleAdapter<*>) : FlexibleViewHolder(
             view, adapter
         ) {
             @SuppressLint("SetTextI18n")

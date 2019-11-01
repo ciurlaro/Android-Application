@@ -1,6 +1,5 @@
-package com.example.myapplication.usecases.match
+package com.example.myapplication.usecases.tournament
 
-import com.example.myapplication.entities.MatchEntity
 import com.example.myapplication.entities.TournamentEntity
 import com.example.myapplication.repositories.ArenaTournamentRepository
 import com.example.myapplication.usecases.UseCaseWithParams
@@ -9,22 +8,22 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.flatMapConcat
 
-class GetMatchesByTournament(
+class GetShowCaseTournamentsUseCase(
     private val repository: ArenaTournamentRepository
-) : UseCaseWithParams<GetMatchesByTournament.Params, Flow<MatchEntity>> {
+) : UseCaseWithParams<GetShowCaseTournamentsUseCase.Params, Flow<TournamentEntity>> {
 
-    @FlowPreview
+    @UseExperimental(FlowPreview::class)
     override fun buildAction(params: Params) =
         (0 until params.maxPage)
             .asFlow()
             .flatMapConcat {
-                repository.getMatchesByTournament(params.tournament.id, it)
+                repository.getShowCaseTournaments(it)
             }
 
-    @FlowPreview
-    fun buildAction(tournament: TournamentEntity, page: Int = 1) =
-        buildAction(Params(tournament, page))
 
-    data class Params(val tournament: TournamentEntity, val maxPage: Int = 1)
+    fun buildAction(maxPage: Int = 1) =
+        buildAction(Params(maxPage))
+
+    data class Params(val maxPage: Int = 1)
 
 }

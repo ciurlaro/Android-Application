@@ -4,7 +4,7 @@ import kotlin.js.Promise
 
 interface JsUseCaseWithParamsPromise<U : UseCaseWithParamSuspending<P, T>, P, T> {
 
-    val useCase: U
+    val usecase: U
 
     fun buildAction(params: P): Promise<T>
 

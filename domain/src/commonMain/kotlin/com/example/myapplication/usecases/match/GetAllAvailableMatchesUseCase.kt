@@ -2,13 +2,13 @@ package com.example.myapplication.usecases.match
 
 import com.example.myapplication.entities.MatchEntity
 import com.example.myapplication.usecases.UseCaseWithParams
-import com.example.myapplication.usecases.registration.GetAllRegistrationsByMatch
+import com.example.myapplication.usecases.registration.GetAllRegistrationsByMatchUseCase
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
 
 class GetAllAvailableMatchesUseCase(
-    private val getAvailableMatchesPerPage: GetAvailableMatchesPerPage,
-    private val getAllRegistrationsByMatch: GetAllRegistrationsByMatch
+    private val getAvailableMatchesPerPageUseCase: GetAvailableMatchesPerPageUseCase,
+    private val getAllRegistrationsByMatchUseCase: GetAllRegistrationsByMatchUseCase
 ) : UseCaseWithParams<GetAllAvailableMatchesUseCase.Params, Flow<Pair<MatchEntity, Int>>> {
 
     @UseExperimental(FlowPreview::class)
@@ -16,9 +16,9 @@ class GetAllAvailableMatchesUseCase(
         (0 until params.pages)
             .asFlow()
             .flatMapConcat {
-                getAvailableMatchesPerPage.buildAction(it)
+                getAvailableMatchesPerPageUseCase.buildAction(it)
                     .map { match ->
-                        match to getAllRegistrationsByMatch.buildAction(match, it).toList().size
+                        match to getAllRegistrationsByMatchUseCase.buildAction(match, it).toList().size
                     }
             }
 

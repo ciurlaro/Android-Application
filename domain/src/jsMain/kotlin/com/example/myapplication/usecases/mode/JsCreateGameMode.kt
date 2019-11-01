@@ -5,10 +5,11 @@ import com.example.myapplication.usecases.JsUseCaseWithParamsPromise
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.promise
 
-class JsCreateGameModeUseCase(
-    override val useCase: CreateGameModeUseCase
+class JsCreateGameMode(
+    override val usecase: CreateGameModeUseCase
 ) : JsUseCaseWithParamsPromise<CreateGameModeUseCase, CreateGameModeUseCase.Params, ModeEntity> {
+
     override fun buildAction(params: CreateGameModeUseCase.Params) = GlobalScope.promise {
-        useCase.buildAction(params)
+        usecase.buildAction(params)
     }
 }
