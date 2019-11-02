@@ -10,8 +10,8 @@ class TournamentLinkMapper(
     private val port: Int
 ) : SingleToRemoteMapper<Url, Long> {
 
-    override fun toRemoteSingle(id: Long) =
-        Url(URLProtocol(protocol, port), host, port, "/tournament/$id",
+    override fun toRemoteSingle(entity: Long) =
+        Url(URLProtocol(protocol, port), host, port, "/tournament/$entity",
             io.ktor.http.parametersOf(), "", null, null, false)
 
 }

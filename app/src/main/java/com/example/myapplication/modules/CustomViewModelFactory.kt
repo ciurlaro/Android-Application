@@ -22,6 +22,8 @@ class CustomViewModelFactory(private val injector: DKodein) : ViewModelProvider.
         )
         SearchViewModel::class -> SearchViewModel(injector.instance())
         UserProfileViewModel::class -> UserProfileViewModel(injector.instance())
-        else -> throw IllegalArgumentException("${modelClass.canonicalName} has not been implemented in this factory")
+        else -> if (modelClass.kotlin.constructors.any { it.parameters.isEmpty() })
+            modelClass.kotlin.constructors.first { it.parameters.isEmpty() }.call()
+        else throw IllegalArgumentException("${modelClass.canonicalName} has not been implemented in this factory")
     } as T
 }

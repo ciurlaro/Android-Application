@@ -43,7 +43,6 @@ kotlin {
         val textEncodingVersion: String by project
 
         val commonMain by getting {
-            println(kotlin.srcDirs)
             dependencies {
                 api(project(":data"))
                 api(ktor("client-core", ktorVersion))

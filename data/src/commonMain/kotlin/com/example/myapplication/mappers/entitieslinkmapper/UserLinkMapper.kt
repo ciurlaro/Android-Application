@@ -10,8 +10,8 @@ class UserLinkMapper(
     private val port: Int
 ) : SingleToRemoteMapper<Url, String> {
 
-    override fun toRemoteSingle(id: String) =
-        Url(URLProtocol(protocol, port), host, port, "/user/$id",
+    override fun toRemoteSingle(entity: String) =
+        Url(URLProtocol(protocol, port), host, port, "/user/$entity",
             io.ktor.http.parametersOf(), "", null, null, false)
 
 }

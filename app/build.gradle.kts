@@ -1,7 +1,17 @@
+buildscript {
+    repositories {
+        google()  // Google's Maven repository
+    }
+    dependencies {
+        classpath("com.google.gms:google-services:4.3.2")
+    }
+}
+
 plugins {
     id("com.android.application")
     kotlin("android")
     kotlin("android.extensions")
+    kotlin("kapt")
 }
 
 android {
@@ -9,6 +19,10 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    dataBinding {
+        isEnabled = true
     }
 
     compileSdkVersion(29)
@@ -34,20 +48,27 @@ android {
     buildTypes {
 
         all {
-            manifestPlaceholders = mapOf("ApplicationName" to "Application")
-            buildConfigField("String", "SERVER_PROTOCOL", "\"http\"")
-            buildConfigField("String", "SERVER_URL", "\"mock\"")
-            buildConfigField("int", "SERVER_PORT", "42")
+            signingConfig = signingConfigs["default"]
         }
 
         getByName("release") {
             isMinifyEnabled = true
             isDebuggable = false
+            manifestPlaceholders = mapOf("ApplicationName" to "Application")
+            // TODO
+            buildConfigField("String", "SERVER_PROTOCOL", "\"http\"")
+            buildConfigField("String", "SERVER_URL", "\"\"")
+            buildConfigField("int", "SERVER_PORT", "\"\"")
         }
 
         getByName("debug") {
             isMinifyEnabled = false
             matchingFallbacks = listOf("release")
+            manifestPlaceholders = mapOf("ApplicationName" to "Application")
+            // TODO
+            buildConfigField("String", "SERVER_PROTOCOL", "\"http\"")
+            buildConfigField("String", "SERVER_URL", "\"\"")
+            buildConfigField("int", "SERVER_PORT", "\"\"")
         }
 
         create("mock") {
@@ -55,20 +76,21 @@ android {
             isDebuggable = true
             matchingFallbacks = listOf("debug")
             manifestPlaceholders = mapOf("ApplicationName" to "MockApplication")
+            buildConfigField("String", "SERVER_PROTOCOL", "\"http\"")
+            buildConfigField("String", "SERVER_URL", "\"mock\"")
+            buildConfigField("int", "SERVER_PORT", "42")
         }
 
         create("localTesting") {
             isMinifyEnabled = false
             isDebuggable = true
+            manifestPlaceholders = mapOf("ApplicationName" to "Application")
             buildConfigField("String", "SERVER_PROTOCOL", "\"http\"")
             buildConfigField("String", "SERVER_URL", "\"localhost\"")
             buildConfigField("int", "SERVER_PORT", "8080")
             matchingFallbacks = listOf("debug")
         }
 
-        all {
-            signingConfig = signingConfigs["default"]
-        }
     }
 
     packagingOptions {
@@ -87,6 +109,8 @@ android {
 
 }
 
+apply(plugin= "com.google.gms.google-services")
+
 dependencies {
 
     val androidxAppCompatVersion: String by project
@@ -104,7 +128,9 @@ dependencies {
     val espressoVersion: String by project
     val androidTestRunnerVersion: String by project
     val flexibleAdapterVersion: String by project
-
+    val firebaseJvmVersion: String by project
+    val jaxbVersion: String by project
+    val javaxActivationVersion: String by project
 
     implementation(project(":mpp-lib"))
 
@@ -119,6 +145,18 @@ dependencies {
     implementation("androidx.lifecycle", "lifecycle-viewmodel-ktx", androidxLifecycleVersion)
     implementation("androidx.navigation", "navigation-fragment-ktx", androidxNavigationVersion)
     implementation("androidx.navigation", "navigation-ui-ktx", androidxNavigationVersion)
+
+    implementation("javax.xml.bind", "jaxb-api", jaxbVersion)
+    implementation("com.sun.xml.bind", "jaxb-core", jaxbVersion)
+    implementation("com.sun.xml.bind", "jaxb-impl", jaxbVersion)
+    implementation("javax.activation", "activation", javaxActivationVersion)
+
+    kapt("javax.xml.bind", "jaxb-api", jaxbVersion)
+    kapt("com.sun.xml.bind", "jaxb-core", jaxbVersion)
+    kapt("com.sun.xml.bind", "jaxb-impl", jaxbVersion)
+    kapt("javax.activation", "activation", javaxActivationVersion)
+
+    implementation("com.google.firebase", "firebase-auth", firebaseJvmVersion)
 
     implementation("com.squareup.picasso", "picasso", picassoVersion)
 

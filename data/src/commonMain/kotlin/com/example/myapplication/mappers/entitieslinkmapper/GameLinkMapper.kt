@@ -10,8 +10,8 @@ class GameLinkMapper(
     private val port: Int
 ) : SingleToRemoteMapper<Url, String> {
 
-    override fun toRemoteSingle(id: String) =
-        Url(URLProtocol(protocol, port), host, port, "/game/$id",
+    override fun toRemoteSingle(entity: String) =
+        Url(URLProtocol(protocol, port), host, port, "/game/$entity",
             io.ktor.http.parametersOf(), "", null, null, false)
 
 }

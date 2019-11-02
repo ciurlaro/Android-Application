@@ -7,16 +7,24 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import androidx.navigation.findNavController
+import androidx.navigation.ui.setupWithNavController
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import org.kodein.di.erased.instance
 
 
 class MainActivity : BaseActivity() {
 
-    var myDialog: Dialog? = null
+    @ExperimentalCoroutinesApi
+    private val authManager by instance<FirebaseAuthenticationManager>()
 
+    @ExperimentalCoroutinesApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.item_user)
-        myDialog = Dialog(this)
+        setContentView(R.layout.activity_main)
+        nav_view.setupWithNavController(findNavController(R.id.nav_host_fragment))
+
 
         /*// However, if we're being restored from a previous state,
         // then we don't need to do anything and should return or else
@@ -63,16 +71,6 @@ class MainActivity : BaseActivity() {
 
             transaction.commit()
         }*/
-    }
-
-    fun showPopup(view: View) {
-        var txtClose: TextView? = null
-        var btn: Button? = null
-        myDialog!!.setContentView(R.layout.popup)
-
-
-        myDialog!!.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        myDialog!!.show()
     }
 
 }
