@@ -1,17 +1,9 @@
 package com.example.myapplication
 
-import android.app.Dialog
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.View
-import android.widget.Button
-import android.widget.TextView
-import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import org.kodein.di.erased.instance
 
 
 class MainActivity : BaseActivity() {
@@ -20,7 +12,9 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        nav_view.setupWithNavController(navController)
+
+        bottom_nav_view.setupWithNavController(navController)
+
         authManager.addOnLogoutCallback("on-logout") {
             navController.navigate()
         }
