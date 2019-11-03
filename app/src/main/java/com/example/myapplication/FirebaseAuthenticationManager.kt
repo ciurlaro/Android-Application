@@ -1,13 +1,10 @@
 package com.example.myapplication
 
-import com.example.myapplication.AuthenticationManager.*
+import com.example.myapplication.AuthenticationManager.Action
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
 @ExperimentalCoroutinesApi

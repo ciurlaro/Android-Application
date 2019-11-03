@@ -2,7 +2,13 @@ plugins {
     kotlin("multiplatform") apply false
     id("com.android.application") apply false
 }
-
+println(buildString {
+    appendln()
+    appendln("*******************************")
+    appendln("* JAVA VERSION: ${System.getProperty("java.version")}")
+    appendln("*******************************")
+    appendln()
+})
 subprojects {
     repositories {
         google()

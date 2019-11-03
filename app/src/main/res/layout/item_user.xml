@@ -163,7 +163,6 @@
 
                     <Button
                         android:id="@+id/button_logout"
-                        android:onClick="showPopup"
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"

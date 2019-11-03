@@ -58,7 +58,7 @@ android {
             // TODO
             buildConfigField("String", "SERVER_PROTOCOL", "\"http\"")
             buildConfigField("String", "SERVER_URL", "\"\"")
-            buildConfigField("int", "SERVER_PORT", "\"\"")
+            buildConfigField("int", "SERVER_PORT", "0")
         }
 
         getByName("debug") {
@@ -68,7 +68,7 @@ android {
             // TODO
             buildConfigField("String", "SERVER_PROTOCOL", "\"http\"")
             buildConfigField("String", "SERVER_URL", "\"\"")
-            buildConfigField("int", "SERVER_PORT", "\"\"")
+            buildConfigField("int", "SERVER_PORT", "0")
         }
 
         create("mock") {
@@ -145,16 +145,6 @@ dependencies {
     implementation("androidx.lifecycle", "lifecycle-viewmodel-ktx", androidxLifecycleVersion)
     implementation("androidx.navigation", "navigation-fragment-ktx", androidxNavigationVersion)
     implementation("androidx.navigation", "navigation-ui-ktx", androidxNavigationVersion)
-
-    implementation("javax.xml.bind", "jaxb-api", jaxbVersion)
-    implementation("com.sun.xml.bind", "jaxb-core", jaxbVersion)
-    implementation("com.sun.xml.bind", "jaxb-impl", jaxbVersion)
-    implementation("javax.activation", "activation", javaxActivationVersion)
-
-    kapt("javax.xml.bind", "jaxb-api", jaxbVersion)
-    kapt("com.sun.xml.bind", "jaxb-core", jaxbVersion)
-    kapt("com.sun.xml.bind", "jaxb-impl", jaxbVersion)
-    kapt("javax.activation", "activation", javaxActivationVersion)
 
     implementation("com.google.firebase", "firebase-auth", firebaseJvmVersion)
 

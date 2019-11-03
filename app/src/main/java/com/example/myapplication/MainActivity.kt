@@ -17,13 +17,13 @@ import org.kodein.di.erased.instance
 class MainActivity : BaseActivity() {
 
     @ExperimentalCoroutinesApi
-    private val authManager by instance<FirebaseAuthenticationManager>()
-
-    @ExperimentalCoroutinesApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        nav_view.setupWithNavController(findNavController(R.id.nav_host_fragment))
+        nav_view.setupWithNavController(navController)
+        authManager.addOnLogoutCallback("on-logout") {
+            navController.navigate()
+        }
 
 
         /*// However, if we're being restored from a previous state,
