@@ -7,6 +7,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
+
 @ExperimentalCoroutinesApi
 class FirebaseAuthenticationManager(
     private val firebaseAuth: FirebaseAuth
