@@ -6,8 +6,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.example.myapplication.ui.home.HomeViewModel
+import com.example.myapplication.ui.login.SigninViewModel
 import com.example.myapplication.ui.search.SearchViewModel
-import com.example.myapplication.ui.userprofle.UserProfileViewModel
+import com.example.myapplication.ui.signup.SignupViewModel
+import com.example.myapplication.ui.userprofile.UserProfileViewModel
 import org.kodein.di.Kodein
 import org.kodein.di.erased.bind
 import org.kodein.di.erased.factory
@@ -23,6 +25,8 @@ object ViewModelModule : KodeinModuleProvider {
         bindViewModel<HomeViewModel>()
         bindViewModel<SearchViewModel>()
         bindViewModel<UserProfileViewModel>()
+        bindViewModel<SigninViewModel>()
+        bindViewModel<SignupViewModel>()
 
     }
 

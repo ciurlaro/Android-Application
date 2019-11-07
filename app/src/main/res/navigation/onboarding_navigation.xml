@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/onboarding_navigation"
+            app:startDestination="@+id/navigation_signin_fragment">
+
+    <fragment
+            android:id="@+id/navigation_signin_fragment"
+            android:name="com.example.myapplication.ui.login.SigninFragment"
+            android:label="@string/login_activity"
+            tools:layout="@layout/fragment_signin">
+        <argument
+                android:name="email"
+                app:argType="string"
+                app:nullable="false"
+                android:defaultValue=""/>
+        <argument
+                android:name="password"
+                app:argType="string"
+                app:nullable="false"
+                android:defaultValue=""/>
+        <action
+                android:id="@+id/action_login_to_signup"
+                app:destination="@+id/navigation_signup_fragment"/>
+    </fragment>
+
+    <fragment
+            android:id="@+id/navigation_signup_fragment"
+                android:name="com.example.myapplication.ui.signup.SignupFragment"
+            android:label="@string/login_activity"
+            tools:layout="@layout/fragment_signup">
+        <argument
+                android:name="email"
+                app:argType="string"
+                app:nullable="false"
+                android:defaultValue=""/>
+        <argument
+                android:name="password"
+                app:argType="string"
+                app:nullable="false"
+                android:defaultValue=""/>
+        <action
+                android:id="@+id/action_signup_to_signin"
+                app:destination="@+id/navigation_signin_fragment"/>
+    </fragment>
+</navigation>

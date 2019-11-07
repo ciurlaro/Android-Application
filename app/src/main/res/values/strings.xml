@@ -41,5 +41,7 @@
     <string name="logout">Logout</string>
     <string name="dont_have_account_question">Don\'t have an account? Click here!</string>
     <string name="have_account_question">Already have an account? Click here!</string>
+    <string name="login_activity">Login Activity</string>
+    <string name="empty_string"/>
 
 </resources>

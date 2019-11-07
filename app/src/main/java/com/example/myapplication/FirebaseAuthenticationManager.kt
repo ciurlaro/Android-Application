@@ -2,9 +2,7 @@ package com.example.myapplication
 
 import com.example.myapplication.AuthenticationManager.Action
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 
@@ -24,44 +22,36 @@ class FirebaseAuthenticationManager(
 
     override fun addOnLoginCallback(action: Action) {
         onLoginCallbacks[action.tag] = action
+        if (firebaseAuth.currentUser != null)
+            action()
     }
-
-    fun addOnLoginCallback(tag: String, dispatcher: CoroutineScope = GlobalScope, action: suspend () -> Unit) =
-        addOnLoginCallback(Action(tag, dispatcher, action))
-
 
     override fun removeOnLoginCallbacks(tag: String) {
         onLoginCallbacks.remove(tag)
     }
 
+
     override fun addOnLogoutCallback(action: Action) {
         onLogoutCallbacks[action.tag] = action
+        if (firebaseAuth.currentUser == null)
+            action()
     }
-
-    fun addOnLogoutCallback(tag: String, dispatcher: CoroutineScope = GlobalScope, action: suspend () -> Unit) =
-        addOnLoginCallback(Action(tag, dispatcher, action))
 
     override fun removeOnLogoutCallbacks(action: String) {
         onLogoutCallbacks.remove(action)
     }
 
-    override fun loginWithEmailAndPassword(email: String, password: String) {
+    override fun loginWithEmailAndPassword(email: String, password: String, onCompletion: (Boolean) -> Unit) {
         firebaseAuth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener {
-                it.isComplete
-            }
+            .addOnCompleteListener { onCompletion(it.isSuccessful) }
     }
 
-    private fun triggerLogin() {
-        onLoginCallbacks.values.forEach {
-            it.dispatcher.launch { it.action() }
-        }
-    }
+    private fun triggerLogin() =
+        onLoginCallbacks.values.forEach { it() }
 
-    private fun triggerLogout() {
-        onLogoutCallbacks.values.forEach {
-            it.dispatcher.launch { it.action() }
-        }
-    }
+
+    private fun triggerLogout() =
+        onLogoutCallbacks.values.forEach { it() }
+
 
 }

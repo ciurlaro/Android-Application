@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.userprofle
+package com.example.myapplication.ui.userprofile
 
 import android.os.Bundle
 import android.view.LayoutInflater

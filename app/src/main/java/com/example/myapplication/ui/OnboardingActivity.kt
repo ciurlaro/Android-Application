@@ -1,0 +1,38 @@
+package com.example.myapplication.ui
+
+import android.content.Context
+import android.content.Intent
+import android.os.Bundle
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import com.example.myapplication.R
+
+@ExperimentalCoroutinesApi
+class OnboardingActivity : BaseActivity(R.id.nav_host_onboarding_fragment) {
+
+    companion object {
+
+        fun buildIntent(context: Context) =
+            Intent(context, OnboardingActivity::class.java)
+
+        operator fun invoke(context: Context) =
+            buildIntent(context)
+
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_onboarding)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        authManager.setOnLoginCallback {
+            startActivity(MainActivity(this))
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        authManager.removeOnLoginCallback()
+    }
+}

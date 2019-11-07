@@ -4,7 +4,11 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("com.google.gms:google-services:4.3.2")
+        val androidxNavigationVersion: String by project
+        val gmsVersion: String by project
+
+        classpath("com.google.gms:google-services:$gmsVersion")
+        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:$androidxNavigationVersion")
 
         // From JDKK 9+ some classes have been moved to Maven. Kapt needs those classes
         // to parse xml and stuff. Load them manually if the current JDK do not contains
@@ -124,6 +128,7 @@ android {
 }
 
 apply(plugin = "com.google.gms.google-services")
+apply(plugin = "androidx.navigation.safeargs.kotlin")
 
 dependencies {
 
@@ -143,8 +148,6 @@ dependencies {
     val androidTestRunnerVersion: String by project
     val flexibleAdapterVersion: String by project
     val firebaseJvmVersion: String by project
-    val jaxbVersion: String by project
-    val javaxActivationVersion: String by project
 
     implementation(project(":mpp-lib"))
 

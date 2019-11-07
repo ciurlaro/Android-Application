@@ -27,16 +27,8 @@ open class Application : Application(), KodeinAware {
         import(androidXModule(this@Application))
         import(ViewModelModule)
         import(buildCommonKodein(SERVER_PROTOCOL, SERVER_URL, SERVER_PORT))
-        bind<FirebaseAuthenticationManager>() with singleton { FirebaseAuthenticationManager(instance("login_channel")) }
-        bind<Flow<Boolean>>("login_fLow") with singleton {
-            val fAuth = instance<FirebaseAuth>()
-            flow {
-                fAuth.addAuthStateListener {
-                    GlobalScope.launch { emit(it.currentUser != null) }
-                }
-            }
-        }
         bind<FirebaseAuth>() with singleton { FirebaseAuth.getInstance() }
+        bind<AuthenticationManager>() with singleton { FirebaseAuthenticationManager(instance()) }
     }
 
 }

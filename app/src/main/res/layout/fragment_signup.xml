@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable name="viewModel" type="com.example.myapplication.ui.signup.SignupViewModel"/>
+    </data>
+
+    <ScrollView
+            android:layout_width="match_parent"
+            android:background="@drawable/hearthstone"
+            android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                tools:context="com.example.myapplication.ui.MainActivity"
+                android:fitsSystemWindows="true"
+                android:paddingBottom="32dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/at_logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="100dp"
+                    android:contentDescription="@string/boh"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:src="@drawable/at_logo_black"/>
+
+            <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/email_etv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:layout_margin="32dp"
+                    android:textSize="32sp"
+                    android:text="@={viewModel.email}"
+                    android:inputType="textEmailAddress"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/at_logo"
+                    android:theme="@style/AppTheme.LightEditText"/>
+
+            <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/confirm_email_etv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:layout_margin="32dp"
+                    android:textSize="32sp"
+                    android:text="@={viewModel.confirmEmail}"
+                    android:inputType="textEmailAddress"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/email_etv"
+                    android:theme="@style/AppTheme.LightEditText"/>
+
+            <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/password_etv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:inputType="textPassword"
+                    android:text="@={viewModel.password}"
+                    android:layout_margin="32dp"
+                    android:textSize="32sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/confirm_email_etv"
+                    android:theme="@style/AppTheme.LightEditText"/>
+
+            <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/confirm_password_etv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:inputType="textPassword"
+                    android:layout_margin="32dp"
+                    android:text="@={viewModel.confirmPassword}"
+                    android:textSize="32sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/password_etv"
+                    android:theme="@style/AppTheme.LightEditText"/>
+
+            <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/nickname_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:inputType="text"
+                    android:text="@={viewModel.nickname}"
+                    android:layout_margin="32dp"
+                    android:textSize="32sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/confirm_password_etv"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                    app:layout_constraintTop_toBottomOf="@id/nickname_tv"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:id="@+id/button_sign_up"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="56dp"
+                    android:background="@drawable/button_styles"
+                    android:text="@string/sign_up"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/login_tv"
+                    android:onClick="@{(view) -> viewModel.onLoginTvClicked(loginTv)}"
+                    app:layout_constraintTop_toBottomOf="@id/button_sign_up"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/have_account_question"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:layout_margin="32dp"
+            />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+</layout>

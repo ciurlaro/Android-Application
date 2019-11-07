@@ -10,15 +10,22 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
+import androidx.navigation.NavController
+import com.example.myapplication.AuthenticationManager
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.erased.instance
 
+@ExperimentalCoroutinesApi
 abstract class BaseFragment : Fragment(), KodeinAware {
 
     override val kodein by closestKodein()
 
     inline fun <reified T : ViewModel> viewModelInstance() = instance<Fragment, T>(arg = this)
+
+    protected val authManager by instance<AuthenticationManager>()
+    protected val navController by instance<NavController>()
 
     inline fun <reified T : ViewDataBinding> viewDataBinding(
         inflater: LayoutInflater,
