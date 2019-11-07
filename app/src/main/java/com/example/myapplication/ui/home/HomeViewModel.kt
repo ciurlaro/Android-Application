@@ -2,6 +2,7 @@ package com.example.myapplication.ui.home
 
 import android.annotation.SuppressLint
 import android.view.View
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
@@ -83,22 +84,20 @@ class HomeViewModel(
 
         override fun getLayoutRes() = R.layout.item_match
 
-        class ViewHolder(val view: View, private val adapter: FlexibleAdapter<*>) : FlexibleViewHolder(
-            view, adapter
-        ) {
+        class ViewHolder(view: View, adapter: FlexibleAdapter<*>) : FlexibleViewHolder(view, adapter) {
             @SuppressLint("SetTextI18n")
-            fun render(data: MatchEntity, registeredPlayer: Int) {
-                view.game_image.setImageResource(R.drawable.doggo)
-                view.game_icon.setImageResource(R.drawable.wow)
-                view.tournament_name.text = data.tournament.title
+            fun render(data: MatchEntity, registeredPlayer: Int) = with(itemView) {
+                game_image.setImageResource(R.drawable.doggo)
+                game_icon.setImageResource(R.drawable.wow)
+                tournament_name.text = data.tournament.title
 
                 val matchInfo = "${data.matchDateTime}".split("T")
-                view.match_date.text = matchInfo[0]
-                view.match_time.text = matchInfo[1]
+                match_date.text = matchInfo[0]
+                match_time.text = matchInfo[1]
 
-                view.match_players.text = "$registeredPlayer|2"
-                //view.match_players.text = Resources.getSystem().getString(R.string.players_number_text, registeredPlayer, 2)
-                view.game_name.text = data.tournament.game.name
+                match_players.text = "$registeredPlayer|2"
+                //match_players.text = Resources.getSystem().getString(R.string.players_number_text, registeredPlayer, 2)
+                game_name.text = data.tournament.game.name
             }
 
         }
@@ -107,22 +106,19 @@ class HomeViewModel(
     @ExperimentalCoroutinesApi
     fun getAllAvailableMatches() =
         getAllAvailableMatches.buildAction()
-            .map {
-                Model(it.first, it.second) }
-            .onEach {
-                homeViewAdapter.addItem(it)
-            }
+            .map { Model(it.first, it.second) }
+            .onEach { homeViewAdapter.addItem(it) }
             .launchIn(viewModelScope)
 
     /**fun getShowcaseTournaments() =
-        getShowcaseTournaments.buildAction()
-            .map {
+    getShowcaseTournaments.buildAction()
+    .map {
 
-            }
-            .onEach {
-                homeViewAdapter.addItem(it)
-            }
-            .launchIn(viewModelScope)*/
+    }
+    .onEach {
+    homeViewAdapter.addItem(it)
+    }
+    .launchIn(viewModelScope)*/
 
     /** @ExperimentalCoroutinesApi
     fun getAllAvailableMatches() =

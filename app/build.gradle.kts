@@ -1,9 +1,23 @@
 buildscript {
     repositories {
-        google()  // Google's Maven repository
+        google()
+        mavenCentral()
     }
     dependencies {
         classpath("com.google.gms:google-services:4.3.2")
+
+        // From JDKK 9+ some classes have been moved to Maven. Kapt needs those classes
+        // to parse xml and stuff. Load them manually if the current JDK do not contains
+        // them.
+        if (JavaVersion.current() >= JavaVersion.VERSION_1_9) {
+            logger.info("Loading JAXB classes into classpath")
+            val jaxbVersion: String by project
+            val javaxActivationVersion: String by project
+            classpath("javax.xml.bind", "jaxb-api", jaxbVersion)
+            classpath("com.sun.xml.bind", "jaxb-core", jaxbVersion)
+            classpath("com.sun.xml.bind", "jaxb-impl", jaxbVersion)
+            classpath("javax.activation", "activation", javaxActivationVersion)
+        }
     }
 }
 
@@ -109,7 +123,7 @@ android {
 
 }
 
-apply(plugin= "com.google.gms.google-services")
+apply(plugin = "com.google.gms.google-services")
 
 dependencies {
 

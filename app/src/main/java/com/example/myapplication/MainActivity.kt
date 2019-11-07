@@ -15,9 +15,9 @@ class MainActivity : BaseActivity() {
 
         bottom_nav_view.setupWithNavController(navController)
 
-        authManager.addOnLogoutCallback("on-logout") {
-            navController.navigate()
-        }
+//        authManager.addOnLogoutCallback("on-logout") {
+//            navController.navigate()
+//        }
 
 
         /*// However, if we're being restored from a previous state,

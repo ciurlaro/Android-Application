@@ -1,12 +1,34 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+
+        // From JDKK 9+ some classes have been moved to Maven. Kapt needs those classes
+        // to parse xml and stuff. Load them manually if the current JDK do not contains
+        // them.
+        if (JavaVersion.current() >= JavaVersion.VERSION_1_9) {
+            logger.info("Loading JAXB classes into classpath")
+            val jaxbVersion: String by project
+            val javaxActivationVersion: String by project
+            classpath("javax.xml.bind", "jaxb-api", jaxbVersion)
+            classpath("com.sun.xml.bind", "jaxb-core", jaxbVersion)
+            classpath("com.sun.xml.bind", "jaxb-impl", jaxbVersion)
+            classpath("javax.activation", "activation", javaxActivationVersion)
+        }
+    }
+}
+
 plugins {
     kotlin("multiplatform") apply false
     id("com.android.application") apply false
 }
-println(buildString {
+logger.info(buildString {
     appendln()
-    appendln("*******************************")
-    appendln("* JAVA VERSION: ${System.getProperty("java.version")}")
-    appendln("*******************************")
+    val jString = JavaVersion.current().toString()
+    appendln("************************")
+    appendln("*  JAVA VERSION: ${jString.padEnd(5)} *")
+    appendln("************************")
     appendln()
 })
 subprojects {
@@ -19,7 +41,10 @@ subprojects {
 }
 
 tasks.create<Delete>("turboClean") {
-    delete(rootProject.buildDir)
+    group = "clean"
+    allprojects {
+        delete(rootProject.buildDir)
+    }
 }
 
 

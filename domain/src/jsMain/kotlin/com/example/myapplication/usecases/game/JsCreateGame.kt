@@ -12,4 +12,5 @@ class JsCreateGame(
     override fun buildAction(params: CreateGameUseCase.Params) = GlobalScope.promise {
         usecase.buildAction(params)
     }
+
 }

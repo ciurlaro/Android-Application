@@ -47,11 +47,9 @@ class SearchViewModel(
             TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         }
 
-        class ViewHolder(val view: View, val adapter: FlexibleAdapter<*>) : FlexibleViewHolder(
-            view, adapter
-        ) {
-            fun render(data: TournamentEntity, count: Int){
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        class ViewHolder(view: View, adapter: FlexibleAdapter<*>) : FlexibleViewHolder(view, adapter) {
+            fun render(data: TournamentEntity, count: Int) = with(itemView) {
+
             }
 
         }
@@ -62,8 +60,6 @@ class SearchViewModel(
     fun getTournamentsByMode(modeName: String) = getTournamentsByModeUseCase
         .buildAction(modeName)
         .map { Model(it.first, it.second) }
-        .onEach {
-            searchViewAdapter.addItem(it)
-        }
+        .onEach { searchViewAdapter.addItem(it) }
         .launchIn(viewModelScope)
 }

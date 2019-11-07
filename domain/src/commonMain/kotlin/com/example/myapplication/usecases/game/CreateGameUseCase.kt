@@ -10,7 +10,7 @@ class CreateGameUseCase(
 ) : UseCaseWithParamSuspending<CreateGameUseCase.Params, GameEntity> {
 
     @UseExperimental(FlowPreview::class)
-    override suspend fun buildAction(params: Params): GameEntity =
+    override suspend fun buildAction(params: Params) =
         repository.createGame(
             params.name,
             params.availableModes,
