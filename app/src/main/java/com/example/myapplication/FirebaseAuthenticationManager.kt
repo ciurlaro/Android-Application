@@ -1,9 +1,10 @@
 package com.example.myapplication
 
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
 import com.example.myapplication.AuthenticationManager.Action
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.launch
 
 
 @ExperimentalCoroutinesApi
@@ -17,11 +18,11 @@ class FirebaseAuthenticationManager(
         }
     }
 
-    private val onLoginCallbacks = hashMapOf<String, Action>()
-    private val onLogoutCallbacks = hashMapOf<String, Action>()
+    private val onLoginCallbacks = hashMapOf<String, Pair<Action, LifecycleOwner>>()
+    private val onLogoutCallbacks = hashMapOf<String, Pair<Action, LifecycleOwner>>()
 
-    override fun addOnLoginCallback(action: Action) {
-        onLoginCallbacks[action.tag] = action
+    override fun addOnLoginCallback(owner: LifecycleOwner, action: Action) {
+        onLoginCallbacks[action.tag] = action to owner
         if (firebaseAuth.currentUser != null)
             action()
     }
@@ -31,8 +32,8 @@ class FirebaseAuthenticationManager(
     }
 
 
-    override fun addOnLogoutCallback(action: Action) {
-        onLogoutCallbacks[action.tag] = action
+    override fun addOnLogoutCallback(owner: LifecycleOwner, action: Action) {
+        onLogoutCallbacks[action.tag] = action to owner
         if (firebaseAuth.currentUser == null)
             action()
     }
@@ -46,12 +47,25 @@ class FirebaseAuthenticationManager(
             .addOnCompleteListener { onCompletion(it.isSuccessful) }
     }
 
-    private fun triggerLogin() =
-        onLoginCallbacks.values.forEach { it() }
+    private fun triggerLogin() {
+        val toRemove = mutableListOf<String>()
+        onLoginCallbacks.values.forEach { (action, owner) ->
+            if (owner.lifecycle.currentState != Lifecycle.State.DESTROYED)
+                action()
+            else toRemove.add(action.tag)
+        }
+        onLoginCallbacks.removeAll(toRemove)
+    }
 
 
-    private fun triggerLogout() =
-        onLogoutCallbacks.values.forEach { it() }
-
+    private fun triggerLogout() {
+        val toRemove = mutableListOf<String>()
+        onLogoutCallbacks.values.forEach { (action, owner) ->
+            if (owner.lifecycle.currentState != Lifecycle.State.DESTROYED)
+                action()
+            else toRemove.add(action.tag)
+        }
+        onLogoutCallbacks.removeAll(toRemove)
+    }
 
 }

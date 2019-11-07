@@ -1,7 +1,9 @@
 package com.example.myapplication.ui
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
@@ -12,7 +14,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import com.example.myapplication.AuthenticationManager
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.GlobalScope
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.erased.instance
@@ -39,5 +43,22 @@ abstract class BaseFragment : Fragment(), KodeinAware {
 
     fun <T> LiveData<T>.observe(observer: (T) -> Unit) =
         observe(this@BaseFragment, Observer { observer(it) })
+
+    fun AuthenticationManager.setOnLoginCallback(
+        dispatcher: CoroutineScope = GlobalScope,
+        action: suspend () -> Unit
+    ) = addOnLoginCallback(
+        this@BaseFragment,
+        AuthenticationManager.Action(this@BaseFragment::class.qualifiedName!!, dispatcher, action)
+    )
+
+    fun AuthenticationManager.setOnLogoutCallback(
+        dispatcher: CoroutineScope = GlobalScope,
+        action: suspend () -> Unit
+    ) = addOnLogoutCallback(
+        this@BaseFragment,
+        AuthenticationManager.Action(this@BaseFragment::class.qualifiedName!!, dispatcher, action)
+    )
+
 
 }

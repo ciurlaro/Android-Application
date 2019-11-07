@@ -14,7 +14,9 @@ class MainActivity : BaseActivity(R.id.nav_host_fragment) {
     companion object {
 
         fun buildIntent(context: Context) =
-            Intent(context, MainActivity::class.java)
+            Intent(context, MainActivity::class.java).apply {
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            }
 
         operator fun invoke(context: Context) =
             buildIntent(context)
@@ -25,7 +27,6 @@ class MainActivity : BaseActivity(R.id.nav_host_fragment) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         bottom_nav_view.setupWithNavController(navController)
 
     }
@@ -35,11 +36,6 @@ class MainActivity : BaseActivity(R.id.nav_host_fragment) {
         authManager.setOnLogoutCallback {
             startActivity(OnboardingActivity(this))
         }
-    }
-
-    override fun onPause() {
-        super.onPause()
-        authManager.removeOnLogoutCallback()
     }
 
 }

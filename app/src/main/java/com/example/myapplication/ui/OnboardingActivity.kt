@@ -12,7 +12,9 @@ class OnboardingActivity : BaseActivity(R.id.nav_host_onboarding_fragment) {
     companion object {
 
         fun buildIntent(context: Context) =
-            Intent(context, OnboardingActivity::class.java)
+            Intent(context, OnboardingActivity::class.java).apply {
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            }
 
         operator fun invoke(context: Context) =
             buildIntent(context)
@@ -31,8 +33,4 @@ class OnboardingActivity : BaseActivity(R.id.nav_host_onboarding_fragment) {
         }
     }
 
-    override fun onPause() {
-        super.onPause()
-        authManager.removeOnLoginCallback()
-    }
 }

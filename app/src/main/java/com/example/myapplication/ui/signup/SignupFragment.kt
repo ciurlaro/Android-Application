@@ -3,9 +3,11 @@ package com.example.myapplication.ui.signup
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.navigation.fragment.navArgs
 import com.example.myapplication.databinding.FragmentSignupBinding
 import com.example.myapplication.ui.BaseFragment
+import kotlinx.android.synthetic.main.fragment_signup.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.kodein.di.erased.instance
 
@@ -23,4 +25,10 @@ class SignupFragment : BaseFragment() {
             }
         }.root
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        requireActivity().onBackPressedDispatcher.addCallback(this) {
+            viewModel.onLoginTvClicked(login_tv)
+        }
+    }
 }

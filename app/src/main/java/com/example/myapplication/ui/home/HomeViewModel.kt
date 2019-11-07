@@ -6,6 +6,8 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.AuthenticationManager
+import com.example.myapplication.FirebaseAuthenticationManager
 import com.example.myapplication.R
 import com.example.myapplication.entities.MatchEntity
 import com.example.myapplication.usecases.game.CreateGameUseCase
@@ -36,28 +38,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 
 class HomeViewModel(
-    private val getGamesByModeUseCase: GetGamesByModeUseCase,
-    private val getGamesContainingNameUseCase: GetGamesContainingNameUseCase,
-    private val getAllAvailableMatches: GetAllAvailableMatchesUseCase,
-    private val getAllMatchesByUser: GetAllMatchesByUserUseCase,
-    private val getUserInfo: GetUserInfoUseCase,
-    private val getCreatedTournamentsByAdmin: GetCreatedTournamentsByAdminUseCase,
-    private val getShowcaseTournamentsUseCase: GetShowCaseTournamentsUseCase,
-    private val getRegistrationsByTournament: GetRegistrationsByTournamentUseCase,
-    private val getTournamentsByGameUseCase: GetTournamentsByGameUseCase,
-    private val getTournamentsByModeUseCase: GetTournamentsByModeUseCase,
-    private val getTournamentsContainingTitleUseCase: GetTournamentsContainingTitleUseCase,
-    private val getRegistrationsByMatchUseCase: GetAllRegistrationsByMatchUseCase,
-    private val getRegistrationsByUserUseCase: GetRegistrationsByUserUseCase,
-    private val getMatchesByTournamentUseCase: GetMatchesByTournamentUseCase,
-    private val isAccountVerified: GetAccountVerificationStatusUseCase,
-    private val isSubscribedAccount: IsSubscribedAccountUseCase,
-    private val createUser: CreateUserUseCase,
-    private val createGameMode: CreateGameModeUseCase,
-    private val createGame: CreateGameUseCase,
-    private val createTournament: CreateTournamentUseCase,
-    private val createMatch: CreateMatchUseCase,
-    private val createRegistration: CreateRegistrationUseCase
+    private val getAllAvailableMatches: GetAllAvailableMatchesUseCase
 ) : ViewModel() {
 
     private val homeViewAdapter = FlexibleAdapter<Model>(emptyList())

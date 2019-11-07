@@ -36,34 +36,34 @@ class HomeFragment : BaseFragment() {
 
 //        viewModel.getAllAvailableMatches()
 
-        //viewModel.getMatchesByUser()
-        //viewModel.getMatchesByTournament()
+    //viewModel.getMatchesByUser()
+    //viewModel.getMatchesByTournament()
 
-        /*viewModel.getGamesByMode()
-        viewModel.getGamesContainingName()
+    /*viewModel.getGamesByMode()
+    viewModel.getGamesContainingName()
 
 
-        viewModel.getRegistrationsByMatch()
-        viewModel.getRegistrationByTournament()
-        viewModel.getRegistrationsByUser()
+    viewModel.getRegistrationsByMatch()
+    viewModel.getRegistrationByTournament()
+    viewModel.getRegistrationsByUser()
 
-        viewModel.getTournamentsByAdmin()
-        viewModel.getShowcaseTournaments()
-        viewModel.getTournamentsByGame()
-        viewModel.getTournamentsByMode()
-        viewModel.getTournamentsContainingTitle()
+    viewModel.getTournamentsByAdmin()
+    viewModel.getShowcaseTournaments()
+    viewModel.getTournamentsByGame()
+    viewModel.getTournamentsByMode()
+    viewModel.getTournamentsContainingTitle()
 
-        viewModel.getUserInformation()
+    viewModel.getUserInformation()
 
-        viewModel.isAccountVerified()
-        viewModel.isSubscribedAccount()
+    viewModel.isAccountVerified()
+    viewModel.isSubscribedAccount()
 
-        viewModel.createGameMode()
-        viewModel.createGame()
-        viewModel.createUser()
-        viewModel.createTournament()
-        viewModel.createMatch()
-        viewModel.createRegistration()*/
+    viewModel.createGameMode()
+    viewModel.createGame()
+    viewModel.createUser()
+    viewModel.createTournament()
+    viewModel.createMatch()
+    viewModel.createRegistration()*/
 
 
 }

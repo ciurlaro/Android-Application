@@ -17,8 +17,7 @@
                 android:layout_width="match_parent"
                 android:orientation="vertical"
                 tools:context="com.example.myapplication.ui.MainActivity"
-                android:fitsSystemWindows="true"
-                android:paddingBottom="32dp">
+                android:fitsSystemWindows="true">
 
             <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/at_logo"
@@ -44,7 +43,8 @@
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/at_logo"
-                    android:theme="@style/AppTheme.LightEditText"/>
+                    android:hint="@string/email_hint"
+                    android:theme="@style/AppTheme.LoginEditTextTheme"/>
 
             <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/confirm_email_etv"
@@ -56,9 +56,10 @@
                     android:text="@={viewModel.confirmEmail}"
                     android:inputType="textEmailAddress"
                     app:layout_constraintLeft_toLeftOf="parent"
+                    android:hint="@string/confirm_email_hint"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/email_etv"
-                    android:theme="@style/AppTheme.LightEditText"/>
+                    android:theme="@style/AppTheme.LoginEditTextTheme"/>
 
             <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/password_etv"
@@ -69,10 +70,11 @@
                     android:text="@={viewModel.password}"
                     android:layout_margin="32dp"
                     android:textSize="32sp"
+                    android:hint="@string/pwd_hint"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/confirm_email_etv"
-                    android:theme="@style/AppTheme.LightEditText"/>
+                    android:theme="@style/AppTheme.LoginEditTextTheme"/>
 
             <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/confirm_password_etv"
@@ -80,16 +82,18 @@
                     android:layout_height="wrap_content"
                     android:maxLines="1"
                     android:inputType="textPassword"
+                    android:hint="@string/pwd_conf_hint"
                     android:layout_margin="32dp"
                     android:text="@={viewModel.confirmPassword}"
                     android:textSize="32sp"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/password_etv"
-                    android:theme="@style/AppTheme.LightEditText"/>
+                    android:theme="@style/AppTheme.LoginEditTextTheme"/>
 
             <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/nickname_tv"
+                    android:hint="@string/nickname_hint"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
@@ -99,6 +103,7 @@
                     android:textSize="32sp"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
+                    android:theme="@style/AppTheme.LoginEditTextTheme"
                     app:layout_constraintTop_toBottomOf="@id/confirm_password_etv"/>
 
             <androidx.appcompat.widget.AppCompatButton
@@ -126,6 +131,7 @@
                     android:textStyle="bold"
                     android:textSize="20sp"
                     android:layout_margin="32dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
             />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

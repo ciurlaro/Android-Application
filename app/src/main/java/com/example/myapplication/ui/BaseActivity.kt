@@ -1,10 +1,5 @@
 package com.example.myapplication.ui
 
-import android.graphics.Color
-import android.os.Bundle
-import android.os.PersistableBundle
-import android.view.View
-import android.view.WindowManager
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
@@ -36,19 +31,20 @@ abstract class BaseActivity(@IdRes navControllerFragmentId: Int) : AppCompatActi
     inline fun <reified T : ViewModel> viewModelInstance() =
         instance<AppCompatActivity, T>(arg = this)
 
-    fun AuthenticationManager.setOnLoginCallback(dispatcher: CoroutineScope = GlobalScope, action: suspend () -> Unit) =
-        addOnLoginCallback(AuthenticationManager.Action(this::class.qualifiedName!!, dispatcher, action))
+    fun AuthenticationManager.setOnLoginCallback(
+        dispatcher: CoroutineScope = GlobalScope,
+        action: suspend () -> Unit
+    ) = addOnLoginCallback(
+        this@BaseActivity,
+        AuthenticationManager.Action(this@BaseActivity::class.qualifiedName!!, dispatcher, action)
+    )
 
     fun AuthenticationManager.setOnLogoutCallback(
         dispatcher: CoroutineScope = GlobalScope,
         action: suspend () -> Unit
-    ) =
-        addOnLogoutCallback(AuthenticationManager.Action(this::class.qualifiedName!!, dispatcher, action))
-
-    fun AuthenticationManager.removeOnLoginCallback() =
-        removeOnLoginCallbacks(this::class.qualifiedName!!)
-
-    fun AuthenticationManager.removeOnLogoutCallback() =
-        removeOnLogoutCallbacks(this::class.qualifiedName!!)
+    ) = addOnLogoutCallback(
+        this@BaseActivity,
+        AuthenticationManager.Action(this@BaseActivity::class.qualifiedName!!, dispatcher, action)
+    )
 
 }

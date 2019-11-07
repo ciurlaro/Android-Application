@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import androidx.lifecycle.LifecycleOwner
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -15,16 +16,10 @@ interface AuthenticationManager {
             dispatcher.launch { action() }
     }
 
-    fun addOnLoginCallback(action: Action)
+    fun addOnLoginCallback(owner: LifecycleOwner, action: Action)
     fun removeOnLoginCallbacks(tag: String)
-    fun addOnLogoutCallback(action: Action)
+    fun addOnLogoutCallback(owner: LifecycleOwner, action: Action)
     fun removeOnLogoutCallbacks(action: String)
     fun loginWithEmailAndPassword(email: String, password: String, onCompletion: (Boolean) -> Unit = {})
 
 }
-
-fun AuthenticationManager.addOnLoginCallback(tag: String, dispatcher: CoroutineScope = GlobalScope, action: suspend () -> Unit) =
-    addOnLoginCallback(AuthenticationManager.Action(tag, dispatcher, action))
-
-fun AuthenticationManager.addOnLogoutCallback(tag: String, dispatcher: CoroutineScope = GlobalScope, action: suspend () -> Unit) =
-    addOnLoginCallback(AuthenticationManager.Action(tag, dispatcher, action))
