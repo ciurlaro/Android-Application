@@ -21,5 +21,5 @@ interface AuthenticationManager {
     fun addOnLogoutCallback(owner: LifecycleOwner, action: Action)
     fun removeOnLogoutCallbacks(action: String)
     fun loginWithEmailAndPassword(email: String, password: String, onCompletion: (Boolean) -> Unit = {})
-
+    fun isLoggedIn() : Boolean
 }

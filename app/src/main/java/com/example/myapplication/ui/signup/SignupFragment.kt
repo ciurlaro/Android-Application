@@ -9,7 +9,6 @@ import com.example.myapplication.databinding.FragmentSignupBinding
 import com.example.myapplication.ui.BaseFragment
 import kotlinx.android.synthetic.main.fragment_signup.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import org.kodein.di.erased.instance
 
 @ExperimentalCoroutinesApi
 class SignupFragment : BaseFragment() {

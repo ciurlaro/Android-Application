@@ -57,18 +57,34 @@
                 app:layout_constraintTop_toBottomOf="@id/email_etv"
                 android:theme="@style/AppTheme.LoginEditTextTheme"/>
 
+        <androidx.core.widget.ContentLoadingProgressBar
+                android:id="@+id/signin_progress_bar"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_marginTop="108dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/password_etv"
+                android:visibility="gone"
+                android:indeterminate="true"
+                tools:visibility="visible"
+                android:progressTint="@color/white"
+        />
+
         <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button_sign_in"
                 style="@style/Theme.Design.Light"
                 android:layout_width="150dp"
-                android:layout_height="50dp"
+                android:layout_height="56dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="108dp"
                 android:background="@drawable/button_styles"
-                android:onClick="@{(view) -> viewModel.onLoginButtonClicked(buttonSignIn, emailEtv, passwordEtv)}"
+                android:onClick="@{(view) -> viewModel.onLoginButtonClicked(buttonSignIn, emailEtv, passwordEtv, signinProgressBar)}"
                 android:text="@string/sign_in"
-                app:layout_constraintLeft_toLeftOf="parent" app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/password_etv"/>
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/password_etv"
+                tools:visibility="invisible"/>
 
         <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/create_account_tv"

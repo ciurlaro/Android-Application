@@ -44,5 +44,7 @@
     <string name="login_activity">Login Activity</string>
     <string name="empty_string"/>
     <string name="confirm_email_hint">Confirm email</string>
+    <string name="must_not_be_empty">Must not be empty</string>
+    <string name="email_or_password_wrong">Email or password wrong</string>
 
 </resources>

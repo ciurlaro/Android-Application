@@ -3,6 +3,7 @@ package com.example.myapplication.ui.login
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.navigation.fragment.navArgs
 import com.example.myapplication.databinding.FragmentSigninBinding
 import com.example.myapplication.ui.BaseFragment
@@ -23,5 +24,13 @@ class SigninFragment : BaseFragment() {
                 }
             }
             .root
+
+    override fun onResume() {
+        super.onResume()
+        requireActivity().onBackPressedDispatcher.addCallback(this) {
+            requireActivity().finishAndRemoveTask()
+        }
+    }
+
 
 }

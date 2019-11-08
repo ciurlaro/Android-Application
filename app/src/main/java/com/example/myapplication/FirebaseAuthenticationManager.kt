@@ -44,7 +44,9 @@ class FirebaseAuthenticationManager(
 
     override fun loginWithEmailAndPassword(email: String, password: String, onCompletion: (Boolean) -> Unit) {
         firebaseAuth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener { onCompletion(it.isSuccessful) }
+            .addOnCompleteListener {
+                onCompletion(it.isSuccessful)
+            }
     }
 
     private fun triggerLogin() {
@@ -68,4 +70,5 @@ class FirebaseAuthenticationManager(
         onLogoutCallbacks.removeAll(toRemove)
     }
 
+    override fun isLoggedIn() = firebaseAuth.currentUser != null
 }

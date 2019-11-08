@@ -26,9 +26,12 @@ class MainActivity : BaseActivity(R.id.nav_host_fragment) {
     @ExperimentalCoroutinesApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        bottom_nav_view.setupWithNavController(navController)
-
+        if (!authManager.isLoggedIn())
+            startActivity(OnboardingActivity(this))
+        else{
+            setContentView(R.layout.activity_main)
+            bottom_nav_view.setupWithNavController(navController)
+        }
     }
 
     override fun onResume() {

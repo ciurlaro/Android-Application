@@ -9,10 +9,12 @@ import com.example.myapplication.ui.BaseFragment
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+@ExperimentalCoroutinesApi
 class HomeFragment : BaseFragment() {
 
     private val viewModel: HomeViewModel by viewModelInstance()
 
+    @ExperimentalCoroutinesApi
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -23,7 +25,6 @@ class HomeFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         matches_rv.adapter = viewModel.adapter
-        viewModel.getAllAvailableMatches()
     }
 
 //        super.onViewCreated(view, savedInstanceState)

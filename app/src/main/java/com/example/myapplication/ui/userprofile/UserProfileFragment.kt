@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.myapplication.R
 import com.example.myapplication.ui.BaseFragment
+import kotlinx.android.synthetic.main.fragment_user.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+@ExperimentalCoroutinesApi
 class UserProfileFragment : BaseFragment() {
 
     private val viewModel: UserProfileViewModel by viewModelInstance()
@@ -21,8 +23,10 @@ class UserProfileFragment : BaseFragment() {
     @ExperimentalCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.user.observe {
 
-//        tournaments_rv.adapter = viewModel.adapter
-//        viewModel.getTournamentsByMode("F4A")
+        }
+        viewModel.getUserInfo()
+
     }
 }
