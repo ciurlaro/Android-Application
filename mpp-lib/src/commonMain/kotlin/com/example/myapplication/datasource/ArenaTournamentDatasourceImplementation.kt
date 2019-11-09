@@ -1,10 +1,12 @@
 package com.example.myapplication.datasource
 
 
+import com.example.myapplication.auth.AuthenticationManager
 import com.example.myapplication.rawresponses.*
 import com.example.myapplication.rawresponses.createresponses.*
 import com.soywiz.klock.DateTimeTz
 import io.ktor.client.HttpClient
+import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.get
 import io.ktor.client.request.header
 import io.ktor.client.request.post
@@ -18,7 +20,7 @@ import kotlinx.serialization.json.Json
 class ArenaTournamentDatasourceImplementation(
     private val httpClient: HttpClient,
     private val endpoints: ArenaTournamentDatasource.Endpoints,
-    override val tokenFactory: TokenFactory
+    private val authManager: AuthenticationManager
 ) : ArenaTournamentDatasource {
 
     @UseExperimental(UnstableDefault::class)
@@ -201,18 +203,21 @@ class ArenaTournamentDatasourceImplementation(
     @UseExperimental(InternalAPI::class)
     private suspend inline fun <reified T> HttpClient.authenticatedGet(url: Url) =
         get<T>(url) {
-            tokenFactory.factory()?.let {
-                header(HttpHeaders.Authorization, "Bearer: ${"$it:".encodeBase64()}")
-            }
+            addAuth()
         }
 
     @UseExperimental(InternalAPI::class)
     private suspend inline fun <reified T> HttpClient.authenticatedPost(url: Url, content: Any?) =
         post<T>(url) {
-            tokenFactory.factory()?.let {
-                header(HttpHeaders.Authorization, "Bearer: ${"$it:".encodeBase64()}")
-            }
+            addAuth()
             content?.let { body = it }
         }
+
+
+    @InternalAPI
+    private fun HttpRequestBuilder.addAuth() {
+        if (authManager.isLoggedIn())
+            header(HttpHeaders.Authorization, "Bearer: ${"${authManager.getToken()}:".encodeBase64()}")
+    }
 
 }

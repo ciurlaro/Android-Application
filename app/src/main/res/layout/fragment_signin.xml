@@ -57,7 +57,7 @@
                 app:layout_constraintTop_toBottomOf="@id/email_etv"
                 android:theme="@style/AppTheme.LoginEditTextTheme"/>
 
-        <androidx.core.widget.ContentLoadingProgressBar
+        <ProgressBar
                 android:id="@+id/signin_progress_bar"
                 android:layout_width="56dp"
                 android:layout_height="56dp"

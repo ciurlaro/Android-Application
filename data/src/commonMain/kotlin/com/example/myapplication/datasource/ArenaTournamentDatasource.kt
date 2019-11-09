@@ -12,9 +12,6 @@ interface ArenaTournamentDatasource {
         val DEFAULT_DATE_TIME_PATTERN = DateFormat("yyyy-MM-dd'T'HH:mm:ss")
     }
 
-
-    val tokenFactory: TokenFactory
-
     suspend fun createGameMode(gameModeJSON: CreateGameModeJSON): ModeJSON
     suspend fun createGame(gameJSON: CreateGameJSON): GameJSON
     suspend fun createMatch(matchJSON: CreateMatchJSON): MatchJSON

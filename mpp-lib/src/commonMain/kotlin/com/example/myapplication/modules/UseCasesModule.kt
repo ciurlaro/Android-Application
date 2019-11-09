@@ -13,7 +13,7 @@ import com.example.myapplication.usecases.tournament.*
 import com.example.myapplication.usecases.user.CreateUserUseCase
 import com.example.myapplication.usecases.user.GetAccountVerificationStatusUseCase
 import com.example.myapplication.usecases.user.IsSubscribedAccountUseCase
-import com.example.myapplication.usecases.user.GetUserInfoUseCase
+import com.example.myapplication.usecases.user.GetCurrentUserInfoUseCase
 import org.kodein.di.Kodein
 import org.kodein.di.erased.bind
 import org.kodein.di.erased.instance
@@ -50,7 +50,7 @@ object UseCasesModule : KodeinModuleProvider {
             )
         }
         bind<GetAvailableMatchesPerPageUseCase>() with singleton { GetAvailableMatchesPerPageUseCase(instance()) }
-        bind<GetUserInfoUseCase>() with singleton { GetUserInfoUseCase(instance()) }
+        bind<GetCurrentUserInfoUseCase>() with singleton { GetCurrentUserInfoUseCase(instance()) }
         bind<GetAccountVerificationStatusUseCase>() with singleton {
             GetAccountVerificationStatusUseCase(
                 instance()

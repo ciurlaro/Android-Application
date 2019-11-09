@@ -6,9 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.example.myapplication.AuthenticationManager
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.GlobalScope
 import org.kodein.di.Copy
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein
@@ -31,20 +29,5 @@ abstract class BaseActivity(@IdRes navControllerFragmentId: Int) : AppCompatActi
     inline fun <reified T : ViewModel> viewModelInstance() =
         instance<AppCompatActivity, T>(arg = this)
 
-    fun AuthenticationManager.setOnLoginCallback(
-        dispatcher: CoroutineScope = GlobalScope,
-        action: suspend () -> Unit
-    ) = addOnLoginCallback(
-        this@BaseActivity,
-        AuthenticationManager.Action(this@BaseActivity::class.qualifiedName!!, dispatcher, action)
-    )
-
-    fun AuthenticationManager.setOnLogoutCallback(
-        dispatcher: CoroutineScope = GlobalScope,
-        action: suspend () -> Unit
-    ) = addOnLogoutCallback(
-        this@BaseActivity,
-        AuthenticationManager.Action(this@BaseActivity::class.qualifiedName!!, dispatcher, action)
-    )
 
 }

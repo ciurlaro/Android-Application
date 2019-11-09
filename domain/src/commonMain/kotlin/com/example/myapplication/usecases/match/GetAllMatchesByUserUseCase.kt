@@ -3,13 +3,13 @@ package com.example.myapplication.usecases.match
 import com.example.myapplication.entities.MatchEntity
 import com.example.myapplication.repositories.ArenaTournamentRepository
 import com.example.myapplication.usecases.UseCaseWithParams
-import com.example.myapplication.usecases.user.GetUserInfoUseCase
+import com.example.myapplication.usecases.user.GetCurrentUserInfoUseCase
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
 
 class GetAllMatchesByUserUseCase(
     private val repository: ArenaTournamentRepository,
-    private val getUserInfo: GetUserInfoUseCase
+    private val getCurrentUserInfoUseCase: GetCurrentUserInfoUseCase
 ) : UseCaseWithParams<GetAllMatchesByUserUseCase.Params, Flow<MatchEntity>> {
 
     @FlowPreview
@@ -17,7 +17,7 @@ class GetAllMatchesByUserUseCase(
         (0 until params.maxPage)
             .asFlow()
             .flatMapConcat {
-                repository.getMatchesByUser(getUserInfo.buildAction().id, it)
+                repository.getMatchesByUser(getCurrentUserInfoUseCase.buildAction().id, it)
             }
 
     @FlowPreview

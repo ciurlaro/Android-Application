@@ -5,7 +5,7 @@ import com.example.myapplication.repositories.ArenaTournamentRepository
 import com.example.myapplication.usecases.UseCaseSuspending
 import kotlinx.coroutines.FlowPreview
 
-class GetUserInfoUseCase(
+class GetCurrentUserInfoUseCase(
     private val repository: ArenaTournamentRepository
 ) : UseCaseSuspending<UserEntity> {
 

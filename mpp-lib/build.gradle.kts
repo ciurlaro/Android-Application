@@ -1,6 +1,16 @@
 import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
 import org.jetbrains.kotlin.gradle.targets.js.npm.tasks.KotlinPackageJsonTask
 
+buildscript {
+    repositories {
+        google()
+    }
+    dependencies {
+        val gmsVersion: String by project
+        classpath("com.google.gms:google-services:$gmsVersion")
+    }
+}
+
 plugins {
     id("com.android.library")
     kotlin("multiplatform")
@@ -24,6 +34,8 @@ android {
     }
 }
 
+apply(plugin = "com.google.gms.google-services")
+
 kotlin {
 
     android {
@@ -41,6 +53,9 @@ kotlin {
         val kotlinVersion: String by project
         val kodeinVersion: String by project
         val textEncodingVersion: String by project
+        val firebaseJvmVersion: String by project
+        val firebaseJsVersion: String by project
+
 
         val commonMain by getting {
             dependencies {
@@ -53,6 +68,7 @@ kotlin {
 
         val androidMain by getting {
             dependencies {
+                api("com.google.firebase:firebase-auth:$firebaseJvmVersion")
                 api(project(":data"))
                 api(ktor("client-okhttp", ktorVersion))
                 api(ktor("client-serialization-jvm", ktorVersion))
@@ -70,6 +86,7 @@ kotlin {
                 api(kodein("core-js", kodeinVersion))
                 api(kodein("erased-js", kodeinVersion))
                 api(npm("text-encoding", textEncodingVersion))
+                api(npm("firebase", firebaseJsVersion))
             }
         }
 
@@ -78,23 +95,6 @@ kotlin {
         }
 
     }
-}
-
-tasks.register<Copy>("buildNodePackage") {
-    group = "nodejs"
-    val jsJar by tasks.named<Jar>("jsJar")
-    val jsPackageJson by tasks.named<KotlinPackageJsonTask>("jsPackageJson")
-    dependsOn(jsJar, jsPackageJson)
-
-    into(file("$buildDir/nodePackage"))
-
-    from(jsPackageJson.packageJson)
-
-    from(zipTree(jsJar.archiveFile)) {
-        include("*.js")
-        into("kotlin")
-    }
-
 }
 
 @Suppress("unused")

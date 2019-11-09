@@ -46,5 +46,7 @@
     <string name="confirm_email_hint">Confirm email</string>
     <string name="must_not_be_empty">Must not be empty</string>
     <string name="email_or_password_wrong">Email or password wrong</string>
+    <string name="email_must_match">Emails must match</string>
+    <string name="password_must_match">Passwords must match</string>
 
 </resources>

@@ -26,11 +26,4 @@ class OnboardingActivity : BaseActivity(R.id.nav_host_onboarding_fragment) {
         setContentView(R.layout.activity_onboarding)
     }
 
-    override fun onResume() {
-        super.onResume()
-        authManager.setOnLoginCallback {
-            startActivity(MainActivity(this))
-        }
-    }
-
 }

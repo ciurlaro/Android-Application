@@ -11,6 +11,7 @@ fun buildCommonKodein(serverProtocol: String, serverUrl: String, serverPort: Int
     import(DatasourcesModule)
     import(NetworkModule)
     import(UseCasesModule)
+    import(AuthModule)
     constant("serverProtocol") with serverProtocol
     constant("serverUrl") with serverUrl
     constant("serverPort") with serverPort

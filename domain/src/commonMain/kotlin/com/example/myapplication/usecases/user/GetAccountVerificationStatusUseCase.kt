@@ -9,6 +9,6 @@ class GetAccountVerificationStatusUseCase(
 ) : UseCaseSuspending<Boolean> {
 
     @UseExperimental(FlowPreview::class)
-    override suspend fun buildAction(): Boolean = repository.isAccountVerified()
+    override suspend fun buildAction() = repository.isAccountVerified()
 
 }

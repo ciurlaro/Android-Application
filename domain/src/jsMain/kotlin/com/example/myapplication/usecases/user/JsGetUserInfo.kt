@@ -7,8 +7,8 @@ import kotlinx.coroutines.promise
 import kotlin.js.Promise
 
 class JsGetUserInfo(
-    override val usecase: GetUserInfoUseCase
-): JsUseCasePromise<GetUserInfoUseCase, UserEntity> {
+    override val usecase: GetCurrentUserInfoUseCase
+): JsUseCasePromise<GetCurrentUserInfoUseCase, UserEntity> {
 
     override fun buildAction(): Promise<UserEntity> = GlobalScope.promise {
         usecase.buildAction()

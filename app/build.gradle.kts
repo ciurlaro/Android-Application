@@ -127,7 +127,6 @@ android {
 
 }
 
-apply(plugin = "com.google.gms.google-services")
 apply(plugin = "androidx.navigation.safeargs.kotlin")
 
 dependencies {
@@ -147,7 +146,6 @@ dependencies {
     val espressoVersion: String by project
     val androidTestRunnerVersion: String by project
     val flexibleAdapterVersion: String by project
-    val firebaseJvmVersion: String by project
 
     implementation(project(":mpp-lib"))
 
@@ -160,10 +158,10 @@ dependencies {
     implementation("androidx.navigation", "navigation-ui", androidxNavigationVersion)
     implementation("androidx.lifecycle", "lifecycle-extensions", androidxLifecycleVersion)
     implementation("androidx.lifecycle", "lifecycle-viewmodel-ktx", androidxLifecycleVersion)
+    implementation("androidx.lifecycle", "lifecycle-runtime-ktx", androidxLifecycleVersion)
+    implementation("androidx.lifecycle", "lifecycle-livedata-ktx", androidxLifecycleVersion)
     implementation("androidx.navigation", "navigation-fragment-ktx", androidxNavigationVersion)
     implementation("androidx.navigation", "navigation-ui-ktx", androidxNavigationVersion)
-
-    implementation("com.google.firebase", "firebase-auth", firebaseJvmVersion)
 
     implementation("com.squareup.picasso", "picasso", picassoVersion)
 
