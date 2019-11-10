@@ -1,5 +1,4 @@
 import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
-import org.jetbrains.kotlin.gradle.targets.js.npm.tasks.KotlinPackageJsonTask
 
 buildscript {
     repositories {
@@ -61,6 +60,8 @@ kotlin {
             dependencies {
                 api(project(":data"))
                 api(ktor("client-core", ktorVersion))
+                api(ktor("client-serialization", ktorVersion))
+                api(ktor("client-mock", ktorVersion))
                 api(kodein("core", kodeinVersion))
                 api(kodein("erased", kodeinVersion))
             }
@@ -72,6 +73,7 @@ kotlin {
                 api(project(":data"))
                 api(ktor("client-okhttp", ktorVersion))
                 api(ktor("client-serialization-jvm", ktorVersion))
+                api(ktor("client-mock-jvm", ktorVersion))
                 api(kodein("core-jvm", kodeinVersion))
                 api(kodein("erased-jvm", kodeinVersion))
                 api(kotlin("reflect", kotlinVersion))
@@ -83,6 +85,7 @@ kotlin {
                 api(project(":data"))
                 api(ktor("client-js", ktorVersion))
                 api(ktor("client-serialization-js", ktorVersion))
+                api(ktor("client-mock-js", ktorVersion))
                 api(kodein("core-js", kodeinVersion))
                 api(kodein("erased-js", kodeinVersion))
                 api(npm("text-encoding", textEncodingVersion))

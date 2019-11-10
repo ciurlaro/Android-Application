@@ -165,8 +165,6 @@ dependencies {
 
     implementation("com.squareup.picasso", "picasso", picassoVersion)
 
-    implementation(ktor("client-mock-jvm", ktorVersion))
-
     implementation("org.kodein.di", "kodein-di-framework-android-x", kodeinVersion)
 
     implementation("eu.davidea", "flexible-adapter", flexibleAdapterVersion)

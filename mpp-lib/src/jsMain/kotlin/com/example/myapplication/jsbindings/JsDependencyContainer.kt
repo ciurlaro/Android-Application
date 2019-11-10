@@ -1,6 +1,5 @@
-package com.example.jsbindings
+package com.example.myapplication.jsbindings
 
-import com.example.myapplication.datasource.TokenFactory
 import com.example.myapplication.modules.JsUseCasesModule
 import com.example.myapplication.modules.buildCommonKodein
 import com.example.myapplication.modules.import
@@ -22,26 +21,18 @@ import com.example.myapplication.usecases.user.JsGetUserInfo
 import com.example.myapplication.usecases.user.JsIsSubscribedAccount
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
-import org.kodein.di.erased.bind
 import org.kodein.di.erased.instance
-import org.kodein.di.erased.singleton
 
 @JsName("DependencyContainer")
 class JsDependencyContainer(
     serverProtocol: String,
     serverUrl: String,
-    serverPort: Int,
-    factory: () -> String?
+    serverPort: Int
 ) : KodeinAware {
 
     override val kodein by Kodein.lazy {
         import(buildCommonKodein(serverProtocol, serverUrl, serverPort))
         import(JsUseCasesModule)
-        bind<TokenFactory>() with singleton {
-            object : TokenFactory {
-                override val factory = factory
-            }
-        }
     }
 
     /* Game usecases */
@@ -119,7 +110,7 @@ class JsDependencyContainer(
 
 }
 
-// const container = new com.example.jsbindings.JsDependencyContainer("", "", "", {
+// const container = new com.example.myapplication.jsbindings.JsDependencyContainer("", "", "", {
 //   w;lekfmelwrigw
 // })
 //  container.jsGetByModeUseCase.buildAction({ mode: "freeforall", page: 1 }) observable

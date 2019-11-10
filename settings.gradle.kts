@@ -27,4 +27,4 @@ pluginManagement {
 
 include(":app", ":data", ":domain", "mpp-lib")
 rootProject.name = "my-application"
-enableFeaturePreview("GRADLE_METADATA")
+//enableFeaturePreview("GRADLE_METADATA")
