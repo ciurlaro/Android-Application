@@ -1,0 +1,21 @@
+{
+  "id": 1,
+  "playersNumber": 16,
+  "tournamentDescription": "Description1",
+  "tournamentMode": "RANKED",
+  "title": "Tournament1",
+  "_links": {
+    "self": {
+      "href": "http://localhost:8080/tournament/1"
+    },
+    "tournamentEntity": {
+      "href": "http://localhost:8080/tournament/1"
+    },
+    "game": {
+      "href": "http://localhost:8080/tournament/1/game"
+    },
+    "admin": {
+      "href": "http://localhost:8080/tournament/1/admin"
+    }
+  }
+}

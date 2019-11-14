@@ -72,7 +72,6 @@ android {
         getByName("release") {
             isMinifyEnabled = true
             isDebuggable = false
-            manifestPlaceholders = mapOf("ApplicationName" to "Application")
             // TODO
             buildConfigField("String", "SERVER_PROTOCOL", "\"http\"")
             buildConfigField("String", "SERVER_URL", "\"\"")
@@ -82,7 +81,6 @@ android {
         getByName("debug") {
             isMinifyEnabled = false
             matchingFallbacks = listOf("release")
-            manifestPlaceholders = mapOf("ApplicationName" to "Application")
             // TODO
             buildConfigField("String", "SERVER_PROTOCOL", "\"http\"")
             buildConfigField("String", "SERVER_URL", "\"\"")
@@ -93,7 +91,6 @@ android {
             isMinifyEnabled = false
             isDebuggable = true
             matchingFallbacks = listOf("debug")
-            manifestPlaceholders = mapOf("ApplicationName" to "MockApplication")
             buildConfigField("String", "SERVER_PROTOCOL", "\"http\"")
             buildConfigField("String", "SERVER_URL", "\"mock\"")
             buildConfigField("int", "SERVER_PORT", "42")
@@ -102,7 +99,6 @@ android {
         create("localTesting") {
             isMinifyEnabled = false
             isDebuggable = true
-            manifestPlaceholders = mapOf("ApplicationName" to "Application")
             buildConfigField("String", "SERVER_PROTOCOL", "\"http\"")
             buildConfigField("String", "SERVER_URL", "\"localhost\"")
             buildConfigField("int", "SERVER_PORT", "8080")
@@ -138,8 +134,6 @@ dependencies {
     val androidxLifecycleVersion: String by project
     val materialVersion: String by project
     val constraintLayoutVersion: String by project
-    val ktorVersion: String by project
-    val kodeinVersion: String by project
     val picassoVersion: String by project
 
     val junitVersion: String by project
@@ -164,8 +158,6 @@ dependencies {
     implementation("androidx.navigation", "navigation-ui-ktx", androidxNavigationVersion)
 
     implementation("com.squareup.picasso", "picasso", picassoVersion)
-
-    implementation("org.kodein.di", "kodein-di-framework-android-x", kodeinVersion)
 
     implementation("eu.davidea", "flexible-adapter", flexibleAdapterVersion)
 

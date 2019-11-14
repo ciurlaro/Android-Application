@@ -1,0 +1,16 @@
+{
+  "gameName": "wow",
+  "availableModes": [
+    "OPEN_WORLD"
+  ],
+  "image": "wow.png",
+  "icon": "wow.icon",
+  "_links": {
+    "self": {
+      "href": "http://localhost:8080/game/wow"
+    },
+    "gameEntity": {
+      "href": "http://localhost:8080/game/wow"
+    }
+  }
+}

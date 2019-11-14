@@ -1,31 +1,29 @@
 package com.example.myapplication.ui.login
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
 import androidx.activity.addCallback
-import androidx.appcompat.widget.AppCompatButton
-import androidx.appcompat.widget.AppCompatEditText
-import androidx.appcompat.widget.AppCompatTextView
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentSigninBinding
+import com.example.myapplication.exceptions.AuthException
 import com.example.myapplication.ui.BaseFragment
 import com.example.myapplication.ui.MainActivity
+import com.example.myapplication.usecases.user.SigninUserUseCase
 import kotlinx.android.synthetic.main.fragment_signin.*
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
+import org.kodein.di.erased.instance
 
 @ExperimentalCoroutinesApi
 class SigninFragment : BaseFragment() {
 
     private val args by navArgs<SigninFragmentArgs>()
     private val viewModel by viewModelInstance<SigninViewModel>()
+    private val loginUserUseCase by instance<SigninUserUseCase>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
         FragmentSigninBinding.inflate(inflater, container, false)
@@ -63,16 +61,21 @@ class SigninFragment : BaseFragment() {
             button_sign_in.visibility = View.INVISIBLE
             signin_progress_bar.visibility = View.VISIBLE
 
-            if (authManager.loginWithEmailAndPassword(viewModel.email.get()!!, viewModel.password.get()!!))
+            try {
+                loginUserUseCase.buildAction(viewModel.email.get()!!, viewModel.password.get()!!)
                 requireActivity().startActivity(MainActivity(requireContext()))
-            else {
+            } catch (e: AuthException.AuthMalformedEmailException) {
+                email_etv.error = resources.getString(R.string.email_is_malformed)
+            } catch (e: AuthException.AuthInvalidCredentialsException) {
                 email_etv.error = resources.getString(R.string.email_or_password_wrong)
                 password_etv.error = resources.getString(R.string.email_or_password_wrong)
+            } finally {
                 button_sign_in.visibility = View.VISIBLE
                 signin_progress_bar.visibility = View.GONE
                 button_sign_in.isClickable = true
                 create_account_tv.isClickable = true
             }
+
         }
     }
 

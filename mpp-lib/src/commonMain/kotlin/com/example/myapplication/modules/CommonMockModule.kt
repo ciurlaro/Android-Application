@@ -13,7 +13,7 @@ import org.kodein.di.erased.bind
 import org.kodein.di.erased.instance
 import org.kodein.di.erased.singleton
 
-object MockModule : KodeinModuleProvider {
+object CommonMockModule : KodeinModuleProvider {
 
     override fun provideModule(): Kodein.Builder.() -> Unit = {
         bind<HttpClient>(overrides = true) with singleton {
@@ -28,7 +28,6 @@ object MockModule : KodeinModuleProvider {
                 }
             }
         }
-
     }
 
     private fun respondJsonFromRawResources(jsonName: String, dKodein: DKodein) = respond(
@@ -200,17 +199,17 @@ object MockModule : KodeinModuleProvider {
             )
 
 
-            "/createUser" -> respondJsonFromRawResources("user_response", dKodein)
-            "/currentUser" -> respondJsonFromRawResources("user_response", dKodein)
-            "/user/Cesare_1" -> respondJsonFromRawResources("user_response", dKodein)
-            "/user/Lamba_2" -> respondJsonFromRawResources("user_response", dKodein)
-            "/user/Beppe_3" -> respondJsonFromRawResources("user_response", dKodein)
+            "/createUser" -> respondJsonFromRawResources("single_user_response", dKodein)
+            "/currentUser" -> respondJsonFromRawResources("single_user_response", dKodein)
+            "/user/Cesare_1" -> respondJsonFromRawResources("single_user_response", dKodein)
+            "/user/Lamba_2" -> respondJsonFromRawResources("single_user_response", dKodein)
+            "/user/Beppe_3" -> respondJsonFromRawResources("single_user_response", dKodein)
             "/user/search/byMatch" -> respondJsonFromRawResources("multiple_users_response", dKodein)
             "/user/search/byMatchId" -> respondJsonFromRawResources("multiple_users_response", dKodein)
-            "/registration/1/user" -> respondJsonFromRawResources("user_response", dKodein)
-            "/registration/2/user" -> respondJsonFromRawResources("user_response", dKodein)
-            "/registration/3/user" -> respondJsonFromRawResources("user_response", dKodein)
-            "/tournament/1/admin" -> respondJsonFromRawResources("user_response", dKodein)
+            "/registration/1/user" -> respondJsonFromRawResources("single_user_response", dKodein)
+            "/registration/2/user" -> respondJsonFromRawResources("single_user_response", dKodein)
+            "/registration/3/user" -> respondJsonFromRawResources("single_user_response", dKodein)
+            "/tournament/1/admin" -> respondJsonFromRawResources("single_user_response", dKodein)
             "/isAccountVerified" -> respondJsonFromRawResources("verification_status_response", dKodein)
             "/isAccountSubscribed" -> respondJsonFromRawResources("subscription_status_response", dKodein)
 

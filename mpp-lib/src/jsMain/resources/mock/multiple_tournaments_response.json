@@ -1,0 +1,66 @@
+{
+  "_embedded": {
+    "tournamentEntities": [
+      {
+        "id": 1,
+        "playersNumber": 16,
+        "tournamentDescription": "Description1",
+        "tournamentMode": "RANKED",
+        "title": "Tournament1",
+        "_links": {
+          "self": {
+            "href": "http://localhost:8080/tournament/1"
+          },
+          "tournamentEntity": {
+            "href": "http://localhost:8080/tournament/1"
+          },
+          "game": {
+            "href": "http://localhost:8080/tournament/1/game"
+          },
+          "admin": {
+            "href": "http://localhost:8080/tournament/1/admin"
+          }
+        }
+      },
+      {
+        "id": 2,
+        "playersNumber": 32,
+        "tournamentDescription": "Description2",
+        "tournamentMode": "FREE_FOR_ALL",
+        "title": "Tournament2",
+        "_links": {
+          "self": {
+            "href": "http://localhost:8080/tournament/2"
+          },
+          "tournamentEntity": {
+            "href": "http://localhost:8080/tournament/2"
+          },
+          "game": {
+            "href": "http://localhost:8080/tournament/2/game"
+          },
+          "admin": {
+            "href": "http://localhost:8080/tournament/2/admin"
+          }
+        }
+      }
+    ]
+  },
+  "_links": {
+    "self": {
+      "href": "http://localhost:8080/tournament{?page,size,sort}",
+      "templated": true
+    },
+    "profile": {
+      "href": "http://localhost:8080/profile/tournament"
+    },
+    "search": {
+      "href": "http://localhost:8080/tournament/search"
+    }
+  },
+  "page": {
+    "size": 20,
+    "totalElements": 2,
+    "totalPages": 1,
+    "number": 0
+  }
+}

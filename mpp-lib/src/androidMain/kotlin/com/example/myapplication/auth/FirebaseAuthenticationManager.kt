@@ -30,22 +30,10 @@ actual class FirebaseAuthenticationManager actual constructor(
 
     override suspend fun createAccountWithEmailAndPassword(email: String, password: String) =
         suspendCancellableCoroutine { continuation: CancellableContinuation<Boolean> ->
-            firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { taskResult ->
-                continuation.resume(taskResult.isSuccessful)
-            }
-                .addOnCanceledListener {
-                    continuation.cancel()
-                }
-                .addOnFailureListener {
-                    continuation.resumeWithException(
-                        when (it) {
-                            is FirebaseAuthWeakPasswordException -> AuthWeakPasswordException()
-                            is FirebaseAuthInvalidCredentialsException -> AuthMalformedEmailException()
-                            is FirebaseAuthUserCollisionException -> AuthUserCollisionException()
-                            else -> it
-                        }
-                    )
-                }
+            firebaseAuth.createUserWithEmailAndPassword(email, password)
+                .addOnSuccessListener { continuation.resume(true) }
+                .addOnCanceledListener { continuation.cancel() }
+                .addOnFailureListener { continuation.resumeWithException(it.asCustom()) }
         }
 
     override suspend fun getToken() =
@@ -130,25 +118,17 @@ actual class FirebaseAuthenticationManager actual constructor(
         suspendCancellableCoroutine<Boolean> { cont ->
             currentFirebaseUser.linkWithCredential(authCredential)
                 .addOnSuccessListener { cont.resume(true) }
-                .addOnFailureListener {
-                    cont.resumeWithException(it.asCustom())
-                }
+                .addOnFailureListener { cont.resumeWithException(it.asCustom()) }
                 .addOnCanceledListener { cont.cancel() }
         }
 
-    private val FirebaseAuthException.custom
-        get() = when (this) {
-            is FirebaseAuthWeakPasswordException -> AuthWeakPasswordException()
-            is FirebaseAuthInvalidCredentialsException -> AuthInvalidCredentialsException(message)
-            is FirebaseAuthUserCollisionException -> AuthUserCollisionException()
-            is FirebaseAuthInvalidUserException -> AuthInvalidUserException()
-            is FirebaseAuthRecentLoginRequiredException -> AuthRecentLoginRequiredException()
-            else -> AuthGenericException(message)
-        }
-
     private fun Exception.asCustom() = when (this) {
-        is FirebaseAuthException -> custom
-        else -> this
+        is FirebaseAuthWeakPasswordException -> AuthWeakPasswordException()
+        is FirebaseAuthInvalidCredentialsException -> AuthInvalidCredentialsException(message)
+        is FirebaseAuthUserCollisionException -> AuthUserCollisionException()
+        is FirebaseAuthInvalidUserException -> AuthInvalidUserException()
+        is FirebaseAuthRecentLoginRequiredException -> AuthRecentLoginRequiredException()
+        else -> AuthGenericException(message)
     }
 
 }

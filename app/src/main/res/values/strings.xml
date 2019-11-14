@@ -48,5 +48,6 @@
     <string name="email_or_password_wrong">Email or password wrong</string>
     <string name="email_must_match">Emails must match</string>
     <string name="password_must_match">Passwords must match</string>
+    <string name="email_is_malformed">Email is malformed</string>
 
 </resources>

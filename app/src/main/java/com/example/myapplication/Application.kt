@@ -18,7 +18,19 @@ open class Application : Application(), KodeinAware {
     override val kodein = Kodein.lazy {
         import(androidXModule(this@Application))
         import(ViewModelModule)
-        import(buildCommonKodein(SERVER_PROTOCOL, SERVER_URL, SERVER_PORT))
+        import(
+            buildCommonKodein(
+                SERVER_PROTOCOL,
+                SERVER_URL,
+                SERVER_PORT,
+                isMock = CURRENT_BUILD_TYPE == BuildTypes.MOCK,
+                isDebug = listOf(
+                    BuildTypes.MOCK,
+                    BuildTypes.DEBUG,
+                    BuildTypes.LOCAL_TESTING
+                ).any { it == CURRENT_BUILD_TYPE }
+            )
+        )
     }
 
 }

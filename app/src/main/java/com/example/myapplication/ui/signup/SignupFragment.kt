@@ -11,14 +11,17 @@ import androidx.navigation.fragment.navArgs
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentSignupBinding
 import com.example.myapplication.ui.BaseFragment
+import com.example.myapplication.usecases.user.CreateUserUseCase
 import kotlinx.android.synthetic.main.fragment_signup.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import org.kodein.di.erased.instance
 
 @ExperimentalCoroutinesApi
 class SignupFragment : BaseFragment() {
 
     private val viewModel by viewModelInstance<SignupViewModel>()
     private val args by navArgs<SignupFragmentArgs>()
+    private val createUserUseCase by instance<CreateUserUseCase>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
         FragmentSignupBinding.inflate(inflater, container, false).also {
@@ -63,7 +66,11 @@ class SignupFragment : BaseFragment() {
             button_sign_up.isClickable = false
             already_have_account_tv.isClickable = false
             val isSuccessful = try {
-                authManager.createAccountWithEmailAndPassword(viewModel.email.get()!!, viewModel.password.get()!!)
+                createUserUseCase.buildAction(
+                    viewModel.email.get()!!,
+                    viewModel.password.get()!!,
+                    viewModel.nickname.get()!!
+                )
             } catch (e: Throwable){
                 wh
             }

@@ -11,8 +11,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
-import com.example.myapplication.AuthenticationManager
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
@@ -25,7 +23,6 @@ abstract class BaseFragment : Fragment(), KodeinAware {
 
     inline fun <reified T : ViewModel> viewModelInstance() = instance<Fragment, T>(arg = this)
 
-    protected val authManager by instance<AuthenticationManager>()
     protected val navController by instance<NavController>()
 
     inline fun <reified T : ViewDataBinding> viewDataBinding(
@@ -40,21 +37,5 @@ abstract class BaseFragment : Fragment(), KodeinAware {
 
     fun <T> LiveData<T>.observe(observer: (T) -> Unit) =
         observe(this@BaseFragment, Observer { observer(it) })
-
-    fun AuthenticationManager.setOnLoginCallback(
-        dispatcher: CoroutineScope = lifecycleScope,
-        action: suspend () -> Unit
-    ) = addOnLoginCallback(
-        this@BaseFragment,
-        AuthenticationManager.Action(this@BaseFragment::class.qualifiedName!!, dispatcher, action)
-    )
-
-    fun AuthenticationManager.setOnLogoutCallback(
-        dispatcher: CoroutineScope = lifecycleScope,
-        action: suspend () -> Unit
-    ) = addOnLogoutCallback(
-        this@BaseFragment,
-        AuthenticationManager.Action(this@BaseFragment::class.qualifiedName!!, dispatcher, action)
-    )
 
 }

@@ -19,4 +19,5 @@ sealed class AuthException(message: String? = null) : Throwable(message) {
     class AuthInvalidUserException(message: String? = null) : AuthException(message)
 
     class AuthRecentLoginRequiredException(message: String? = null) : AuthException(message)
+
 }

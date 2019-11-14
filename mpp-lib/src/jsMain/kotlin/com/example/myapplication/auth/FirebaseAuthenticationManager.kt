@@ -93,9 +93,8 @@ actual class FirebaseAuthenticationManager actual constructor(
 
     private fun Throwable.asCustom() = when (message) {
         "auth/weak-password" -> AuthWeakPasswordException()
-        "auth/invalid-credential", "auth/wrong-password", "auth/invalid-email" -> AuthInvalidCredentialsException(
-            message
-        )
+        "auth/invalid-credential", "auth/wrong-password", "auth/invalid-email" ->
+            AuthInvalidCredentialsException(message)
         "auth/account-exists-with-different-credential" -> AuthUserCollisionException()
         "auth/operation-not-allowed", "auth/user-disabled", "auth/user-not-found" -> AuthInvalidUserException()
         "auth/requires-recent-login" -> AuthRecentLoginRequiredException()

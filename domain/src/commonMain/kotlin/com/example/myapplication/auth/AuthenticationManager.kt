@@ -2,7 +2,7 @@ package com.example.myapplication.auth
 
 import com.example.myapplication.entities.AuthProviders
 import com.example.myapplication.entities.AuthUserEntity
-import com.example.myapplication.exceptions.*
+import com.example.myapplication.exceptions.AuthException.*
 
 /**
  * Standard interface to handle third party auth provider authentication.
