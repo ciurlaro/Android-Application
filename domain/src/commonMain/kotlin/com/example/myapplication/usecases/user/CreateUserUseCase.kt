@@ -13,12 +13,12 @@ class CreateUserUseCase(
     @UseExperimental(FlowPreview::class)
     override suspend fun buildAction(params: Params) {
         authenticationManager.createAccountWithEmailAndPassword(params.email, params.password)
-        repository.createUser(
-            params.email,
-            params.password,
-            params.nickname,
-            params.image
-        )
+//        repository.createUser(
+//            params.email,
+//            params.password,
+//            params.nickname,
+//            params.image
+//        )
     }
 
 

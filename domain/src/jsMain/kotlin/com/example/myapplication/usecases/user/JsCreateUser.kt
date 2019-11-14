@@ -1,6 +1,5 @@
 package com.example.myapplication.usecases.user
 
-import com.example.myapplication.entities.UserEntity
 import com.example.myapplication.usecases.JsUseCaseWithParamsPromise
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.promise
@@ -8,9 +7,9 @@ import kotlin.js.Promise
 
 class JsCreateUser(
     override val usecase: CreateUserUseCase
-) : JsUseCaseWithParamsPromise<CreateUserUseCase, CreateUserUseCase.Params, UserEntity> {
+) : JsUseCaseWithParamsPromise<CreateUserUseCase, CreateUserUseCase.Params, Unit> {
 
-    override fun buildAction(params: CreateUserUseCase.Params): Promise<UserEntity>  = GlobalScope.promise {
-        usecase.buildAction(params)
+    override fun buildAction(params: CreateUserUseCase.Params): Promise<Unit>  = GlobalScope.promise {
+        TODO()
     }
 }

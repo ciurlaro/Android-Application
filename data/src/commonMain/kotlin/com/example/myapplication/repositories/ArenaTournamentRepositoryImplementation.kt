@@ -41,17 +41,65 @@ class ArenaTournamentRepositoryImplementation(
     private val matchLinkMapper: MatchLinkMapper
 ) : ArenaTournamentRepository {
 
-    override suspend fun createUser(
-        email: String,
-        password: String,
-        nickname: String,
-        image: String
-    ) =
-        atDS.createUser(
-            CreateUserJSON(email, password, nickname, image)
-        )
-            .let { userMapper.fromRemoteSingle(it) }
+    override suspend fun updateCurrentUserEmail(email: String): Boolean {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
+    override suspend fun updateCurrentUserPassword(): Boolean {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override suspend fun updateCurrentUserNickname(): Boolean {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override suspend fun updateCurrentUserProfileImage(): Boolean {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override suspend fun loginWithEmailAndPassword(email: String, password: String): Boolean {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override suspend fun loginWithFacebookToken(token: String): Boolean {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override suspend fun loginWithGoogleToken(token: String): Boolean {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override suspend fun createAccountWithEmailAndPassword(email: String, password: String): Boolean {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override suspend fun getCurrentUserAuthMethods(): List<AuthProviders> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override suspend fun linkGoogleAuthProvider(token: String): Boolean {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override suspend fun linkFacebookAuthProvider(token: String): Boolean {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override suspend fun linkPasswordAuthProvider(password: String): Boolean {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override suspend fun reauthenticateWithPassword(password: String): Boolean {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override suspend fun reauthenticateWithGoogleToken(token: String): Boolean {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override suspend fun reauthenticateWithFacebook(token: String): Boolean {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
     override suspend fun createGame(
         name: String,

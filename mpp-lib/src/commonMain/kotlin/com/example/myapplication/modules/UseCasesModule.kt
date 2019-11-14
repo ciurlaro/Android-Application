@@ -68,7 +68,7 @@ object UseCasesModule : KodeinModuleProvider {
             )
         }
 
-        bind<CreateUserUseCase>() with singleton { CreateUserUseCase(instance()) }
+        bind<CreateUserUseCase>() with singleton { CreateUserUseCase(instance(), instance()) }
         bind<CreateGameModeUseCase>() with singleton { CreateGameModeUseCase(instance()) }
         bind<CreateGameUseCase>() with singleton { CreateGameUseCase(instance()) }
         bind<CreateTournamentUseCase>() with singleton { CreateTournamentUseCase(instance()) }

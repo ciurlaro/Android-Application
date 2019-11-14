@@ -1,0 +1,47 @@
+#slider1 {
+  background-image: url(src/assets/images/heroes-of-the-storm-machines-of-war-art-1920.0.webp);
+}
+
+#slider2 {
+  background-image: url(src/assets/images/hs-1024x576.jpg);
+}
+
+#slider3 {
+  background-image: url(src/assets/images/909952-2000x1125.jpg);
+}
+
+//style="opacity: 0.2;"
+
+.bestTournament-section {
+  .games {
+    height: 50px;
+  }
+
+  .more-button {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+}
+
+
+.tech-section {
+  .card-footer {
+    span {
+      font-weight: normal
+    }
+
+  }
+}
+
+
+.android-section {
+  #phone-img {
+    width: 60%;
+  }
+
+  a {
+    margin-top: 20px;
+  }
+
+}
