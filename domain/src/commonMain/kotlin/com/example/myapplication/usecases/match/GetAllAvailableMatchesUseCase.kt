@@ -22,7 +22,6 @@ class GetAllAvailableMatchesUseCase(
                     }
             }
 
-
     fun buildAction(pages: Int = 1) =
         buildAction(Params(pages))
 

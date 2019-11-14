@@ -12,7 +12,7 @@ import com.example.myapplication.databinding.FragmentSigninBinding
 import com.example.myapplication.exceptions.AuthException
 import com.example.myapplication.ui.BaseFragment
 import com.example.myapplication.ui.MainActivity
-import com.example.myapplication.usecases.user.SigninUserUseCase
+import com.example.myapplication.usecases.user.login.SigninUserUseCase
 import kotlinx.android.synthetic.main.fragment_signin.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
@@ -23,7 +23,7 @@ class SigninFragment : BaseFragment() {
 
     private val args by navArgs<SigninFragmentArgs>()
     private val viewModel by viewModelInstance<SigninViewModel>()
-    private val loginUserUseCase by instance<SigninUserUseCase>()
+    private val signinUserUseCase by instance<SigninUserUseCase>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
         FragmentSigninBinding.inflate(inflater, container, false)
@@ -62,7 +62,7 @@ class SigninFragment : BaseFragment() {
             signin_progress_bar.visibility = View.VISIBLE
 
             try {
-                loginUserUseCase.buildAction(viewModel.email.get()!!, viewModel.password.get()!!)
+                signinUserUseCase.buildAction(viewModel.email.get()!!, viewModel.password.get()!!)
                 requireActivity().startActivity(MainActivity(requireContext()))
             } catch (e: AuthException.AuthMalformedEmailException) {
                 email_etv.error = resources.getString(R.string.email_is_malformed)
@@ -83,7 +83,7 @@ class SigninFragment : BaseFragment() {
         create_account_tv.isClickable = false
         button_sign_in.isClickable = false
         navController.navigate(
-            SigninFragmentDirections.actionLoginToSignup(
+            SigninFragmentDirections.actionSigninToSignup(
                 viewModel.email.get()!!,
                 viewModel.password.get()!!
             )

@@ -1,4 +1,4 @@
-package com.example.myapplication.usecases.user
+package com.example.myapplication.usecases.user.login
 
 import com.example.myapplication.repositories.ArenaTournamentRepository
 import com.example.myapplication.usecases.UseCaseWithParamSuspending

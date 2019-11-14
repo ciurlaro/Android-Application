@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.entities.UserEntity
-import com.example.myapplication.usecases.user.GetCurrentUserInfoUseCase
+import com.example.myapplication.usecases.user.info.GetCurrentUserInfoUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 

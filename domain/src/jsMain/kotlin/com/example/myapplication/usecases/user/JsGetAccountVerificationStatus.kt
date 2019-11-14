@@ -1,6 +1,7 @@
 package com.example.myapplication.usecases.user
 
 import com.example.myapplication.usecases.JsUseCasePromise
+import com.example.myapplication.usecases.user.info.GetAccountVerificationStatusUseCase
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.promise
 

@@ -2,6 +2,7 @@ package com.example.myapplication.usecases.user
 
 import com.example.myapplication.entities.UserEntity
 import com.example.myapplication.usecases.JsUseCaseWithParamsPromise
+import com.example.myapplication.usecases.user.creation.CreateAccountWithEmailAndPasswordUseCase
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.promise
 import kotlin.js.Promise

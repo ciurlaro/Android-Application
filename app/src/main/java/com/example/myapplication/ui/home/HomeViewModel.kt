@@ -3,9 +3,7 @@ package com.example.myapplication.ui.home
 import android.annotation.SuppressLint
 import android.view.View
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.AuthenticationManager
 import com.example.myapplication.R
 import com.example.myapplication.entities.MatchEntity
 import com.example.myapplication.usecases.match.GetAllAvailableMatchesUseCase
@@ -14,10 +12,6 @@ import eu.davidea.flexibleadapter.items.AbstractFlexibleItem
 import eu.davidea.flexibleadapter.items.IFlexible
 import eu.davidea.viewholders.FlexibleViewHolder
 import kotlinx.android.synthetic.main.item_match.view.*
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onEach
 
 class HomeViewModel(
     private val getAllAvailableMatches: GetAllAvailableMatchesUseCase
@@ -65,13 +59,6 @@ class HomeViewModel(
 
         }
     }
-
-    @ExperimentalCoroutinesApi
-    fun getAllAvailableMatches() =
-        getAllAvailableMatches.buildAction()
-            .map { Model(it.first, it.second) }
-            .onEach { homeViewAdapter.addItem(it) }
-            .launchIn(viewModelScope)
 
     /**fun getShowcaseTournaments() =
     getShowcaseTournaments.buildAction()
