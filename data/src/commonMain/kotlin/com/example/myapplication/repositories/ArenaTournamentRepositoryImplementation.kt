@@ -69,7 +69,9 @@ class ArenaTournamentRepositoryImplementation(
 
     override suspend fun createGameMode(modeName: String) =
         atDS.createGameMode(CreateGameModeJSON(modeName))
-            .let { modeMapper.fromRemoteSingle(it) }
+            .let {
+                modeMapper.fromRemoteSingle(it)
+            }
 
     override suspend fun createTournament(
         playersNumber: Int,

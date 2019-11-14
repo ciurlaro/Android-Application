@@ -1,0 +1,10 @@
+{
+  "main": "kotlinx-io-kotlinx-coroutines-io.js",
+  "devDependencies": {},
+  "dependencies": {},
+  "peerDependencies": {},
+  "optionalDependencies": {},
+  "bundledDependencies": [],
+  "name": "kotlinx-io-kotlinx-coroutines-io",
+  "version": "0.1.15"
+}

@@ -1,0 +1,10 @@
+{
+  "main": "Kodein-DI-kodein-di-core.js",
+  "devDependencies": {},
+  "dependencies": {},
+  "peerDependencies": {},
+  "optionalDependencies": {},
+  "bundledDependencies": [],
+  "name": "Kodein-DI-kodein-di-core",
+  "version": "6.4.0"
+}
