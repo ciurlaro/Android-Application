@@ -1,7 +1,7 @@
 package com.example.myapplication.auth
 
+import com.example.myapplication.datasource.FirebaseDatasource
 import com.example.myapplication.entities.AuthProviders
-import com.example.myapplication.entities.AuthUserEntity
 import com.example.myapplication.exceptions.AuthException.*
 import com.google.firebase.auth.*
 import com.google.firebase.auth.FirebaseAuth
@@ -12,9 +12,29 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 
 @ExperimentalCoroutinesApi
-actual class FirebaseAuthenticationManager actual constructor(
+actual class FirebaseDatasourceImplementation actual constructor(
     private val firebaseAuth: FirebaseAuth
-) : AuthenticationManager {
+) : FirebaseDatasource {
+
+    override suspend fun getToken() =
+        getUserToken()
+
+    override suspend fun updateUserEmail(email: String) =
+        updateEmailCredential(email)
+
+
+    override suspend fun updateUserPassword(password: String) =
+        updatePasswordCredential(password)
+
+    override suspend fun updateUserNickname(nickname: String) =
+        updateNicknameCredential(
+            UserProfileChangeRequest.Builder()
+                .setDisplayName(nickname).build()
+        )
+
+    override suspend fun updateUserProfileImage(image: String): Boolean {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
     private val currentFirebaseUser
         get() = firebaseAuth.currentUser ?: throw AuthNotAuthenticatedException()
@@ -35,25 +55,6 @@ actual class FirebaseAuthenticationManager actual constructor(
                 .addOnCanceledListener { continuation.cancel() }
                 .addOnFailureListener { continuation.resumeWithException(it.asCustom()) }
         }
-
-    override suspend fun getToken() =
-        suspendCancellableCoroutine<String> { cont ->
-            currentFirebaseUser.getIdToken(false)
-                .addOnSuccessListener { cont.resume(it.token!!) }
-                .addOnCanceledListener { cont.cancel() }
-                .addOnFailureListener {
-                    cont.resumeWithException(
-                        when (it) {
-                            is FirebaseAuthInvalidUserException -> AuthInvalidUserException(it.message)
-                            else -> it
-                        }
-                    )
-                }
-        }
-
-    override fun getCurrentUser() = firebaseAuth.currentUser?.let {
-        AuthUserEntity(it.uid, it.email!!)
-    }
 
     override suspend fun getCurrentUserAuthMethods() =
         fetchAvailableAuthMethodsByEmail(currentFirebaseUser.email!!)
@@ -118,6 +119,42 @@ actual class FirebaseAuthenticationManager actual constructor(
         suspendCancellableCoroutine<Boolean> { cont ->
             currentFirebaseUser.linkWithCredential(authCredential)
                 .addOnSuccessListener { cont.resume(true) }
+                .addOnFailureListener { cont.resumeWithException(it.asCustom()) }
+                .addOnCanceledListener { cont.cancel() }
+        }
+
+    private suspend fun updateEmailCredential(email: String) =
+        suspendCancellableCoroutine<Boolean> { cont ->
+            currentFirebaseUser.updateEmail(email)
+                .addOnSuccessListener { cont.resume(true) }
+                .addOnFailureListener { cont.resumeWithException(it.asCustom()) }
+                .addOnCanceledListener { cont.cancel() }
+        }
+
+    private suspend fun updatePasswordCredential(password: String) =
+        suspendCancellableCoroutine<Boolean> { cont ->
+            currentFirebaseUser.updatePassword(password)
+                .addOnSuccessListener { cont.resume(true) }
+                .addOnFailureListener { cont.resumeWithException(it.asCustom()) }
+                .addOnCanceledListener { cont.cancel() }
+        }
+
+    private suspend fun updateNicknameCredential(profileUpdate: UserProfileChangeRequest) =
+        suspendCancellableCoroutine<Boolean> { cont ->
+            currentFirebaseUser.updateProfile(profileUpdate)
+                .addOnSuccessListener { cont.resume(true) }
+                .addOnFailureListener { cont.resumeWithException(it.asCustom()) }
+                .addOnCanceledListener { cont.cancel() }
+        }
+
+    private suspend fun updateProfileImageCredential(profileUpdate: UserProfileChangeRequest) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    private suspend fun getUserToken() =
+        suspendCancellableCoroutine<String> { cont ->
+            currentFirebaseUser.getIdToken(true)
+                .addOnCompleteListener { cont.resume(it.result!!.token!!) }
                 .addOnFailureListener { cont.resumeWithException(it.asCustom()) }
                 .addOnCanceledListener { cont.cancel() }
         }

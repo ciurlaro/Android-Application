@@ -11,7 +11,7 @@ import androidx.navigation.fragment.navArgs
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentSignupBinding
 import com.example.myapplication.ui.BaseFragment
-import com.example.myapplication.usecases.user.CreateUserUseCase
+import com.example.myapplication.usecases.user.CreateAccountWithEmailAndPasswordUseCase
 import kotlinx.android.synthetic.main.fragment_signup.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.kodein.di.erased.instance
@@ -21,7 +21,7 @@ class SignupFragment : BaseFragment() {
 
     private val viewModel by viewModelInstance<SignupViewModel>()
     private val args by navArgs<SignupFragmentArgs>()
-    private val createUserUseCase by instance<CreateUserUseCase>()
+    private val createUserUseCase by instance<CreateAccountWithEmailAndPasswordUseCase>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
         FragmentSignupBinding.inflate(inflater, container, false).also {

@@ -10,10 +10,10 @@ import com.example.myapplication.usecases.registration.GetAllRegistrationsByMatc
 import com.example.myapplication.usecases.registration.GetRegistrationsByTournamentUseCase
 import com.example.myapplication.usecases.registration.GetRegistrationsByUserUseCase
 import com.example.myapplication.usecases.tournament.*
-import com.example.myapplication.usecases.user.CreateUserUseCase
+import com.example.myapplication.usecases.user.CreateAccountWithEmailAndPasswordUseCase
 import com.example.myapplication.usecases.user.GetAccountVerificationStatusUseCase
-import com.example.myapplication.usecases.user.IsSubscribedAccountUseCase
 import com.example.myapplication.usecases.user.GetCurrentUserInfoUseCase
+import com.example.myapplication.usecases.user.IsSubscribedAccountUseCase
 import org.kodein.di.Kodein
 import org.kodein.di.erased.bind
 import org.kodein.di.erased.instance
@@ -67,8 +67,7 @@ object UseCasesModule : KodeinModuleProvider {
                 instance()
             )
         }
-
-        bind<CreateUserUseCase>() with singleton { CreateUserUseCase(instance()) }
+        bind<CreateAccountWithEmailAndPasswordUseCase>() with singleton { CreateAccountWithEmailAndPasswordUseCase(instance()) }
         bind<CreateGameModeUseCase>() with singleton { CreateGameModeUseCase(instance()) }
         bind<CreateGameUseCase>() with singleton { CreateGameUseCase(instance()) }
         bind<CreateTournamentUseCase>() with singleton { CreateTournamentUseCase(instance()) }

@@ -1,7 +1,7 @@
 package com.example.myapplication.auth
 
+import com.example.myapplication.datasource.FirebaseDatasource
 import com.example.myapplication.entities.AuthProviders
-import com.example.myapplication.entities.AuthUserEntity
 import com.example.myapplication.exceptions.AuthException.*
 import externals.firebase.AuthCredential
 import externals.firebase.auth.EmailAuthProvider.EMAIL_PASSWORD_SIGN_IN_METHOD
@@ -9,9 +9,9 @@ import externals.firebase.auth.FacebookAuthProvider.FACEBOOK_SIGN_IN_METHOD
 import externals.firebase.auth.GoogleAuthProvider.GOOGLE_SIGN_IN_METHOD
 import kotlinx.coroutines.await
 
-actual class FirebaseAuthenticationManager actual constructor(
+actual class FirebaseDatasourceImplementation actual constructor(
     private val firebaseAuth: FirebaseAuth
-) : AuthenticationManager {
+) : FirebaseDatasource {
 
     private val currentFirebaseUser
         get() = firebaseAuth.currentUser ?: throw AuthNotAuthenticatedException()
@@ -27,13 +27,6 @@ actual class FirebaseAuthenticationManager actual constructor(
 
     override suspend fun createAccountWithEmailAndPassword(email: String, password: String) =
         firebaseAuth.createUserWithEmailAndPassword(email, password).await().let { true }
-
-    override suspend fun getToken() =
-        currentFirebaseUser.getIdToken().await()
-
-    override fun getCurrentUser() = firebaseAuth.currentUser?.let {
-        AuthUserEntity(it.uid!!, it.email!!)
-    }
 
     override suspend fun getCurrentUserAuthMethods() =
         fetchAvailableAuthMethodsByEmail(currentFirebaseUser.email!!)

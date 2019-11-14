@@ -1,7 +1,6 @@
 package com.example.myapplication.datasource
 
 
-import com.example.myapplication.auth.AuthenticationManager
 import com.example.myapplication.exceptions.AuthException
 import com.example.myapplication.rawresponses.*
 import com.example.myapplication.rawresponses.createresponses.*
@@ -21,7 +20,7 @@ import kotlinx.serialization.json.Json
 class ArenaTournamentDatasourceImplementation(
     private val httpClient: HttpClient,
     private val endpoints: ArenaTournamentDatasource.Endpoints,
-    private val authManager: AuthenticationManager
+    private val firebaseDS: FirebaseDatasource
 ) : ArenaTournamentDatasource {
 
     @UseExperimental(UnstableDefault::class)
@@ -218,7 +217,7 @@ class ArenaTournamentDatasourceImplementation(
     @InternalAPI
     private suspend fun HttpRequestBuilder.addAuth() {
         try {
-            header(HttpHeaders.Authorization, "Bearer: ${"${authManager.getToken()}:".encodeBase64()}")
+            header(HttpHeaders.Authorization, "Bearer: ${"${firebaseDS.getToken()}:".encodeBase64()}")
         } catch (e: AuthException) {
             println(e)
         }

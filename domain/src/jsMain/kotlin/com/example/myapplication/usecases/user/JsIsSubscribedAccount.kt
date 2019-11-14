@@ -8,10 +8,10 @@ import kotlin.js.Promise
 
 
 class JsIsSubscribedAccount(
-    override val usecase: CreateUserUseCase
-) : JsUseCaseWithParamsPromise<CreateUserUseCase, CreateUserUseCase.Params, UserEntity> {
+    override val usecase: CreateAccountWithEmailAndPasswordUseCase
+) : JsUseCaseWithParamsPromise<CreateAccountWithEmailAndPasswordUseCase, CreateAccountWithEmailAndPasswordUseCase.Params, UserEntity> {
 
-    override fun buildAction(params: CreateUserUseCase.Params): Promise<UserEntity> = GlobalScope.promise {
+    override fun buildAction(params: CreateAccountWithEmailAndPasswordUseCase.Params): Promise<UserEntity> = GlobalScope.promise {
         usecase.buildAction(params)
     }
 }

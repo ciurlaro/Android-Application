@@ -2,20 +2,20 @@ package com.example.myapplication.usecases.user
 
 import com.example.myapplication.repositories.ArenaTournamentRepository
 import com.example.myapplication.usecases.UseCaseWithParamSuspending
+import kotlinx.coroutines.FlowPreview
 
-class SigninUserUseCase(
+class CreateAccountWithEmailAndPasswordUseCase(
     private val repository: ArenaTournamentRepository
-) : UseCaseWithParamSuspending<SigninUserUseCase.Params, Boolean> {
+) : UseCaseWithParamSuspending<CreateAccountWithEmailAndPasswordUseCase.Params, Boolean> {
 
+    @UseExperimental(FlowPreview::class)
     override suspend fun buildAction(params: Params) =
-        repository.loginWithEmailAndPassword(params.email, params.password)
+        repository.createAccountWithEmailAndPassword(params.email, params.password)
 
     suspend fun buildAction(email: String, password: String) =
         buildAction(Params(email, password))
 
-    data class Params(
-        val email: String,
-        val password: String
-    )
+    data class Params(val email: String, val password: String)
 
 }
+

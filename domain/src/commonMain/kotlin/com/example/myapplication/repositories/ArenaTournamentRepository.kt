@@ -40,9 +40,9 @@ interface ArenaTournamentRepository {
     ): TournamentEntity
 
     suspend fun updateCurrentUserEmail(email: String): Boolean
-    suspend fun updateCurrentUserPassword(): Boolean
-    suspend fun updateCurrentUserNickname(): Boolean
-    suspend fun updateCurrentUserProfileImage(): Boolean
+    suspend fun updateCurrentUserPassword(password: String): Boolean
+    suspend fun updateCurrentUserNickname(nickname: String): Boolean
+    suspend fun updateCurrentUserProfileImage(image: String): Boolean
 
     suspend fun getGameByName(name: String): GameEntity
     fun searchGameByName(name: String, page: Int): Flow<GameEntity>
