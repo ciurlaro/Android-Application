@@ -26,19 +26,6 @@ class MainActivity : BaseActivity(R.id.nav_host_fragment) {
     @ExperimentalCoroutinesApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        /*if (!authManager.isLoggedIn())
-            startActivity(OnboardingActivity(this))
-        else{
-            setContentView(R.layout.activity_main)
-            bottom_nav_view.setupWithNavController(navController)
-        }*/
+        bottom_nav_view.setupWithNavController(navController)
     }
-
-    override fun onResume() {
-        super.onResume()
-        /*authManager.setOnLogoutCallback {
-            startActivity(OnboardingActivity(this))
-        }*/
-    }
-
 }

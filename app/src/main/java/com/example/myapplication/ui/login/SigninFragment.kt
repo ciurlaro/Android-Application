@@ -96,6 +96,4 @@ class SigninFragment : BaseFragment() {
             requireActivity().finishAndRemoveTask()
         }
     }
-
-
 }

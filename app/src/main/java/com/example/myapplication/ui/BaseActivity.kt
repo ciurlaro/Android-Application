@@ -21,7 +21,6 @@ abstract class BaseActivity(@IdRes navControllerFragmentId: Int) : AppCompatActi
     }
 
     @ExperimentalCoroutinesApi
-    //val authManager by instance<AuthenticationManager>()
     val navController by instance<NavController>()
 
     inline fun <reified T : ViewModel> viewModelInstance() =
