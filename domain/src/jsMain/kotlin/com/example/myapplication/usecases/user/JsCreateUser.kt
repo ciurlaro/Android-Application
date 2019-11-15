@@ -1,6 +1,5 @@
 package com.example.myapplication.usecases.user
 
-import com.example.myapplication.entities.UserEntity
 import com.example.myapplication.usecases.JsUseCaseWithParamsPromise
 import com.example.myapplication.usecases.user.creation.CreateAccountWithEmailAndPasswordUseCase
 import kotlinx.coroutines.GlobalScope
@@ -9,9 +8,10 @@ import kotlin.js.Promise
 
 class JsCreateUser(
     override val usecase: CreateAccountWithEmailAndPasswordUseCase
-) : JsUseCaseWithParamsPromise<CreateAccountWithEmailAndPasswordUseCase, CreateAccountWithEmailAndPasswordUseCase.Params, UserEntity> {
+) : JsUseCaseWithParamsPromise<CreateAccountWithEmailAndPasswordUseCase, CreateAccountWithEmailAndPasswordUseCase.Params, Boolean> {
 
-    override fun buildAction(params: CreateAccountWithEmailAndPasswordUseCase.Params): Promise<UserEntity>  = GlobalScope.promise {
+    override fun buildAction(params: CreateAccountWithEmailAndPasswordUseCase.Params): Promise<Boolean> =
+        GlobalScope.promise {
         usecase.buildAction(params)
     }
 }

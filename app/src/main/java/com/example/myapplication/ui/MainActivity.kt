@@ -13,7 +13,7 @@ class MainActivity : BaseActivity(R.id.nav_host_fragment) {
 
     companion object {
 
-        fun buildIntent(context: Context) =
+        private fun buildIntent(context: Context) =
             Intent(context, MainActivity::class.java).apply {
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
             }
@@ -26,6 +26,7 @@ class MainActivity : BaseActivity(R.id.nav_host_fragment) {
     @ExperimentalCoroutinesApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
         bottom_nav_view.setupWithNavController(navController)
     }
 }
