@@ -31,3 +31,18 @@ subprojects {
         mavenCentral()
     }
 }
+
+task<Copy>("copyPackages"){
+    group = "jsmerda"
+    subprojects {
+        if("jsJar" in tasks.names)
+            dependsOn(tasks["jsJar"])
+    }
+    from(file("$buildDir/js/")){
+        exclude("**/yarn.lock")
+        exclude("**/node_modules")
+        exclude("**/*.json.hash")
+        exclude("package.json")
+    }
+    into("web-client")
+}

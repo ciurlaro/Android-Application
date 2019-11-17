@@ -1,4 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
+import * as myModule from 'my-application/packages/my-application-mpp-lib/kotlin/my-application-mpp-lib.js';
+
 
 @Component({
   selector: 'app-account',
@@ -8,7 +10,9 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 export class AccountComponent implements OnInit, OnDestroy {
 
 
-  constructor() { }
+  constructor() {
+      const c = myModule.prin
+  }
 
   ngOnInit() {
 

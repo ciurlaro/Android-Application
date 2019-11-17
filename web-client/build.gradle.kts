@@ -10,6 +10,7 @@ node {
 
 task<YarnTask>("ngBuild") {
   dependsOn("yarn_install")
+  //dependsOn("npmInstall")
   inputs.dir("node_modules")
   inputs.dir("src")
   inputs.file("angular.json")
@@ -17,9 +18,15 @@ task<YarnTask>("ngBuild") {
   inputs.dir("../build/js/packages")
   inputs.file("package.json")
   outputs.dir("dist")
+  
   args = listOf("run", "build")
 }
+
 
 task<YarnTask>("serve") {
   args = listOf("run", "start")
 }
+
+
+
+
