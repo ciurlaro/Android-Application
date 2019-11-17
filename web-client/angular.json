@@ -47,7 +47,8 @@
               "src/assets/imagesloaded/imagesloaded.pkgd.min.js",
               "src/assets/bootstrapcarouselswipe/bootstrap-carousel-swipe.js",
               "src/assets/theme/js/script.js",
-              "src/assets/gallery/script.js"
+              "src/assets/gallery/script.js",
+              "node_modules/my-application-mpp-lib/kotlin/my-application-mpp-lib.js"
             ]
           },
           "configurations": {
