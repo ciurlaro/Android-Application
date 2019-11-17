@@ -14,23 +14,25 @@ import org.kodein.di.android.x.androidXModule
 
 open class Application : Application(), KodeinAware {
 
+    init {
+
+    }
+
     @ExperimentalCoroutinesApi
     override val kodein = Kodein.lazy {
-        import(androidXModule(this@Application))
         import(ViewModelModule)
-        import(
-            buildCommonKodein(
+        import(buildCommonKodein(
                 SERVER_PROTOCOL,
                 SERVER_URL,
                 SERVER_PORT,
-                isMock = CURRENT_BUILD_TYPE == BuildTypes.MOCK,
+                isMock = BuildTypes.current() == BuildTypes.MOCK,
                 isDebug = listOf(
                     BuildTypes.MOCK,
                     BuildTypes.DEBUG,
                     BuildTypes.LOCAL_TESTING
-                ).any { it == CURRENT_BUILD_TYPE }
-            )
-        )
+                ).any { it == BuildTypes.current() }
+            ), true)
+        import(androidXModule(this@Application))
     }
 
 }

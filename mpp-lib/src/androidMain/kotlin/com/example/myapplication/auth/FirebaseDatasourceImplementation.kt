@@ -19,6 +19,12 @@ actual class FirebaseDatasourceImplementation actual constructor(
     override suspend fun getToken() =
         getUserToken()
 
+    override suspend fun getCurrentAuthUser() =
+        firebaseAuth.currentUser? ?:
+
+
+    override suspend fun getCurrentUserClaims(): Map<String, Boolean>
+
     override suspend fun updateUserEmail(email: String) =
         updateEmailCredential(email)
 

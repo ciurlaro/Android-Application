@@ -17,7 +17,7 @@ class GetAllMatchesByUserUseCase(
         (0 until params.maxPage)
             .asFlow()
             .flatMapConcat {
-                repository.getMatchesByUser(getCurrentUserInfoUseCase.buildAction().id, it)
+                repository.getMatchesByUser(getCurrentUserInfoUseCase.buildAction()!!.id, it)
             }
 
     @FlowPreview

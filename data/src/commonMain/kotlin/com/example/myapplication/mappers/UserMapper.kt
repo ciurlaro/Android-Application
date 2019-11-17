@@ -2,7 +2,6 @@ package com.example.myapplication.mappers
 
 import com.example.myapplication.entities.UserEntity
 import com.example.myapplication.rawresponses.UserJSON
-import com.example.myapplication.rawresponses.createresponses.CreateUserJSON
 
 class UserMapper :
     SingleFromRemoteMapper<UserJSON, UserEntity> {
@@ -13,3 +12,4 @@ class UserMapper :
         }
 
 }
+

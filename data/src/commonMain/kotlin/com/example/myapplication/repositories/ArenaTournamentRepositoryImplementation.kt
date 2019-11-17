@@ -31,6 +31,7 @@ class ArenaTournamentRepositoryImplementation(
     private val tournamentMapper: TournamentMapper,
     private val registrationMapper: RegistrationMapper,
     private val userMapper: UserMapper,
+    private val currentUserMapper: CurrentUserMapper,
     private val accountStatusMapper: AccountStatusMapper,
     private val subscriptionMapper: AccountSubscriptionMapper,
     private val tournamentSplitter: TournamentSplitter,
@@ -88,17 +89,6 @@ class ArenaTournamentRepositoryImplementation(
 
     override suspend fun reauthenticateWithFacebook(token: String) =
         firebaseDS.reauthenticateWithFacebook(token)
-
-    /*override suspend fun createUser(
-        email: String,
-        password: String,
-        nickname: String,
-        image: String
-    ) =
-        atDS.createUser(
-            CreateUserJSON(email, password, nickname, image)
-        )
-            .let { userMapper.fromRemoteSingle(it) }*/
 
 
     override suspend fun createGame(
@@ -394,17 +384,12 @@ class ArenaTournamentRepositoryImplementation(
         arenaTournamentDS.getCurrentUser()
             .let { userMapper.fromRemoteSingle(it) }
 
-    override suspend fun getCurrentUser() =
-        arenaTournamentDS.getCurrentUser()
-            .let { userMapper.fromRemoteSingle(it) }
+    override suspend fun getCurrentUser() = coroutineScope {
+        val user = async { firebaseDS.getCurrentAuthUser() }
+        val claims = async { firebaseDS.getClaims() }
 
-    override suspend fun isAccountVerified() =
-        arenaTournamentDS.getAccountVerificationStatus()
-            .let { accountStatusMapper.fromRemoteSingle(it) }
-
-    override suspend fun isAccountSubscribed() =
-        arenaTournamentDS.getAccountSubscription()
-            .let { subscriptionMapper.fromRemoteSingle(it) }
+        user.await()?.let { currentUserMapper.fromRemoteSingle(it, claims.await()) }
+    }
 
     private fun MultipleTournamentsJSON.transformTournaments() =
         tournamentSplitter(this)

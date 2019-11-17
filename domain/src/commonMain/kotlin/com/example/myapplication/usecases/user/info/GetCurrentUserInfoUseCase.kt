@@ -7,9 +7,10 @@ import kotlinx.coroutines.FlowPreview
 
 class GetCurrentUserInfoUseCase(
     private val repository: ArenaTournamentRepository
-) : UseCaseSuspending<UserEntity> {
+) : UseCaseSuspending<UserEntity?> {
 
     @UseExperimental(FlowPreview::class)
-    override suspend fun buildAction(): UserEntity = repository.getCurrentUser()
+    override suspend fun buildAction() =
+        repository.getCurrentUser()
 
 }

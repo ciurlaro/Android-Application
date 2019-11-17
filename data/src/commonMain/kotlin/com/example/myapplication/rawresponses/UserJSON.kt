@@ -22,5 +22,6 @@ data class UserJSON(
     val image: String,
     val verified: Boolean,
     val subscriber: Boolean,
-    val _links: LinksJSON
+    val _links: LinksJSON? = null
+// TODO() rimuovere _links !!!!!!!!
 )
