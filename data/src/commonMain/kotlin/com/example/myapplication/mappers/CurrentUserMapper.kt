@@ -12,7 +12,6 @@ class CurrentUserMapper :
             user.email,
             user.nickname,
             user.image,
-            claims.getValue("isVerified"),
             claims.getValue("isSubscriber")
         )
     }

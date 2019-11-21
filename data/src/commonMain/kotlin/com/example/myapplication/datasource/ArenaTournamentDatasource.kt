@@ -50,7 +50,6 @@ interface ArenaTournamentDatasource {
     suspend fun getRegistrationsByUser(userId: String, page: Int): MultipleRegistrationsJSON
     suspend fun getRegistrationsByMatchId(matchId: Long, page: Int): MultipleRegistrationsJSON
 
-    suspend fun getCurrentUser(): UserJSON
     suspend fun getUserById(id: String): UserJSON
     suspend fun getUserByLink(link: String): UserJSON
     suspend fun getUsersByMatchId(matchId: Long, page: Int): MultipleUsersJSON

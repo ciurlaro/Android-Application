@@ -8,7 +8,7 @@ class UserMapper :
 
     override fun fromRemoteSingle(remote: UserJSON) =
         with(remote) {
-            UserEntity(id, email, nickname, image, verified, subscriber)
+            UserEntity(id, email, nickname, image, subscriber)
         }
 
 }

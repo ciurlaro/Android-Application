@@ -8,6 +8,5 @@ data class UserEntity(
     val email: String,
     val nickname: String,
     val image: String,
-    val verified: Boolean = false,
-    val subscriber: Boolean
+    val isSubscriber: Boolean
 )

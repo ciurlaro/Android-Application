@@ -173,4 +173,6 @@ interface FirebaseDatasource {
 
     suspend fun getCurrentUserClaims(): Map<String, Boolean>
 
+    suspend fun isCurrentUserEmailVerified(): Boolean
+
 }

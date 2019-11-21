@@ -69,7 +69,10 @@ interface ArenaTournamentRepository {
     fun getRegistrationsByUser(userId: String, page: Int): Flow<RegistrationEntity>
 
     suspend fun getUserById(id: String): UserEntity
+
     suspend fun getCurrentUser(): UserEntity?
+
+    suspend fun isCurrentUserEmailVerified(): Boolean
 
     /**
      * Allows to login with username and password.

@@ -14,6 +14,7 @@ import com.example.myapplication.splitters.RegistrationSplitter
 import com.example.myapplication.splitters.TournamentSplitter
 import com.example.myapplication.utils.Quadruple
 import com.example.myapplication.utils.Quintuple
+import com.example.myapplication.utils.flatMapIterableConcat
 import com.soywiz.klock.DateFormat
 import com.soywiz.klock.DateTimeTz
 import kotlinx.coroutines.CoroutineScope
@@ -32,8 +33,6 @@ class ArenaTournamentRepositoryImplementation(
     private val registrationMapper: RegistrationMapper,
     private val userMapper: UserMapper,
     private val currentUserMapper: CurrentUserMapper,
-    private val accountStatusMapper: AccountStatusMapper,
-    private val subscriptionMapper: AccountSubscriptionMapper,
     private val tournamentSplitter: TournamentSplitter,
     private val matchSplitter: MatchSplitter,
     private val registrationSplitter: RegistrationSplitter,
@@ -53,9 +52,8 @@ class ArenaTournamentRepositoryImplementation(
     override suspend fun updateCurrentUserNickname(nickname: String) =
         firebaseDS.updateUserNickname(nickname)
 
-    override suspend fun updateCurrentUserProfileImage(image: String): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override suspend fun updateCurrentUserProfileImage(image: String) =
+        firebaseDS.updateUserProfileImage(image)
 
     override suspend fun loginWithEmailAndPassword(email: String, password: String) =
         firebaseDS.loginWithEmailAndPassword(email, password)
@@ -90,6 +88,8 @@ class ArenaTournamentRepositoryImplementation(
     override suspend fun reauthenticateWithFacebook(token: String) =
         firebaseDS.reauthenticateWithFacebook(token)
 
+    override suspend fun isCurrentUserEmailVerified() =
+        firebaseDS.isCurrentUserEmailVerified()
 
     override suspend fun createGame(
         name: String,
@@ -381,12 +381,12 @@ class ArenaTournamentRepositoryImplementation(
             }
 
     override suspend fun getUserById(id: String) =
-        arenaTournamentDS.getCurrentUser()
+        arenaTournamentDS.getUserById(id)
             .let { userMapper.fromRemoteSingle(it) }
 
     override suspend fun getCurrentUser() = coroutineScope {
         val user = async { firebaseDS.getCurrentAuthUser() }
-        val claims = async { firebaseDS.getClaims() }
+        val claims = async { firebaseDS.getCurrentUserClaims() }
 
         user.await()?.let { currentUserMapper.fromRemoteSingle(it, claims.await()) }
     }
@@ -466,10 +466,3 @@ class ArenaTournamentRepositoryImplementation(
         }
 
 }
-
-@FlowPreview
-private fun <T, R> Flow<T>.flatMapIterableConcat(function: (T) -> Iterable<R>) =
-    flatMapConcat {
-        function(it)
-            .asFlow()
-    }

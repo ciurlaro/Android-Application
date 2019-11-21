@@ -2,6 +2,7 @@ package com.example.myapplication.auth
 
 import com.example.myapplication.datasource.FirebaseDatasource
 import com.example.myapplication.entities.AuthProviders
+import com.example.myapplication.exceptions.AuthException
 import com.example.myapplication.exceptions.AuthException.*
 import com.google.firebase.auth.*
 import com.google.firebase.auth.FirebaseAuth
@@ -20,7 +21,7 @@ actual class FirebaseDatasourceImplementation actual constructor(
         getUserToken()
 
     override suspend fun getCurrentAuthUser() =
-        firebaseAuth.currentUser? ?:
+        firebaseAuth.currentUser ?: throw AuthNotAuthenticatedException()
 
 
     override suspend fun getCurrentUserClaims(): Map<String, Boolean>
