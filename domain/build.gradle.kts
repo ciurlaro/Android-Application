@@ -1,5 +1,9 @@
+import org.jetbrains.kotlin.gradle.tasks.Kotlin2JsCompile
+import se.jensim.gradle.plugin.kt2ts.kt2ts
+
 plugins {
     kotlin("multiplatform")
+    id("se.jensim.kt2ts") version "0.11.0"
 }
 
 kotlin {
@@ -52,4 +56,14 @@ kotlin {
 
     }
 
+}
+
+kt2ts {
+    output {
+        outputFile = file("$buildDir/ts/kt2ts.d.ts")
+        annotations = listOf("kotlin.js.JsName")
+    }
+    withGroovyBuilder {
+        setProperty("classFilesSources.compileTasks", "listOf(tasks.compileKotlin)")
+    }
 }
