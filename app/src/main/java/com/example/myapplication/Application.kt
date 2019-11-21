@@ -22,16 +22,16 @@ open class Application : Application(), KodeinAware {
     override val kodein = Kodein.lazy {
         import(ViewModelModule)
         import(buildCommonKodein(
-                SERVER_PROTOCOL,
-                SERVER_URL,
-                SERVER_PORT,
-                isMock = BuildTypes.current() == BuildTypes.MOCK,
-                isDebug = listOf(
-                    BuildTypes.MOCK,
-                    BuildTypes.DEBUG,
-                    BuildTypes.LOCAL_TESTING
-                ).any { it == BuildTypes.current() }
-            ), true)
+            SERVER_PROTOCOL,
+            SERVER_URL,
+            SERVER_PORT,
+            isMock = BuildTypes.current() == BuildTypes.MOCK,
+            isDebug = listOf(
+                BuildTypes.MOCK,
+                BuildTypes.DEBUG,
+                BuildTypes.LOCAL_TESTING
+            ).any { it == BuildTypes.current() }
+        ), true)
         import(androidXModule(this@Application))
     }
 
