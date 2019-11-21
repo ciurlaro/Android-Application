@@ -1,4 +1,5 @@
 *.iml
+web-client/package
 .gradle
 local.properties
 .idea/
