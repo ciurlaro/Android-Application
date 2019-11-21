@@ -25,11 +25,11 @@ android {
     compileSdkVersion(29)
     buildToolsVersion("29.0.2")
 
-    sourceSets.all {
-        java.srcDirs(file("src/android${name.capitalize()}/kotlin"))
-        res.srcDirs(file("src/android${name.capitalize()}/res"))
-        resources.srcDirs(file("src/android${name.capitalize()}/resources"))
-        manifest.srcFile(file("src/android${name.capitalize()}/AndroidManifest.xml"))
+    sourceSets["main"].apply {
+        java.srcDirs(file("src/androidMain/kotlin"))
+        res.srcDirs(file("src/androidMain/res"))
+        resources.srcDirs(file("src/androidMain/resources"))
+        manifest.srcFile(file("src/androidMain/AndroidManifest.xml"))
     }
 }
 
@@ -42,7 +42,7 @@ kotlin {
             kotlinOptions.jvmTarget = "1.8"
         }
     }
-    js{
+    js {
         browser()
     }
 
@@ -73,7 +73,6 @@ kotlin {
                 api("com.google.firebase:firebase-auth:$firebaseJvmVersion")
                 api("com.google.firebase:firebase-storage:$firebaseJvmVersion")
                 api("com.google.firebase:firebase-storage-ktx:$firebaseJvmVersion")
-                api(project(":data"))
                 api(ktor("client-okhttp", ktorVersion))
                 api(ktor("client-serialization-jvm", ktorVersion))
                 api(ktor("client-mock-jvm", ktorVersion))
@@ -87,7 +86,6 @@ kotlin {
 
         val jsMain by getting {
             dependencies {
-                api(project(":data"))
                 api(ktor("client-js", ktorVersion))
                 api(ktor("client-serialization-js", ktorVersion))
                 api(ktor("client-mock-js", ktorVersion))

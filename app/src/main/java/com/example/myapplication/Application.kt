@@ -14,10 +14,6 @@ import org.kodein.di.android.x.androidXModule
 
 open class Application : Application(), KodeinAware {
 
-    init {
-
-    }
-
     @ExperimentalCoroutinesApi
     override val kodein = Kodein.lazy {
         import(ViewModelModule)

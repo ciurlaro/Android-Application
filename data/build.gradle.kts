@@ -32,7 +32,6 @@ kotlin {
 
         val jvmMain by getting {
             dependencies {
-                api(project(":domain"))
                 api(ktor("http-jvm", ktorVersion))
                 api(ktor("utils-jvm", ktorVersion))
                 api(serialization("runtime", kotlinxSerializationVersion))
@@ -41,7 +40,6 @@ kotlin {
 
         val jsMain by getting {
             dependencies {
-                api(project(":domain"))
                 api(ktor("http-js", ktorVersion))
                 api(ktor("utils-js", ktorVersion))
                 api(serialization("runtime-js", kotlinxSerializationVersion))

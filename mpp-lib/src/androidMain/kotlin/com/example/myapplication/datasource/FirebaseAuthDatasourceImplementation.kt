@@ -1,18 +1,11 @@
 package com.example.myapplication.datasource
 
 import android.net.Uri
-import com.example.myapplication.datasource.FirebaseAuthDatasource
 import com.example.myapplication.entities.AuthProviders
 import com.example.myapplication.entities.AuthUserEntity
-import com.example.myapplication.exceptions.AuthException.*
-import com.google.android.gms.tasks.Task
+import com.example.myapplication.exceptions.AuthException.AuthNotAuthenticatedException
 import com.google.firebase.auth.*
-import com.google.firebase.auth.FirebaseAuth
-import kotlinx.coroutines.CancellableContinuation
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.suspendCancellableCoroutine
-import kotlin.coroutines.resume
-import kotlin.coroutines.resumeWithException
 
 @ExperimentalCoroutinesApi
 actual class FirebaseAuthDatasourceImplementation actual constructor(
