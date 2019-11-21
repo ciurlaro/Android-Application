@@ -1,6 +1,6 @@
 package com.example.myapplication.auth
 
-import com.example.myapplication.datasource.FirebaseDatasource
+import com.example.myapplication.datasource.FirebaseAuthDatasource
 import com.example.myapplication.entities.AuthProviders
 import com.example.myapplication.entities.AuthUserEntity
 import com.example.myapplication.exceptions.AuthException.*
@@ -10,9 +10,9 @@ import externals.firebase.auth.FacebookAuthProvider.FACEBOOK_SIGN_IN_METHOD
 import externals.firebase.auth.GoogleAuthProvider.GOOGLE_SIGN_IN_METHOD
 import kotlinx.coroutines.await
 
-actual class FirebaseDatasourceImplementation actual constructor(
+actual class FirebaseAuthDatasourceImplementation actual constructor(
     private val firebaseAuth: FirebaseAuth
-) : FirebaseDatasource {
+) : FirebaseAuthDatasource {
     override suspend fun getCurrentAuthUser(): AuthUserEntity? {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }

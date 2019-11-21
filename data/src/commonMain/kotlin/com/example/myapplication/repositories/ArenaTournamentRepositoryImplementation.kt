@@ -1,7 +1,7 @@
 package com.example.myapplication.repositories
 
 import com.example.myapplication.datasource.ArenaTournamentDatasource
-import com.example.myapplication.datasource.FirebaseDatasource
+import com.example.myapplication.datasource.FirebaseAuthDatasource
 import com.example.myapplication.entities.*
 import com.example.myapplication.mappers.*
 import com.example.myapplication.mappers.entitieslinkmapper.*
@@ -25,7 +25,7 @@ import kotlinx.coroutines.flow.*
 
 class ArenaTournamentRepositoryImplementation(
     private val arenaTournamentDS: ArenaTournamentDatasource,
-    private val firebaseDS: FirebaseDatasource,
+    private val firebaseAuthDS: FirebaseAuthDatasource,
     private val gameMapper: GameMapper,
     private val modeMapper: ModeMapper,
     private val matchMapper: MatchMapper,
@@ -44,52 +44,52 @@ class ArenaTournamentRepositoryImplementation(
 ) : ArenaTournamentRepository {
 
     override suspend fun updateCurrentUserEmail(email: String) =
-        firebaseDS.updateUserEmail(email)
+        firebaseAuthDS.updateUserEmail(email)
 
     override suspend fun updateCurrentUserPassword(password: String) =
-        firebaseDS.updateUserPassword(password)
+        firebaseAuthDS.updateUserPassword(password)
 
     override suspend fun updateCurrentUserNickname(nickname: String) =
-        firebaseDS.updateUserNickname(nickname)
+        firebaseAuthDS.updateUserNickname(nickname)
 
     override suspend fun updateCurrentUserProfileImage(image: ByteArray) =
         TODO()
 
     override suspend fun loginWithEmailAndPassword(email: String, password: String) =
-        firebaseDS.loginWithEmailAndPassword(email, password)
+        firebaseAuthDS.loginWithEmailAndPassword(email, password)
 
     override suspend fun loginWithFacebookToken(token: String) =
-        firebaseDS.loginWithFacebookToken(token)
+        firebaseAuthDS.loginWithFacebookToken(token)
 
     override suspend fun loginWithGoogleToken(token: String) =
-        firebaseDS.loginWithGoogleToken(token)
+        firebaseAuthDS.loginWithGoogleToken(token)
 
     override suspend fun createAccountWithEmailAndPassword(email: String, password: String) =
-        firebaseDS.createAccountWithEmailAndPassword(email, password)
+        firebaseAuthDS.createAccountWithEmailAndPassword(email, password)
 
     override suspend fun getCurrentUserAuthMethods() =
-        firebaseDS.getCurrentUserAuthMethods()
+        firebaseAuthDS.getCurrentUserAuthMethods()
 
     override suspend fun linkGoogleAuthProvider(token: String) =
-        firebaseDS.linkGoogleAuthProvider(token)
+        firebaseAuthDS.linkGoogleAuthProvider(token)
 
     override suspend fun linkFacebookAuthProvider(token: String) =
-        firebaseDS.linkFacebookAuthProvider(token)
+        firebaseAuthDS.linkFacebookAuthProvider(token)
 
     override suspend fun linkPasswordAuthProvider(password: String) =
-        firebaseDS.linkPasswordAuthProvider(password)
+        firebaseAuthDS.linkPasswordAuthProvider(password)
 
     override suspend fun reauthenticateWithPassword(password: String) =
-        firebaseDS.reauthenticateWithPassword(password)
+        firebaseAuthDS.reauthenticateWithPassword(password)
 
     override suspend fun reauthenticateWithGoogleToken(token: String) =
-        firebaseDS.reauthenticateWithGoogleToken(token)
+        firebaseAuthDS.reauthenticateWithGoogleToken(token)
 
     override suspend fun reauthenticateWithFacebook(token: String) =
-        firebaseDS.reauthenticateWithFacebook(token)
+        firebaseAuthDS.reauthenticateWithFacebook(token)
 
     override suspend fun isCurrentUserEmailVerified() =
-        firebaseDS.isCurrentUserEmailVerified()
+        firebaseAuthDS.isCurrentUserEmailVerified()
 
     override suspend fun createGame(
         name: String,
@@ -385,8 +385,8 @@ class ArenaTournamentRepositoryImplementation(
             .let { userMapper.fromRemoteSingle(it) }
 
     override suspend fun getCurrentUser() = coroutineScope {
-        val user = async { firebaseDS.getCurrentAuthUser() }
-        val claims = async { firebaseDS.getCurrentUserClaims() }
+        val user = async { firebaseAuthDS.getCurrentAuthUser() }
+        val claims = async { firebaseAuthDS.getCurrentUserClaims() }
 
         user.await()?.let { currentUserMapper.fromRemoteSingle(it, claims.await()) }
     }

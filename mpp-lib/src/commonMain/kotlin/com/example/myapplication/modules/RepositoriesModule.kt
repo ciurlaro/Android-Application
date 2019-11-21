@@ -15,7 +15,7 @@ object RepositoriesModule : KodeinModuleProvider {
                 instance(), instance(), instance(), instance(), instance(),
                 instance(), instance(), instance(), instance(), instance(),
                 instance(), instance(), instance(), instance(), instance(),
-                instance(), instance(), instance(), instance()
+                instance(), instance()
             )
         }
     }

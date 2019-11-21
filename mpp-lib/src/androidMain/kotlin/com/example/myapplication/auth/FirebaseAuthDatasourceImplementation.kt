@@ -1,7 +1,7 @@
 package com.example.myapplication.auth
 
 import android.net.Uri
-import com.example.myapplication.datasource.FirebaseDatasource
+import com.example.myapplication.datasource.FirebaseAuthDatasource
 import com.example.myapplication.entities.AuthProviders
 import com.example.myapplication.entities.AuthUserEntity
 import com.example.myapplication.exceptions.AuthException.*
@@ -15,9 +15,9 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 
 @ExperimentalCoroutinesApi
-actual class FirebaseDatasourceImplementation actual constructor(
+actual class FirebaseAuthDatasourceImplementation actual constructor(
     private val firebaseAuth: FirebaseAuth
-) : FirebaseDatasource {
+) : FirebaseAuthDatasource {
 
     private val currentFirebaseUser
         get() = firebaseAuth.currentUser ?: throw AuthNotAuthenticatedException()

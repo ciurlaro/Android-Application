@@ -2,12 +2,10 @@ package com.example.myapplication.ui
 
 import android.content.Context
 import android.content.Intent
-import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.ui.setupWithNavController
 import com.example.myapplication.R
 import com.example.myapplication.repositories.ArenaTournamentRepository
-import com.example.myapplication.utils.isLoggedIn
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.kodein.di.erased.instance
@@ -19,7 +17,7 @@ class MainActivity : BaseActivity(R.id.nav_host_fragment) {
 
     init {
         lifecycleScope.launchWhenCreated {
-            if(repo.isLoggedIn()){
+            if (repo.getCurrentUser() != null) {
                 setContentView(R.layout.activity_main)
                 bottom_nav_view.setupWithNavController(navController)
             } else

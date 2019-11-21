@@ -4,7 +4,7 @@ import com.example.myapplication.entities.AuthProviders
 import com.example.myapplication.entities.AuthUserEntity
 import com.example.myapplication.exceptions.AuthException.*
 
-interface FirebaseDatasource {
+interface FirebaseAuthDatasource {
 
     /**
      * Allows to update current user email.

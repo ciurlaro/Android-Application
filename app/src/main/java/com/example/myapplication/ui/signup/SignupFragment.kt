@@ -76,8 +76,7 @@ class SignupFragment : BaseFragment() {
                 createAccountWithCompleteInformationUseCase.buildAction(
                     viewModel.email.get()!!,
                     viewModel.password.get()!!,
-                    viewModel.nickname.get()!!,
-                    "image"
+                    viewModel.nickname.get()!!
                 )
             } catch (e: Throwable) {
 

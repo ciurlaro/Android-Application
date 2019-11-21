@@ -13,12 +13,11 @@ class CreateAccountWithCompleteInformation(
     override suspend fun buildAction(params: Params) = with(params) {
         createAccountWithEmailAndPasswordUseCase.buildAction(email, password)
             .and(updateUserNicknameUseCase.buildAction(nickname))
-            .and(updateUserProfileImageUseCase.buildAction(image))
     }
 
-    suspend fun buildAction(email: String, password: String, nickname: String, image: String) =
-        buildAction(Params(email, password, nickname, image))
+    suspend fun buildAction(email: String, password: String, nickname: String) =
+        buildAction(Params(email, password, nickname))
 
-    data class Params(val email: String, val password: String, val nickname: String, val image: String)
+    data class Params(val email: String, val password: String, val nickname: String)
 
 }

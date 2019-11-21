@@ -18,6 +18,6 @@ class SignupViewModel(
     val nickname = ObservableField("")
 
     fun create() = viewModelScope.launch {
-        createAccount.buildAction(email.get()!!, password.get()!!, nickname.get()!!, "image")
+        createAccount.buildAction(email.get()!!, password.get()!!, nickname.get()!!)
     }
 }

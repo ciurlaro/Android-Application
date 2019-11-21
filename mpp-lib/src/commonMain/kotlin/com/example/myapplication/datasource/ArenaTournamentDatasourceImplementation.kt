@@ -20,7 +20,7 @@ import kotlinx.serialization.json.Json
 class ArenaTournamentDatasourceImplementation(
     private val httpClient: HttpClient,
     private val endpoints: ArenaTournamentDatasource.Endpoints,
-    private val firebaseDS: FirebaseDatasource
+    private val firebaseAuthDS: FirebaseAuthDatasource
 ) : ArenaTournamentDatasource {
 
     @UseExperimental(UnstableDefault::class)
@@ -191,9 +191,6 @@ class ArenaTournamentDatasourceImplementation(
     override suspend fun getUsersByMatchId(matchId: Long, page: Int): MultipleUsersJSON =
         httpClient.get(endpoints.usersByMatchIdUrl(matchId, page))
 
-    override suspend fun getCurrentUser(): UserJSON =
-        httpClient.authenticatedGet(endpoints.currentUserUrl())
-
     override suspend fun getAccountVerificationStatus(): AccountStatusJSON =
         httpClient.authenticatedGet(endpoints.isAccountVerifiedUrl())
 
@@ -217,7 +214,7 @@ class ArenaTournamentDatasourceImplementation(
     @InternalAPI
     private suspend fun HttpRequestBuilder.addAuth() {
         try {
-            header(HttpHeaders.Authorization, "Bearer: ${"${firebaseDS.getToken()}:".encodeBase64()}")
+            header(HttpHeaders.Authorization, "Bearer: ${"${firebaseAuthDS.getToken()}:".encodeBase64()}")
         } catch (e: AuthException) {
             println(e)
         }
