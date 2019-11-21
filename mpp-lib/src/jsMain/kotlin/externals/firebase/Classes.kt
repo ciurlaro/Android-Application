@@ -1,5 +1,6 @@
 package externals.firebase
 
+import org.khronos.webgl.Uint8Array
 import kotlin.js.Promise
 
 external interface AuthCredential {
@@ -24,8 +25,11 @@ external interface AdditionalUserInfo
 external interface User {
     val email: String?
     val uid: String?
+    val displayName: String?
+    val photoURL: String?
 
     fun getIdToken(forceRefresh: Boolean = definedExternally): Promise<String>
+    fun getIdTokenResult(): Promise<IdTokenResult>
     fun reauthenticateWithCredential(credential: AuthCredential): Promise<UserCredential>
     fun linkWithCredential(credential: AuthCredential): Promise<UserCredential>
 
@@ -62,4 +66,34 @@ external interface OAuthProvider : AuthProvider {
     fun addScope(scope: String): AuthProvider
     fun credential(idToken: String = definedExternally, accessToken: String = definedExternally): OAuthCredential
     fun setCustomParameters(customOAuthParameters: dynamic): AuthProvider
+}
+
+external class FirebaseStorage {
+    fun ref(path: String?): Reference
+}
+
+external interface Reference {
+    fun child(path: String?): Reference
+    fun put(data: Uint8Array): UploadTask
+    fun getDownloadUrl(): Promise<String>
+}
+
+external class UploadTask : Promise<UploadTaskSnapshot> {
+    val snapshot: UploadTaskSnapshot
+}
+
+external interface UploadTaskSnapshot {
+    val bytesTransferred: Long
+    val ref: Reference
+    val task: UploadTask
+    val totalBytes: Long
+}
+
+external interface IdTokenResult {
+    val authTime: String
+    val claims: dynamic
+    val expirationTime: String
+    val issuedAtTime: String
+    val token: String
+    val signInProvider: String?
 }

@@ -1,4 +1,4 @@
-package com.example.myapplication.auth
+package com.example.myapplication.datasource
 
 import android.net.Uri
 import com.example.myapplication.datasource.FirebaseAuthDatasource
@@ -110,30 +110,6 @@ actual class FirebaseAuthDatasourceImplementation actual constructor(
     private suspend fun getUserToken() =
         wrapTask({ currentFirebaseUser.getIdToken(true) }) {
             it!!.token!!
-        }
-
-    private fun Exception.asCustom() = when (this) {
-        is FirebaseAuthWeakPasswordException -> AuthWeakPasswordException()
-        is FirebaseAuthInvalidCredentialsException -> AuthInvalidCredentialsException(message)
-        is FirebaseAuthUserCollisionException -> AuthUserCollisionException()
-        is FirebaseAuthInvalidUserException -> AuthInvalidUserException()
-        is FirebaseAuthRecentLoginRequiredException -> AuthRecentLoginRequiredException()
-        else -> AuthGenericException(message)
-    }
-
-    private fun <T, K> Task<T>.asCoroutine(cont: CancellableContinuation<K>, onSuccess: (T) -> K) =
-        addOnSuccessListener { cont.resume(onSuccess(it)) }
-            .addOnFailureListener { cont.resumeWithException(it.asCustom()) }
-            .addOnCanceledListener { cont.cancel() }
-
-    private suspend fun <T, K> wrapTask(taskProvider: () -> Task<T>, onSuccess: (T) -> K) =
-        suspendCancellableCoroutine<K> {
-            taskProvider().asCoroutine(it, onSuccess)
-        }
-
-    private suspend fun <T> wrapTask(taskProvider: () -> Task<T>) =
-        suspendCancellableCoroutine<Boolean> {
-            taskProvider().asCoroutine(it) { true }
         }
 
     private fun profileBuilder(builder: UserProfileChangeRequest.Builder.() -> Unit) =

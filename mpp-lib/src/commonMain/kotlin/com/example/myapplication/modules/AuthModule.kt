@@ -1,8 +1,8 @@
 package com.example.myapplication.modules
 
-import com.example.myapplication.auth.FirebaseAuth
-import com.example.myapplication.auth.FirebaseAuthDatasourceImplementation
-import com.example.myapplication.auth.getFirebaseAuthInstance
+import com.example.myapplication.datasource.FirebaseAuth
+import com.example.myapplication.datasource.FirebaseAuthDatasourceImplementation
+import com.example.myapplication.datasource.getFirebaseAuthInstance
 import com.example.myapplication.datasource.FirebaseAuthDatasource
 import org.kodein.di.Kodein
 import org.kodein.di.erased.bind

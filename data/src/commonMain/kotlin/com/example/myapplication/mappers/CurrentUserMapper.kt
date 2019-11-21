@@ -11,14 +11,14 @@ class CurrentUserMapper :
             user.id,
             user.email,
             user.nickname,
-            user.image,
+            imageUrl,
             claims.getValue("isSubscriber")
         )
     }
 
-    fun fromRemoteSingle(user: AuthUserEntity, claims: Map<String, Boolean>) =
-        fromRemoteSingle(Params(user, claims))
+    fun fromRemoteSingle(user: AuthUserEntity, claims: Map<String, Boolean>, imageUrl: String?) =
+        fromRemoteSingle(Params(user, claims, imageUrl))
 
-    data class Params(val user: AuthUserEntity, val claims: Map<String, Boolean>)
+    data class Params(val user: AuthUserEntity, val claims: Map<String, Boolean>, val imageUrl: String?)
 
 }

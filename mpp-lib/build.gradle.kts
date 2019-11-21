@@ -71,6 +71,8 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 api("com.google.firebase:firebase-auth:$firebaseJvmVersion")
+                api("com.google.firebase:firebase-storage:$firebaseJvmVersion")
+                api("com.google.firebase:firebase-storage-ktx:$firebaseJvmVersion")
                 api(project(":data"))
                 api(ktor("client-okhttp", ktorVersion))
                 api(ktor("client-serialization-jvm", ktorVersion))

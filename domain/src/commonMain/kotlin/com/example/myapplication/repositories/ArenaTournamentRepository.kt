@@ -56,7 +56,6 @@ interface ArenaTournamentRepository {
     fun getShowCaseTournaments(page: Int): Flow<TournamentEntity>
     fun getTournamentsContainingTitle(title: String, page: Int): Flow<TournamentEntity>
 
-
     suspend fun getMatchById(id: Long): MatchEntity
     fun getMatchesByTournament(tournamentId: Long, page: Int): Flow<MatchEntity>
     fun getMatchesByGame(gameName: String, page: Int): Flow<MatchEntity>

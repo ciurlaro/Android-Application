@@ -2,7 +2,9 @@ package com.example.myapplication.repositories
 
 import com.example.myapplication.datasource.ArenaTournamentDatasource
 import com.example.myapplication.datasource.FirebaseAuthDatasource
+import com.example.myapplication.datasource.FirebaseStorageDatasource
 import com.example.myapplication.entities.*
+import com.example.myapplication.exceptions.AuthException
 import com.example.myapplication.mappers.*
 import com.example.myapplication.mappers.entitieslinkmapper.*
 import com.example.myapplication.rawresponses.MultipleMatchJSON
@@ -26,6 +28,7 @@ import kotlinx.coroutines.flow.*
 class ArenaTournamentRepositoryImplementation(
     private val arenaTournamentDS: ArenaTournamentDatasource,
     private val firebaseAuthDS: FirebaseAuthDatasource,
+    private val firebaseStorageDS: FirebaseStorageDatasource,
     private val gameMapper: GameMapper,
     private val modeMapper: ModeMapper,
     private val matchMapper: MatchMapper,
@@ -43,6 +46,9 @@ class ArenaTournamentRepositoryImplementation(
     private val matchLinkMapper: MatchLinkMapper
 ) : ArenaTournamentRepository {
 
+    private suspend fun currentUserOrError() =
+        getCurrentUser() ?: throw AuthException.AuthNotAuthenticatedException()
+
     override suspend fun updateCurrentUserEmail(email: String) =
         firebaseAuthDS.updateUserEmail(email)
 
@@ -53,7 +59,7 @@ class ArenaTournamentRepositoryImplementation(
         firebaseAuthDS.updateUserNickname(nickname)
 
     override suspend fun updateCurrentUserProfileImage(image: ByteArray) =
-        TODO()
+        firebaseStorageDS.uploadFile(image, "users/${currentUserOrError()}/profile")
 
     override suspend fun loginWithEmailAndPassword(email: String, password: String) =
         firebaseAuthDS.loginWithEmailAndPassword(email, password)
@@ -388,7 +394,13 @@ class ArenaTournamentRepositoryImplementation(
         val user = async { firebaseAuthDS.getCurrentAuthUser() }
         val claims = async { firebaseAuthDS.getCurrentUserClaims() }
 
-        user.await()?.let { currentUserMapper.fromRemoteSingle(it, claims.await()) }
+        user.await()?.let {
+            currentUserMapper.fromRemoteSingle(
+                it,
+                claims.await(),
+                it.image?.let { firebaseStorageDS.getFileUrl(it) }
+            )
+        }
     }
 
     private fun MultipleTournamentsJSON.transformTournaments() =
