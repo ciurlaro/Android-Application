@@ -1,7 +1,8 @@
 package com.example.myapplication.auth
 
-import com.example.myapplication.datasource.FirebaseDatasource
+import com.example.myapplication.datasource.FirebaseAuthDatasource
 import com.example.myapplication.entities.AuthProviders
+import com.example.myapplication.entities.AuthUserEntity
 import com.example.myapplication.exceptions.AuthException.*
 import externals.firebase.AuthCredential
 import externals.firebase.auth.EmailAuthProvider.EMAIL_PASSWORD_SIGN_IN_METHOD
@@ -9,9 +10,40 @@ import externals.firebase.auth.FacebookAuthProvider.FACEBOOK_SIGN_IN_METHOD
 import externals.firebase.auth.GoogleAuthProvider.GOOGLE_SIGN_IN_METHOD
 import kotlinx.coroutines.await
 
-actual class FirebaseDatasourceImplementation actual constructor(
+actual class FirebaseAuthDatasourceImplementation actual constructor(
     private val firebaseAuth: FirebaseAuth
-) : FirebaseDatasource {
+) : FirebaseAuthDatasource {
+    override suspend fun getCurrentAuthUser(): AuthUserEntity? {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override suspend fun getCurrentUserClaims(): Map<String, Boolean> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override suspend fun isCurrentUserEmailVerified(): Boolean {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override suspend fun updateUserEmail(email: String): Boolean {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override suspend fun updateUserPassword(password: String): Boolean {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override suspend fun updateUserNickname(nickname: String): Boolean {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override suspend fun updateUserProfileImage(image: String): Boolean {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override suspend fun getToken(): String {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
     private val currentFirebaseUser
         get() = firebaseAuth.currentUser ?: throw AuthNotAuthenticatedException()

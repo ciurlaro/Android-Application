@@ -26,7 +26,7 @@ fun buildCommonKodein(
     if (isDebug)
         constant("networkLogLevel") with networkLogLevel
     if (isMock) {
-        import(CommonMockModule)
+        import(CommonMockModule, allowOverride = true)
         import(PlatformSpecificMockModule)
     }
 }

@@ -42,7 +42,7 @@ interface ArenaTournamentRepository {
     suspend fun updateCurrentUserEmail(email: String): Boolean
     suspend fun updateCurrentUserPassword(password: String): Boolean
     suspend fun updateCurrentUserNickname(nickname: String): Boolean
-    suspend fun updateCurrentUserProfileImage(image: String): Boolean
+    suspend fun updateCurrentUserProfileImage(image: ByteArray): Boolean
 
     suspend fun getGameByName(name: String): GameEntity
     fun searchGameByName(name: String, page: Int): Flow<GameEntity>
@@ -69,9 +69,10 @@ interface ArenaTournamentRepository {
     fun getRegistrationsByUser(userId: String, page: Int): Flow<RegistrationEntity>
 
     suspend fun getUserById(id: String): UserEntity
-    suspend fun getCurrentUser(): UserEntity
-    suspend fun isAccountVerified(): Boolean
-    suspend fun isAccountSubscribed(): Boolean
+
+    suspend fun getCurrentUser(): UserEntity?
+
+    suspend fun isCurrentUserEmailVerified(): Boolean
 
     /**
      * Allows to login with username and password.

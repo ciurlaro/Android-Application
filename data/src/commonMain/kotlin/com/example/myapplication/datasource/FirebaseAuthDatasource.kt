@@ -1,9 +1,10 @@
 package com.example.myapplication.datasource
 
 import com.example.myapplication.entities.AuthProviders
+import com.example.myapplication.entities.AuthUserEntity
 import com.example.myapplication.exceptions.AuthException.*
 
-interface FirebaseDatasource {
+interface FirebaseAuthDatasource {
 
     /**
      * Allows to update current user email.
@@ -167,4 +168,11 @@ interface FirebaseDatasource {
      * @return Firebase user token.
      */
     suspend fun getToken(): String
+
+    suspend fun getCurrentAuthUser(): AuthUserEntity?
+
+    suspend fun getCurrentUserClaims(): Map<String, Boolean>
+
+    suspend fun isCurrentUserEmailVerified(): Boolean
+
 }

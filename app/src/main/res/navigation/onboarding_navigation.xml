@@ -21,7 +21,7 @@
                 app:nullable="false"
                 android:defaultValue=""/>
         <action
-                android:id="@+id/action_login_to_signup"
+                android:id="@+id/action_signin_to_signup"
                 app:destination="@+id/navigation_signup_fragment"/>
     </fragment>
 

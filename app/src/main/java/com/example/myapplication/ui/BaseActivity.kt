@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import com.example.myapplication.AuthenticationManager
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.kodein.di.Copy
 import org.kodein.di.KodeinAware
@@ -22,8 +21,6 @@ abstract class BaseActivity(@IdRes navControllerFragmentId: Int) : AppCompatActi
     }
 
     @ExperimentalCoroutinesApi
-    val authManager by instance<AuthenticationManager>()
-
     val navController by instance<NavController>()
 
     inline fun <reified T : ViewModel> viewModelInstance() =

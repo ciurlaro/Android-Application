@@ -24,7 +24,7 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.erased.instance
 
 @JsName("DependencyContainer")
-class JsDependencyContainer(
+class  JsDependencyContainer(
     serverProtocol: String,
     serverUrl: String,
     serverPort: Int

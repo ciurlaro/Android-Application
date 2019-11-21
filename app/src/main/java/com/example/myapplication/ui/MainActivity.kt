@@ -2,18 +2,32 @@ package com.example.myapplication.ui
 
 import android.content.Context
 import android.content.Intent
-import android.os.Bundle
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.ui.setupWithNavController
 import com.example.myapplication.R
+import com.example.myapplication.repositories.ArenaTournamentRepository
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import org.kodein.di.erased.instance
 
 @ExperimentalCoroutinesApi
 class MainActivity : BaseActivity(R.id.nav_host_fragment) {
 
+    private val repo by instance<ArenaTournamentRepository>()
+
+    init {
+        lifecycleScope.launchWhenCreated {
+            if (repo.getCurrentUser() != null) {
+                setContentView(R.layout.activity_main)
+                bottom_nav_view.setupWithNavController(navController)
+            } else
+                startActivity(OnboardingActivity(this@MainActivity))
+        }
+    }
+
     companion object {
 
-        fun buildIntent(context: Context) =
+        private fun buildIntent(context: Context) =
             Intent(context, MainActivity::class.java).apply {
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
             }
@@ -21,24 +35,6 @@ class MainActivity : BaseActivity(R.id.nav_host_fragment) {
         operator fun invoke(context: Context) =
             buildIntent(context)
 
-    }
-
-    @ExperimentalCoroutinesApi
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        if (!authManager.isLoggedIn())
-            startActivity(OnboardingActivity(this))
-        else{
-            setContentView(R.layout.activity_main)
-            bottom_nav_view.setupWithNavController(navController)
-        }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        authManager.setOnLogoutCallback {
-            startActivity(OnboardingActivity(this))
-        }
     }
 
 }

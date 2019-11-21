@@ -7,21 +7,23 @@ import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.annotation.StringRes
 import androidx.appcompat.widget.AppCompatEditText
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentSignupBinding
 import com.example.myapplication.ui.BaseFragment
-import com.example.myapplication.usecases.user.CreateAccountWithEmailAndPasswordUseCase
+import com.example.myapplication.usecases.user.creation.CreateAccountWithCompleteInformation
 import kotlinx.android.synthetic.main.fragment_signup.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.launch
 import org.kodein.di.erased.instance
 
 @ExperimentalCoroutinesApi
 class SignupFragment : BaseFragment() {
 
-    private val viewModel by viewModelInstance<SignupViewModel>()
     private val args by navArgs<SignupFragmentArgs>()
-    private val createUserUseCase by instance<CreateAccountWithEmailAndPasswordUseCase>()
+    private val viewModel by viewModelInstance<SignupViewModel>()
+    private val createAccountWithCompleteInformationUseCase by instance<CreateAccountWithCompleteInformation>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
         FragmentSignupBinding.inflate(inflater, container, false).also {
@@ -33,7 +35,12 @@ class SignupFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        button_sign_up.setOnClickListener{
+            lifecycleScope.launch { onSignupButtonClicked() }
+        }
+        already_have_account_tv.setOnClickListener {
+            onSigninTvClicked()
+        }
     }
 
     private suspend fun onSignupButtonClicked() {
@@ -66,20 +73,21 @@ class SignupFragment : BaseFragment() {
             button_sign_up.isClickable = false
             already_have_account_tv.isClickable = false
             val isSuccessful = try {
-                createUserUseCase.buildAction(
+                createAccountWithCompleteInformationUseCase.buildAction(
                     viewModel.email.get()!!,
                     viewModel.password.get()!!,
                     viewModel.nickname.get()!!
                 )
-            } catch (e: Throwable){
-                wh
+            } catch (e: Throwable) {
+
             }
         }
 
     }
 
-    private fun onLoginTvClicked() {
+    private fun onSigninTvClicked() {
         already_have_account_tv.isClickable = false
+        button_sign_up.isClickable = false
         navController.navigate(
             SignupFragmentDirections.actionSignupToSignin(
                 viewModel.email.get()!!,
@@ -91,7 +99,7 @@ class SignupFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requireActivity().onBackPressedDispatcher.addCallback(this) {
-            onLoginTvClicked()
+            onSigninTvClicked()
         }
     }
 

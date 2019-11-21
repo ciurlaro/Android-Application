@@ -3,7 +3,7 @@ package com.example.myapplication.usecases.tournament
 import com.example.myapplication.entities.TournamentEntity
 import com.example.myapplication.repositories.ArenaTournamentRepository
 import com.example.myapplication.usecases.UseCaseWithParams
-import com.example.myapplication.usecases.user.GetCurrentUserInfoUseCase
+import com.example.myapplication.usecases.user.info.GetCurrentUserInfoUseCase
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
@@ -19,7 +19,7 @@ class GetCreatedTournamentsByAdminUseCase(
         (0 until params.maxPage)
             .asFlow()
             .flatMapConcat {
-                repository.getTournamentsByUser(getCurrentUserInfoUseCase.buildAction().id, it)
+                repository.getTournamentsByUser(getCurrentUserInfoUseCase.buildAction()!!.id, it)
             }
 
     @FlowPreview

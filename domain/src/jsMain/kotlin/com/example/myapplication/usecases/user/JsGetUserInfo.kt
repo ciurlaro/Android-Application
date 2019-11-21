@@ -2,6 +2,7 @@ package com.example.myapplication.usecases.user
 
 import com.example.myapplication.entities.UserEntity
 import com.example.myapplication.usecases.JsUseCasePromise
+import com.example.myapplication.usecases.user.info.GetCurrentUserInfoUseCase
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.promise
 import kotlin.js.Promise

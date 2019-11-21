@@ -3,7 +3,7 @@ package com.example.myapplication.usecases.match
 import com.example.myapplication.entities.MatchEntity
 import com.example.myapplication.repositories.ArenaTournamentRepository
 import com.example.myapplication.usecases.UseCaseWithParams
-import com.example.myapplication.usecases.user.GetCurrentUserInfoUseCase
+import com.example.myapplication.usecases.user.info.GetCurrentUserInfoUseCase
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
 
@@ -17,7 +17,7 @@ class GetAllMatchesByUserUseCase(
         (0 until params.maxPage)
             .asFlow()
             .flatMapConcat {
-                repository.getMatchesByUser(getCurrentUserInfoUseCase.buildAction().id, it)
+                repository.getMatchesByUser(getCurrentUserInfoUseCase.buildAction()!!.id, it)
             }
 
     @FlowPreview

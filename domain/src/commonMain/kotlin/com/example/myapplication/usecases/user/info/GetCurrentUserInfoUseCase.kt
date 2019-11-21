@@ -1,4 +1,4 @@
-package com.example.myapplication.usecases.user
+package com.example.myapplication.usecases.user.info
 
 import com.example.myapplication.entities.UserEntity
 import com.example.myapplication.repositories.ArenaTournamentRepository
@@ -7,9 +7,10 @@ import kotlinx.coroutines.FlowPreview
 
 class GetCurrentUserInfoUseCase(
     private val repository: ArenaTournamentRepository
-) : UseCaseSuspending<UserEntity> {
+) : UseCaseSuspending<UserEntity?> {
 
     @UseExperimental(FlowPreview::class)
-    override suspend fun buildAction(): UserEntity = repository.getCurrentUser()
+    override suspend fun buildAction() =
+        repository.getCurrentUser()
 
 }
