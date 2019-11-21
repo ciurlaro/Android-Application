@@ -1,6 +1,7 @@
 package com.example.myapplication.repositories
 
 import com.example.myapplication.datasource.ArenaTournamentDatasource
+import com.example.myapplication.datasource.FirebaseDatasource
 import com.example.myapplication.entities.*
 import com.example.myapplication.mappers.*
 import com.example.myapplication.mappers.entitieslinkmapper.*
@@ -23,6 +24,7 @@ import kotlinx.coroutines.flow.*
 
 class ArenaTournamentRepositoryImplementation(
     private val atDS: ArenaTournamentDatasource,
+    private val firebaseDS: FirebaseDatasource,
     private val gameMapper: GameMapper,
     private val modeMapper: ModeMapper,
     private val matchMapper: MatchMapper,

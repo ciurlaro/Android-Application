@@ -14,7 +14,6 @@ import com.example.myapplication.usecases.user.CreateAccountWithEmailAndPassword
 import com.example.myapplication.usecases.user.GetAccountVerificationStatusUseCase
 import com.example.myapplication.usecases.user.IsSubscribedAccountUseCase
 import com.example.myapplication.usecases.user.GetCurrentUserInfoUseCase
-import com.example.myapplication.usecases.user.IsSubscribedAccountUseCase
 import org.kodein.di.Kodein
 import org.kodein.di.erased.bind
 import org.kodein.di.erased.instance
