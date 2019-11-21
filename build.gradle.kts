@@ -33,7 +33,8 @@ subprojects {
 }
 
 task<Copy>("copyPackages"){
-    group = "jsmerda"
+    //group = "jsmerda"
+    dependsOn("yarn_install")
     subprojects {
         if("jsJar" in tasks.names)
             dependsOn(tasks["jsJar"])

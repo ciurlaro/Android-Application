@@ -1,0 +1,224 @@
+{
+  "version": "8",
+  "byHash": {
+    "9c1f5d44a4b76fe1089d4bd947bb8999": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-coroutines-core-common/1.3.2/a3f262e6afbcd3a3031e26fdd4d30a6a8b5f5695/kotlinx-coroutines-core-common-1.3.2.jar"
+    },
+    "6ce4b4f2b60562d405ce30f6deb73e8c": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-common/1.3.50/3d9cd3e1bc7b92e95f43d45be3bfbcf38e36ab87/kotlin-stdlib-common-1.3.50.jar"
+    },
+    "7be961703812025290177fd52e1f38d2": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/com.soywiz.korlibs.klock/klock-js/1.7.4/dc1c5b0fa3416e0bff040afc4cc49b2233647e96/klock-js-1.7.4.jar",
+      "target": "klock-root-klock:1.7.4"
+    },
+    "aa40e97965f407f97db7c5b0cb063371": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-js/1.3.50/13eda1d89666eae9da35ba866e4da49b33bf8845/kotlin-stdlib-js-1.3.50.jar",
+      "target": "kotlin:1.3.50"
+    },
+    "f322d44d4078659f964d386bd2f4cd6a": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-coroutines-core-js/1.3.2/19170364025f2d137809806b6fffb6a9babf95d2/kotlinx-coroutines-core-js-1.3.2.jar",
+      "target": "kotlinx-coroutines-core:1.3.2"
+    },
+    "dd143412f0170a47ce30cf221407f7e5": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/io.ktor/ktor-http/1.2.5/85281719152e4a691db1926750412f5821b22262/ktor-http-1.2.5.jar"
+    },
+    "d022293065c9081c457a97b6bd11e25c": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/io.ktor/ktor-utils/1.2.5/ae6161c95f16945140f27c5cbbf3c7a2061def34/ktor-utils-1.2.5.jar"
+    },
+    "51e43ec67bb98781fab1605dbe93c088": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-coroutines-io/0.1.15/c6207b8fc281f8480848032d09189360b20d1c8e/kotlinx-coroutines-io-0.1.15.jar"
+    },
+    "efa7ff534565d20f05ffffd53e478f83": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-io/0.1.15/cd1dd900f6df56e47ba8d53693fcc48968f257ad/kotlinx-io-0.1.15.jar"
+    },
+    "fc3690a6067290a160cf758651c23621": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlinx/atomicfu-common/0.13.0/9c669ec40acad7e69d5a05603996b3850513828/atomicfu-common-0.13.0.jar"
+    },
+    "f551c1dcb81b17a6307b9336bb47a46c": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlinx/atomicfu/0.13.0/4b8b4f83754789e928d2a15e59d182f921744aaf/atomicfu-0.13.0.jar"
+    },
+    "8d8f8b6e3c56f28da647b3aa6237de29": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.3.50/b529d1738c7e98bbfa36a4134039528f2ce78ebf/kotlin-stdlib-1.3.50.jar"
+    },
+    "72ac29dee68b63d11710f49a42861308": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/13.0/919f0dfe192fb4e063e7dacadee7f8bb9a2672a9/annotations-13.0.jar"
+    },
+    "1379e1a5e13477d06d891a674209cd4f": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-serialization-runtime-common/0.13.0/de1deb3d97dced6bea712227b1e611b6bfdbcd7e/kotlinx-serialization-runtime-common-0.13.0.jar"
+    },
+    "8cb842419dbd890e56815bd4cf9da50f": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/io.ktor/ktor-http-js/1.2.5/8e0a03486b0fdbb8f3e6e3fc612cbe9c527d1ab4/ktor-http-js-1.2.5.jar",
+      "target": "ktor-ktor-http:1.2.5"
+    },
+    "80f3da59f085327ec99042872fc7a825": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/io.ktor/ktor-utils-js/1.2.5/f26f59b0789fd4dcd3daa024864ac7a16ebb6cc7/ktor-utils-js-1.2.5.jar",
+      "target": "ktor-ktor-utils:1.2.5"
+    },
+    "02e66ad8d6205ed5ef29ff4fb11a6707": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-coroutines-io-js/0.1.15/3899cb0c3ab051c28cf4055eee7c2ab2a39da2e6/kotlinx-coroutines-io-js-0.1.15.jar",
+      "target": "kotlinx-io-kotlinx-coroutines-io:0.1.15"
+    },
+    "03111326d2e152608a13a35ea6e63b25": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-io-js/0.1.15/9a97d15f3fd5120839ce088c77b35b38d15f17d/kotlinx-io-js-0.1.15.jar",
+      "target": "kotlinx-io:0.1.15"
+    },
+    "7a01ae348491ecea7b529133c0870c8f": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlinx/atomicfu-js/0.13.0/3b681446fee4836f8fc27283238a2a3c96e33b49/atomicfu-js-0.13.0.jar",
+      "target": "kotlinx-atomicfu:0.13.0"
+    },
+    "969b9b7596de9d11749df352aee1f0d5": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-serialization-runtime-js/0.13.0/9c55d02da739494e3b802a430d01a906c5329a1a/kotlinx-serialization-runtime-js-0.13.0.jar",
+      "target": "kotlinx-serialization-kotlinx-serialization-runtime:0.13.0"
+    },
+    "dacc98a4e8fd8b114c4cf427bc59dbb2": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-test-nodejs-runner/1.3.41/d8b047893af57b120f41b5c8176691a69263c0ac/kotlin-test-nodejs-runner-1.3.41.jar",
+      "target": "kotlin-test-nodejs-runner:1.3.41"
+    },
+    "cc909a7119541d29c4e3377a05cb035e": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-test-js/1.3.41/3e2fbf8ac392c8ec6da16cd1436378fdfd97230f/kotlin-test-js-1.3.41.jar",
+      "target": "kotlin-test:1.3.41"
+    },
+    "6841cc8fc165b71d223833706e951af7": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-test-common/1.3.41/744000c1a0ef654706ce3367a10543590dab9246/kotlin-test-common-1.3.41.jar"
+    },
+    "fee8054f66b8f8499787c4bdb38dbf45": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-test-annotations-common/1.3.41/f57e03dea3d1a81b5e1b3cdcf4eb2710a3fac173/kotlin-test-annotations-common-1.3.41.jar"
+    },
+    "42803b2d5cef7924713a378ab03a18d0": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/io.ktor/ktor-client-core/1.2.5/ffe37d9be01b15e8ba6c89d16d4e25f551a2175c/ktor-client-core-1.2.5.jar"
+    },
+    "258aa1a46db7adab0f79dabef6ae3c10": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/io.ktor/ktor-http-cio/1.2.5/abee6d98d153fb30a9eebc4f3979ef5490e3d05e/ktor-http-cio-1.2.5.jar"
+    },
+    "db6e363c29353a4052d48e37e7f8d921": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/io.ktor/ktor-client-serialization/1.2.5/d291edbc9db9d06e5a9ea3062b8e6836c06dda0d/ktor-client-serialization-1.2.5.jar"
+    },
+    "ef937c66635bc59b438cf6ae9a9d33a8": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/io.ktor/ktor-client-json/1.2.5/7093f1e100f4e42273089e2ea89ef739a8ec6aaf/ktor-client-json-1.2.5.jar"
+    },
+    "73693f5b5dad0cc865f78eaa2f94f378": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/io.ktor/ktor-client-mock/1.2.5/4fedd280cee760bafc1a8a1b7f93d7ba562c867b/ktor-client-mock-1.2.5.jar"
+    },
+    "93befe0323500c5f6f85dae9e6088500": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/io.ktor/ktor-client-logging/1.2.5/9cc8d269500ccf530f62d4a21bc059d127830d6c/ktor-client-logging-1.2.5.jar"
+    },
+    "0bac6de1de09366c4b1ca05a771d2af2": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/org.kodein.di/kodein-di-core-js/6.4.0/70c9a75f20d77225432663dbead04d0de3a9b28a/kodein-di-core-js-6.4.0.jar",
+      "target": "Kodein-DI-kodein-di-core:6.4.0"
+    },
+    "d70060104cf13c2adbfaf0a6a4cc3162": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/org.kodein.di/kodein-di-erased-js/6.4.0/dccf6233560e35826bfe263d09159aedc7f95fc1/kodein-di-erased-js-6.4.0.jar",
+      "target": "Kodein-DI-kodein-di-erased:6.4.0"
+    },
+    "40858cf620c9b5d1bac1f26022fc30b5": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/io.ktor/ktor-client-js/1.2.5/6a69c26f75731417bf60d548013466b15a91ede4/ktor-client-js-1.2.5.jar",
+      "target": "ktor-ktor-client-js:1.2.5"
+    },
+    "74aa84d287c3eb768101f63df0769c7f": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/io.ktor/ktor-client-core-js/1.2.5/2efeadf0778d09aceb23b7cb60312dd634e6352c/ktor-client-core-js-1.2.5.jar",
+      "target": "ktor-ktor-client-core:1.2.5"
+    },
+    "aa7dd36630867915ca42babac98a10ce": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/io.ktor/ktor-http-cio-js/1.2.5/a64e484ea29f5a19f4e419dee29b6ba377d01c13/ktor-http-cio-js-1.2.5.jar",
+      "target": "ktor-ktor-http-cio:1.2.5"
+    },
+    "b065e324e19b046972bd64417c64930e": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/io.ktor/ktor-client-serialization-js/1.2.5/10cb79947216f1ff6e331160802927639b788073/ktor-client-serialization-js-1.2.5.jar",
+      "target": "ktor-ktor-client-serialization:1.2.5"
+    },
+    "d5233d0eb298c0980d728027a3a94360": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/io.ktor/ktor-client-json-js/1.2.5/989bedf7734a52b61d863f56ecb34b888de28b90/ktor-client-json-js-1.2.5.jar",
+      "target": "ktor-ktor-client-json:1.2.5"
+    },
+    "affd13c9d1e5118daaa0c540a1c1aafd": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/io.ktor/ktor-client-mock-js/1.2.5/9bc0b4167ba03fee80e2d120cf6abcadb27fad6b/ktor-client-mock-js-1.2.5.jar",
+      "target": "ktor-ktor-client-mock:1.2.5"
+    },
+    "fe430ce4ccc2dad4f7bf798797754456": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/io.ktor/ktor-client-logging-js/1.2.5/c9c0096f5af7eb5dfae412e670e77c4686480cd0/ktor-client-logging-js-1.2.5.jar",
+      "target": "ktor-ktor-client-logging:1.2.5"
+    }
+  },
+  "byTarget": {
+    "klock-root-klock:1.7.4": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/com.soywiz.korlibs.klock/klock-js/1.7.4/dc1c5b0fa3416e0bff040afc4cc49b2233647e96/klock-js-1.7.4.jar",
+      "target": "klock-root-klock:1.7.4"
+    },
+    "kotlin:1.3.50": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-js/1.3.50/13eda1d89666eae9da35ba866e4da49b33bf8845/kotlin-stdlib-js-1.3.50.jar",
+      "target": "kotlin:1.3.50"
+    },
+    "kotlinx-coroutines-core:1.3.2": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-coroutines-core-js/1.3.2/19170364025f2d137809806b6fffb6a9babf95d2/kotlinx-coroutines-core-js-1.3.2.jar",
+      "target": "kotlinx-coroutines-core:1.3.2"
+    },
+    "ktor-ktor-http:1.2.5": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/io.ktor/ktor-http-js/1.2.5/8e0a03486b0fdbb8f3e6e3fc612cbe9c527d1ab4/ktor-http-js-1.2.5.jar",
+      "target": "ktor-ktor-http:1.2.5"
+    },
+    "ktor-ktor-utils:1.2.5": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/io.ktor/ktor-utils-js/1.2.5/f26f59b0789fd4dcd3daa024864ac7a16ebb6cc7/ktor-utils-js-1.2.5.jar",
+      "target": "ktor-ktor-utils:1.2.5"
+    },
+    "kotlinx-io-kotlinx-coroutines-io:0.1.15": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-coroutines-io-js/0.1.15/3899cb0c3ab051c28cf4055eee7c2ab2a39da2e6/kotlinx-coroutines-io-js-0.1.15.jar",
+      "target": "kotlinx-io-kotlinx-coroutines-io:0.1.15"
+    },
+    "kotlinx-io:0.1.15": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-io-js/0.1.15/9a97d15f3fd5120839ce088c77b35b38d15f17d/kotlinx-io-js-0.1.15.jar",
+      "target": "kotlinx-io:0.1.15"
+    },
+    "kotlinx-atomicfu:0.13.0": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlinx/atomicfu-js/0.13.0/3b681446fee4836f8fc27283238a2a3c96e33b49/atomicfu-js-0.13.0.jar",
+      "target": "kotlinx-atomicfu:0.13.0"
+    },
+    "kotlinx-serialization-kotlinx-serialization-runtime:0.13.0": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-serialization-runtime-js/0.13.0/9c55d02da739494e3b802a430d01a906c5329a1a/kotlinx-serialization-runtime-js-0.13.0.jar",
+      "target": "kotlinx-serialization-kotlinx-serialization-runtime:0.13.0"
+    },
+    "kotlin-test-nodejs-runner:1.3.41": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-test-nodejs-runner/1.3.41/d8b047893af57b120f41b5c8176691a69263c0ac/kotlin-test-nodejs-runner-1.3.41.jar",
+      "target": "kotlin-test-nodejs-runner:1.3.41"
+    },
+    "kotlin-test:1.3.41": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-test-js/1.3.41/3e2fbf8ac392c8ec6da16cd1436378fdfd97230f/kotlin-test-js-1.3.41.jar",
+      "target": "kotlin-test:1.3.41"
+    },
+    "Kodein-DI-kodein-di-core:6.4.0": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/org.kodein.di/kodein-di-core-js/6.4.0/70c9a75f20d77225432663dbead04d0de3a9b28a/kodein-di-core-js-6.4.0.jar",
+      "target": "Kodein-DI-kodein-di-core:6.4.0"
+    },
+    "Kodein-DI-kodein-di-erased:6.4.0": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/org.kodein.di/kodein-di-erased-js/6.4.0/dccf6233560e35826bfe263d09159aedc7f95fc1/kodein-di-erased-js-6.4.0.jar",
+      "target": "Kodein-DI-kodein-di-erased:6.4.0"
+    },
+    "ktor-ktor-client-js:1.2.5": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/io.ktor/ktor-client-js/1.2.5/6a69c26f75731417bf60d548013466b15a91ede4/ktor-client-js-1.2.5.jar",
+      "target": "ktor-ktor-client-js:1.2.5"
+    },
+    "ktor-ktor-client-core:1.2.5": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/io.ktor/ktor-client-core-js/1.2.5/2efeadf0778d09aceb23b7cb60312dd634e6352c/ktor-client-core-js-1.2.5.jar",
+      "target": "ktor-ktor-client-core:1.2.5"
+    },
+    "ktor-ktor-http-cio:1.2.5": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/io.ktor/ktor-http-cio-js/1.2.5/a64e484ea29f5a19f4e419dee29b6ba377d01c13/ktor-http-cio-js-1.2.5.jar",
+      "target": "ktor-ktor-http-cio:1.2.5"
+    },
+    "ktor-ktor-client-serialization:1.2.5": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/io.ktor/ktor-client-serialization-js/1.2.5/10cb79947216f1ff6e331160802927639b788073/ktor-client-serialization-js-1.2.5.jar",
+      "target": "ktor-ktor-client-serialization:1.2.5"
+    },
+    "ktor-ktor-client-json:1.2.5": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/io.ktor/ktor-client-json-js/1.2.5/989bedf7734a52b61d863f56ecb34b888de28b90/ktor-client-json-js-1.2.5.jar",
+      "target": "ktor-ktor-client-json:1.2.5"
+    },
+    "ktor-ktor-client-mock:1.2.5": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/io.ktor/ktor-client-mock-js/1.2.5/9bc0b4167ba03fee80e2d120cf6abcadb27fad6b/ktor-client-mock-js-1.2.5.jar",
+      "target": "ktor-ktor-client-mock:1.2.5"
+    },
+    "ktor-ktor-client-logging:1.2.5": {
+      "src": "/Users/paranoia/.gradle/caches/modules-2/files-2.1/io.ktor/ktor-client-logging-js/1.2.5/c9c0096f5af7eb5dfae412e670e77c4686480cd0/ktor-client-logging-js-1.2.5.jar",
+      "target": "ktor-ktor-client-logging:1.2.5"
+    }
+  }
+}

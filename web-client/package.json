@@ -3,7 +3,10 @@
   "version": "0.0.0",
   "workspaces": [
     "packages/*",
-    "packages_imported/*"
+    "packages_imported/*",
+    "packages_imported/kotlinx-io/0.1.15",
+    "packages_imported/Kodein-DI-kodein-di-core/6.4.0",
+    "packages_imported/Kodein-DI-kodein-di-erased/6.4.0"
   ],
   "scripts": {
     "ng": ".\\node_modules\\@angular\\cli\\bin\\ng",
