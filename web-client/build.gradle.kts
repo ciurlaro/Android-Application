@@ -24,7 +24,7 @@ task<YarnTask>("ngBuild") {
 
 
 task<YarnTask>("serve") {
-  args = listOf("run", "start")
+  args = listOf("run", "start" )
 }
 
 
