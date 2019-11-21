@@ -1,8 +1,0 @@
-{
-  "main": "klock-root-klock.js",
-  "dependencies": {
-    "kotlin": "1.3.50"
-  },
-  "name": "klock-root-klock",
-  "version": "1.7.4"
-}
