@@ -52,8 +52,8 @@ class ArenaTournamentRepositoryImplementation(
     override suspend fun updateCurrentUserNickname(nickname: String) =
         firebaseDS.updateUserNickname(nickname)
 
-    override suspend fun updateCurrentUserProfileImage(image: String) =
-        firebaseDS.updateUserProfileImage(image)
+    override suspend fun updateCurrentUserProfileImage(image: ByteArray) =
+        TODO()
 
     override suspend fun loginWithEmailAndPassword(email: String, password: String) =
         firebaseDS.loginWithEmailAndPassword(email, password)
