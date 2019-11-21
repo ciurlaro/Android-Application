@@ -26,9 +26,9 @@ android {
     buildToolsVersion("29.0.2")
 
     sourceSets.all {
-        java.srcDirs(file("src/android${name.capitalize()}/kotlin"))
-        res.srcDirs(file("src/android${name.capitalize()}/res"))
-        resources.srcDirs(file("src/android${name.capitalize()}/resources"))
+//        java.srcDirs(file("src/android${name.capitalize()}/kotlin"))
+//        res.srcDirs(file("src/android${name.capitalize()}/res"))
+//        resources.srcDirs(file("src/android${name.capitalize()}/resources"))
         manifest.srcFile(file("src/android${name.capitalize()}/AndroidManifest.xml"))
     }
 }

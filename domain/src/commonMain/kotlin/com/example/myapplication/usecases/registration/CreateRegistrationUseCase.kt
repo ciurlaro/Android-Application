@@ -4,12 +4,12 @@ import com.example.myapplication.entities.MatchEntity
 import com.example.myapplication.entities.RegistrationEntity
 import com.example.myapplication.entities.UserEntity
 import com.example.myapplication.repositories.ArenaTournamentRepository
-import com.example.myapplication.usecases.UseCaseWithParamSuspending
+import com.example.myapplication.usecases.UseCaseWithParamsSuspending
 import kotlinx.coroutines.FlowPreview
 
 class CreateRegistrationUseCase(
     private val repository: ArenaTournamentRepository
-) : UseCaseWithParamSuspending<CreateRegistrationUseCase.Params, RegistrationEntity> {
+) : UseCaseWithParamsSuspending<CreateRegistrationUseCase.Params, RegistrationEntity> {
 
     @UseExperimental(FlowPreview::class)
     override suspend fun buildAction(params: Params): RegistrationEntity =

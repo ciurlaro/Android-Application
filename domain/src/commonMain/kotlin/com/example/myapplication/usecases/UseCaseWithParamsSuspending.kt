@@ -1,5 +1,5 @@
 package com.example.myapplication.usecases
 
-interface UseCaseWithParamSuspending<P, O> {
+interface UseCaseWithParamsSuspending<P, O> {
     suspend fun buildAction(params: P): O
 }
