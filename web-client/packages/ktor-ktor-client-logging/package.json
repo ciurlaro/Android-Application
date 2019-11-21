@@ -1,0 +1,7 @@
+{
+  "main": "ktor-ktor-client-logging.js",
+  "devDependencies": {},
+  "dependencies": {},
+  "name": "ktor-ktor-client-logging",
+  "version": "1.2.5"
+}

@@ -8,23 +8,40 @@ node {
   download = true
 }
 
-task<YarnTask>("ngBuild") {
-  dependsOn("yarn_install")
-  //dependsOn("npmInstall")
-  inputs.dir("node_modules")
+val yarnInstall by tasks.register<YarnTask>("yarnInstall") {
+
+  group = "yarn"
+
+  dependsOn(rootProject.tasks["copyPackages"])
+
+  inputs.file("package.json")
+  outputs.dir("node_modules")
+
+  args = listOf("install")
+}
+
+task<YarnTask>("build") {
+
+  group = "ng"
+
+  dependsOn(yarnInstall)
+
   inputs.dir("src")
   inputs.file("angular.json")
-  inputs.dir("../build/js/packages_imported")
+
   inputs.dir("../build/js/packages")
-  inputs.file("package.json")
   outputs.dir("dist")
-  
+
   args = listOf("run", "build")
+
 }
 
 
 task<YarnTask>("serve") {
-  args = listOf("run", "start" )
+
+  group = "ng"
+
+  args = listOf("run", "start")
 }
 
 

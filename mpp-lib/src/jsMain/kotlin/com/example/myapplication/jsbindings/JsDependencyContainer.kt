@@ -109,8 +109,3 @@ class  JsDependencyContainer(
     val isSubscribed by instance<JsIsSubscribedAccount>()
 
 }
-
-// const container = new com.example.myapplication.jsbindings.JsDependencyContainer("", "", "", {
-//   w;lekfmelwrigw
-// })
-//  container.jsGetByModeUseCase.buildAction({ mode: "freeforall", page: 1 }) observable

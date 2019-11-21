@@ -32,18 +32,33 @@ subprojects {
     }
 }
 
-task<Copy>("copyPackages"){
-    //group = "jsmerda"
-    dependsOn("yarn_install")
-    subprojects {
-        if("jsJar" in tasks.names)
-            dependsOn(tasks["jsJar"])
+task<Copy>("copyPackages") {
+    group = "jsmerda"
+    listOf("domain", "data", "mpp-lib").forEach {
+        dependsOn("$it:compileKotlinJs")
     }
-    from(file("$buildDir/js/")){
+    from(file("$buildDir/js/packages")) {
         exclude("**/yarn.lock")
         exclude("**/node_modules")
         exclude("**/*.json.hash")
         exclude("package.json")
     }
-    into("web-client")
+    from(file("$buildDir/js/packages_imported")) {
+        exclude("**/yarn.lock")
+        exclude(".visited")
+        exclude("**/node_modules")
+        exclude("**/*.json.hash")
+        exclude("package.json")
+        eachFile {
+            relativePath = RelativePath(
+                true,
+                *relativePath.segments
+                    .toMutableList()
+                    .apply { removeAt(1) }
+                    .toTypedArray()
+            )
+        }
+        includeEmptyDirs = false
+    }
+    into("web-client/packages")
 }

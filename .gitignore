@@ -12,6 +12,8 @@ google-services.json
 web-client/yarn_modules
 node_modules/
 yarn.lock
+web-client/packages
+web-client/dist
 
 # compiled output
 /dist
