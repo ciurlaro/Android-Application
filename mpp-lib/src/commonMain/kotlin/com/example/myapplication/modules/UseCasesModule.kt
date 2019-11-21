@@ -12,6 +12,7 @@ import com.example.myapplication.usecases.registration.GetRegistrationsByUserUse
 import com.example.myapplication.usecases.tournament.*
 import com.example.myapplication.usecases.user.CreateAccountWithEmailAndPasswordUseCase
 import com.example.myapplication.usecases.user.GetAccountVerificationStatusUseCase
+import com.example.myapplication.usecases.user.IsSubscribedAccountUseCase
 import com.example.myapplication.usecases.user.GetCurrentUserInfoUseCase
 import com.example.myapplication.usecases.user.IsSubscribedAccountUseCase
 import org.kodein.di.Kodein

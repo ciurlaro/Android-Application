@@ -23,59 +23,27 @@ plugins {
     kotlin("multiplatform") apply false
     id("com.android.application") apply false
 }
-logger.info(buildString {
-    appendln()
-    val jString = JavaVersion.current().toString()
-    appendln("************************")
-    appendln("*  JAVA VERSION: ${jString.padEnd(5)} *")
-    appendln("************************")
-    appendln()
-})
+
 subprojects {
     repositories {
         google()
         jcenter()
         mavenCentral()
-        maven("https://dl.bintray.com/kotlin/kotlin-eap")
-        maven("https://dl.bintray.com/kotlin/kotlin-dev")
     }
 }
 
-tasks.create<Delete>("turboClean") {
-    group = "clean"
-    allprojects {
-        delete(rootProject.buildDir)
-    }
-}
-
-
-val nodePackagesCopyTask by tasks.register<Copy>("copyNodePackagesFromSubprojects") {
-    evaluationDependsOnChildren()
-    into(file("$buildDir/nodePackages"))
+task<Copy>("copyPackages"){
+    //group = "jsmerda"
+    dependsOn("yarn_install")
     subprojects {
-        if ("buildNodePackage" in tasks.map { it.name }) {
-            val t by tasks.named<Copy>("buildNodePackage")
-            dependsOn(t)
-            from(t.destinationDir) {
-                into("${rootProject.name}-$name")
-            }
-        }
+        if("jsJar" in tasks.names)
+            dependsOn(tasks["jsJar"])
     }
-}
-
-tasks.register<Zip>("zipNodePackages") {
-    subprojects {
-        tasks.findByName("jsJar")?.let { dependsOn(it) }
+    from(file("$buildDir/js/")){
+        exclude("**/yarn.lock")
+        exclude("**/node_modules")
+        exclude("**/*.json.hash")
+        exclude("package.json")
     }
-    from("$buildDir/js") {
-        include("*")
-        include("**/*")
-        exclude("node_modules")
-        exclude("node_modules.state")
-        exclude("yarn.lock")
-        exclude("*/.visited")
-
-    }
-    archiveBaseName.set("node_package")
-    destinationDirectory.set(buildDir)
+    into("web-client")
 }
