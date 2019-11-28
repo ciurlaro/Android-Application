@@ -136,7 +136,7 @@ dependencies {
     val androidxLifecycleVersion: String by project
     val materialVersion: String by project
     val constraintLayoutVersion: String by project
-    val picassoVersion: String by project
+    val glideVersion: String by project
 
     val junitVersion: String by project
     val espressoVersion: String by project
@@ -159,7 +159,8 @@ dependencies {
     implementation("androidx.navigation", "navigation-fragment-ktx", androidxNavigationVersion)
     implementation("androidx.navigation", "navigation-ui-ktx", androidxNavigationVersion)
 
-    implementation("com.squareup.picasso", "picasso", picassoVersion)
+    implementation("com.github.bumptech.glide", "glide", glideVersion)
+    kapt("com.github.bumptech.glide", "compiler", glideVersion)
 
     implementation("eu.davidea", "flexible-adapter", flexibleAdapterVersion)
 

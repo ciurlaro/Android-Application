@@ -6,8 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 import com.example.myapplication.ui.home.HomeViewModel
-import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.item_match.view.*
 
 class MatchesAdapter : RecyclerView.Adapter<MatchesAdapter.ViewHolder>() {
 

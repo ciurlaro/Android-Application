@@ -4,10 +4,10 @@ import android.view.View
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.entities.TournamentEntity
 import com.example.myapplication.usecases.tournament.GetShowCaseTournamentsUseCase
-import com.squareup.picasso.Picasso
 import eu.davidea.flexibleadapter.FlexibleAdapter
 import eu.davidea.flexibleadapter.items.AbstractFlexibleItem
 import eu.davidea.flexibleadapter.items.IFlexible
@@ -47,7 +47,9 @@ class HomeViewModel(
         class ViewHolder(view: View, adapter: FlexibleAdapter<*>) : FlexibleViewHolder(view, adapter) {
 
             fun render(data: TournamentEntity) = with(itemView) {
-                Picasso.get().load(data.game.icon).into(tournament_game_icon)
+                Glide.with(itemView.context)
+                    .load(data.game.icon)
+                    .into(tournament_game_icon)
                 tournament_name_tv.text = data.title
                 tournament_description_tv.text = data.tournamentDescription
             }

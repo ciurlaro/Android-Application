@@ -4,7 +4,7 @@
     "OPEN_WORLD"
   ],
   "image": "wow.png",
-  "icon": "http://bit.ly/2R1aXDQ",
+  "icon": "https://icon-library.net/images/overwatch-logo-icon/overwatch-logo-icon-13.jpg",
   "_links": {
     "self": {
       "href": "http://localhost:8080/game/wow"
