@@ -1,20 +1,22 @@
 package com.example.myapplication.ui.home
 
-import android.annotation.SuppressLint
 import android.view.View
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
-import com.example.myapplication.entities.MatchEntity
-import com.example.myapplication.usecases.match.GetAllAvailableMatchesUseCase
+import com.example.myapplication.entities.TournamentEntity
+import com.example.myapplication.usecases.tournament.GetShowCaseTournamentsUseCase
 import eu.davidea.flexibleadapter.FlexibleAdapter
 import eu.davidea.flexibleadapter.items.AbstractFlexibleItem
 import eu.davidea.flexibleadapter.items.IFlexible
 import eu.davidea.viewholders.FlexibleViewHolder
-import kotlinx.android.synthetic.main.item_match.view.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 class HomeViewModel(
-    private val getAllAvailableMatches: GetAllAvailableMatchesUseCase
+    private val showCaseTournamentsUseCase: GetShowCaseTournamentsUseCase
 ) : ViewModel() {
 
     private val homeViewAdapter = FlexibleAdapter<Model>(emptyList())
@@ -22,7 +24,7 @@ class HomeViewModel(
     val adapter
         get() = homeViewAdapter as RecyclerView.Adapter<*>
 
-    data class Model(val matchEntity: MatchEntity, val registeredPlayer: Int) :
+    data class Model(val tournamentEntity: TournamentEntity) :
         AbstractFlexibleItem<Model.ViewHolder>() {
         override fun bindViewHolder(
             adapter: FlexibleAdapter<IFlexible<RecyclerView.ViewHolder>>,
@@ -30,8 +32,7 @@ class HomeViewModel(
             position: Int,
             payloads: MutableList<Any>
         ) {
-            holder.render(matchEntity, registeredPlayer)
-
+            holder.render(tournamentEntity)
         }
 
         override fun createViewHolder(
@@ -39,12 +40,12 @@ class HomeViewModel(
             adapter: FlexibleAdapter<IFlexible<RecyclerView.ViewHolder>>
         ) = ViewHolder(view, adapter)
 
-        override fun getLayoutRes() = R.layout.item_match
+        override fun getLayoutRes() = R.layout.item_tournament
 
         class ViewHolder(view: View, adapter: FlexibleAdapter<*>) : FlexibleViewHolder(view, adapter) {
-            @SuppressLint("SetTextI18n")
-            fun render(data: MatchEntity, registeredPlayer: Int) = with(itemView) {
-                game_image.setImageResource(R.drawable.doggo)
+
+            fun render(data: TournamentEntity, registeredPlayer: Int) = with(itemView) {
+                /*game_image.setImageResource(R.drawable.doggo)
                 game_icon.setImageResource(R.drawable.wow)
                 tournament_name.text = data.tournament.title
 
@@ -54,21 +55,17 @@ class HomeViewModel(
 
                 match_players.text = "$registeredPlayer|2"
                 //match_players.text = Resources.getSystem().getString(R.string.players_number_text, registeredPlayer, 2)
-                game_name.text = data.tournament.game.name
+                game_name.text = data.tournament.game.name*/
             }
 
         }
     }
 
-    /**fun getShowcaseTournaments() =
-    getShowcaseTournaments.buildAction()
-    .map {
-
-    }
-    .onEach {
-    homeViewAdapter.addItem(it)
-    }
-    .launchIn(viewModelScope)*/
+    @ExperimentalCoroutinesApi
+    fun getShowcaseTournaments() =
+        showCaseTournamentsUseCase.buildAction()
+            .onEach { homeViewAdapter.addItem(Model(it)) }
+            .launchIn(viewModelScope)
 
     /** @ExperimentalCoroutinesApi
     fun getAllAvailableMatches() =

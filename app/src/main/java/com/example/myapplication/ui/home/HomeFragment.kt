@@ -27,44 +27,4 @@ class HomeFragment : BaseFragment() {
         matches_rv.adapter = viewModel.adapter
     }
 
-//        super.onViewCreated(view, savedInstanceState)
-//
-//        matches_rv.adapter = adapter
-//
-//        viewModel.text.observe {
-//            adapter.data = it
-//        }
-
-//        viewModel.getAllAvailableMatches()
-
-    //viewModel.getMatchesByUser()
-    //viewModel.getMatchesByTournament()
-
-    /*viewModel.getGamesByMode()
-    viewModel.getGamesContainingName()
-
-
-    viewModel.getRegistrationsByMatch()
-    viewModel.getRegistrationByTournament()
-    viewModel.getRegistrationsByUser()
-
-    viewModel.getTournamentsByAdmin()
-    viewModel.getShowcaseTournaments()
-    viewModel.getTournamentsByGame()
-    viewModel.getTournamentsByMode()
-    viewModel.getTournamentsContainingTitle()
-
-    viewModel.getUserInformation()
-
-    viewModel.isAccountVerified()
-    viewModel.isSubscribedAccount()
-
-    viewModel.createGameMode()
-    viewModel.createGame()
-    viewModel.createUser()
-    viewModel.createTournament()
-    viewModel.createMatch()
-    viewModel.createRegistration()*/
-
-
 }
