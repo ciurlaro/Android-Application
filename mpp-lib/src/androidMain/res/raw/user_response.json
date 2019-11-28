@@ -3,14 +3,5 @@
   "email": "cesare@cesare.cesare",
   "nickname": "CESA_RHINO",
   "image": "cesare.png",
-  "verified": true,
-  "subscriber": true,
-  "_links": {
-    "self": {
-      "href": "http://localhost:8080/user/Cesare_1"
-    },
-    "userEntity": {
-      "href": "http://localhost:8080/user/Cesare_1"
-    }
-  }
+  "subscriber": true
 }

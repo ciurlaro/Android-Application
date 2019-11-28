@@ -4,7 +4,7 @@
     "OPEN_WORLD"
   ],
   "image": "wow.png",
-  "icon": "wow.icon",
+  "icon": "http://bit.ly/2R1aXDQ",
   "_links": {
     "self": {
       "href": "http://localhost:8080/game/wow"

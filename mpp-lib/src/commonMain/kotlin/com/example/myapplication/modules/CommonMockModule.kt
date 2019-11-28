@@ -72,7 +72,7 @@ object CommonMockModule : KodeinModuleProvider {
             "/tournament/1" -> respondJsonFromRawResources("single_tournament_response", dKodein)
             "/tournament/2" -> respondJsonFromRawResources("single_tournament_response", dKodein)
             "/tournament/2/game" -> respondJsonFromRawResources("single_game_response", dKodein)
-            "/tournament/2/admin" -> respondJsonFromRawResources("user_response", dKodein)
+            "/tournament/2/admin" -> respondJsonFromRawResources("single_user_response", dKodein)
             "/tournament/search/byMode" -> respondJsonFromRawResources("multiple_tournaments_response", dKodein)
             "/tournament/search/byGame" -> respondJsonFromRawResources("multiple_tournaments_response", dKodein)
             "/tournament/search/byGame?game=Cesare_1&page=0" -> respondJsonFromRawResources(

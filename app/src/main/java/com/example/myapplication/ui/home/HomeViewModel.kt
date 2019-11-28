@@ -7,10 +7,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 import com.example.myapplication.entities.TournamentEntity
 import com.example.myapplication.usecases.tournament.GetShowCaseTournamentsUseCase
+import com.squareup.picasso.Picasso
 import eu.davidea.flexibleadapter.FlexibleAdapter
 import eu.davidea.flexibleadapter.items.AbstractFlexibleItem
 import eu.davidea.flexibleadapter.items.IFlexible
 import eu.davidea.viewholders.FlexibleViewHolder
+import kotlinx.android.synthetic.main.item_tournament.view.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -44,20 +46,11 @@ class HomeViewModel(
 
         class ViewHolder(view: View, adapter: FlexibleAdapter<*>) : FlexibleViewHolder(view, adapter) {
 
-            fun render(data: TournamentEntity, registeredPlayer: Int) = with(itemView) {
-                /*game_image.setImageResource(R.drawable.doggo)
-                game_icon.setImageResource(R.drawable.wow)
-                tournament_name.text = data.tournament.title
-
-                val matchInfo = "${data.matchDateTime}".split("T")
-                match_date.text = matchInfo[0]
-                match_time.text = matchInfo[1]
-
-                match_players.text = "$registeredPlayer|2"
-                //match_players.text = Resources.getSystem().getString(R.string.players_number_text, registeredPlayer, 2)
-                game_name.text = data.tournament.game.name*/
+            fun render(data: TournamentEntity) = with(itemView) {
+                Picasso.get().load(data.game.icon).into(tournament_game_icon)
+                tournament_name_tv.text = data.title
+                tournament_description_tv.text = data.tournamentDescription
             }
-
         }
     }
 
