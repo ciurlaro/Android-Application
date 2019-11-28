@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
+import androidx.appcompat.widget.AppCompatEditText
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.example.myapplication.R
@@ -14,6 +15,7 @@ import com.example.myapplication.ui.BaseFragment
 import com.example.myapplication.ui.MainActivity
 import com.example.myapplication.usecases.user.login.SigninUserUseCase
 import kotlinx.android.synthetic.main.fragment_signin.*
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import org.kodein.di.erased.instance
@@ -26,19 +28,19 @@ class SigninFragment : BaseFragment() {
     private val signinUserUseCase by instance<SigninUserUseCase>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
-        FragmentSigninBinding.inflate(inflater, container, false)
-            .also {
-                it.viewModel = viewModel.apply {
-                    email.set(args.email)
-                    password.set(args.password)
-                }
+        FragmentSigninBinding.inflate(inflater, container, false).also {
+            it.viewModel = viewModel.apply {
+                email.set(args.email)
+                password.set(args.password)
             }
-            .root
+        }.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         button_sign_in.setOnClickListener {
-            lifecycleScope.launch { onLoginButtonClicked() }
+            lifecycleScope.launch(Dispatchers.Main) {
+                onLoginButtonClicked()
+            }
         }
         create_account_tv.setOnClickListener {
             onCreateAccountTvClicked()
@@ -47,14 +49,17 @@ class SigninFragment : BaseFragment() {
 
     private suspend fun onLoginButtonClicked() {
         var asErrored = false
-        if (email_etv.text.isNullOrEmpty()) {
-            email_etv.error = resources.getString(R.string.must_not_be_empty)
-            asErrored = true
+
+        fun checkETV(etv: AppCompatEditText) {
+            if (etv.text.isNullOrEmpty()) {
+                etv.error = resources.getString(R.string.must_not_be_empty)
+                asErrored = true
+            }
         }
-        if (password_etv.text.isNullOrEmpty()) {
-            password_etv.error = resources.getString(R.string.must_not_be_empty)
-            asErrored = true
-        }
+
+        checkETV(email_etv)
+        checkETV(password_etv)
+
         if (!asErrored) {
             button_sign_in.isClickable = false
             create_account_tv.isClickable = false
@@ -96,4 +101,5 @@ class SigninFragment : BaseFragment() {
             requireActivity().finishAndRemoveTask()
         }
     }
+
 }

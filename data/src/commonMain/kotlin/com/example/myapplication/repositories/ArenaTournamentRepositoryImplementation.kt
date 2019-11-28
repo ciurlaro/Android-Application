@@ -390,15 +390,15 @@ class ArenaTournamentRepositoryImplementation(
         arenaTournamentDS.getUserById(id)
             .let { userMapper.fromRemoteSingle(it) }
 
-    override suspend fun getCurrentUser() = coroutineScope {
-        val user = async { firebaseAuthDS.getCurrentAuthUser() }
-        val claims = async { firebaseAuthDS.getCurrentUserClaims() }
+    override suspend fun getCurrentUser() = firebaseAuthDS.getCurrentAuthUser()?.let {
+        coroutineScope {
+            val claims = async { firebaseAuthDS.getCurrentUserClaims() }
+            val imageUrl = it.image?.let { async { firebaseStorageDS.getFileUrl(it) } }
 
-        user.await()?.let {
             currentUserMapper.fromRemoteSingle(
                 it,
                 claims.await(),
-                it.image?.let { firebaseStorageDS.getFileUrl(it) }
+                imageUrl?.await()
             )
         }
     }

@@ -22,8 +22,8 @@ actual class FirebaseAuthDatasourceImplementation actual constructor(
     override suspend fun getToken() =
         getUserToken()
 
-    override suspend fun getCurrentAuthUser() = currentFirebaseUser.let {
-        AuthUserEntity(it.uid, it.email!!, it.displayName!!, it.photoUrl.toString())
+    override suspend fun getCurrentAuthUser() = firebaseAuth.currentUser?.let {
+        AuthUserEntity(it.uid, it.email!!, it.displayName!!, it.photoUrl?.toString())
     }
 
     override suspend fun getCurrentUserClaims() =

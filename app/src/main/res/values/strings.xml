@@ -49,5 +49,7 @@
     <string name="email_must_match">Emails must match</string>
     <string name="password_must_match">Passwords must match</string>
     <string name="email_is_malformed">Email is malformed</string>
+    <string name="email_already_exists">Email already exists</string>
+    <string name="weak_password_exception">At least 6 chars</string>
 
 </resources>

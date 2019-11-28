@@ -10,11 +10,11 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 
 fun Exception.asCustom() = when (this) {
-    is FirebaseAuthWeakPasswordException -> AuthException.AuthWeakPasswordException()
+    is FirebaseAuthWeakPasswordException -> AuthException.AuthWeakPasswordException(message)
     is FirebaseAuthInvalidCredentialsException -> AuthException.AuthInvalidCredentialsException(message)
-    is FirebaseAuthUserCollisionException -> AuthException.AuthUserCollisionException()
-    is FirebaseAuthInvalidUserException -> AuthException.AuthInvalidUserException()
-    is FirebaseAuthRecentLoginRequiredException -> AuthException.AuthRecentLoginRequiredException()
+    is FirebaseAuthUserCollisionException -> AuthException.AuthUserCollisionException(message)
+    is FirebaseAuthInvalidUserException -> AuthException.AuthInvalidUserException(message)
+    is FirebaseAuthRecentLoginRequiredException -> AuthException.AuthRecentLoginRequiredException(message)
     is StorageException -> com.example.myapplication.exceptions.StorageException(message)
     else -> this
 }

@@ -5,12 +5,14 @@ import kotlinx.coroutines.await
 import kotlin.js.Promise
 
 fun Throwable.asCustom() = when (message) {
-    "auth/weak-password" -> AuthException.AuthWeakPasswordException()
+    "auth/weak-password" -> AuthException.AuthWeakPasswordException(message)
     "auth/invalid-credential", "auth/wrong-password", "auth/invalid-email" ->
         AuthException.AuthInvalidCredentialsException(message)
-    "auth/account-exists-with-different-credential" -> AuthException.AuthUserCollisionException()
-    "auth/operation-not-allowed", "auth/user-disabled", "auth/user-not-found" -> AuthException.AuthInvalidUserException()
-    "auth/requires-recent-login" -> AuthException.AuthRecentLoginRequiredException()
+    "auth/account-exists-with-different-credential" -> AuthException.AuthUserCollisionException(message)
+    "auth/operation-not-allowed", "auth/user-disabled", "auth/user-not-found" -> AuthException.AuthInvalidUserException(
+        message
+    )
+    "auth/requires-recent-login" -> AuthException.AuthRecentLoginRequiredException(message)
     else -> AuthException.AuthGenericException(message)
 }
 

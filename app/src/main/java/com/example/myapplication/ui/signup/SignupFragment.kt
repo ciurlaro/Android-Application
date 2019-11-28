@@ -1,8 +1,11 @@
 package com.example.myapplication.ui.signup
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.annotation.StringRes
@@ -11,9 +14,12 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentSignupBinding
+import com.example.myapplication.exceptions.AuthException
 import com.example.myapplication.ui.BaseFragment
+import com.example.myapplication.ui.MainActivity
 import com.example.myapplication.usecases.user.creation.CreateAccountWithCompleteInformation
 import kotlinx.android.synthetic.main.fragment_signup.*
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import org.kodein.di.erased.instance
@@ -35,8 +41,10 @@ class SignupFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        button_sign_up.setOnClickListener{
-            lifecycleScope.launch { onSignupButtonClicked() }
+        button_sign_up.setOnClickListener {
+            lifecycleScope.launch(Dispatchers.Main) {
+                onSignupButtonClicked()
+            }
         }
         already_have_account_tv.setOnClickListener {
             onSigninTvClicked()
@@ -72,14 +80,29 @@ class SignupFragment : BaseFragment() {
         if (!hasErrored) {
             button_sign_up.isClickable = false
             already_have_account_tv.isClickable = false
-            val isSuccessful = try {
+            button_sign_up.visibility = INVISIBLE
+            signup_progress_bar.visibility = VISIBLE
+            try {
                 createAccountWithCompleteInformationUseCase.buildAction(
                     viewModel.email.get()!!,
                     viewModel.password.get()!!,
                     viewModel.nickname.get()!!
                 )
-            } catch (e: Throwable) {
-
+                requireActivity().startActivity(MainActivity(requireContext()))
+            } catch (e: AuthException.AuthUserCollisionException) {
+                Log.d(TAG, e.message, e)
+                email_etv.error = resources.getString(R.string.email_already_exists)
+            } catch (e: AuthException.AuthWeakPasswordException) {
+                Log.d(TAG, e.message, e)
+                password_etv.error = resources.getString(R.string.weak_password_exception)
+            } catch (e: AuthException.AuthMalformedEmailException) {
+                Log.d(TAG, e.message, e)
+                email_etv.error = resources.getString(R.string.email_is_malformed)
+            } finally {
+                button_sign_up.isClickable = true
+                already_have_account_tv.isClickable = true
+                button_sign_up.visibility = VISIBLE
+                signup_progress_bar.visibility = INVISIBLE
             }
         }
 

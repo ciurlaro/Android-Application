@@ -1,8 +1,6 @@
 package com.example.myapplication.modules
 
-import com.example.myapplication.datasource.ArenaTournamentDatasource
-import com.example.myapplication.datasource.ArenaTournamentDatasourceImplementation
-import com.example.myapplication.datasource.EndpointsImplementation
+import com.example.myapplication.datasource.*
 import org.kodein.di.Kodein
 import org.kodein.di.erased.bind
 import org.kodein.di.erased.instance
@@ -13,6 +11,15 @@ object DatasourcesModule : KodeinModuleProvider {
         bind<ArenaTournamentDatasource>() with singleton {
             ArenaTournamentDatasourceImplementation(instance(), instance(), instance())
         }
+
+        bind<FirebaseStorageDatasource>() with singleton { FirebaseStorageDatasourceImplementation(instance()) }
+
+        bind<FirebaseAuth>() with singleton { getFirebaseAuthInstance() }
+        bind<FirebaseStorage>() with singleton { getFirebaseStorageInstance() }
+
+        bind<FirebaseAuthDatasource>() with singleton { FirebaseAuthDatasourceImplementation(instance()) }
+
+
         bind<ArenaTournamentDatasource.Endpoints>() with singleton {
             EndpointsImplementation(
                 instance("serverProtocol"),

@@ -19,6 +19,9 @@ import org.kodein.di.erased.instance
 @ExperimentalCoroutinesApi
 abstract class BaseFragment : Fragment(), KodeinAware {
 
+    @Suppress("PropertyName")
+    protected val TAG = this::class.simpleName!!
+
     override val kodein by closestKodein()
 
     inline fun <reified T : ViewModel> viewModelInstance() = instance<Fragment, T>(arg = this)
