@@ -167,6 +167,10 @@ object CommonMockModule : KodeinModuleProvider {
                 "multiple_matches_response",
                 dKodein
             )
+            "/match/search/byTournamentId?tournamentId=2&page=0" -> respondJsonFromRawResources(
+                "multiple_matches_response",
+                dKodein
+            )
             "/registration/1/match" -> respondJsonFromRawResources("single_match_response", dKodein)
             "/registration/2/match" -> respondJsonFromRawResources("single_match_response", dKodein)
             "/registration/3/match" -> respondJsonFromRawResources("single_match_response", dKodein)

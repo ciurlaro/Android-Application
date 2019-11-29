@@ -1,5 +1,6 @@
 package com.example.myapplication.ui.search
 
+import com.example.myapplication.R
 import android.view.View
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -43,9 +44,7 @@ class SearchViewModel(
             adapter: FlexibleAdapter<IFlexible<RecyclerView.ViewHolder>>
         ) = ViewHolder(view, adapter)
 
-        override fun getLayoutRes(): Int {
-            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        }
+        override fun getLayoutRes() = R.layout.item_tournament
 
         class ViewHolder(view: View, adapter: FlexibleAdapter<*>) : FlexibleViewHolder(view, adapter) {
             fun render(data: TournamentEntity, count: Int) = with(itemView) {
@@ -57,9 +56,7 @@ class SearchViewModel(
 
 
     @ExperimentalCoroutinesApi
-    fun getTournamentsByMode(modeName: String) = getTournamentsByModeUseCase
-        .buildAction(modeName)
-        .map { Model(it.first, it.second) }
-        .onEach { searchViewAdapter.addItem(it) }
+    fun getTournamentsByMode(modeName: String) = getTournamentsByModeUseCase.buildAction(modeName)
+        .onEach { searchViewAdapter.addItem(Model(it.first, it.second)) }
         .launchIn(viewModelScope)
 }
