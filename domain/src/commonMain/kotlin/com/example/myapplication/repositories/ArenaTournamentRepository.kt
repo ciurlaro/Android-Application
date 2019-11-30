@@ -98,6 +98,11 @@ interface ArenaTournamentRepository {
     suspend fun loginWithGoogleToken(token: String): Boolean
 
     /**
+     * Logout using Firebase Auth
+     */
+    suspend fun logout()
+
+    /**
      * Creates a new account on the authentication provider.
      * @throws AuthUserCollisionException when email already exists.
      * @throws AuthWeakPasswordException when password's not strong enough.

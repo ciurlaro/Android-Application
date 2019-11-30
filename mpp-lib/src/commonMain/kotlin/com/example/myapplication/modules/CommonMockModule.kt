@@ -108,7 +108,7 @@ object CommonMockModule : KodeinModuleProvider {
                 "multiple_tournaments_response",
                 dKodein
             )
-            "/tournament/search/byMode?tournamentMode=F4A&page=0" -> respondJsonFromRawResources(
+            "/tournament/search/byMode?tournamentMode=RANKED&page=0" -> respondJsonFromRawResources(
                 "multiple_tournaments_response",
                 dKodein
             )

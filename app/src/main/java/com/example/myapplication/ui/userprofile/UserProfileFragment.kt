@@ -4,19 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.ui.BaseFragment
+import com.example.myapplication.usecases.user.logout.SignoutUserUseCase
 import kotlinx.android.synthetic.main.fragment_user.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
+import org.kodein.di.erased.instance
 
 @ExperimentalCoroutinesApi
 class UserProfileFragment : BaseFragment() {
 
     private val viewModel: UserProfileViewModel by viewModelInstance()
+    private val signoutUseCase by instance<SignoutUserUseCase>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,7 +46,7 @@ class UserProfileFragment : BaseFragment() {
         }
     }
 
-    private fun logOut() {
-        Toast.makeText(activity, "Logging out...", Toast.LENGTH_LONG).show()
+    private suspend fun logOut() {
+        signoutUseCase.buildAction()
     }
 }

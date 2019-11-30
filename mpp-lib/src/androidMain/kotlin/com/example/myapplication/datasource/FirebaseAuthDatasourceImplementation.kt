@@ -55,6 +55,9 @@ actual class FirebaseAuthDatasourceImplementation actual constructor(
     override suspend fun loginWithGoogleToken(token: String) =
         loginWithAuthCredential(GoogleAuthProvider.getCredential(token, null))
 
+    override suspend fun logout() = firebaseAuth.signOut()
+
+
     override suspend fun createAccountWithEmailAndPassword(email: String, password: String) =
         wrapTask { firebaseAuth.createUserWithEmailAndPassword(email, password) }
 

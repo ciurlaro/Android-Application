@@ -12,7 +12,7 @@ class GetTournamentsByModePerPageUseCase(
     override fun buildAction(params: Params) =
         repository.getTournamentsByMode(params.mode, params.page)
 
-    fun buildAction(mode: String, page: Int) =
+    fun buildAction(mode: String, page: Int = 1) =
         buildAction(Params(mode, page))
 
     data class Params(val mode: String, val page: Int)

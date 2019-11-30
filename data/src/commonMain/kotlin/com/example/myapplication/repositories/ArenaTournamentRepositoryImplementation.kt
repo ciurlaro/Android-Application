@@ -70,6 +70,9 @@ class ArenaTournamentRepositoryImplementation(
     override suspend fun loginWithGoogleToken(token: String) =
         firebaseAuthDS.loginWithGoogleToken(token)
 
+    override suspend fun logout() =
+        firebaseAuthDS.logout()
+
     override suspend fun createAccountWithEmailAndPassword(email: String, password: String) =
         firebaseAuthDS.createAccountWithEmailAndPassword(email, password)
 

@@ -74,6 +74,11 @@ interface FirebaseAuthDatasource {
     suspend fun loginWithGoogleToken(token: String): Boolean
 
     /**
+     *
+     */
+    suspend fun logout()
+
+    /**
      * Creates a new account on the authentication provider.
      * @param email user email
      * @param password user password
