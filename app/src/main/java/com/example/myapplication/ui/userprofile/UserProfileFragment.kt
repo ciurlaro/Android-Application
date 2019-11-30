@@ -8,6 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.ui.BaseFragment
+import com.example.myapplication.ui.MainActivity
 import com.example.myapplication.usecases.user.logout.SignoutUserUseCase
 import kotlinx.android.synthetic.main.fragment_user.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -44,9 +45,12 @@ class UserProfileFragment : BaseFragment() {
                 logOut()
             }
         }
+
     }
 
     private suspend fun logOut() {
         signoutUseCase.buildAction()
+        requireActivity().startActivity(MainActivity(requireContext()))
     }
+
 }

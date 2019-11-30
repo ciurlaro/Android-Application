@@ -16,6 +16,7 @@ import com.example.myapplication.usecases.user.creation.CreateAccountWithFaceboo
 import com.example.myapplication.usecases.user.creation.CreateAccountWithGoogleToken
 import com.example.myapplication.usecases.user.info.GetCurrentUserInfoUseCase
 import com.example.myapplication.usecases.user.login.SigninUserUseCase
+import com.example.myapplication.usecases.user.logout.SignoutUserUseCase
 import com.example.myapplication.usecases.user.update.UpdateUserEmailUseCase
 import com.example.myapplication.usecases.user.update.UpdateUserNicknameUseCase
 import com.example.myapplication.usecases.user.update.UpdateUserPasswordUseCase
@@ -77,6 +78,7 @@ object UseCasesModule : KodeinModuleProvider {
 
 
         bind<SigninUserUseCase>() with singleton { SigninUserUseCase(instance()) }
+        bind<SignoutUserUseCase>() with singleton { SignoutUserUseCase(instance()) }
         bind<CreateAccountWithEmailAndPasswordUseCase>() with singleton {
             CreateAccountWithEmailAndPasswordUseCase(
                 instance()

@@ -18,6 +18,12 @@
             tools:layout="@layout/fragment_dashboard"/>
 
     <fragment
+            android:id="@+id/navigation_option"
+            android:name="com.example.myapplication.ui.option.OptionFragment"
+            android:label="@string/title_option"
+            tools:layout="@layout/fragment_option"/>
+
+    <fragment
             android:id="@+id/navigation_user_profile"
             android:name="com.example.myapplication.ui.userprofile.UserProfileFragment"
             android:label="@string/title_notifications"

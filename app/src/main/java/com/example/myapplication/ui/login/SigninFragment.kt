@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import androidx.activity.addCallback
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.lifecycle.lifecycleScope
@@ -44,6 +45,15 @@ class SigninFragment : BaseFragment() {
         }
         create_account_tv.setOnClickListener {
             onCreateAccountTvClicked()
+        }
+
+        password_etv.setOnEditorActionListener { _, action_id, _ ->
+            if (action_id == EditorInfo.IME_ACTION_DONE) {
+                lifecycleScope.launch(Dispatchers.Main) {
+                    onLoginButtonClicked()
+                }
+            }
+            true
         }
     }
 
