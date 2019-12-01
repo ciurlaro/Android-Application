@@ -202,6 +202,24 @@ object CommonMockModule : KodeinModuleProvider {
                 dKodein
             )
 
+            "/registration/search/byUserId?userId=yoU5Wv7Vs0QOsD9jkMnJRTXIHYW2&page=0" -> respondJsonFromRawResources(
+                "multiple_registrations_response",
+                dKodein
+            )
+            "/registration/search/byUserId?userId=yoU5Wv7Vs0QOsD9jkMnJRTXIHYW2&page=1" -> respondJsonFromRawResources(
+                "multiple_registrations_response",
+                dKodein
+            )
+            "/registration/search/byUserId?userId=M5aTomuryOZrIlkJNNzHQN1Q0CG2&page=0" -> respondJsonFromRawResources(
+                "multiple_registrations_response",
+                dKodein
+            )
+
+            "/registration/search/byUserId?userId=M5aTomuryOZrIlkJNNzHQN1Q0CG2&page=1" -> respondJsonFromRawResources(
+                "multiple_registrations_response",
+                dKodein
+            )
+
 
             "/createUser" -> respondJsonFromRawResources("single_user_response", dKodein)
             "/currentUser" -> respondJsonFromRawResources("single_user_response", dKodein)

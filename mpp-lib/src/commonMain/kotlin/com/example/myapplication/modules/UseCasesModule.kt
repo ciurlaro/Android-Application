@@ -96,5 +96,8 @@ object UseCasesModule : KodeinModuleProvider {
         bind<UpdateUserPasswordUseCase>() with singleton { UpdateUserPasswordUseCase(instance()) }
         bind<UpdateUserProfileImageUseCase>() with singleton { UpdateUserProfileImageUseCase(instance()) }
 
+        bind<GetAllAvailableMatchesByParametersUseCase>() with singleton {
+            GetAllAvailableMatchesByParametersUseCase(instance(), instance(), instance())
+        }
     }
 }
