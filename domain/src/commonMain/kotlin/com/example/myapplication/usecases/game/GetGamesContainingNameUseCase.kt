@@ -2,25 +2,25 @@ package com.example.myapplication.usecases.game
 
 import com.example.myapplication.entities.GameEntity
 import com.example.myapplication.repositories.ArenaTournamentRepository
-import com.example.myapplication.usecases.UseCaseWithParams
+import com.example.myapplication.usecases.UseCaseWithParamSuspending
+import com.example.myapplication.utils.flatMapConcatIterable
 import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
-import kotlinx.coroutines.flow.flatMapConcat
+import kotlinx.coroutines.flow.toList
 
 class GetGamesContainingNameUseCase(
     private val repository: ArenaTournamentRepository
-) : UseCaseWithParams<GetGamesContainingNameUseCase.Params, Flow<GameEntity>> {
+) : UseCaseWithParamSuspending<GetGamesContainingNameUseCase.Params, List<GameEntity>> {
 
     @UseExperimental(FlowPreview::class)
-    override fun buildAction(params: Params) =
+    override suspend fun buildAction(params: Params) =
         (0 until params.maxPage)
             .asFlow()
-            .flatMapConcat {
+            .flatMapConcatIterable {
                 repository.getGamesContainingName(params.gameName, it)
-            }
+            }.toList()
 
-    fun buildAction(gameName: String, maxPage: Int = 1) =
+    suspend fun buildAction(gameName: String, maxPage: Int = 1) =
         buildAction(Params(gameName, maxPage))
 
     data class Params(val gameName: String, val maxPage: Int = 1)

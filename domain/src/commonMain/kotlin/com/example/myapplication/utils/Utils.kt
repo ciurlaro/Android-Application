@@ -4,3 +4,4 @@ import com.example.myapplication.repositories.ArenaTournamentRepository
 
 suspend fun ArenaTournamentRepository.isLoggedIn() =
     getCurrentUser() != null
+

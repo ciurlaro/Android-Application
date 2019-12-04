@@ -20,16 +20,16 @@ actual object PlatformSpecificMockModule : KodeinModuleProvider {
         bind<String>("multiple_game_modes_response") with singleton { rawFromRes(R.raw.multiple_game_modes_response) }
 
         bind<String>("single_tournament_response") with singleton { rawFromRes(R.raw.tournament_response) }
-        bind<String>("multiple_tournaments_response") with singleton { rawFromRes(R.raw.multiple_tournaments_response) }
+        bind<String>("multiple_tournament_response") with singleton { rawFromRes(R.raw.multiple_tournaments_response) }
 
         bind<String>("single_match_response") with singleton { rawFromRes(R.raw.match_response) }
-        bind<String>("multiple_matches_response") with singleton { rawFromRes(R.raw.multiple_matches_response) }
+        bind<String>("multiple_match_response") with singleton { rawFromRes(R.raw.multiple_matches_response) }
 
         bind<String>("single_registration_response") with singleton { rawFromRes(R.raw.registration_response) }
-        bind<String>("multiple_registrations_response") with singleton { rawFromRes(R.raw.multiple_registrations_response) }
+        bind<String>("multiple_registration_response") with singleton { rawFromRes(R.raw.multiple_registrations_response) }
 
         bind<String>("single_user_response") with singleton { rawFromRes(R.raw.user_response) }
-        bind<String>("multiple_users_response") with singleton { rawFromRes(R.raw.multiple_users_response) }
+        bind<String>("multiple_user_response") with singleton { rawFromRes(R.raw.multiple_users_response) }
 
     }
 

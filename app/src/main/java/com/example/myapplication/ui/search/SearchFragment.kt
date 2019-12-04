@@ -9,6 +9,7 @@ import com.example.myapplication.R
 import com.example.myapplication.ui.BaseFragment
 import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.launch
 
 @ExperimentalCoroutinesApi
@@ -22,6 +23,7 @@ class SearchFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ) = inflater.inflate(R.layout.fragment_search, container, false)!!
 
+    @FlowPreview
     @ExperimentalCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -30,6 +32,5 @@ class SearchFragment : BaseFragment() {
             viewModel.getTournamentsByMode("RANKED")
         }
     }
-
 
 }

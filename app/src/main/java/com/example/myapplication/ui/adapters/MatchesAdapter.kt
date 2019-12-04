@@ -5,11 +5,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
-import com.example.myapplication.ui.home.HomeViewModel
+import com.example.myapplication.ui.items.TournamentFlexibleItem
 
 class MatchesAdapter : RecyclerView.Adapter<MatchesAdapter.ViewHolder>() {
 
-    var data = listOf<HomeViewModel.Model>()
+    var data = listOf<TournamentFlexibleItem>()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -27,8 +27,8 @@ class MatchesAdapter : RecyclerView.Adapter<MatchesAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        fun render(data: HomeViewModel.Model) = with(itemView) {
-//            val (matchEntity, registeredPlayers) = data
+        fun render(data: TournamentFlexibleItem) = with(itemView) {
+            //            val (matchEntity, registeredPlayers) = data
 //            Picasso.get().load(matchEntity.tournament.game.image).into(game_image)
 //            Picasso.get().load(matchEntity.tournament.game.icon).into(game_icon)
 //            tournament_name.text = matchEntity.tournament.title

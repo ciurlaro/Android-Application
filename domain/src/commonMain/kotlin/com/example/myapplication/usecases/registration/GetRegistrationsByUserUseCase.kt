@@ -3,27 +3,28 @@ package com.example.myapplication.usecases.registration
 import com.example.myapplication.entities.RegistrationEntity
 import com.example.myapplication.entities.UserEntity
 import com.example.myapplication.repositories.ArenaTournamentRepository
-import com.example.myapplication.usecases.UseCaseWithParams
+import com.example.myapplication.usecases.UseCaseWithParamSuspending
+import com.example.myapplication.utils.flatMapConcatIterable
 import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
-import kotlinx.coroutines.flow.flatMapConcat
+import kotlinx.coroutines.flow.toList
 
 class GetRegistrationsByUserUseCase(
     private val repository: ArenaTournamentRepository
-) : UseCaseWithParams<GetRegistrationsByUserUseCase.Params, Flow<RegistrationEntity>> {
+) : UseCaseWithParamSuspending<GetRegistrationsByUserUseCase.Params, List<RegistrationEntity>> {
 
     @FlowPreview
-    override fun buildAction(params: Params) =
+    override suspend fun buildAction(params: Params) =
         (0 until params.maxPage)
             .asFlow()
-            .flatMapConcat {
+            .flatMapConcatIterable {
                 repository.getRegistrationsByUser(params.user.id, it)
             }
+            .toList()
 
 
     @FlowPreview
-    fun buildAction(user: UserEntity, maxPage: Int = 1) =
+    suspend fun buildAction(user: UserEntity, maxPage: Int = 1) =
         buildAction(Params(user, maxPage))
 
     data class Params(val user: UserEntity, val maxPage: Int = 1)

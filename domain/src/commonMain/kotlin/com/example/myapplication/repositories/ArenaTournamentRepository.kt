@@ -4,7 +4,6 @@ package com.example.myapplication.repositories
 import com.example.myapplication.entities.*
 import com.example.myapplication.exceptions.AuthException.*
 import com.soywiz.klock.DateTimeTz
-import kotlinx.coroutines.flow.Flow
 
 interface ArenaTournamentRepository {
 
@@ -45,27 +44,28 @@ interface ArenaTournamentRepository {
     suspend fun updateCurrentUserProfileImage(image: ByteArray): Boolean
 
     suspend fun getGameByName(name: String): GameEntity
-    fun searchGameByName(name: String, page: Int): Flow<GameEntity>
-    fun getGamesContainingName(name: String, page: Int): Flow<GameEntity>
-    fun getGamesByMode(mode: String, page: Int): Flow<GameEntity>
+    suspend fun searchGameByName(name: String, page: Int): List<GameEntity>
+    suspend fun getGamesContainingName(name: String, page: Int): List<GameEntity>
+    suspend fun getGamesByMode(mode: String, page: Int): List<GameEntity>
 
     suspend fun getTournamentById(id: Long): TournamentEntity
-    fun getTournamentsByMode(mode: String, page: Int): Flow<TournamentEntity>
-    fun getTournamentsByGame(gameName: String, page: Int): Flow<TournamentEntity>
-    fun getTournamentsByUser(userId: String, page: Int): Flow<TournamentEntity>
-    fun getShowCaseTournaments(page: Int): Flow<TournamentEntity>
-    fun getTournamentsContainingTitle(title: String, page: Int): Flow<TournamentEntity>
+    suspend fun getTournamentsByMode(mode: String, page: Int): List<TournamentEntity>
+    suspend fun getTournamentsByGame(gameName: String, page: Int): List<TournamentEntity>
+    suspend fun getTournamentsByUser(userId: String, page: Int): List<TournamentEntity>
+    suspend fun getShowCaseTournaments(page: Int): List<TournamentEntity>
+    suspend fun getTournamentsContainingTitle(title: String, page: Int): List<TournamentEntity>
+    suspend fun searchTournaments(title: String, gameIds: List<String>, page: Int): List<TournamentEntity>
 
     suspend fun getMatchById(id: Long): MatchEntity
-    fun getMatchesByTournament(tournamentId: Long, page: Int): Flow<MatchEntity>
-    fun getMatchesByGame(gameName: String, page: Int): Flow<MatchEntity>
-    fun getMatchesAfterDate(dateTime: DateTimeTz, page: Int): Flow<MatchEntity>
-    fun getMatchesAvailable(page: Int): Flow<MatchEntity>
-    fun getMatchesByUser(userId: String, page: Int): Flow<MatchEntity>
+    suspend fun getMatchesByTournament(tournamentId: Long, page: Int): List<MatchEntity>
+    suspend fun getMatchesByGame(gameName: String, page: Int): List<MatchEntity>
+    suspend fun getMatchesAfterDate(dateTime: DateTimeTz, page: Int): List<MatchEntity>
+    suspend fun getMatchesAvailable(page: Int): List<MatchEntity>
+    suspend fun getMatchesByUser(userId: String, page: Int): List<MatchEntity>
 
     suspend fun getRegistrationById(id: Long): RegistrationEntity
-    fun getRegistrationsByMatch(matchId: Long, page: Int): Flow<RegistrationEntity>
-    fun getRegistrationsByUser(userId: String, page: Int): Flow<RegistrationEntity>
+    suspend fun getRegistrationsByMatch(matchId: Long, page: Int): List<RegistrationEntity>
+    suspend fun getRegistrationsByUser(userId: String, page: Int): List<RegistrationEntity>
 
     suspend fun getUserById(id: String): UserEntity
 

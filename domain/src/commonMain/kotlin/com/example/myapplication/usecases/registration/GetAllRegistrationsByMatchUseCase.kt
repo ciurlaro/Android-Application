@@ -3,27 +3,27 @@ package com.example.myapplication.usecases.registration
 import com.example.myapplication.entities.MatchEntity
 import com.example.myapplication.entities.RegistrationEntity
 import com.example.myapplication.repositories.ArenaTournamentRepository
-import com.example.myapplication.usecases.UseCaseWithParams
+import com.example.myapplication.usecases.UseCaseWithParamSuspending
+import com.example.myapplication.utils.flatMapConcatIterable
 import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
-import kotlinx.coroutines.flow.flatMapConcat
+import kotlinx.coroutines.flow.toList
 
 class GetAllRegistrationsByMatchUseCase(
     private val repository: ArenaTournamentRepository
-) : UseCaseWithParams<GetAllRegistrationsByMatchUseCase.Params, Flow<RegistrationEntity>> {
+) : UseCaseWithParamSuspending<GetAllRegistrationsByMatchUseCase.Params, List<RegistrationEntity>> {
 
     @FlowPreview
-    override fun buildAction(params: Params) =
+    override suspend fun buildAction(params: Params) =
         (0 until params.maxPage)
             .asFlow()
-            .flatMapConcat {
+            .flatMapConcatIterable {
                 repository.getRegistrationsByMatch(params.match.id, it)
-            }
+            }.toList()
 
 
     @FlowPreview
-    fun buildAction(match: MatchEntity, maxPage: Int = 1) =
+    suspend fun buildAction(match: MatchEntity, maxPage: Int = 1) =
         buildAction(Params(match, maxPage))
 
     data class Params(val match: MatchEntity, val maxPage: Int = 1)
