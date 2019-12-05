@@ -39,30 +39,31 @@ object CommonMockModule : KodeinModuleProvider {
     private fun DKodein.handleMockEngineRequest(request: HttpRequestData): HttpResponseData {
         val words = request.url.fullPath.removePrefix("/").split("/")
 
-        fun singleOrMultipleResponse(word: String) = when {
-            listOf("game", "tournament", "registration", "match", "user").none { it == word } ->
-                error("$request cannot be handled by the mock engine")
-            words.size == 1 -> when (request.method) {
-                HttpMethod.Get -> "multiple_${word}_response"
-                else -> "single_${word}_response"
-            }
-            else -> when (words[1]) {
-                "search" -> "multiple_${word}_response"
-                else -> "single_${word}_response"
-            }
-        }
-
         return when (request.url.fullPath) {
             "/isAccountVerified" -> "verification_status_response"
             "/isAccountSubscribed" -> "subscription_status_response"
-            else -> when (words.last()) {
-                "game" -> "single_game_response"
-                "tournament" -> "single_tournament_response"
-                "registration" -> "single_registration_response"
-                "match" -> "single_match_response"
-                "user" -> "single_user_response"
-                else -> singleOrMultipleResponse(words[0])
-            }
+            else -> singleOrMultipleResponse(request, words)
         }.let { respondJsonFromRawResources(it) }
     }
+
+    private fun singleOrMultipleResponse(request: HttpRequestData, words: List<String>) =
+        when (words.size) {
+            1 ->
+                when (request.method) {
+                    HttpMethod.Get -> "multiple_${words[0]}_response"
+                    else -> "single_${words[0]}_response"
+                }
+            2 -> "single_${words[0]}_response"
+            else ->
+                when (words[1]) {
+                    "search" -> "multiple_${words[0]}_response"
+                    else ->
+                        when {
+                            listOf("game", "tournament", "registration", "match", "user").contains(words.last()) ->
+                                "single_${words.last()}_response"
+                            words.last() == "admin" -> "single_user_response"
+                            else -> error("$request cannot be handled by the mock engine")
+                        }
+                }
+        }
 }

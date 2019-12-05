@@ -24,7 +24,6 @@ class SearchFragment : BaseFragment() {
     ) = inflater.inflate(R.layout.fragment_search, container, false)!!
 
     @FlowPreview
-    @ExperimentalCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         tournaments_rv.adapter = viewModel.adapter
