@@ -28,7 +28,7 @@ class SearchFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         tournaments_rv.adapter = viewModel.adapter
         lifecycleScope.launch {
-            viewModel.getTournamentsByMode("RANKED")
+            viewModel.searchTournaments("RANKED")
         }
     }
 

@@ -10,7 +10,7 @@ import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.launch
 
 class SearchViewModel(
-    private val searchTournaments: SearchTournamentsUseCase
+    private val searchTournamentsUseCase: SearchTournamentsUseCase
 ) : ViewModel() {
 
     private val searchViewAdapter = FlexibleAdapter<TournamentFlexibleItem>(emptyList())
@@ -20,8 +20,8 @@ class SearchViewModel(
 
 
     @FlowPreview
-    fun getTournamentsByMode(gameName: String) = viewModelScope.launch {
-        searchTournaments.buildAction(gameName)
+    fun searchTournaments(gameName: String) = viewModelScope.launch {
+        searchTournamentsUseCase.buildAction(gameName)
             .onEach {
                 searchViewAdapter.addItem(TournamentFlexibleItem(it))
             }
