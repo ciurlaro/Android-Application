@@ -159,6 +159,12 @@ data class EndpointsImplementation(
             parametersOf("matchId" to matchId, "page" to page)
         )
 
+    override fun registrationsByUserIdUrlAndMatchIdUrl(userId: String, matchId: Long, page: Int) =
+        buildUrl(
+            "/registration/search/byUserIdAndMatchId",
+            parametersOf("userId" to userId, "matchId" to matchId, "page" to page)
+        )
+
     override fun currentUserUrl() =
         buildUrl("/currentUser")
 

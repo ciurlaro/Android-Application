@@ -26,7 +26,7 @@ abstract class BaseFragment : Fragment(), KodeinAware {
 
     inline fun <reified T : ViewModel> viewModelInstance() = instance<Fragment, T>(arg = this)
 
-    protected val navController by instance<NavController>()
+    val navController by instance<NavController>()
 
     inline fun <reified T : ViewDataBinding> viewDataBinding(
         inflater: LayoutInflater,

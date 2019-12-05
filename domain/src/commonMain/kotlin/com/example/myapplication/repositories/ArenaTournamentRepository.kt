@@ -44,7 +44,8 @@ interface ArenaTournamentRepository {
     suspend fun updateCurrentUserProfileImage(image: ByteArray): Boolean
 
     suspend fun getGameByName(name: String): GameEntity
-    suspend fun searchGameByName(name: String, page: Int): List<GameEntity>
+    suspend fun searchGamesByName(name: String, page: Int): List<GameEntity>
+    suspend fun getAllGames(page: Int): List<GameEntity>
     suspend fun getGamesContainingName(name: String, page: Int): List<GameEntity>
     suspend fun getGamesByMode(mode: String, page: Int): List<GameEntity>
 
@@ -66,6 +67,7 @@ interface ArenaTournamentRepository {
     suspend fun getRegistrationById(id: Long): RegistrationEntity
     suspend fun getRegistrationsByMatch(matchId: Long, page: Int): List<RegistrationEntity>
     suspend fun getRegistrationsByUser(userId: String, page: Int): List<RegistrationEntity>
+    suspend fun getRegistrationByUserAndMatch(userId: String, matchId: Long, page: Int): RegistrationEntity
 
     suspend fun getUserById(id: String): UserEntity
 

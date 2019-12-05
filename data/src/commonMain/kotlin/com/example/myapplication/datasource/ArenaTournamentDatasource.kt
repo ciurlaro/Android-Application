@@ -47,6 +47,7 @@ interface ArenaTournamentDatasource {
 
     suspend fun getRegistrationById(id: Long): RegistrationJSON
     suspend fun getRegistrationByLink(link: String): RegistrationJSON
+    suspend fun getRegistrationByUserIdAndMatchId(userId: String, matchId: Long, page: Int): RegistrationJSON
     suspend fun getRegistrationsByUser(userId: String, page: Int): MultipleRegistrationsJSON
     suspend fun getRegistrationsByMatchId(matchId: Long, page: Int): MultipleRegistrationsJSON
 
@@ -104,6 +105,7 @@ interface ArenaTournamentDatasource {
         fun registrationsByUserUrl(userId: String, page: Int): Url
 
         fun registrationsByMatchIdUrl(matchId: Long, page: Int): Url
+        fun registrationsByUserIdUrlAndMatchIdUrl(userId: String, matchId: Long, page: Int): Url
 
         fun currentUserUrl(): Url
         fun userByIdUrl(userId: String): Url

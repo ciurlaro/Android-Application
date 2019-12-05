@@ -4,23 +4,24 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
-import com.example.myapplication.entities.TournamentEntity
+import com.example.myapplication.entities.GameEntity
 import eu.davidea.flexibleadapter.FlexibleAdapter
 import eu.davidea.flexibleadapter.items.AbstractFlexibleItem
 import eu.davidea.flexibleadapter.items.IFlexible
 import eu.davidea.viewholders.FlexibleViewHolder
+import kotlinx.android.synthetic.main.item_game.view.*
 import kotlinx.android.synthetic.main.item_tournament.view.*
 
-data class TournamentFlexibleItem(val tournamentEntity: TournamentEntity) :
+data class GameFlexibleItem(val gameEntity: GameEntity) :
+    AbstractFlexibleItem<GameFlexibleItem.ViewHolder>() {
 
-    AbstractFlexibleItem<TournamentFlexibleItem.ViewHolder>() {
     override fun bindViewHolder(
         adapter: FlexibleAdapter<IFlexible<RecyclerView.ViewHolder>>,
         holder: ViewHolder,
         position: Int,
         payloads: MutableList<Any>
     ) {
-        holder.render(tournamentEntity)
+        holder.render(gameEntity)
     }
 
     override fun createViewHolder(
@@ -29,16 +30,14 @@ data class TournamentFlexibleItem(val tournamentEntity: TournamentEntity) :
     ) =
         ViewHolder(view, adapter)
 
-    override fun getLayoutRes() = R.layout.item_tournament
+    override fun getLayoutRes() = R.layout.item_game
 
     class ViewHolder(view: View, adapter: FlexibleAdapter<*>) : FlexibleViewHolder(view, adapter) {
 
-        fun render(data: TournamentEntity) = with(itemView) {
+        fun render(data: GameEntity) = with(itemView) {
             Glide.with(itemView.context)
-                .load(data.game.icon)
-                .into(tournament_game_icon)
-            tournament_name_tv.text = data.title
-            tournament_description_tv.text = data.tournamentDescription
+                .load(data.icon)
+                .into(itemView.chip1.chipIcon)
         }
     }
 }

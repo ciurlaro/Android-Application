@@ -166,6 +166,8 @@ class ArenaTournamentDatasourceImplementation(
     override suspend fun getRegistrationByLink(link: String): RegistrationJSON =
         httpClient.get(link)
 
+    override suspend fun getRegistrationByUserIdAndMatchId(userId: String, matchId: Long, page: Int): RegistrationJSON =
+        httpClient.get(endpoints.registrationsByUserIdUrlAndMatchIdUrl(userId, matchId, page))
 
     override suspend fun getMatchesNotFull(page: Int): MultipleMatchJSON =
         httpClient.get(endpoints.matchesNotFullUrl(page))
