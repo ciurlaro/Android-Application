@@ -1,6 +1,7 @@
 package com.example.myapplication.modules
 
 import com.example.myapplication.usecases.game.CreateGameUseCase
+import com.example.myapplication.usecases.game.GetAllGamesUseCase
 import com.example.myapplication.usecases.game.GetGamesByModeUseCase
 import com.example.myapplication.usecases.game.GetGamesContainingNameUseCase
 import com.example.myapplication.usecases.match.*
@@ -69,6 +70,7 @@ object UseCasesModule : KodeinModuleProvider {
             )
         }
 
+        bind<GetAllGamesUseCase>() with singleton { GetAllGamesUseCase(instance()) }
         bind<CreateGameModeUseCase>() with singleton { CreateGameModeUseCase(instance()) }
         bind<CreateGameUseCase>() with singleton { CreateGameUseCase(instance()) }
         bind<CreateTournamentUseCase>() with singleton { CreateTournamentUseCase(instance()) }

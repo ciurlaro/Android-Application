@@ -48,11 +48,10 @@ object CommonMockModule : KodeinModuleProvider {
 
     private fun singleOrMultipleResponse(request: HttpRequestData, words: List<String>) =
         when (words.size) {
-            1 ->
-                when (request.method) {
-                    HttpMethod.Get -> "multiple_${words[0]}_response"
-                    else -> "single_${words[0]}_response"
-                }
+            1 -> when (request.method) {
+                HttpMethod.Get -> "multiple_${words[0].split("?")[0]}_response"
+                else -> "single_${words[0]}_response"
+            }
             2 -> "single_${words[0]}_response"
             else ->
                 when (words[1]) {

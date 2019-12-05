@@ -10,7 +10,6 @@ import eu.davidea.flexibleadapter.items.AbstractFlexibleItem
 import eu.davidea.flexibleadapter.items.IFlexible
 import eu.davidea.viewholders.FlexibleViewHolder
 import kotlinx.android.synthetic.main.item_game.view.*
-import kotlinx.android.synthetic.main.item_tournament.view.*
 
 data class GameFlexibleItem(val gameEntity: GameEntity) :
     AbstractFlexibleItem<GameFlexibleItem.ViewHolder>() {
@@ -37,7 +36,9 @@ data class GameFlexibleItem(val gameEntity: GameEntity) :
         fun render(data: GameEntity) = with(itemView) {
             Glide.with(itemView.context)
                 .load(data.icon)
-                .into(itemView.chip1.chipIcon)
+                .into(game_item_icon)
+
+            game_item_textview.text = data.name
         }
     }
 }

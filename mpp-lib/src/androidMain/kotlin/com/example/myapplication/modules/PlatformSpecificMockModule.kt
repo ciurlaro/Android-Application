@@ -14,7 +14,7 @@ actual object PlatformSpecificMockModule : KodeinModuleProvider {
     override fun provideModule(): Kodein.Builder.() -> Unit = {
 
         bind<String>("single_game_response") with singleton { rawFromRes(R.raw.game_response) }
-        bind<String>("multiple_game_responses") with singleton { rawFromRes(R.raw.multiple_games_response) }
+        bind<String>("multiple_game_response") with singleton { rawFromRes(R.raw.multiple_games_response) }
 
         bind<String>("single_game_mode_response") with singleton { rawFromRes(R.raw.game_mode_response) }
         bind<String>("multiple_game_modes_response") with singleton { rawFromRes(R.raw.multiple_game_modes_response) }

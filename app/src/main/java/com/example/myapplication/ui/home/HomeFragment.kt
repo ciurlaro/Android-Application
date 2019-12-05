@@ -26,7 +26,7 @@ class HomeFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        matches_rv.adapter = viewModel.adapter
+        matches_recyclerview.adapter = viewModel.adapter
         lifecycleScope.launch{
             viewModel.getShowcaseTournaments()
         }

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import com.example.myapplication.R
 import com.example.myapplication.ui.BaseFragment
+import com.example.myapplication.ui.game.GameViewModel
 import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -15,7 +16,7 @@ import kotlinx.coroutines.launch
 @ExperimentalCoroutinesApi
 class SearchFragment : BaseFragment() {
 
-    private val viewModel: SearchViewModel by viewModelInstance()
+    private val viewModel: GameViewModel by viewModelInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,9 +27,9 @@ class SearchFragment : BaseFragment() {
     @FlowPreview
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        tournaments_rv.adapter = viewModel.adapter
+        games_recyclerview.adapter = viewModel.adapter
         lifecycleScope.launch {
-            viewModel.searchTournaments("RANKED")
+            viewModel.getGames()
         }
     }
 
