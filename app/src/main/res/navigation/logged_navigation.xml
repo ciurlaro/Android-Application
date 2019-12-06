@@ -22,7 +22,6 @@
     <fragment
             android:id="@+id/navigation_user_profile"
             android:name="com.example.myapplication.ui.userprofile.UserProfileFragment"
-            android:label="@string/title_notifications"
-            tools:layout="@layout/fragment_notifications"/>
+            android:label="@string/title_notifications"/>
 
 </navigation>

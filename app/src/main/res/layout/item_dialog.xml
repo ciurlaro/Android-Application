@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="4dp"
+        android:elevation="2dp"
+        app:cardCornerRadius="5dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/lightorangedark"
+            android:padding="16dp">
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/item_dialog_match_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:text="Match #1:"
+                android:textColor="@color/black"
+                android:textSize="20sp"/>
+
+        <View
+                android:id="@+id/dialog_item_separator"
+                android:background="#BC000000"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/item_dialog_match_textview"
+                app:layout_constraintRight_toLeftOf="dialog_include"/>
+
+        <include layout="@layout/date_time_picker"
+                 android:id="@+id/dialog_include"
+                 android:layout_width="0dp"
+                 android:layout_height="wrap_content"
+                 app:layout_constraintBottom_toBottomOf="parent"
+                 app:layout_constraintRight_toRightOf="parent"
+                 app:layout_constraintLeft_toRightOf="@id/dialog_item_separator"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

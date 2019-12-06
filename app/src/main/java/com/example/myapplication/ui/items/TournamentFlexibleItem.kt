@@ -12,8 +12,8 @@ import eu.davidea.viewholders.FlexibleViewHolder
 import kotlinx.android.synthetic.main.item_tournament.view.*
 
 data class TournamentFlexibleItem(val tournamentEntity: TournamentEntity) :
-
     AbstractFlexibleItem<TournamentFlexibleItem.ViewHolder>() {
+
     override fun bindViewHolder(
         adapter: FlexibleAdapter<IFlexible<RecyclerView.ViewHolder>>,
         holder: ViewHolder,
@@ -41,4 +41,5 @@ data class TournamentFlexibleItem(val tournamentEntity: TournamentEntity) :
             tournament_description_tv.text = data.tournamentDescription
         }
     }
+
 }

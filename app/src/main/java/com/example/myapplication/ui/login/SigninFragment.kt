@@ -43,7 +43,7 @@ class SigninFragment : BaseFragment() {
             }
         }
         create_account_tv.setOnClickListener {
-            onCreateAccountTvClicked()
+            onCreateAccountTextViewClicked()
         }
     }
 
@@ -84,7 +84,7 @@ class SigninFragment : BaseFragment() {
         }
     }
 
-    private fun onCreateAccountTvClicked() {
+    private fun onCreateAccountTextViewClicked() {
         create_account_tv.isClickable = false
         button_sign_in.isClickable = false
         navController.navigate(
