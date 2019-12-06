@@ -86,7 +86,7 @@
                 tools:visibility="invisible"/>
 
         <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/create_account_tv"
+                android:id="@+id/create_account_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="32dp"

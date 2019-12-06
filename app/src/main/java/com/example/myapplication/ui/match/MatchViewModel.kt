@@ -1,4 +1,4 @@
-package com.example.myapplication.ui.registration
+package com.example.myapplication.ui.match
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -12,7 +12,7 @@ import eu.davidea.flexibleadapter.FlexibleAdapter
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.launch
 
-class RegistrationViewModel(
+class MatchViewModel(
     private val getMatchesByTournamentUseCase: GetMatchesByTournamentUseCase,
     private val getCurrentUserInfoUseCase: GetCurrentUserInfoUseCase,
     private val isUserRegisteredUseCase: IsUserRegisteredUseCase

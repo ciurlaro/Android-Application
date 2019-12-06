@@ -1,5 +1,6 @@
 package com.example.myapplication.ui.userprofile
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import org.kodein.di.erased.instance
 
+
 @ExperimentalCoroutinesApi
 class UserProfileFragment : BaseFragment() {
 
@@ -27,6 +29,7 @@ class UserProfileFragment : BaseFragment() {
     ) = inflater.inflate(R.layout.fragment_user, container, false)!!
 
 
+    @SuppressLint("InflateParams", "ResourceType")
     @ExperimentalCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -40,13 +43,14 @@ class UserProfileFragment : BaseFragment() {
         }
 
         button_logout.setOnClickListener {
-            lifecycleScope.launch() {
-                logOut()
-            }
+            suspend fun logOut() = signoutUseCase.buildAction()
+            lifecycleScope.launch { logOut() }
         }
-    }
 
-    private suspend fun logOut() {
-        signoutUseCase.buildAction()
+        user_creating_tournament_button.setOnClickListener {
+            navController.navigate(
+                // verso CreateTournamentFragment (fragment_create_tournament)
+            )
+        }
     }
 }

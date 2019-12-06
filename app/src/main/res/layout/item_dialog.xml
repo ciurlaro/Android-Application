@@ -38,8 +38,7 @@
                 android:layout_marginRight="4dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toRightOf="@id/item_dialog_match_textview"
-                app:layout_constraintRight_toLeftOf="dialog_include"/>
+                app:layout_constraintLeft_toRightOf="@id/item_dialog_match_textview"/>
 
         <include layout="@layout/date_time_picker"
                  android:id="@+id/dialog_include"

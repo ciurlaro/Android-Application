@@ -42,7 +42,7 @@ class SigninFragment : BaseFragment() {
                 onLoginButtonClicked()
             }
         }
-        create_account_tv.setOnClickListener {
+        create_account_textview.setOnClickListener {
             onCreateAccountTextViewClicked()
         }
     }
@@ -62,7 +62,7 @@ class SigninFragment : BaseFragment() {
 
         if (!asErrored) {
             button_sign_in.isClickable = false
-            create_account_tv.isClickable = false
+            create_account_textview.isClickable = false
             button_sign_in.visibility = View.INVISIBLE
             signin_progress_bar.visibility = View.VISIBLE
 
@@ -78,14 +78,14 @@ class SigninFragment : BaseFragment() {
                 button_sign_in.visibility = View.VISIBLE
                 signin_progress_bar.visibility = View.GONE
                 button_sign_in.isClickable = true
-                create_account_tv.isClickable = true
+                create_account_textview.isClickable = true
             }
 
         }
     }
 
     private fun onCreateAccountTextViewClicked() {
-        create_account_tv.isClickable = false
+        create_account_textview.isClickable = false
         button_sign_in.isClickable = false
         navController.navigate(
             SigninFragmentDirections.actionSigninToSignup(

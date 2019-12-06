@@ -1,29 +1,24 @@
-package com.example.myapplication.ui.registration
+package com.example.myapplication.ui.match
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.lifecycleScope
-import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.ui.BaseFragment
-import kotlinx.android.synthetic.main.fragment_user.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.launch
-import org.kodein.di.erased.instance
 
 @ExperimentalCoroutinesApi
-class RegistrationFragment : BaseFragment() {
+class MatchFragment : BaseFragment() {
 
-    private val viewModel: RegistrationViewModel by viewModelInstance()
+    private val viewModel: MatchViewModel by viewModelInstance()
     //private val signoutUseCase by instance<SignoutUserUseCase>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = inflater.inflate(R.layout.fragment_user, container, false)!!
+    ) = inflater.inflate(R.layout.activity_match, container, false)!!
 
     @ExperimentalCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

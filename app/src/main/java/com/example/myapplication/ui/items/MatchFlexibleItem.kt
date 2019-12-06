@@ -2,7 +2,6 @@ package com.example.myapplication.ui.items
 
 import android.annotation.SuppressLint
 import android.view.View
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
@@ -54,24 +53,6 @@ data class MatchFlexibleItem(
                 "DATE: ${data.matchDateTime.dayOfMonth}/${data.matchDateTime.month}/${data.matchDateTime.year}"
             match_time.text = "TIME: ${data.matchDateTime.hours}:${data.matchDateTime.minutes}"
             match_players.text = """${data.tournament.playersNumber}/$count"""
-
-            match_switch.isChecked = alreadyRegistered
-            match_switch.setOnCheckedChangeListener { _, isChecked ->
-                if (isChecked) {
-                    match_switch.isChecked = false
-                    Toast.makeText(context, "Registration to ${tournament_name.text} succeded!", Toast.LENGTH_LONG)
-                        .show()
-                } else {
-                    match_switch.isChecked = true
-                    Toast.makeText(
-                        context,
-                        "Unregistration to ${tournament_name.text} succeded!",
-                        Toast.LENGTH_LONG
-                    )
-                        .show()
-                }
-
-            }
         }
     }
 }
