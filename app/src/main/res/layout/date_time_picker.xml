@@ -10,6 +10,7 @@
             android:id="@+id/in_date"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
+            android:textAlignment="center"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@id/btn_date"
             app:layout_constraintTop_toTopOf="parent"/>
@@ -24,9 +25,10 @@
             app:layout_constraintTop_toTopOf="parent"/>
 
     <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/in_time"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:id="@+id/in_time"
+            android:textAlignment="center"
             app:layout_constraintTop_toBottomOf="@id/in_date"
             app:layout_constraintEnd_toEndOf="parent"/>
 

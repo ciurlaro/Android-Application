@@ -22,33 +22,32 @@
                 android:id="@+id/game_item_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/game_item_icon"
                 android:textColor="@color/black"
                 android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="parent"/>
+                tools:text="Game #1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"/>
 
 
         <Switch
                 android:id="@+id/game_item_switch"
-                app:layout_constraintLeft_toRightOf="@+id/game_item_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintLeft_toRightOf="@+id/game_item_icon"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
 
 
         <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/game_item_icon"
                 android:layout_height="50dp"
                 android:layout_width="50dp"
-
-                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/game_item_switch"
+                app:layout_constraintLeft_toRightOf="@id/game_item_textview"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:src="@tools:sample/backgrounds/scenic"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:src="@tools:sample/backgrounds/scenic"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
