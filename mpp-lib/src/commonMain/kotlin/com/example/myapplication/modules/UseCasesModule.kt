@@ -11,6 +11,7 @@ import com.example.myapplication.usecases.registration.GetAllRegistrationsByMatc
 import com.example.myapplication.usecases.registration.GetRegistrationsByTournamentUseCase
 import com.example.myapplication.usecases.registration.GetRegistrationsByUserUseCase
 import com.example.myapplication.usecases.tournament.*
+import com.example.myapplication.usecases.user.IsUserRegisteredUseCase
 import com.example.myapplication.usecases.user.creation.CreateAccountWithCompleteInformation
 import com.example.myapplication.usecases.user.creation.CreateAccountWithEmailAndPasswordUseCase
 import com.example.myapplication.usecases.user.creation.CreateAccountWithFacebookToken
@@ -97,9 +98,11 @@ object UseCasesModule : KodeinModuleProvider {
         bind<UpdateUserEmailUseCase>() with singleton { UpdateUserEmailUseCase(instance()) }
         bind<UpdateUserPasswordUseCase>() with singleton { UpdateUserPasswordUseCase(instance()) }
         bind<UpdateUserProfileImageUseCase>() with singleton { UpdateUserProfileImageUseCase(instance()) }
+        bind<IsUserRegisteredUseCase>() with singleton { IsUserRegisteredUseCase(instance()) }
 
         bind<SearchTournamentsUseCase>() with singleton {
             SearchTournamentsUseCase(instance())
         }
+
     }
 }

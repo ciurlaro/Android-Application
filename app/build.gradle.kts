@@ -137,11 +137,13 @@ dependencies {
     val materialVersion: String by project
     val constraintLayoutVersion: String by project
     val glideVersion: String by project
+    val slf4jAndroidVersion: String by project
 
     val junitVersion: String by project
     val espressoVersion: String by project
     val androidTestRunnerVersion: String by project
     val flexibleAdapterVersion: String by project
+    val androidxPagingVersion: String by project
 
     implementation(project(":mpp-lib"))
 
@@ -158,11 +160,12 @@ dependencies {
     implementation("androidx.lifecycle", "lifecycle-livedata-ktx", androidxLifecycleVersion)
     implementation("androidx.navigation", "navigation-fragment-ktx", androidxNavigationVersion)
     implementation("androidx.navigation", "navigation-ui-ktx", androidxNavigationVersion)
+    implementation("androidx.paging", "paging-runtime", androidxPagingVersion)
+    implementation("eu.davidea", "flexible-adapter", flexibleAdapterVersion)
 
     implementation("com.github.bumptech.glide", "glide", glideVersion)
     kapt("com.github.bumptech.glide", "compiler", glideVersion)
-
-    implementation("eu.davidea", "flexible-adapter", flexibleAdapterVersion)
+    runtimeOnly("org.slf4j", "slf4j-android", slf4jAndroidVersion)
 
     testImplementation("junit", "junit", junitVersion)
     androidTestImplementation("androidx.test", "runner", androidTestRunnerVersion)

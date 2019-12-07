@@ -5,6 +5,7 @@ import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
+import io.ktor.client.features.logging.Logging
 import io.ktor.client.request.HttpRequestData
 import io.ktor.client.request.HttpResponseData
 import io.ktor.http.*
@@ -22,6 +23,10 @@ object CommonMockModule : KodeinModuleProvider {
                 install(JsonFeature) {
                     serializer = KotlinxSerializer()
                 }
+                if (instance("isDebug"))
+                    install(Logging) {
+                        level = instance("networkLogLevel")
+                    }
                 engine {
                     addHandler {
                         handleMockEngineRequest(it)
@@ -53,16 +58,15 @@ object CommonMockModule : KodeinModuleProvider {
                 else -> "single_${words[0]}_response"
             }
             2 -> "single_${words[0]}_response"
-            else ->
-                when (words[1]) {
-                    "search" -> "multiple_${words[0]}_response"
-                    else ->
-                        when {
-                            listOf("game", "tournament", "registration", "match", "user").contains(words.last()) ->
-                                "single_${words.last()}_response"
-                            words.last() == "admin" -> "single_user_response"
-                            else -> error("$request cannot be handled by the mock engine")
-                        }
-                }
+            else -> when (words[1]) {
+                "search" -> "multiple_${words[0]}_response"
+                else ->
+                    when {
+                        listOf("game", "tournament", "registration", "match", "user").contains(words.last()) ->
+                            "single_${words.last()}_response"
+                        words.last() == "admin" -> "single_user_response"
+                        else -> error("$request cannot be handled by the mock engine")
+                    }
+            }
         }
 }

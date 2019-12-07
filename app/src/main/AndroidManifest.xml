@@ -27,6 +27,9 @@
         <activity android:name=".ui.OnboardingActivity"
                   android:theme="@style/AppTheme.NoActionBar"
                   android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".ui.match.MatchActivity"
+                  android:theme="@style/AppTheme.NoActionBar"
+                  android:windowSoftInputMode="adjustResize"/>
         <meta-data
                 android:name="preloaded_fonts"
                 android:resource="@array/preloaded_fonts"/>

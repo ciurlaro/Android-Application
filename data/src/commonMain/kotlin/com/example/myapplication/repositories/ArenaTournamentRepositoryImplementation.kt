@@ -214,7 +214,7 @@ class ArenaTournamentRepositoryImplementation(
                 Triple(
                     it,
                     async { arenaTournamentDS.getGameByLink(it._links.game!!.href) },
-                    async { arenaTournamentDS.getUserByLink(it._links.userEntity!!.href) }
+                    async { arenaTournamentDS.getUserByLink(it._links.admin!!.href) }
                 )
             }
             .let { Triple(it.first, it.second.await(), it.third.await()) }
@@ -312,36 +312,10 @@ class ArenaTournamentRepositoryImplementation(
     override suspend fun getRegistrationsByUser(userId: String, page: Int) =
         arenaTournamentDS.getRegistrationsByUser(userId, page).transformRegistrations()
 
-    override suspend fun getRegistrationByUserAndMatch(userId: String, matchId: Long, page: Int) = coroutineScope {
+    override suspend fun getRegistrationByUserAndMatch(userId: String, matchId: Long, page: Int) =
         arenaTournamentDS.getRegistrationByUserIdAndMatchId(userId, matchId, page)
-            .let { it to arenaTournamentDS.getMatchByLink(it._links.matchEntity!!.href) }
-            .let {
-                Triple(
-                    it.first,
-                    it.second,
-                    arenaTournamentDS.getTournamentByLink(it.second._links.tournamentEntity!!.href)
-                )
-            }
-            .let {
-                Quintuple(
-                    it.first,
-                    it.second,
-                    it.third,
-                    async { arenaTournamentDS.getGameByLink(it.third._links.gameEntity!!.href) },
-                    async { arenaTournamentDS.getUserById(it.first._links.userEntity!!.href) }
-                )
-            }
-            .let {
-                Quintuple(
-                    it.first,
-                    it.second,
-                    it.third,
-                    it.fourth.await(),
-                    it.fifth.await()
-                )
-            }
-            .let { registrationMapper.fromRemoteSingle(it) }
-    }
+            .transformRegistrations()
+            .firstOrNull()
 
     override suspend fun getUserById(id: String) =
         arenaTournamentDS.getUserById(id)

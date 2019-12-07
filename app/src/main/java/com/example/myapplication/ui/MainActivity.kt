@@ -11,7 +11,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.kodein.di.erased.instance
 
 @ExperimentalCoroutinesApi
-class MainActivity : BaseActivity(R.id.nav_host_fragment) {
+class MainActivity : BaseFragmentedActivity(R.id.nav_host_fragment) {
 
     private val repo by instance<ArenaTournamentRepository>()
 

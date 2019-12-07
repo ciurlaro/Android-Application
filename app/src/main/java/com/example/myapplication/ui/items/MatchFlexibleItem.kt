@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.entities.MatchEntity
+import com.soywiz.klock.DateFormat
 import eu.davidea.flexibleadapter.FlexibleAdapter
 import eu.davidea.flexibleadapter.items.AbstractFlexibleItem
 import eu.davidea.flexibleadapter.items.IFlexible
@@ -49,9 +50,8 @@ data class MatchFlexibleItem(
             tournament_name.text = data.tournament.title
             game_name.text = data.tournament.game.name
 
-            match_date.text =
-                "DATE: ${data.matchDateTime.dayOfMonth}/${data.matchDateTime.month}/${data.matchDateTime.year}"
-            match_time.text = "TIME: ${data.matchDateTime.hours}:${data.matchDateTime.minutes}"
+            match_date.text = DateFormat("dd/MM/yyyy").format(data.matchDateTime)
+            match_time.text = "TIME: ${DateFormat("hh:mm").format(data.matchDateTime)}"
             match_players.text = """${data.tournament.playersNumber}/$count"""
         }
     }

@@ -3,11 +3,11 @@ package com.example.myapplication.ui
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import com.example.myapplication.R
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @ExperimentalCoroutinesApi
-class OnboardingActivity : BaseActivity(R.id.nav_host_onboarding_fragment) {
+class OnboardingActivity : BaseFragmentedActivity(R.id.nav_host_onboarding_fragment) {
 
     companion object {
 

@@ -67,7 +67,7 @@ interface ArenaTournamentRepository {
     suspend fun getRegistrationById(id: Long): RegistrationEntity
     suspend fun getRegistrationsByMatch(matchId: Long, page: Int): List<RegistrationEntity>
     suspend fun getRegistrationsByUser(userId: String, page: Int): List<RegistrationEntity>
-    suspend fun getRegistrationByUserAndMatch(userId: String, matchId: Long, page: Int): RegistrationEntity
+    suspend fun getRegistrationByUserAndMatch(userId: String, matchId: Long, page: Int): RegistrationEntity?
 
     suspend fun getUserById(id: String): UserEntity
 

@@ -1,6 +1,5 @@
 package com.example.myapplication.ui.home
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
@@ -22,17 +21,7 @@ class HomeViewModel(
     @FlowPreview
     fun getShowcaseTournaments() = viewModelScope.launch {
         showCaseTournamentsUseCase.buildAction()
-            .onEach {
-                homeViewAdapter.addItem(TournamentFlexibleItem(it))
-            }
-    }
-
-    fun addListenerToItem() {
-        homeViewAdapter.mItemClickListener =
-            FlexibleAdapter.OnItemClickListener {
-                    _, _ ->  Log.d("a", "AAAAAAAAA").let { true }
-            }
-
+            .onEach { homeViewAdapter.addItem(TournamentFlexibleItem(it)) }
     }
 
 }

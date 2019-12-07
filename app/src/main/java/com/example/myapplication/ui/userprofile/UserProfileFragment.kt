@@ -48,9 +48,9 @@ class UserProfileFragment : BaseFragment() {
         }
 
         user_creating_tournament_button.setOnClickListener {
-            navController.navigate(
-                // verso CreateTournamentFragment (fragment_create_tournament)
-            )
+//            navController.navigate(
+//                // verso CreateTournamentFragment (fragment_create_tournament)
+//            )
         }
     }
 }

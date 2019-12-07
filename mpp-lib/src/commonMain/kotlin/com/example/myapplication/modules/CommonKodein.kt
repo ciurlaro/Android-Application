@@ -22,8 +22,9 @@ fun buildCommonKodein(
     constant("serverUrl") with serverUrl
     constant("serverPort") with serverPort
     constant("isDebug") with isDebug
-    if (isDebug)
+    if (isDebug) {
         constant("networkLogLevel") with networkLogLevel
+    }
     if (isMock) {
         import(CommonMockModule, allowOverride = true)
         import(PlatformSpecificMockModule)
