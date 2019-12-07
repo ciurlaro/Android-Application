@@ -2,6 +2,8 @@ package com.example.myapplication.ui
 
 import android.content.Context
 import android.content.Intent
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.ui.setupWithNavController
 import com.example.myapplication.R
@@ -20,6 +22,13 @@ class MainActivity : BaseFragmentedActivity(R.id.nav_host_fragment) {
             if (repo.getCurrentUser() != null) {
                 setContentView(R.layout.activity_main)
                 bottom_nav_view.setupWithNavController(navController)
+                if (!repo.isCurrentUserSubscriber()) {
+                    new_tournament_button.visibility = VISIBLE
+                    new_tournament_button.setOnLongClickListener {
+                        //                        startActivity()
+                    }
+                } else
+                    new_tournament_button.visibility = GONE
             } else
                 startActivity(OnboardingActivity(this@MainActivity))
         }

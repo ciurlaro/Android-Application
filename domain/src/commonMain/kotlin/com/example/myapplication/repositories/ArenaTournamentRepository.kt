@@ -187,4 +187,6 @@ interface ArenaTournamentRepository {
      */
     suspend fun reauthenticateWithFacebook(token: String): Boolean
 
+    suspend fun isCurrentUserSubscriber(): Boolean
+
 }

@@ -101,6 +101,9 @@ class ArenaTournamentRepositoryImplementation(
     override suspend fun isCurrentUserEmailVerified() =
         firebaseAuthDS.isCurrentUserEmailVerified()
 
+    override suspend fun isCurrentUserSubscriber() =
+        firebaseAuthDS.getCurrentUserClaims().getValue("isSubscriber")
+
     override suspend fun createGame(
         name: String,
         availableModes: List<String>,
