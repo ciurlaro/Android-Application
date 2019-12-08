@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
           package="com.example.myapplication">
 
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -12,7 +13,10 @@
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            tools:ignore="AllowBackup,GoogleAppIndexingWarning"
+            android:allowBackup="false"
+            android:fullBackupContent="false">
 
         <activity
                 android:name=".ui.MainActivity"
@@ -24,15 +28,22 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
         <activity android:name=".ui.OnboardingActivity"
                   android:theme="@style/AppTheme.NoActionBar"
                   android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".ui.match.MatchActivity"
                   android:theme="@style/AppTheme.NoActionBar"
                   android:windowSoftInputMode="adjustResize"/>
+
+        <activity android:name=".ui.tournament.CreateTournamentActivity"
+                  android:theme="@style/AppTheme.NoActionBar"
+                  android:windowSoftInputMode="adjustResize"/>
+
         <meta-data
                 android:name="preloaded_fonts"
-                android:resource="@array/preloaded_fonts"/>
+                android:resource="@array/preloaded_fonts"
+        />
     </application>
 
 </manifest>

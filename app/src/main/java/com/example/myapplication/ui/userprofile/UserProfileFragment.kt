@@ -46,11 +46,5 @@ class UserProfileFragment : BaseFragment() {
             suspend fun logOut() = signoutUseCase.buildAction()
             lifecycleScope.launch { logOut() }
         }
-
-        user_creating_tournament_button.setOnClickListener {
-//            navController.navigate(
-//                // verso CreateTournamentFragment (fragment_create_tournament)
-//            )
-        }
     }
 }

@@ -28,7 +28,7 @@
                 android:src="@drawable/at_logo_black"/>
 
         <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/email_etv"
+                android:id="@+id/email_edit_textview"
                 android:hint="@string/email_hint"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
                 android:theme="@style/AppTheme.LoginEditTextTheme"/>
 
         <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/password_etv"
+                android:id="@+id/password_edit_textview"
                 android:layout_width="0dp"
                 android:hint="@string/pwd_hint"
                 android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
                 android:text="@={viewModel.password}"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/email_etv"
+                app:layout_constraintTop_toBottomOf="@id/email_edit_textview"
                 android:theme="@style/AppTheme.LoginEditTextTheme"/>
 
         <ProgressBar
@@ -64,7 +64,7 @@
                 android:layout_marginTop="108dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/password_etv"
+                app:layout_constraintTop_toBottomOf="@+id/password_edit_textview"
                 android:visibility="gone"
                 android:indeterminate="true"
                 tools:visibility="visible"
@@ -82,7 +82,7 @@
                 android:text="@string/sign_in"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/password_etv"
+                app:layout_constraintTop_toBottomOf="@+id/password_edit_textview"
                 tools:visibility="invisible"/>
 
         <androidx.appcompat.widget.AppCompatTextView

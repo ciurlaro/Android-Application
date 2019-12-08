@@ -22,27 +22,26 @@ class MatchActivity : BaseActivity() {
         setContentView(R.layout.activity_match)
 
         with(viewModel) {
+            loadTournament(tournamentId)
             tournaments_recyclerview.adapter = adapter
             tournament.observe {
                 getMatchesByTournament(it)
             }
-            loadTournament(tournamentId)
         }
 
     }
 
     companion object {
 
-        private const val TOURNAMENT_TAG = "TT"
+        private const val TOURNAMENT_TAG = "TOURNAMENT_TAG"
 
-        fun buildIntent(context: Context, tournamentEntity: TournamentEntity) =
+        private fun buildIntent(context: Context, tournamentEntity: TournamentEntity) =
             Intent(context, MatchActivity::class.java).apply {
                 putExtra(TOURNAMENT_TAG, tournamentEntity.id)
             }
 
         operator fun invoke(context: Context, tournamentEntity: TournamentEntity) =
             buildIntent(context, tournamentEntity)
-
     }
 
 }

@@ -57,8 +57,8 @@ class SigninFragment : BaseFragment() {
             }
         }
 
-        checkETV(email_etv)
-        checkETV(password_etv)
+        checkETV(email_edit_textview)
+        checkETV(password_edit_textview)
 
         if (!asErrored) {
             button_sign_in.isClickable = false
@@ -70,10 +70,10 @@ class SigninFragment : BaseFragment() {
                 signinUserUseCase.buildAction(viewModel.email.get()!!, viewModel.password.get()!!)
                 requireActivity().startActivity(MainActivity(requireContext()))
             } catch (e: AuthException.AuthMalformedEmailException) {
-                email_etv.error = resources.getString(R.string.email_is_malformed)
+                email_edit_textview.error = resources.getString(R.string.email_is_malformed)
             } catch (e: AuthException.AuthInvalidCredentialsException) {
-                email_etv.error = resources.getString(R.string.email_or_password_wrong)
-                password_etv.error = resources.getString(R.string.email_or_password_wrong)
+                email_edit_textview.error = resources.getString(R.string.email_or_password_wrong)
+                password_edit_textview.error = resources.getString(R.string.email_or_password_wrong)
             } finally {
                 button_sign_in.visibility = View.VISIBLE
                 signin_progress_bar.visibility = View.GONE

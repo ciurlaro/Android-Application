@@ -46,40 +46,40 @@ class SignupFragment : BaseFragment() {
                 onSignupButtonClicked()
             }
         }
-        already_have_account_tv.setOnClickListener {
-            onSigninTvClicked()
+        already_have_account_textview.setOnClickListener {
+            onSigninTextviewClicked()
         }
     }
 
     private suspend fun onSignupButtonClicked() {
         var hasErrored = false
 
-        fun checkETVBlankError(etv: AppCompatEditText) {
+        fun checkEditTextviewBlankError(etv: AppCompatEditText) {
             if (etv.text.isNullOrBlank()) {
                 etv.error = resources.getString(R.string.must_not_be_empty)
                 hasErrored = true
             }
         }
 
-        fun checkEqualsETV(tv1: AppCompatEditText, tv2: AppCompatEditText, @StringRes error: Int) {
+        fun checkEqualsEditTextviews(tv1: AppCompatEditText, tv2: AppCompatEditText, @StringRes error: Int) {
             if (tv1.text.toString() != tv2.text.toString()) {
                 tv2.error = resources.getString(error)
                 hasErrored = true
             }
         }
 
-        checkETVBlankError(email_etv)
-        checkETVBlankError(confirm_email_etv)
-        checkETVBlankError(password_etv)
-        checkETVBlankError(confirm_email_etv)
-        checkETVBlankError(nickname_tv)
+        checkEditTextviewBlankError(email_edit_textview)
+        checkEditTextviewBlankError(confirm_email_edit_textview)
+        checkEditTextviewBlankError(password_edit_textview)
+        checkEditTextviewBlankError(confirm_email_edit_textview)
+        checkEditTextviewBlankError(nickname_textview)
 
-        checkEqualsETV(email_etv, confirm_email_etv, R.string.email_must_match)
-        checkEqualsETV(password_etv, confirm_password_etv, R.string.password_must_match)
+        checkEqualsEditTextviews(email_edit_textview, confirm_email_edit_textview, R.string.email_must_match)
+        checkEqualsEditTextviews(password_edit_textview, confirm_password_edit_textview, R.string.password_must_match)
 
         if (!hasErrored) {
             button_sign_up.isClickable = false
-            already_have_account_tv.isClickable = false
+            already_have_account_textview.isClickable = false
             button_sign_up.visibility = INVISIBLE
             signup_progress_bar.visibility = VISIBLE
             try {
@@ -91,16 +91,16 @@ class SignupFragment : BaseFragment() {
                 requireActivity().startActivity(MainActivity(requireContext()))
             } catch (e: AuthException.AuthUserCollisionException) {
                 Log.d(TAG, e.message, e)
-                email_etv.error = resources.getString(R.string.email_already_exists)
+                email_edit_textview.error = resources.getString(R.string.email_already_exists)
             } catch (e: AuthException.AuthWeakPasswordException) {
                 Log.d(TAG, e.message, e)
-                password_etv.error = resources.getString(R.string.weak_password_exception)
+                password_edit_textview.error = resources.getString(R.string.weak_password_exception)
             } catch (e: AuthException.AuthMalformedEmailException) {
                 Log.d(TAG, e.message, e)
-                email_etv.error = resources.getString(R.string.email_is_malformed)
+                email_edit_textview.error = resources.getString(R.string.email_is_malformed)
             } finally {
                 button_sign_up.isClickable = true
-                already_have_account_tv.isClickable = true
+                already_have_account_textview.isClickable = true
                 button_sign_up.visibility = VISIBLE
                 signup_progress_bar.visibility = INVISIBLE
             }
@@ -108,8 +108,8 @@ class SignupFragment : BaseFragment() {
 
     }
 
-    private fun onSigninTvClicked() {
-        already_have_account_tv.isClickable = false
+    private fun onSigninTextviewClicked() {
+        already_have_account_textview.isClickable = false
         button_sign_up.isClickable = false
         navController.navigate(
             SignupFragmentDirections.actionSignupToSignin(
@@ -122,7 +122,7 @@ class SignupFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requireActivity().onBackPressedDispatcher.addCallback(this) {
-            onSigninTvClicked()
+            onSigninTextviewClicked()
         }
     }
 
