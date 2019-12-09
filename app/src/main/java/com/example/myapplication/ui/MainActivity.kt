@@ -2,8 +2,10 @@ package com.example.myapplication.ui
 
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.ui.setupWithNavController
 import com.example.myapplication.R
@@ -15,10 +17,10 @@ import org.kodein.di.erased.instance
 
 
 @ExperimentalCoroutinesApi
+@RequiresApi(Build.VERSION_CODES.HONEYCOMB)
 class MainActivity : BaseFragmentedActivity(R.id.nav_host_fragment) {
 
     private val repo by instance<ArenaTournamentRepository>()
-
 
     init {
         lifecycleScope.launchWhenCreated {
@@ -37,9 +39,8 @@ class MainActivity : BaseFragmentedActivity(R.id.nav_host_fragment) {
         }
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed().apply { finish() }
-    }
+    override fun onBackPressed() =
+        finish()
 
     companion object {
 

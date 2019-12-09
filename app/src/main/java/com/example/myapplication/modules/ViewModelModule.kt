@@ -11,6 +11,7 @@ import com.example.myapplication.ui.login.SigninViewModel
 import com.example.myapplication.ui.match.MatchViewModel
 import com.example.myapplication.ui.search.SearchViewModel
 import com.example.myapplication.ui.signup.SignupViewModel
+import com.example.myapplication.ui.tournament.CreateTournamentViewModel
 import com.example.myapplication.ui.userprofile.UserProfileViewModel
 import org.kodein.di.Kodein
 import org.kodein.di.erased.bind
@@ -31,6 +32,7 @@ object ViewModelModule : KodeinModuleProvider {
         bindViewModel<SignupViewModel>()
         bindViewModel<GameViewModel>()
         bindViewModel<MatchViewModel>()
+        bindViewModel<CreateTournamentViewModel>()
 
     }
 

@@ -54,11 +54,12 @@
     <string name="dialog_players_number"># players:</string>
     <string name="dialog_tournament_search">Search</string>
     <string name="dialog_tournament_title">Insert tournament title</string>
-    <string name="dialog_games">Choose a game:</string>
+    <string name="dialog_games">Choose a game</string>
     <string name="dialog_tournament_create">CREATE</string>
     <string name="select_date">SELECT DATE</string>
     <string name="select_time">SELECT TIME</string>
     <string name="create_tournament">Create tournament</string>
+    <string name="select_game">select game</string>
 
     <string-array name="spinner_content_tournament_creation">
         <item>8</item>

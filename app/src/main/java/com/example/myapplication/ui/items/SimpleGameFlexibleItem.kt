@@ -9,17 +9,16 @@ import eu.davidea.flexibleadapter.FlexibleAdapter
 import eu.davidea.flexibleadapter.items.AbstractFlexibleItem
 import eu.davidea.flexibleadapter.items.IFlexible
 import eu.davidea.viewholders.FlexibleViewHolder
-import kotlinx.android.synthetic.main.item_game.view.*
+import kotlinx.android.synthetic.main.simple_item_game.view.*
 
-
-data class CreateTournamentFlexibleItem(val gameEntity: GameEntity) :
-    AbstractFlexibleItem<CreateTournamentFlexibleItem.ViewHolder>() {
+data class SimpleGameFlexibleItem(val gameEntity: GameEntity) :
+    AbstractFlexibleItem<SimpleGameFlexibleItem.ViewHolder>() {
 
     override fun bindViewHolder(
-        adapter: FlexibleAdapter<IFlexible<RecyclerView.ViewHolder>>,
+        adapter: FlexibleAdapter<IFlexible<RecyclerView.ViewHolder>>?,
         holder: ViewHolder,
         position: Int,
-        payloads: MutableList<Any>
+        payloads: MutableList<Any>?
     ) {
         holder.render(gameEntity)
     }
@@ -30,16 +29,15 @@ data class CreateTournamentFlexibleItem(val gameEntity: GameEntity) :
     ) =
         ViewHolder(view, adapter)
 
-    override fun getLayoutRes() = R.layout.activity_players_spinner
+    override fun getLayoutRes() = R.layout.simple_item_game
 
     class ViewHolder(view: View, adapter: FlexibleAdapter<*>) : FlexibleViewHolder(view, adapter) {
-
         fun render(data: GameEntity) = with(itemView) {
-            Glide.with(itemView.context)
+            Glide.with(this)
                 .load(data.icon)
-                .into(game_item_icon)
-
-            game_item_textview.text = data.name
+                .into(simple_game_view_image)
+            simple_game_view_text.text = data.name
         }
     }
+
 }
