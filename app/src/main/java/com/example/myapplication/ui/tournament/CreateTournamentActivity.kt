@@ -12,14 +12,16 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 
 @ExperimentalCoroutinesApi
+@FlowPreview
 class CreateTournamentActivity : BaseActivity() {
 
-    // private val viewModel: CreateTournamentViewModel by viewModelInstance()
+    private val viewModel: CreateTournamentViewModel by viewModelInstance()
 
-    @FlowPreview
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_tournament)
+
+        activity_game_spinner.adapter = viewModel.adapter
 
         activity_create_tournament_button.setOnClickListener {
             Log.d("e", "LOOOOOL")

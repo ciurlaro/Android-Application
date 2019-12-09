@@ -9,10 +9,10 @@ class GetAllGamesUseCase(
 ) : UseCaseWithParamSuspending<GetAllGamesUseCase.Params, List<GameEntity>> {
 
     override suspend fun buildAction(params: Params) =
-        repository.getAllGames(params.pages)
+        repository.getAllGames(params.page)
 
-    suspend fun buildAction(pages: Int = 1) =
-        buildAction(Params(pages))
+    suspend fun buildAction(page: Int = 1) =
+        buildAction(Params(page))
 
-    data class Params(val pages: Int = 1)
+    data class Params(val page: Int = 1)
 }
