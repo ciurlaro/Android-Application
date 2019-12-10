@@ -7,7 +7,7 @@
         android:layout_height="match_parent">
 
     <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_fragment_games"
+            android:id="@+id/toolbar_fragments"
             android:background="@color/colorPrimaryDark"
             android:layout_width="match_parent"
             android:layout_height="65dp"
@@ -22,7 +22,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:textSize="25sp"
-                tools:text="Match of `Tournament`"
+                android:text="@string/match_of_tournament_string"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"/>
@@ -35,7 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintTop_toBottomOf="@id/toolbar_fragment_games"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_fragments"
             app:layout_constraintBottom_toBottomOf="parent"
             tools:listitem="@layout/item_match"/>
 

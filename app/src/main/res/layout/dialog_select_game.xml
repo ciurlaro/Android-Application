@@ -1,11 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-                                           xmlns:tools="http://schemas.android.com/tools"
-                                           xmlns:app="http://schemas.android.com/apk/res-auto"
-                                           android:id="@+id/rv"
-                                           android:orientation="vertical"
-                                           android:layout_height="300dp"
-                                           android:layout_width="300dp"
-                                           tools:listitem="@layout/simple_item_game"
-                                           app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-/>
+
+<androidx.appcompat.widget.Toolbar
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/toolbar_fragments"
+        android:background="@color/colorPrimaryDark"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:textAlignment="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+    <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:text="@string/choose_a_game_string"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/simple_games_recyclerview"
+            android:orientation="vertical"
+            android:layout_height="300dp"
+            android:layout_width="300dp"
+            tools:listitem="@layout/simple_item_game"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
+    </androidx.recyclerview.widget.RecyclerView>
+
+</androidx.appcompat.widget.Toolbar>

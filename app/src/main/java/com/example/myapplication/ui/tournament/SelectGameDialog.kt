@@ -18,13 +18,13 @@ class SelectGameDialog(private val callback: (GameEntity) -> Unit) : BaseDialogF
     private val adapter by lazy { FlexibleAdapter<SimpleGameFlexibleItem>(emptyList()) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
-        inflater.inflate(R.layout.dialog_select_game, container, false)
+        inflater.inflate(R.layout.dialog_select_game, container, false)!!
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         RecyclerViewDivider.with(requireContext())
             .build()
-            .addTo(rv)
+            .addTo(simple_games_recyclerview)
         with(viewModel) {
             allGames.observe { games ->
                 adapter.addItems(0, games.map { SimpleGameFlexibleItem(it) })

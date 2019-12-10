@@ -12,7 +12,9 @@ import com.example.myapplication.ui.match.MatchViewModel
 import com.example.myapplication.ui.search.SearchViewModel
 import com.example.myapplication.ui.signup.SignupViewModel
 import com.example.myapplication.ui.tournament.CreateTournamentViewModel
+import com.example.myapplication.ui.tournament.SelectGameDialogViewModel
 import com.example.myapplication.ui.userprofile.UserProfileViewModel
+import kotlinx.coroutines.FlowPreview
 import org.kodein.di.Kodein
 import org.kodein.di.erased.bind
 import org.kodein.di.erased.factory
@@ -21,6 +23,7 @@ import org.kodein.di.erased.singleton
 
 object ViewModelModule : KodeinModuleProvider {
 
+    @FlowPreview
     override fun provideModule(): Kodein.Builder.() -> Unit = {
 
         bind<ViewModelProvider.Factory>() with singleton { CustomViewModelFactory(dkodein) }
@@ -32,7 +35,9 @@ object ViewModelModule : KodeinModuleProvider {
         bindViewModel<SignupViewModel>()
         bindViewModel<GameViewModel>()
         bindViewModel<MatchViewModel>()
+        bindViewModel<SelectGameDialogViewModel>()
         bindViewModel<CreateTournamentViewModel>()
+
 
     }
 

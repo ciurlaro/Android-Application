@@ -60,6 +60,13 @@
     <string name="select_time">SELECT TIME</string>
     <string name="create_tournament">Create tournament</string>
     <string name="select_game">select game</string>
+    <string name="togglebutton">ToggleButton</string>
+    <string name="home_string">Home</string>
+    <string name="user_string">User</string>
+    <string name="search_string">Search</string>
+    <string name="create_tournament_string">Create tournament</string>
+    <string name="match_of_tournament_string">Match of</string>
+    <string name="choose_a_game_string">Choose a game</string>
 
     <string-array name="spinner_content_tournament_creation">
         <item>8</item>
