@@ -50,21 +50,21 @@ class CreateTournamentActivity : BaseActivity() {
         }
 
 //        DATE AND TIME PICKERS: FUNZIONANO MA VANNO ASSOCIATI A PULSANTI E VIEW GIUSTE
-//        games_selection_edit_textview.setOnClickListener {
-//            val mcurrentDate = Calendar.getInstance()
-//            val mYear = mcurrentDate[Calendar.YEAR]
-//            val mMonth = mcurrentDate[Calendar.MONTH]
-//            val mDay = mcurrentDate[Calendar.DAY_OF_MONTH]
-//            val mDatePicker: DatePickerDialog
-//            mDatePicker = DatePickerDialog(
-//                this@CreateTournamentActivity,
-//                OnDateSetListener { _, selectedyear, selectedmonth, selectedday ->
-//                    games_selection_edit_textview.text = "$selectedday/${selectedmonth+1}/$selectedyear"
-//                }, mYear, mMonth, mDay
-//            )
-//            mDatePicker.setTitle("Select Date")
-//            mDatePicker.show()
-//        }
+        //        games_selection_edit_textview.setOnClickListener {
+        //            val mcurrentDate = Calendar.getInstance()
+        //            val mYear = mcurrentDate[Calendar.YEAR]
+        //            val mMonth = mcurrentDate[Calendar.MONTH]
+        //            val mDay = mcurrentDate[Calendar.DAY_OF_MONTH]
+        //            val mDatePicker: DatePickerDialog
+        //            mDatePicker = DatePickerDialog(
+        //                this@CreateTournamentActivity,
+        //                OnDateSetListener { _, selectedyear, selectedmonth, selectedday ->
+        //                    games_selection_edit_textview.text = "$selectedday/${selectedmonth+1}/$selectedyear"
+        //                }, mYear, mMonth, mDay
+        //            )
+        //            mDatePicker.setTitle("Select Date")
+        //            mDatePicker.show()
+        //        }
 //        games_selection_edit_textview.setOnClickListener {
 //            val mcurrentTime = Calendar.getInstance()
 //            val hour = mcurrentTime[Calendar.HOUR_OF_DAY]
@@ -72,7 +72,7 @@ class CreateTournamentActivity : BaseActivity() {
 //            val mTimePicker: TimePickerDialog
 //            mTimePicker = TimePickerDialog(
 //                this@CreateTournamentActivity,
-//                OnTimeSetListener { _, selectedHour, selectedMinute ->
+//                TimePickerDialog.OnTimeSetListener { _, selectedHour, selectedMinute ->
 //                    games_selection_edit_textview.text = "$selectedHour:$selectedMinute"
 //                }, hour, minute,
 //                true
