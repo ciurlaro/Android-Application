@@ -25,8 +25,8 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
-                android:text="Match #1:"
-                android:textColor="@color/black"
+            android:text="@string/match_number"
+            android:textColor="@color/black"
                 android:textSize="20sp"/>
 
         <View

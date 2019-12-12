@@ -3,7 +3,6 @@ package com.example.myapplication.ui
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.annotation.RequiresApi
@@ -27,8 +26,6 @@ class MainActivity : BaseFragmentedActivity(R.id.nav_host_fragment) {
 
     init {
         lifecycleScope.launchWhenCreated {
-            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
-            actionBar?.hide()
             if (repo.getCurrentUser() != null) {
                 setContentView(R.layout.activity_main)
                 bottom_nav_view.setupWithNavController(navController)

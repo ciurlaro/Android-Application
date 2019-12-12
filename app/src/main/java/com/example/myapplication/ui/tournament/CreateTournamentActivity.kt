@@ -1,21 +1,21 @@
 package com.example.myapplication.ui.tournament
 
-
 import android.annotation.SuppressLint
-import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.view.View
+import android.widget.AdapterView
 import androidx.annotation.RequiresApi
+import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
+import com.example.myapplication.databinding.ActivityCreateTournamentBinding
 import com.example.myapplication.ui.BaseActivity
-import com.example.myapplication.ui.MainActivity
 import kotlinx.android.synthetic.main.activity_create_tournament.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-
 
 @ExperimentalCoroutinesApi
 @FlowPreview
@@ -27,68 +27,66 @@ class CreateTournamentActivity : BaseActivity() {
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_create_tournament)
 
-        activity_tournament_games_button.setOnClickListener { _ ->
-            val dialog = Dialog(this@CreateTournamentActivity)
-//            val dialogView = SelectGameDialog {
-//                viewModel.selectedGame.value = it
-//            }.view
-            dialog.setContentView(R.layout.dialog_select_game)
-            dialog.show()
+        bindContentView<ActivityCreateTournamentBinding>(R.layout.activity_create_tournament) {
+            viewModel = this@CreateTournamentActivity.viewModel
         }
 
+        viewModel.selectedPlayersNumber.value = activity_players_spinner.selectedItem.toString().toInt()
 
+        activity_players_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
 
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                viewModel.selectedPlayersNumber.value = parent.getItemAtPosition(position).toString().toInt()
+            }
+
+        }
+
+        activity_tournament_games_button.setOnClickListener { _ ->
+            SelectGameDialog {
+                viewModel.selectedGame.value = it
+            }.show(supportFragmentManager, "LOL")
+        }
 
         with(viewModel) {
             selectedGame.observe {
                 Glide.with(this@CreateTournamentActivity)
                     .load(it.icon)
                     .into(selected_game_image)
+                games_selection_edit_textview.text = it.name
             }
         }
 
-//        DATE AND TIME PICKERS: FUNZIONANO MA VANNO ASSOCIATI A PULSANTI E VIEW GIUSTE
-        //        games_selection_edit_textview.setOnClickListener {
-        //            val mcurrentDate = Calendar.getInstance()
-        //            val mYear = mcurrentDate[Calendar.YEAR]
-        //            val mMonth = mcurrentDate[Calendar.MONTH]
-        //            val mDay = mcurrentDate[Calendar.DAY_OF_MONTH]
-        //            val mDatePicker: DatePickerDialog
-        //            mDatePicker = DatePickerDialog(
-        //                this@CreateTournamentActivity,
-        //                OnDateSetListener { _, selectedyear, selectedmonth, selectedday ->
-        //                    games_selection_edit_textview.text = "$selectedday/${selectedmonth+1}/$selectedyear"
-        //                }, mYear, mMonth, mDay
-        //            )
-        //            mDatePicker.setTitle("Select Date")
-        //            mDatePicker.show()
-        //        }
-//        games_selection_edit_textview.setOnClickListener {
-//            val mcurrentTime = Calendar.getInstance()
-//            val hour = mcurrentTime[Calendar.HOUR_OF_DAY]
-//            val minute = mcurrentTime[Calendar.MINUTE]
-//            val mTimePicker: TimePickerDialog
-//            mTimePicker = TimePickerDialog(
-//                this@CreateTournamentActivity,
-//                TimePickerDialog.OnTimeSetListener { _, selectedHour, selectedMinute ->
-//                    games_selection_edit_textview.text = "$selectedHour:$selectedMinute"
-//                }, hour, minute,
-//                true
-//            )
-//            mTimePicker.show()
-//        }
-
+        activity_create_tournament_button.setOnClickListener {
+            activity_create_tournament_button.isClickable = false
+            if (checkStuff()) {
+                viewModel.createTournament(lifecycleScope) {
+                    finish()
+                }
+            } else
+                activity_create_tournament_button.isClickable = true
+        }
 
     }
 
+    private fun checkStuff(): Boolean {
+        var isAllOk = true
+        if (activity_item_title_text_view.text.isNullOrBlank()) {
+            activity_item_title_text_view.error = resources.getString(R.string.empty_string)
+            isAllOk = false
+        }
+        if (activity_create_tournament_description_text_view.text.isNullOrBlank()) {
+            activity_create_tournament_description_text_view.error = resources.getString(R.string.empty_string)
+            isAllOk = false
+        }
+        if (games_selection_edit_textview.text.isNullOrBlank()) {
+            games_selection_edit_textview.error = resources.getString(R.string.select_a_game)
+            isAllOk = false
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-        startActivity(MainActivity(this@CreateTournamentActivity))
+        }
+        return isAllOk
     }
-
 
     companion object {
         private fun buildIntent(context: Context) =

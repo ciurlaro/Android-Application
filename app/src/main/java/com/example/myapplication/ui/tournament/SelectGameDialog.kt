@@ -22,6 +22,7 @@ class SelectGameDialog(private val callback: (GameEntity) -> Unit) : BaseDialogF
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        simple_games_recyclerview.adapter = adapter
         RecyclerViewDivider.with(requireContext())
             .build()
             .addTo(simple_games_recyclerview)
@@ -30,9 +31,11 @@ class SelectGameDialog(private val callback: (GameEntity) -> Unit) : BaseDialogF
                 adapter.addItems(0, games.map { SimpleGameFlexibleItem(it) })
                 adapter.mItemClickListener = FlexibleAdapter.OnItemClickListener { _, position ->
                     callback(games[position])
+                    dismiss()
                     true
                 }
             }
+            loadGames()
         }
     }
 }

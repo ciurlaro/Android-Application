@@ -1,32 +1,37 @@
 package com.example.myapplication.ui.tournament
 
+import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.myapplication.entities.GameEntity
-import com.example.myapplication.entities.UserEntity
-import com.example.myapplication.usecases.game.GetAllGamesUseCase
+import com.example.myapplication.entities.TournamentEntity
 import com.example.myapplication.usecases.tournament.CreateTournamentUseCase
 import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.launch
 
 @FlowPreview
 class CreateTournamentViewModel(
-    private val getAllGamesUseCase: GetAllGamesUseCase,
     private val createTournamentUseCase: CreateTournamentUseCase
 ) : ViewModel() {
 
     val selectedGame = MutableLiveData<GameEntity>()
-    val playersNumber = MutableLiveData<Int>()
+    val selectedPlayersNumber = MutableLiveData<Int>()
+    val description = MutableLiveData<String>()
+    val title = MutableLiveData<String>()
 
 
-    suspend fun createTournament(
-        playersNumber: Int,
-        title: String,
-        tournamentDescription: String,
-        tournamentMode: String,
-        admin: UserEntity,
-        game: GameEntity
-    ) {
-        createTournamentUseCase.buildAction(playersNumber, title, tournamentDescription, tournamentMode, admin, game)
+    fun createTournament(
+        lifecycleScope: LifecycleCoroutineScope,
+        function: (TournamentEntity) -> Unit
+    ) = viewModelScope.launch {
+        val t = createTournamentUseCase.buildAction(
+            selectedPlayersNumber.value!!,
+            title.value!!,
+            description.value!!,
+            selectedGame.value!!
+        )
+        lifecycleScope.launch { function(t) }
     }
 
 }
