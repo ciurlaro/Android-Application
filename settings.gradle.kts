@@ -31,4 +31,4 @@ pluginManagement {
 
 include(":app", ":data", ":domain", "mpp-lib", "web-client")
 rootProject.name = "my-application"
-//enableFeaturePreview("GRADLE_METADATA")
+enableFeaturePreview("GRADLE_METADATA")

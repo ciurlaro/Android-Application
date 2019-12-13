@@ -10,8 +10,7 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.erased.instance
 
-abstract class BaseDialogFragment : DialogFragment(),
-    KodeinAware {
+abstract class BaseDialogFragment : DialogFragment(), KodeinAware {
     @Suppress("PropertyName")
     protected val TAG = this::class.simpleName!!
 
