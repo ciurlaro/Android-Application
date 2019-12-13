@@ -1,0 +1,3 @@
+package com.example.myapplication.datasource
+
+expect class FirebaseStorageDatasourceImplementation(firebaseStorage: FirebaseStorage) : FirebaseStorageDatasource

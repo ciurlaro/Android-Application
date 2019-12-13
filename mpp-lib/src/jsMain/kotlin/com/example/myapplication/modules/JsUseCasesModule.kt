@@ -28,7 +28,6 @@ object JsUseCasesModule : KodeinModuleProvider {
         bind<JsGetGamesByMode>() with singleton { JsGetGamesByMode(instance()) }
         bind<JsGetGamesContainingName>() with singleton { JsGetGamesContainingName(instance()) }
 
-
         bind<JsCreateGameMode>() with singleton { JsCreateGameMode(instance()) }
 
         bind<JsCreateMatch>() with singleton { JsCreateMatch(instance()) }

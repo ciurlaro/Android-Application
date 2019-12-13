@@ -5,13 +5,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
-import com.example.myapplication.ui.home.HomeViewModel
-import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.item_match.view.*
+import com.example.myapplication.ui.items.TournamentFlexibleItem
 
 class MatchesAdapter : RecyclerView.Adapter<MatchesAdapter.ViewHolder>() {
 
-    var data = listOf<HomeViewModel.Model>()
+    var data = listOf<TournamentFlexibleItem>()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -29,25 +27,25 @@ class MatchesAdapter : RecyclerView.Adapter<MatchesAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        fun render(data: HomeViewModel.Model) = with(itemView) {
-            val (matchEntity, registeredPlayers) = data
-            Picasso.get().load(matchEntity.tournament.game.image).into(game_image)
-            Picasso.get().load(matchEntity.tournament.game.icon).into(game_icon)
-            tournament_name.text = matchEntity.tournament.title
-            match_date.text = resources.getString(
-                R.string.date_text,
-                matchEntity.matchDateTime.format("dd/MM/yyyy")
-            )
-            match_time.text = resources.getString(
-                R.string.time_text,
-                matchEntity.matchDateTime.format("HH:mm 'GMT'z")
-            )
-            match_players.text = resources.getString(
-                R.string.players_text_fraction,
-                registeredPlayers,
-                matchEntity.playersCount
-            )
-            game_name.text = matchEntity.tournament.game.name
+        fun render(data: TournamentFlexibleItem) = with(itemView) {
+            //            val (matchEntity, registeredPlayers) = data
+//            Picasso.get().load(matchEntity.tournament.game.image).into(game_image)
+//            Picasso.get().load(matchEntity.tournament.game.icon).into(game_icon)
+//            tournament_name.text = matchEntity.tournament.title
+//            match_date.text = resources.getString(
+//                R.string.date_text,
+//                matchEntity.matchDateTime.format("dd/MM/yyyy")
+//            )
+//            match_time.text = resources.getString(
+//                R.string.time_text,
+//                matchEntity.matchDateTime.format("HH:mm 'GMT'z")
+//            )
+//            match_players.text = resources.getString(
+//                R.string.players_text_fraction,
+//                registeredPlayers,
+//                matchEntity.playersCount
+//            )
+//            game_name.text = matchEntity.tournament.game.name
         }
 
     }

@@ -1,10 +1,12 @@
 package com.example.myapplication.datasource
 
 
+import com.example.myapplication.exceptions.AuthException
 import com.example.myapplication.rawresponses.*
 import com.example.myapplication.rawresponses.createresponses.*
 import com.soywiz.klock.DateTimeTz
 import io.ktor.client.HttpClient
+import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.get
 import io.ktor.client.request.header
 import io.ktor.client.request.post
@@ -18,7 +20,7 @@ import kotlinx.serialization.json.Json
 class ArenaTournamentDatasourceImplementation(
     private val httpClient: HttpClient,
     private val endpoints: ArenaTournamentDatasource.Endpoints,
-    override val tokenFactory: TokenFactory
+    private val firebaseAuthDS: FirebaseAuthDatasource
 ) : ArenaTournamentDatasource {
 
     @UseExperimental(UnstableDefault::class)
@@ -164,6 +166,12 @@ class ArenaTournamentDatasourceImplementation(
     override suspend fun getRegistrationByLink(link: String): RegistrationJSON =
         httpClient.get(link)
 
+    override suspend fun getRegistrationByUserIdAndMatchId(
+        userId: String,
+        matchId: Long,
+        page: Int
+    ): MultipleRegistrationsJSON =
+        httpClient.get(endpoints.registrationsByUserIdUrlAndMatchIdUrl(userId, matchId, page))
 
     override suspend fun getMatchesNotFull(page: Int): MultipleMatchJSON =
         httpClient.get(endpoints.matchesNotFullUrl(page))
@@ -189,30 +197,36 @@ class ArenaTournamentDatasourceImplementation(
     override suspend fun getUsersByMatchId(matchId: Long, page: Int): MultipleUsersJSON =
         httpClient.get(endpoints.usersByMatchIdUrl(matchId, page))
 
-    override suspend fun getCurrentUser(): UserJSON =
-        httpClient.authenticatedGet(endpoints.currentUserUrl())
-
     override suspend fun getAccountVerificationStatus(): AccountStatusJSON =
         httpClient.authenticatedGet(endpoints.isAccountVerifiedUrl())
 
     override suspend fun getAccountSubscription(): SubscriptionStatusJSON =
         httpClient.authenticatedGet(endpoints.isAccountSubscribedUrl())
 
+    override suspend fun searchTournaments(title: String, gameIds: List<String>, page: Int): MultipleTournamentsJSON =
+        httpClient.authenticatedGet(endpoints.searchTournaments(title, gameIds, page))
+
     @UseExperimental(InternalAPI::class)
     private suspend inline fun <reified T> HttpClient.authenticatedGet(url: Url) =
         get<T>(url) {
-            tokenFactory.factory()?.let {
-                header(HttpHeaders.Authorization, "Bearer: ${"$it:".encodeBase64()}")
-            }
+            addAuth()
         }
 
     @UseExperimental(InternalAPI::class)
     private suspend inline fun <reified T> HttpClient.authenticatedPost(url: Url, content: Any?) =
         post<T>(url) {
-            tokenFactory.factory()?.let {
-                header(HttpHeaders.Authorization, "Bearer: ${"$it:".encodeBase64()}")
-            }
+            addAuth()
             content?.let { body = it }
         }
+
+
+    @InternalAPI
+    private suspend fun HttpRequestBuilder.addAuth() {
+        try {
+            header(HttpHeaders.Authorization, "Bearer: ${"${firebaseAuthDS.getToken()}:".encodeBase64()}")
+        } catch (e: AuthException) {
+            println(e)
+        }
+    }
 
 }

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.myapplication.ui.tournament.CreateTournamentViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="4dp"
+        android:elevation="2dp"
+        app:cardCornerRadius="5dp"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_fragments"
+            android:background="@color/colorPrimaryDark"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:textAlignment="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="25sp"
+                android:text="@string/create_tournament_string"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/activity_item_title_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/tournament_title"
+            android:maxLines="1"
+            android:text="@={viewModel.title}"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            android:theme="@style/AppTheme.LoginEditTextTheme"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_fragments" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/activity_tournament_players_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="7dp"
+            android:text="@string/players_number"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/activity_item_title_text_view" />
+
+        <Spinner
+            android:id="@+id/activity_players_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawSelectorOnTop="true"
+            android:entries="@array/spinner_content_tournament_creation"
+            app:layout_constraintBottom_toTopOf="@+id/activity_tournament_games_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/games_selection_edit_textview"
+            app:layout_constraintTop_toTopOf="@+id/activity_tournament_players_textview" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/activity_tournament_games_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/choose_a_game_string"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            app:layout_constraintLeft_toLeftOf="@id/activity_tournament_players_textview"
+            app:layout_constraintStart_toStartOf="@+id/activity_tournament_players_textview"
+            app:layout_constraintTop_toBottomOf="@id/activity_tournament_players_textview" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/selected_game_image"
+            android:layout_width="30dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            app:layout_constraintBottom_toBottomOf="@id/activity_tournament_games_button"
+            app:layout_constraintLeft_toRightOf="@id/activity_tournament_games_button"
+            app:layout_constraintTop_toTopOf="@id/activity_tournament_games_button"
+            tools:src="@drawable/wow" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/games_selection_edit_textview"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@id/activity_tournament_games_button"
+            app:layout_constraintLeft_toRightOf="@id/selected_game_image"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/activity_tournament_games_button" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_margin="16dp"
+            android:id="@+id/activity_create_tournament_button"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/colorPrimary"
+            android:text="@string/create_tournament"
+            android:textColor="#FFF"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/activity_create_tournament_description_text_view" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/activity_create_tournament_description_text_view"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:layout_margin="16dp"
+            android:hint="@string/description"
+            android:text="@={viewModel.description}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/activity_tournament_games_button" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

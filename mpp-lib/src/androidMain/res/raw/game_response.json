@@ -1,0 +1,16 @@
+{
+  "gameName": "wow",
+  "availableModes": [
+    "OPEN_WORLD"
+  ],
+  "image": "https://games.teeech.it/wp-content/uploads/sites/5/2019/11/overwatch-2.jpg",
+  "icon": "https://icon-library.net/images/overwatch-logo-icon/overwatch-logo-icon-13.jpg",
+  "_links": {
+    "self": {
+      "href": "http://localhost:8080/game/wow"
+    },
+    "gameEntity": {
+      "href": "http://localhost:8080/game/wow"
+    }
+  }
+}

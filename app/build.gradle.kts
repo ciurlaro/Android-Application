@@ -4,7 +4,11 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("com.google.gms:google-services:4.3.2")
+        val androidxNavigationVersion: String by project
+        val gmsVersion: String by project
+
+        classpath("com.google.gms:google-services:$gmsVersion")
+        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:$androidxNavigationVersion")
 
         // From JDKK 9+ some classes have been moved to Maven. Kapt needs those classes
         // to parse xml and stuff. Load them manually if the current JDK do not contains
@@ -68,7 +72,6 @@ android {
         getByName("release") {
             isMinifyEnabled = true
             isDebuggable = false
-            manifestPlaceholders = mapOf("ApplicationName" to "Application")
             // TODO
             buildConfigField("String", "SERVER_PROTOCOL", "\"http\"")
             buildConfigField("String", "SERVER_URL", "\"\"")
@@ -78,7 +81,6 @@ android {
         getByName("debug") {
             isMinifyEnabled = false
             matchingFallbacks = listOf("release")
-            manifestPlaceholders = mapOf("ApplicationName" to "Application")
             // TODO
             buildConfigField("String", "SERVER_PROTOCOL", "\"http\"")
             buildConfigField("String", "SERVER_URL", "\"\"")
@@ -89,7 +91,6 @@ android {
             isMinifyEnabled = false
             isDebuggable = true
             matchingFallbacks = listOf("debug")
-            manifestPlaceholders = mapOf("ApplicationName" to "MockApplication")
             buildConfigField("String", "SERVER_PROTOCOL", "\"http\"")
             buildConfigField("String", "SERVER_URL", "\"mock\"")
             buildConfigField("int", "SERVER_PORT", "42")
@@ -98,7 +99,6 @@ android {
         create("localTesting") {
             isMinifyEnabled = false
             isDebuggable = true
-            manifestPlaceholders = mapOf("ApplicationName" to "Application")
             buildConfigField("String", "SERVER_PROTOCOL", "\"http\"")
             buildConfigField("String", "SERVER_URL", "\"localhost\"")
             buildConfigField("int", "SERVER_PORT", "8080")
@@ -119,11 +119,13 @@ android {
         exclude("META-INF/ktor-client-json.kotlin_module")
         exclude("META-INF/ktor-client-core.kotlin_module")
         exclude("META-INF/ktor-client-serialization.kotlin_module")
+        exclude("META-INF/ktor-client-mock.kotlin_module")
+        exclude("META-INF/ktor-client-logging.kotlin_module")
     }
 
 }
 
-apply(plugin = "com.google.gms.google-services")
+apply(plugin = "androidx.navigation.safeargs.kotlin")
 
 dependencies {
 
@@ -134,17 +136,15 @@ dependencies {
     val androidxLifecycleVersion: String by project
     val materialVersion: String by project
     val constraintLayoutVersion: String by project
-    val ktorVersion: String by project
-    val kodeinVersion: String by project
-    val picassoVersion: String by project
+    val glideVersion: String by project
+    val slf4jAndroidVersion: String by project
+    val recyclerViewDividerVersion: String by project
 
     val junitVersion: String by project
     val espressoVersion: String by project
     val androidTestRunnerVersion: String by project
     val flexibleAdapterVersion: String by project
-    val firebaseJvmVersion: String by project
-    val jaxbVersion: String by project
-    val javaxActivationVersion: String by project
+    val androidxPagingVersion: String by project
 
     implementation(project(":mpp-lib"))
 
@@ -157,18 +157,17 @@ dependencies {
     implementation("androidx.navigation", "navigation-ui", androidxNavigationVersion)
     implementation("androidx.lifecycle", "lifecycle-extensions", androidxLifecycleVersion)
     implementation("androidx.lifecycle", "lifecycle-viewmodel-ktx", androidxLifecycleVersion)
+    implementation("androidx.lifecycle", "lifecycle-runtime-ktx", androidxLifecycleVersion)
+    implementation("androidx.lifecycle", "lifecycle-livedata-ktx", androidxLifecycleVersion)
     implementation("androidx.navigation", "navigation-fragment-ktx", androidxNavigationVersion)
     implementation("androidx.navigation", "navigation-ui-ktx", androidxNavigationVersion)
-
-    implementation("com.google.firebase", "firebase-auth", firebaseJvmVersion)
-
-    implementation("com.squareup.picasso", "picasso", picassoVersion)
-
-    implementation(ktor("client-mock-jvm", ktorVersion))
-
-    implementation("org.kodein.di", "kodein-di-framework-android-x", kodeinVersion)
-
+    implementation("androidx.paging", "paging-runtime", androidxPagingVersion)
     implementation("eu.davidea", "flexible-adapter", flexibleAdapterVersion)
+    implementation("com.github.fondesa", "recycler-view-divider", recyclerViewDividerVersion)
+
+    implementation("com.github.bumptech.glide", "glide", glideVersion)
+    kapt("com.github.bumptech.glide", "compiler", glideVersion)
+    runtimeOnly("org.slf4j", "slf4j-android", slf4jAndroidVersion)
 
     testImplementation("junit", "junit", junitVersion)
     androidTestImplementation("androidx.test", "runner", androidTestRunnerVersion)

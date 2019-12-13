@@ -56,6 +56,11 @@ object MappersModule : KodeinModuleProvider {
             )
         }
 
+        bind<CurrentUserMapper>() with singleton { CurrentUserMapper() }
+
+
+
+
     }
 
 }

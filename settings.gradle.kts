@@ -9,6 +9,7 @@ pluginManagement {
         mavenCentral()
         gradlePluginPortal()
         maven("https://dl.bintray.com/kotlin/kotlin-eap")
+        maven("https://dl.bintray.com/kotlin/kotlin-dev")
     }
     resolutionStrategy {
         eachPlugin {
@@ -26,4 +27,4 @@ pluginManagement {
 
 include(":app", ":data", ":domain", "mpp-lib","Frontend-app")
 rootProject.name = "my-application"
-enableFeaturePreview("GRADLE_METADATA")
+//enableFeaturePreview("GRADLE_METADATA")

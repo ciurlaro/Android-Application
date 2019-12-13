@@ -5,13 +5,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
-import com.example.myapplication.ui.search.SearchViewModel
+import com.example.myapplication.ui.items.TournamentFlexibleItem
 
 class SearchAdapter : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
 
-    private val data = mutableListOf<SearchViewModel.Model>()
+    private val data = mutableListOf<TournamentFlexibleItem>()
 
-    fun addElement(e: SearchViewModel.Model) {
+    fun addElement(e: TournamentFlexibleItem) {
         data.add(e)
         notifyItemInserted(data.lastIndex)
     }
@@ -28,7 +28,7 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        fun render(data: SearchViewModel.Model) {
+        fun render(data: TournamentFlexibleItem) {
             TODO()
         }
     }

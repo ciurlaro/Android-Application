@@ -3,6 +3,19 @@
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="AppTheme.LoginEditTextTheme" parent="Base.V7.Widget.AppCompat.EditText">
+        <item name="colorControlNormal">@color/white</item>
+        <item name="colorControlActivated">@color/colorAccent</item>
+        <item name="colorControlHighlight">@color/colorAccent</item>
+        <item name="android:textColorHint">@color/startblue</item>
+        <item name="editTextStyle">@style/AppTheme.LoginEditTextTheme.TextStyle</item>
+    </style>
+
+    <style name="AppTheme.LoginEditTextTheme.TextStyle">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">32sp</item>
     </style>
 </resources>

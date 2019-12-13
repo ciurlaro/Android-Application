@@ -1,17 +1,15 @@
 package com.example.myapplication.usecases.user
 
-import com.example.myapplication.entities.UserEntity
 import com.example.myapplication.usecases.JsUseCaseWithParamsPromise
+import com.example.myapplication.usecases.user.creation.CreateAccountWithEmailAndPasswordUseCase
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.promise
-import kotlin.js.Promise
-
 
 class JsIsSubscribedAccount(
-    override val usecase: CreateUserUseCase
-) : JsUseCaseWithParamsPromise<CreateUserUseCase, CreateUserUseCase.Params, UserEntity> {
+    override val usecase: CreateAccountWithEmailAndPasswordUseCase
+) : JsUseCaseWithParamsPromise<CreateAccountWithEmailAndPasswordUseCase, CreateAccountWithEmailAndPasswordUseCase.Params, Boolean> {
 
-    override fun buildAction(params: CreateUserUseCase.Params): Promise<UserEntity> = GlobalScope.promise {
+    override fun buildAction(params: CreateAccountWithEmailAndPasswordUseCase.Params) = GlobalScope.promise {
         usecase.buildAction(params)
     }
 }

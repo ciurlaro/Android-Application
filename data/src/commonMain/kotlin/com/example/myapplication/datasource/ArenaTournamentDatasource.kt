@@ -12,9 +12,6 @@ interface ArenaTournamentDatasource {
         val DEFAULT_DATE_TIME_PATTERN = DateFormat("yyyy-MM-dd'T'HH:mm:ss")
     }
 
-
-    val tokenFactory: TokenFactory
-
     suspend fun createGameMode(gameModeJSON: CreateGameModeJSON): ModeJSON
     suspend fun createGame(gameJSON: CreateGameJSON): GameJSON
     suspend fun createMatch(matchJSON: CreateMatchJSON): MatchJSON
@@ -50,15 +47,16 @@ interface ArenaTournamentDatasource {
 
     suspend fun getRegistrationById(id: Long): RegistrationJSON
     suspend fun getRegistrationByLink(link: String): RegistrationJSON
+    suspend fun getRegistrationByUserIdAndMatchId(userId: String, matchId: Long, page: Int): MultipleRegistrationsJSON
     suspend fun getRegistrationsByUser(userId: String, page: Int): MultipleRegistrationsJSON
     suspend fun getRegistrationsByMatchId(matchId: Long, page: Int): MultipleRegistrationsJSON
 
-    suspend fun getCurrentUser(): UserJSON
     suspend fun getUserById(id: String): UserJSON
     suspend fun getUserByLink(link: String): UserJSON
     suspend fun getUsersByMatchId(matchId: Long, page: Int): MultipleUsersJSON
     suspend fun getAccountVerificationStatus(): AccountStatusJSON
     suspend fun getAccountSubscription(): SubscriptionStatusJSON
+    suspend fun searchTournaments(title: String, gameIds: List<String>, page: Int): MultipleTournamentsJSON
 
     interface Endpoints {
 
@@ -107,12 +105,14 @@ interface ArenaTournamentDatasource {
         fun registrationsByUserUrl(userId: String, page: Int): Url
 
         fun registrationsByMatchIdUrl(matchId: Long, page: Int): Url
+        fun registrationsByUserIdUrlAndMatchIdUrl(userId: String, matchId: Long, page: Int): Url
 
         fun currentUserUrl(): Url
         fun userByIdUrl(userId: String): Url
         fun usersByMatchIdUrl(matchId: Long, page: Int): Url
         fun isAccountVerifiedUrl(): Url
         fun isAccountSubscribedUrl(): Url
+        fun searchTournaments(title: String, gameIds: List<String>, page: Int): Url
 
     }
 }

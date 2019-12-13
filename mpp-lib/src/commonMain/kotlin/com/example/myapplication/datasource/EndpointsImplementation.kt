@@ -3,6 +3,7 @@ package com.example.myapplication.datasource
 import com.example.myapplication.mappers.DateTimeMapper
 import com.soywiz.klock.DateTimeTz
 import io.ktor.http.Parameters
+import io.ktor.http.ParametersBuilder
 import io.ktor.http.URLProtocol
 import io.ktor.http.Url
 
@@ -18,6 +19,9 @@ data class EndpointsImplementation(
 
     private fun buildUrl(path: String, parameters: Parameters = parametersOf()) =
         Url(URLProtocol(protocol, port), host, port, path, parameters, "", null, null, false)
+
+    private fun buildUrl(path: String, builder: ParametersBuilder.() -> Unit) =
+        buildUrl(path, Parameters.build(builder))
 
 
     /*
@@ -155,6 +159,12 @@ data class EndpointsImplementation(
             parametersOf("matchId" to matchId, "page" to page)
         )
 
+    override fun registrationsByUserIdUrlAndMatchIdUrl(userId: String, matchId: Long, page: Int) =
+        buildUrl(
+            "/registration/search/byUserIdAndMatchId",
+            parametersOf("userId" to userId, "matchId" to matchId, "page" to page)
+        )
+
     override fun currentUserUrl() =
         buildUrl("/currentUser")
 
@@ -170,4 +180,10 @@ data class EndpointsImplementation(
     override fun isAccountSubscribedUrl() =
         buildUrl("isAccountSubscribed")
 
+    override fun searchTournaments(title: String, gameIds: List<String>, page: Int) =
+        buildUrl("tournament/search/byNameAndGames") {
+            append("title", title)
+            if (gameIds.isNotEmpty())
+                append("gameIds", gameIds.joinToString(","))
+        }
 }

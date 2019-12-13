@@ -1,5 +1,8 @@
+import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
+
 plugins {
     kotlin("multiplatform")
+    kotlin("plugin.serialization")
 }
 
 kotlin {
@@ -15,41 +18,45 @@ kotlin {
 
     sourceSets {
 
-        val kotlinVersion: String by project
-        val coroutinesVersion: String by project
-        val klockVersion: String by project
-        val rxjsVersion: String by project
+        val ktorVersion: String by project
+        val kotlinxSerializationVersion: String by project
 
         val commonMain by getting {
             dependencies {
-                api(kotlin("stdlib-common", kotlinVersion))
-                api("com.soywiz.korlibs.klock:klock:$klockVersion")
-                api("org.jetbrains.kotlinx:kotlinx-coroutines-core-common:$coroutinesVersion")
+                api(project(":domain"))
+                api(ktor("http", ktorVersion))
+                api(ktor("utils", ktorVersion))
+                api(serialization("runtime-common", kotlinxSerializationVersion))
             }
         }
 
         val jvmMain by getting {
             dependencies {
-                api(kotlin("stdlib-jdk8", kotlinVersion))
-                api("com.soywiz.korlibs.klock:klock-jvm:$klockVersion")
-                api("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
-
+                api(ktor("http-jvm", ktorVersion))
+                api(ktor("utils-jvm", ktorVersion))
+                api(serialization("runtime", kotlinxSerializationVersion))
             }
         }
 
         val jsMain by getting {
             dependencies {
-                api(kotlin("stdlib-js", kotlinVersion))
-                api("com.soywiz.korlibs.klock:klock-js:$klockVersion")
-                api("org.jetbrains.kotlinx:kotlinx-coroutines-core-js:$coroutinesVersion")
-                api(npm("rxjs", rxjsVersion))
+                api(ktor("http-js", ktorVersion))
+                api(ktor("utils-js", ktorVersion))
+                api(serialization("runtime-js", kotlinxSerializationVersion))
             }
         }
 
         all {
             languageSettings.useExperimentalAnnotation("kotlin.Experimental")
         }
-
     }
 
 }
+
+@Suppress("unused")
+fun KotlinDependencyHandler.ktor(module: String, version: String? = null): Any =
+    "io.ktor:ktor-$module${version?.let { ":$version" } ?: ""}"
+
+@Suppress("unused")
+fun KotlinDependencyHandler.serialization(module: String, version: String? = null): Any =
+    "org.jetbrains.kotlinx:kotlinx-serialization-$module${version?.let { ":$version" } ?: ""}"
