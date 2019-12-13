@@ -2,11 +2,11 @@ package com.example.myapplication.usecases.game
 
 import com.example.myapplication.entities.GameEntity
 import com.example.myapplication.repositories.ArenaTournamentRepository
-import com.example.myapplication.usecases.UseCaseWithParamSuspending
+import com.example.myapplication.usecases.UseCaseWithParamsSuspending
 
 class GetAllGamesUseCase(
     private val repository: ArenaTournamentRepository
-) : UseCaseWithParamSuspending<GetAllGamesUseCase.Params, List<GameEntity>> {
+) : UseCaseWithParamsSuspending<GetAllGamesUseCase.Params, List<GameEntity>> {
 
     override suspend fun buildAction(params: Params) =
         repository.getAllGames(params.page)

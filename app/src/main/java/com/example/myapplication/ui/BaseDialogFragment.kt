@@ -1,6 +1,7 @@
 package com.example.myapplication.ui
 
 import android.content.res.Resources
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
@@ -23,5 +24,11 @@ abstract class BaseDialogFragment : DialogFragment(), KodeinAware {
 
     val Int.dp
         get() = (this / Resources.getSystem().displayMetrics.density).toInt()
+
+    fun <T: AppCompatActivity> startActivity(intentBuilder: IntentBuilder<T>) =
+        requireActivity().startActivity(intentBuilder.buildIntent(requireContext()))
+
+    fun <T: AppCompatActivity, P> startActivity(intentBuilder: IntentBuilderWithArguments<T, P>, arguments: P) =
+        requireActivity().startActivity(intentBuilder.buildIntent(requireContext(), arguments))
 
 }

@@ -2,7 +2,7 @@ package com.example.myapplication.usecases.game
 
 import com.example.myapplication.entities.GameEntity
 import com.example.myapplication.repositories.ArenaTournamentRepository
-import com.example.myapplication.usecases.UseCaseWithParamSuspending
+import com.example.myapplication.usecases.UseCaseWithParamsSuspending
 import com.example.myapplication.utils.flatMapConcatIterable
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.InternalCoroutinesApi
@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.toList
 
 class GetGamesByModeUseCase(
     private val repository: ArenaTournamentRepository
-) : UseCaseWithParamSuspending<GetGamesByModeUseCase.Params, List<GameEntity>> {
+) : UseCaseWithParamsSuspending<GetGamesByModeUseCase.Params, List<GameEntity>> {
 
     @InternalCoroutinesApi
     @UseExperimental(FlowPreview::class)

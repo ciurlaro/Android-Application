@@ -2,7 +2,7 @@ package com.example.myapplication.usecases.match
 
 import com.example.myapplication.entities.MatchEntity
 import com.example.myapplication.repositories.ArenaTournamentRepository
-import com.example.myapplication.usecases.UseCaseWithParamSuspending
+import com.example.myapplication.usecases.UseCaseWithParamsSuspending
 import com.example.myapplication.usecases.user.info.GetCurrentUserInfoUseCase
 import com.example.myapplication.utils.flatMapConcatIterable
 import kotlinx.coroutines.FlowPreview
@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.toList
 class GetAllMatchesByUserUseCase(
     private val repository: ArenaTournamentRepository,
     private val getCurrentUserInfoUseCase: GetCurrentUserInfoUseCase
-) : UseCaseWithParamSuspending<GetAllMatchesByUserUseCase.Params, List<MatchEntity>> {
+) : UseCaseWithParamsSuspending<GetAllMatchesByUserUseCase.Params, List<MatchEntity>> {
 
     @FlowPreview
     override suspend fun buildAction(params: Params) =

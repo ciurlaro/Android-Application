@@ -15,6 +15,9 @@ abstract class BaseActivity : AppCompatActivity(), KodeinAware {
 
     override val kodein by closestKodein()
 
+    protected val TAG
+        get() = this::class.simpleName!!
+
     inline fun <reified T : ViewModel> viewModelInstance() =
         instance<AppCompatActivity, T>(arg = this)
 
@@ -23,5 +26,11 @@ abstract class BaseActivity : AppCompatActivity(), KodeinAware {
 
     fun <T : ViewDataBinding> bindContentView(@LayoutRes resId: Int, function: T.() -> Unit) =
         DataBindingUtil.setContentView<T>(this, resId)!!.apply(function)
+
+    fun <T: AppCompatActivity> startActivity(intentBuilder: IntentBuilder<T>) =
+        startActivity(intentBuilder.buildIntent(this))
+
+    fun <T: AppCompatActivity, P> startActivity(intentBuilder: IntentBuilderWithArguments<T, P>, arguments: P) =
+        startActivity(intentBuilder.buildIntent(this, arguments))
 
 }

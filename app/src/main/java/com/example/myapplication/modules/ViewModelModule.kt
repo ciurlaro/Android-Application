@@ -13,6 +13,7 @@ import com.example.myapplication.ui.search.SearchViewModel
 import com.example.myapplication.ui.signup.SignupViewModel
 import com.example.myapplication.ui.tournament.CreateTournamentViewModel
 import com.example.myapplication.ui.tournament.SelectGameDialogViewModel
+import com.example.myapplication.ui.tournament.TournamentDetailViewModel
 import com.example.myapplication.ui.userprofile.UserProfileViewModel
 import kotlinx.coroutines.FlowPreview
 import org.kodein.di.Kodein
@@ -37,7 +38,7 @@ object ViewModelModule : KodeinModuleProvider {
         bindViewModel<MatchViewModel>()
         bindViewModel<SelectGameDialogViewModel>()
         bindViewModel<CreateTournamentViewModel>()
-
+        bindViewModel<TournamentDetailViewModel>()
 
     }
 

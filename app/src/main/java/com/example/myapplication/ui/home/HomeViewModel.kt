@@ -1,8 +1,10 @@
 package com.example.myapplication.ui.home
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.entities.TournamentEntity
 import com.example.myapplication.ui.items.TournamentFlexibleItem
 import com.example.myapplication.usecases.tournament.GetShowCaseTournamentsUseCase
 import eu.davidea.flexibleadapter.FlexibleAdapter
@@ -13,15 +15,11 @@ class HomeViewModel(
     private val showCaseTournamentsUseCase: GetShowCaseTournamentsUseCase
 ) : ViewModel() {
 
-    private val homeViewAdapter = FlexibleAdapter<TournamentFlexibleItem>(emptyList())
-
-    val adapter
-        get() = homeViewAdapter as RecyclerView.Adapter<*>
+    val tournaments = MutableLiveData<List<TournamentEntity>>()
 
     @FlowPreview
     fun getShowcaseTournaments() = viewModelScope.launch {
-        showCaseTournamentsUseCase.buildAction()
-            .onEach { homeViewAdapter.addItem(TournamentFlexibleItem(it)) }
+        tournaments.value = showCaseTournamentsUseCase.buildAction()
     }
 
 }

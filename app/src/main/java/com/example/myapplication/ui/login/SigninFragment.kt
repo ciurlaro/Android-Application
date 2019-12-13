@@ -17,6 +17,7 @@ import com.example.myapplication.usecases.user.login.SigninUserUseCase
 import kotlinx.android.synthetic.main.fragment_signin.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.launch
 import org.kodein.di.erased.instance
 
@@ -35,6 +36,7 @@ class SigninFragment : BaseFragment() {
             }
         }.root
 
+    @FlowPreview
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         button_sign_in.setOnClickListener {
@@ -47,6 +49,7 @@ class SigninFragment : BaseFragment() {
         }
     }
 
+    @FlowPreview
     private suspend fun onLoginButtonClicked() {
         var asErrored = false
 
@@ -68,7 +71,7 @@ class SigninFragment : BaseFragment() {
 
             try {
                 signinUserUseCase.buildAction(viewModel.email.get()!!, viewModel.password.get()!!)
-                requireActivity().startActivity(MainActivity(requireContext()))
+                startActivity(MainActivity)
             } catch (e: AuthException.AuthMalformedEmailException) {
                 email_edit_textview.error = resources.getString(R.string.email_is_malformed)
             } catch (e: AuthException.AuthInvalidCredentialsException) {

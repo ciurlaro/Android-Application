@@ -1,14 +1,14 @@
 package com.example.myapplication.usecases.user.creation
 
 import com.example.myapplication.exceptions.AuthException.*
-import com.example.myapplication.usecases.UseCaseWithParamSuspending
+import com.example.myapplication.usecases.UseCaseWithParamsSuspending
 import com.example.myapplication.usecases.user.update.UpdateUserNicknameUseCase
 import com.example.myapplication.usecases.user.update.UpdateUserProfileImageUseCase
 
 class CreateAccountWithCompleteInformation(
     private val createAccountWithEmailAndPasswordUseCase: CreateAccountWithEmailAndPasswordUseCase,
     private val updateUserNicknameUseCase: UpdateUserNicknameUseCase
-) : UseCaseWithParamSuspending<CreateAccountWithCompleteInformation.Params, Boolean> {
+) : UseCaseWithParamsSuspending<CreateAccountWithCompleteInformation.Params, Boolean> {
 
     /**
      * @throws AuthUserCollisionException when email already exists.

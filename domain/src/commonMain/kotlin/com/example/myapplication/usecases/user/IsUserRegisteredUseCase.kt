@@ -1,11 +1,11 @@
 package com.example.myapplication.usecases.user
 
 import com.example.myapplication.repositories.ArenaTournamentRepository
-import com.example.myapplication.usecases.UseCaseWithParamSuspending
+import com.example.myapplication.usecases.UseCaseWithParamsSuspending
 
 class IsUserRegisteredUseCase(
     private val repository: ArenaTournamentRepository
-) : UseCaseWithParamSuspending<IsUserRegisteredUseCase.Params, Boolean> {
+) : UseCaseWithParamsSuspending<IsUserRegisteredUseCase.Params, Boolean> {
 
     override suspend fun buildAction(params: Params) =
         repository.getRegistrationByUserAndMatch(params.userId, params.matchId, params.pages).let { true }

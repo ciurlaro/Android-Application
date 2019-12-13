@@ -2,7 +2,7 @@ package com.example.myapplication.usecases.game
 
 import com.example.myapplication.entities.GameEntity
 import com.example.myapplication.repositories.ArenaTournamentRepository
-import com.example.myapplication.usecases.UseCaseWithParamSuspending
+import com.example.myapplication.usecases.UseCaseWithParamsSuspending
 import com.example.myapplication.utils.flatMapConcatIterable
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.asFlow
@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.toList
 
 class GetGamesContainingNameUseCase(
     private val repository: ArenaTournamentRepository
-) : UseCaseWithParamSuspending<GetGamesContainingNameUseCase.Params, List<GameEntity>> {
+) : UseCaseWithParamsSuspending<GetGamesContainingNameUseCase.Params, List<GameEntity>> {
 
     @UseExperimental(FlowPreview::class)
     override suspend fun buildAction(params: Params) =

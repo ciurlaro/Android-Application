@@ -38,9 +38,6 @@ data class TournamentFlexibleItem(val tournamentEntity: TournamentEntity) :
 
         @ExperimentalCoroutinesApi
         fun render(data: TournamentEntity) = with(itemView) {
-            setOnClickListener {
-                context.startActivity(MatchActivity(context, data))
-            }
             Glide.with(itemView.context)
                 .load(data.game.icon)
                 .into(tournament_game_icon)

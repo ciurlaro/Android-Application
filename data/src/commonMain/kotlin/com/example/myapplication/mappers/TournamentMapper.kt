@@ -15,12 +15,11 @@ class TournamentMapper(
             TournamentEntity(
                 first.id,
                 first.playersNumber,
+                first.title,
                 first.tournamentDescription,
                 first.tournamentMode,
-                first.title,
                 userMapper.fromRemoteSingle(third),
                 gameMapper.fromRemoteSingle(second)
-
             )
         }
 

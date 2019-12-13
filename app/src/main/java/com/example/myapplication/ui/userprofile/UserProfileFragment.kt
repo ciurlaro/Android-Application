@@ -9,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.ui.BaseFragment
+import com.example.myapplication.ui.OnboardingActivity
 import com.example.myapplication.usecases.user.logout.SignoutUserUseCase
 import kotlinx.android.synthetic.main.fragment_user.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -20,14 +21,12 @@ import org.kodein.di.erased.instance
 class UserProfileFragment : BaseFragment() {
 
     private val viewModel: UserProfileViewModel by viewModelInstance()
-    private val signoutUseCase by instance<SignoutUserUseCase>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ) = inflater.inflate(R.layout.fragment_user, container, false)!!
-
 
     @SuppressLint("InflateParams", "ResourceType")
     @ExperimentalCoroutinesApi
@@ -43,8 +42,9 @@ class UserProfileFragment : BaseFragment() {
         }
 
         button_logout.setOnClickListener {
-            suspend fun logOut() = signoutUseCase.buildAction()
-            lifecycleScope.launch { logOut() }
+            viewModel.signOut(lifecycleScope) {
+                startActivity(OnboardingActivity)
+            }
         }
     }
 }
