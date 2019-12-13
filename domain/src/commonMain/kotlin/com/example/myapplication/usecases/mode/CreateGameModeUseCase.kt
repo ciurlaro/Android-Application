@@ -2,12 +2,12 @@ package com.example.myapplication.usecases.mode
 
 import com.example.myapplication.entities.ModeEntity
 import com.example.myapplication.repositories.ArenaTournamentRepository
-import com.example.myapplication.usecases.UseCaseWithParamSuspending
+import com.example.myapplication.usecases.UseCaseWithParamsSuspending
 import kotlinx.coroutines.FlowPreview
 
 class CreateGameModeUseCase(
     private val repository: ArenaTournamentRepository
-) : UseCaseWithParamSuspending<CreateGameModeUseCase.Params, ModeEntity> {
+) : UseCaseWithParamsSuspending<CreateGameModeUseCase.Params, ModeEntity> {
 
     @UseExperimental(FlowPreview::class)
     override suspend fun buildAction(params: Params): ModeEntity =

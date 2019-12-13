@@ -1,11 +1,11 @@
 package com.example.myapplication.usecases.user.update
 
 import com.example.myapplication.repositories.ArenaTournamentRepository
-import com.example.myapplication.usecases.UseCaseWithParamSuspending
+import com.example.myapplication.usecases.UseCaseWithParamsSuspending
 
 class UpdateUserEmailUseCase(
     private val repository: ArenaTournamentRepository
-) : UseCaseWithParamSuspending<UpdateUserEmailUseCase.Params, Boolean> {
+) : UseCaseWithParamsSuspending<UpdateUserEmailUseCase.Params, Boolean> {
 
     override suspend fun buildAction(params: Params) =
         repository.updateCurrentUserEmail(params.email)

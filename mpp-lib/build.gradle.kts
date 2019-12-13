@@ -25,11 +25,11 @@ android {
     compileSdkVersion(29)
     buildToolsVersion("29.0.2")
 
-    sourceSets["main"].apply {
-        java.srcDirs(file("src/androidMain/kotlin"))
-        res.srcDirs(file("src/androidMain/res"))
-        resources.srcDirs(file("src/androidMain/resources"))
-        manifest.srcFile(file("src/androidMain/AndroidManifest.xml"))
+    sourceSets.all {
+        java.srcDirs(file("src/android${name.capitalize()}/kotlin"))
+        res.srcDirs(file("src/android${name.capitalize()}/res"))
+        resources.srcDirs(file("src/android${name.capitalize()}/resources"))
+        manifest.srcFile(file("src/android${name.capitalize()}/AndroidManifest.xml"))
     }
 }
 
