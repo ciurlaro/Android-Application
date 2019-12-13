@@ -2,7 +2,7 @@ package com.example.myapplication.usecases.tournament
 
 import com.example.myapplication.entities.TournamentEntity
 import com.example.myapplication.repositories.ArenaTournamentRepository
-import com.example.myapplication.usecases.UseCaseWithParamSuspending
+import com.example.myapplication.usecases.UseCaseWithParamsSuspending
 import com.example.myapplication.utils.flatMapConcatIterable
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.asFlow
@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.toList
 
 class SearchTournamentsUseCase(
     private val repository: ArenaTournamentRepository
-) : UseCaseWithParamSuspending<SearchTournamentsUseCase.Params, List<TournamentEntity>> {
+) : UseCaseWithParamsSuspending<SearchTournamentsUseCase.Params, List<TournamentEntity>> {
 
     data class Params(val title: String, val gameIds: List<String>, val maxPage: Int = 1)
 

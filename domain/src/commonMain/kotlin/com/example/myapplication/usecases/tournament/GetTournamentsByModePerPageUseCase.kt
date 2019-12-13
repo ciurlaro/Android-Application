@@ -2,11 +2,11 @@ package com.example.myapplication.usecases.tournament
 
 import com.example.myapplication.entities.TournamentEntity
 import com.example.myapplication.repositories.ArenaTournamentRepository
-import com.example.myapplication.usecases.UseCaseWithParamSuspending
+import com.example.myapplication.usecases.UseCaseWithParamsSuspending
 
 class GetTournamentsByModePerPageUseCase(
     private val repository: ArenaTournamentRepository
-) : UseCaseWithParamSuspending<GetTournamentsByModePerPageUseCase.Params, List<TournamentEntity>> {
+) : UseCaseWithParamsSuspending<GetTournamentsByModePerPageUseCase.Params, List<TournamentEntity>> {
 
     override suspend fun buildAction(params: Params) =
         repository.getTournamentsByMode(params.mode, params.page)

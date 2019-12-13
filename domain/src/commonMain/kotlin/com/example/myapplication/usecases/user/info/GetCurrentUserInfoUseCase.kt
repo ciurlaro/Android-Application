@@ -11,6 +11,6 @@ class GetCurrentUserInfoUseCase(
 
     @UseExperimental(FlowPreview::class)
     override suspend fun buildAction() =
-        repository.getCurrentUser()
+        repository.getCurrentUser()!!
 
 }

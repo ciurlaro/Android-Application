@@ -8,24 +8,24 @@
     android:orientation="vertical">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/user_image"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@tools:sample/avatars" />
+            android:id="@+id/history_user_image"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/avatars"/>
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="32dp"
-        android:maxLines="1"
-        android:textAllCaps="true"
-        android:textSize="32sp"
-        app:layout_constraintBottom_toBottomOf="@id/user_image"
-        app:layout_constraintLeft_toRightOf="@id/user_image"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/user_image"
-        tools:text="Lamba92" />
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="32dp"
+            android:maxLines="1"
+            android:textAllCaps="true"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toBottomOf="@id/history_user_image"
+            app:layout_constraintLeft_toRightOf="@id/history_user_image"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/history_user_image"
+            tools:text="Lamba92"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -452,7 +452,7 @@
   CreateGameUseCase.$metadata$ = {
     kind: Kind_CLASS,
     simpleName: 'CreateGameUseCase',
-    interfaces: [UseCaseWithParamSuspending]
+    interfaces: [UseCaseWithParamsSuspending]
   };
   function GetGamesByModeUseCase(repository) {
     this.repository_0 = repository;
@@ -696,7 +696,7 @@
   CreateMatchUseCase.$metadata$ = {
     kind: Kind_CLASS,
     simpleName: 'CreateMatchUseCase',
-    interfaces: [UseCaseWithParamSuspending]
+    interfaces: [UseCaseWithParamsSuspending]
   };
   function unsafeFlow$ObjectLiteral(closure$block) {
     this.closure$block = closure$block;
@@ -1327,7 +1327,7 @@
   CreateGameModeUseCase.$metadata$ = {
     kind: Kind_CLASS,
     simpleName: 'CreateGameModeUseCase',
-    interfaces: [UseCaseWithParamSuspending]
+    interfaces: [UseCaseWithParamsSuspending]
   };
   function CreateRegistrationUseCase(repository) {
     this.repository_0 = repository;
@@ -1371,7 +1371,7 @@
   CreateRegistrationUseCase.$metadata$ = {
     kind: Kind_CLASS,
     simpleName: 'CreateRegistrationUseCase',
-    interfaces: [UseCaseWithParamSuspending]
+    interfaces: [UseCaseWithParamsSuspending]
   };
   function GetAllRegistrationsByMatchUseCase(repository) {
     this.repository_0 = repository;
@@ -1768,7 +1768,7 @@
   CreateTournamentUseCase.$metadata$ = {
     kind: Kind_CLASS,
     simpleName: 'CreateTournamentUseCase',
-    interfaces: [UseCaseWithParamSuspending]
+    interfaces: [UseCaseWithParamsSuspending]
   };
   function GetCreatedTournamentsByAdminUseCase(repository, getCurrentUserInfoUseCase) {
     this.repository_0 = repository;
@@ -2578,24 +2578,30 @@
     simpleName: 'UseCaseSuspending',
     interfaces: []
   };
+
   function UseCaseWithParams() {
   }
+
   UseCaseWithParams.$metadata$ = {
     kind: Kind_INTERFACE,
     simpleName: 'UseCaseWithParams',
     interfaces: []
   };
-  function UseCaseWithParamSuspending() {
+
+  function UseCaseWithParamsSuspending() {
   }
-  UseCaseWithParamSuspending.$metadata$ = {
+
+  UseCaseWithParamsSuspending.$metadata$ = {
     kind: Kind_INTERFACE,
-    simpleName: 'UseCaseWithParamSuspending',
+    simpleName: 'UseCaseWithParamsSuspending',
     interfaces: []
   };
+
   function CreateUserUseCase(repository, authenticationManager) {
     this.repository_0 = repository;
     this.authenticationManager_0 = authenticationManager;
   }
+
   function Coroutine$buildAction_11rb$($this, params_0, continuation_0) {
     CoroutineImpl.call(this, continuation_0);
     this.exceptionState_0 = 1;
@@ -2692,7 +2698,7 @@
   CreateUserUseCase.$metadata$ = {
     kind: Kind_CLASS,
     simpleName: 'CreateUserUseCase',
-    interfaces: [UseCaseWithParamSuspending]
+    interfaces: [UseCaseWithParamsSuspending]
   };
   function GetAccountVerificationStatusUseCase(repository) {
     this.repository_0 = repository;
@@ -2769,7 +2775,7 @@
   SigninUserUseCase.$metadata$ = {
     kind: Kind_CLASS,
     simpleName: 'SigninUserUseCase',
-    interfaces: [UseCaseWithParamSuspending]
+    interfaces: [UseCaseWithParamsSuspending]
   };
   function DummyClasses() {
     DummyClasses$Companion_getInstance();
@@ -3955,7 +3961,7 @@
   package$usecases.UseCase = UseCase;
   package$usecases.UseCaseSuspending = UseCaseSuspending;
   package$usecases.UseCaseWithParams = UseCaseWithParams;
-  package$usecases.UseCaseWithParamSuspending = UseCaseWithParamSuspending;
+  package$usecases.UseCaseWithParamsSuspending = UseCaseWithParamsSuspending;
   CreateUserUseCase.Params = CreateUserUseCase$Params;
   var package$user = package$usecases.user || (package$usecases.user = {});
   package$user.CreateUserUseCase = CreateUserUseCase;

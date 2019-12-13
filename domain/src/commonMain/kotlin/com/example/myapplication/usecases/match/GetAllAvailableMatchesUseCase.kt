@@ -1,7 +1,7 @@
 package com.example.myapplication.usecases.match
 
 import com.example.myapplication.entities.MatchEntity
-import com.example.myapplication.usecases.UseCaseWithParamSuspending
+import com.example.myapplication.usecases.UseCaseWithParamsSuspending
 import com.example.myapplication.usecases.registration.GetAllRegistrationsByMatchUseCase
 import com.example.myapplication.utils.flatMapConcatIterable
 import kotlinx.coroutines.FlowPreview
@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.toList
 class GetAllAvailableMatchesUseCase(
     private val getAvailableMatchesPerPageUseCase: GetAvailableMatchesPerPageUseCase,
     private val getAllRegistrationsByMatchUseCase: GetAllRegistrationsByMatchUseCase
-) : UseCaseWithParamSuspending<GetAllAvailableMatchesUseCase.Params, List<Pair<MatchEntity, Int>>> {
+) : UseCaseWithParamsSuspending<GetAllAvailableMatchesUseCase.Params, List<Pair<MatchEntity, Int>>> {
 
     @UseExperimental(FlowPreview::class)
     override suspend fun buildAction(params: Params) =

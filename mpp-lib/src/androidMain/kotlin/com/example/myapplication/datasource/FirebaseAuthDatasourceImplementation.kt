@@ -16,7 +16,8 @@ actual class FirebaseAuthDatasourceImplementation actual constructor(
         get() = firebaseAuth.currentUser ?: throw AuthNotAuthenticatedException()
 
     override suspend fun isCurrentUserEmailVerified(): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return true
+        // TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override suspend fun getToken() =
