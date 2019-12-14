@@ -100,6 +100,7 @@ object UseCasesModule : KodeinModuleProvider {
         bind<UpdateUserPasswordUseCase>() with singleton { UpdateUserPasswordUseCase(instance()) }
         bind<UpdateUserProfileImageUseCase>() with singleton { UpdateUserProfileImageUseCase(instance()) }
         bind<IsUserRegisteredUseCase>() with singleton { IsUserRegisteredUseCase(instance()) }
+        bind<GetUsersByTournamentUseCase>() with singleton { GetUsersByTournamentUseCase(instance()) }
         bind<SignoutUserUseCase>() with singleton { SignoutUserUseCase(instance()) }
 
         bind<SearchTournamentsUseCase>() with singleton {

@@ -33,26 +33,24 @@ class MainActivity : BaseFragmentedActivity(R.id.nav_host_fragment) {
                     with(new_tournament_button) {
                         visibility = VISIBLE
                         setOnClickListener {
-                            startActivity(CreateTournamentActivity(this@MainActivity))
+                            startActivity(CreateTournamentActivity)
                         }
                     }
                 else new_tournament_button.visibility = GONE
-            } else startActivity(OnboardingActivity(this@MainActivity))
+            } else startActivity(OnboardingActivity)
         }
     }
 
     override fun onBackPressed() =
         finish()
 
-    companion object {
+    companion object : IntentBuilder<MainActivity> {
 
-        private fun buildIntent(context: Context) =
+        override fun buildIntent(context: Context) =
             Intent(context, MainActivity::class.java).apply {
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
             }
 
-        operator fun invoke(context: Context) =
-            buildIntent(context)
     }
 
 }

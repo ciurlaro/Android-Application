@@ -1,5 +1,6 @@
 package com.example.myapplication.ui.userprofile
 
+import androidx.lifecycle.LifecycleCoroutineScope
 import android.app.Dialog
 import android.content.Context
 import androidx.lifecycle.MutableLiveData
@@ -13,8 +14,11 @@ import com.example.myapplication.usecases.user.info.GetCurrentUserInfoUseCase
 import com.example.myapplication.usecases.user.logout.SignoutUserUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
+import org.kodein.di.android.x.AndroidLifecycleScope
 
 class UserProfileViewModel(
+    private val getCurrentUserInfoUseCase: GetCurrentUserInfoUseCase,
+    private val signoutUserUseCase: SignoutUserUseCase
     private val getCurrentUserInfoUseCase: GetCurrentUserInfoUseCase,
     private val getTournamentsByUserUseCase: GetRegistrationsByUserUseCase,
     private val repository: ArenaTournamentRepository,
@@ -41,8 +45,6 @@ class UserProfileViewModel(
         }
     }
 
-    suspend fun signout() = signoutUseCase.buildAction()
-
     fun getHistory(requireContext: Context) {
         viewModelScope.launch {
             getTournamentsByUserUseCase.buildAction(user.value!!)
@@ -51,6 +53,11 @@ class UserProfileViewModel(
         dialog.setContentView(R.layout.fragment_home)
         dialog.show()
 
+    }
+
+    fun signOut(lifecycleScope: LifecycleCoroutineScope, action: suspend () -> Unit) = viewModelScope.launch {
+        signoutUserUseCase.buildAction()
+        lifecycleScope.launch { action() }
     }
 
 }

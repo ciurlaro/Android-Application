@@ -3,6 +3,7 @@ package com.example.myapplication.ui
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingComponent
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -28,18 +29,14 @@ abstract class BaseFragment : Fragment(), KodeinAware {
 
     val navController by instance<NavController>()
 
-    inline fun <reified T : ViewDataBinding> viewDataBinding(
-        inflater: LayoutInflater,
-        @LayoutRes layoutId: Int,
-        container: ViewGroup?,
-        attachToParent: Boolean = false,
-        bindingComponent: DataBindingComponent? = null
-    ) = DataBindingUtil.inflate<T>(inflater, layoutId, container, attachToParent, bindingComponent)!!.apply {
-        lifecycleOwner = this@BaseFragment
-    }
-
     fun <T> LiveData<T>.observe(observer: (T) -> Unit) =
         observe(this@BaseFragment, Observer { observer(it) })
+
+    fun <T: AppCompatActivity> startActivity(intentBuilder: IntentBuilder<T>) =
+        requireActivity().startActivity(intentBuilder.buildIntent(requireContext()))
+
+    fun <T: AppCompatActivity, P> startActivity(intentBuilder: IntentBuilderWithArguments<T, P>, arguments: P) =
+        requireActivity().startActivity(intentBuilder.buildIntent(requireContext(), arguments))
 
 }
 

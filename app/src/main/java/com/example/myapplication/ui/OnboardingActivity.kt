@@ -9,15 +9,12 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @ExperimentalCoroutinesApi
 class OnboardingActivity : BaseFragmentedActivity(R.id.nav_host_onboarding_fragment) {
 
-    companion object {
+    companion object : IntentBuilder<OnboardingActivity> {
 
-        private fun buildIntent(context: Context) =
+        override fun buildIntent(context: Context) =
             Intent(context, OnboardingActivity::class.java).apply {
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
             }
-
-        operator fun invoke(context: Context) =
-            buildIntent(context)
 
     }
 

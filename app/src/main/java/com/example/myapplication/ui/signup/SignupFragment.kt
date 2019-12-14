@@ -21,6 +21,7 @@ import com.example.myapplication.usecases.user.creation.CreateAccountWithComplet
 import kotlinx.android.synthetic.main.fragment_signup.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.launch
 import org.kodein.di.erased.instance
 
@@ -39,6 +40,7 @@ class SignupFragment : BaseFragment() {
             }
         }.root
 
+    @FlowPreview
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         button_sign_up.setOnClickListener {
@@ -51,6 +53,7 @@ class SignupFragment : BaseFragment() {
         }
     }
 
+    @FlowPreview
     private suspend fun onSignupButtonClicked() {
         var hasErrored = false
 
@@ -88,7 +91,7 @@ class SignupFragment : BaseFragment() {
                     viewModel.password.get()!!,
                     viewModel.nickname.get()!!
                 )
-                requireActivity().startActivity(MainActivity(requireContext()))
+                startActivity(MainActivity)
             } catch (e: AuthException.AuthUserCollisionException) {
                 Log.d(TAG, e.message, e)
                 email_edit_textview.error = resources.getString(R.string.email_already_exists)

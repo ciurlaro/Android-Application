@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityCreateTournamentBinding
 import com.example.myapplication.ui.BaseActivity
+import com.example.myapplication.ui.IntentBuilder
 import kotlinx.android.synthetic.main.activity_create_tournament.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -62,7 +63,7 @@ class CreateTournamentActivity : BaseActivity() {
             activity_create_tournament_button.isClickable = false
             if (checkStuff()) {
                 viewModel.createTournament(lifecycleScope) {
-                    finish()
+                    startActivity(TournamentDetailActivity, it.id)
                 }
             } else
                 activity_create_tournament_button.isClickable = true
@@ -88,14 +89,11 @@ class CreateTournamentActivity : BaseActivity() {
         return isAllOk
     }
 
-    companion object {
-        private fun buildIntent(context: Context) =
+    companion object : IntentBuilder<CreateTournamentActivity> {
+        override fun buildIntent(context: Context) =
             Intent(context, CreateTournamentActivity::class.java).apply {
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
             }
-
-        operator fun invoke(context: Context) =
-            buildIntent(context)
     }
 
 }
