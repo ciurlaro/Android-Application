@@ -139,6 +139,9 @@ dependencies {
     val glideVersion: String by project
     val slf4jAndroidVersion: String by project
     val recyclerViewDividerVersion: String by project
+    val materialDesignVersion: String by project
+    val socialButtonsVersion: String by project
+    val facebookSdkVersion: String by project
 
     val junitVersion: String by project
     val espressoVersion: String by project
@@ -164,6 +167,9 @@ dependencies {
     implementation("androidx.paging", "paging-runtime", androidxPagingVersion)
     implementation("eu.davidea", "flexible-adapter", flexibleAdapterVersion)
     implementation("com.github.fondesa", "recycler-view-divider", recyclerViewDividerVersion)
+    implementation("com.google.android.material", "material", materialDesignVersion)
+    implementation("in.championswimmer", "Android-SocialButtons", socialButtonsVersion)
+    implementation("com.facebook.android", "facebook-android-sdk", facebookSdkVersion)
 
     implementation("com.github.bumptech.glide", "glide", glideVersion)
     kapt("com.github.bumptech.glide", "compiler", glideVersion)

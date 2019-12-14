@@ -1,29 +1,38 @@
 package com.example.myapplication.ui.search
 
+import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.ui.items.TournamentFlexibleItem
+import com.example.myapplication.entities.GameEntity
+import com.example.myapplication.entities.TournamentEntity
+import com.example.myapplication.usecases.game.GetAllGamesUseCase
 import com.example.myapplication.usecases.tournament.SearchTournamentsUseCase
-import eu.davidea.flexibleadapter.FlexibleAdapter
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.launch
 
 class SearchViewModel(
-    private val searchTournamentsUseCase: SearchTournamentsUseCase
+    private val searchTournamentsUseCase: SearchTournamentsUseCase,
+    private val getAllGamesUseCase: GetAllGamesUseCase
 ) : ViewModel() {
 
-    private val searchViewAdapter = FlexibleAdapter<TournamentFlexibleItem>(emptyList())
+    init {
+        Log.d(this::class.simpleName!!, "I am being created")
+    }
 
-    val adapter
-        get() = searchViewAdapter as RecyclerView.Adapter<*>
+    val availableGames = MutableLiveData<List<GameEntity>>()
+    val selectedGame = MutableLiveData<GameEntity>()
+    val tournaments = MutableLiveData<List<TournamentEntity>>()
 
+    fun loadGames() = viewModelScope.launch {
+        availableGames.value = getAllGamesUseCase.buildAction(0)
+    }
 
     @FlowPreview
-    fun searchTournaments(gameName: String) = viewModelScope.launch {
-        searchTournamentsUseCase.buildAction(gameName)
-            .onEach {
-                searchViewAdapter.addItem(TournamentFlexibleItem(it))
-            }
+    fun loadTournaments(title: String) = viewModelScope.launch {
+        tournaments.value = searchTournamentsUseCase.buildAction(
+            title,
+            selectedGame.value?.name
+        )
     }
 }

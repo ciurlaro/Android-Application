@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
-                                                   xmlns:tools="http://schemas.android.com/tools"
-                                                   android:layout_width="match_parent"
-                                                   android:layout_height="match_parent"
-                                                   tools:context="com.example.myapplication.ui.MainActivity">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.myapplication.ui.MainActivity">
 
-    <androidx.appcompat.widget.Toolbar
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:paddingBottom="8dp">
+
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar_fragments"
             android:background="@color/colorPrimaryDark"
             android:layout_width="match_parent"
@@ -15,7 +21,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent">
 
-        <androidx.appcompat.widget.AppCompatTextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
@@ -23,108 +29,120 @@
                 android:text="@string/user_string"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"/>
+                app:layout_constraintRight_toRightOf="parent" />
 
-    </androidx.appcompat.widget.Toolbar>
+        </androidx.appcompat.widget.Toolbar>
 
-
-    <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/history_user_image"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/user_image"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar_fragments"
-            android:layout_marginTop="100dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:src="@drawable/doggo"/>
+            android:src="@drawable/ic_person_black_24dp"
+            app:layout_constraintTop_toBottomOf="@+id/update_user_is_subscribed" />
 
-
-    <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/update_user_image_pencil"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/edit_profile_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fabSize="mini"
+            android:backgroundTint="@color/lightorangedark"
+            android:layout_margin="8dp"
+            android:scaleType="center"
             android:src="@drawable/ic_edit_black_24dp"
-            android:layout_marginStart="5dp"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/history_user_image"
-            app:layout_constraintBottom_toBottomOf="@+id/history_user_image"/>
+            app:layout_constraintBottom_toBottomOf="@+id/user_image"
+            app:layout_constraintEnd_toEndOf="@+id/user_image" />
 
-    <androidx.appcompat.widget.AppCompatImageView
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_marginTop="16dp"
+            android:visibility="invisible"
+            tools:visibility="visible"
             android:id="@+id/update_user_is_subscribed"
             android:layout_width="50dp"
             android:layout_height="44dp"
-            android:src="@drawable/ic_sms_failed_black_24dp"
+            android:src="@drawable/crown_vector"
+            app:layout_constraintEnd_toEndOf="@+id/user_image"
+            android:tint="@color/gold"
+            app:layout_constraintStart_toStartOf="@+id/user_image"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_fragments" />
 
-            app:layout_constraintBottom_toTopOf="@+id/history_user_image"
-            app:layout_constraintEnd_toEndOf="@+id/history_user_image"/>
-    <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/update_user_is_verified"
-            android:layout_width="50dp"
-            android:layout_height="44dp"
-            android:src="@drawable/ic_contact_mail_black_24dp"
-            app:layout_constraintBottom_toTopOf="@+id/history_user_image"
-            app:layout_constraintStart_toStartOf="@+id/history_user_image"/>
-    <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/update_user_nickanme_pencil"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            app:layout_constraintRight_toRightOf="parent"
-            android:src="@drawable/ic_edit_black_24dp"
-            app:layout_constraintBottom_toBottomOf="@+id/user_nickname"
-            app:layout_constraintStart_toStartOf="@+id/update_user_image_pencil"
-            app:layout_constraintTop_toTopOf="@+id/user_nickname"/>
-    <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/update_user_email_pencil"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            app:layout_constraintRight_toRightOf="parent"
-            android:src="@drawable/ic_edit_black_24dp"
-            app:layout_constraintBottom_toBottomOf="@+id/user_mail"
-            app:layout_constraintStart_toStartOf="@+id/update_user_nickanme_pencil"
-            app:layout_constraintTop_toTopOf="@+id/user_mail"/>
-
-    <androidx.appcompat.widget.AppCompatEditTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/user_nickname"
             android:layout_width="wrap_content"
+            android:gravity="center"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:inputType="none"
             android:textColor="@color/black"
-            android:textSize="21sp"
+            android:textSize="32sp"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@id/history_user_image"
-            app:layout_constraintLeft_toLeftOf="@id/history_user_image"
-            app:layout_constraintRight_toRightOf="@id/history_user_image"
-            tools:text="@string/nickname"/>
+            app:layout_constraintTop_toBottomOf="@id/user_image"
+            app:layout_constraintLeft_toLeftOf="@id/user_image"
+            app:layout_constraintRight_toRightOf="@id/user_image"
+            tools:text="Lamba92"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/user_mail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            tools:text="@string/mail"
-            android:textColor="@color/black"
-            android:textSize="21sp"
+            android:layout_marginTop="1dp"
+            tools:text="mario@test.it"
+            android:textColor="@color/transparent_black"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@id/user_nickname"
             app:layout_constraintStart_toStartOf="@+id/user_nickname"
-            app:layout_constraintEnd_toEndOf="@+id/user_nickname"/>
+            app:layout_constraintEnd_toEndOf="@+id/user_nickname" />
 
-    <androidx.appcompat.widget.AppCompatButton
+        <in.championswimmer.libsocialbuttons.FabSocial
+            android:id="@+id/google_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/facebook_btn"
+            app:layout_constraintTop_toBottomOf="@+id/user_mail"
+            app:social="google" />
+
+        <in.championswimmer.libsocialbuttons.FabSocial
+            android:id="@+id/facebook_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/google_btn"
+            app:layout_constraintEnd_toStartOf="@id/email_btn"
+            app:layout_constraintStart_toEndOf="@+id/google_btn"
+            app:layout_constraintTop_toTopOf="@+id/google_btn"
+            app:social="facebook" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/email_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/facebook_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/ic_email_black_24dp"
+            android:tint="@color/white"
+            app:layout_constraintStart_toEndOf="@+id/facebook_btn"
+            app:layout_constraintTop_toTopOf="@+id/facebook_btn" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_marginTop="32dp"
             android:id="@+id/button_history"
-            android:layout_marginTop="10dp"
             android:layout_width="150dp"
             android:layout_height="56dp"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/button_styles"
             android:text="@string/history"
-            app:layout_constraintEnd_toEndOf="@+id/user_mail"
-            app:layout_constraintStart_toStartOf="@+id/user_mail"
-            app:layout_constraintTop_toBottomOf="@id/user_mail"
             style="@style/Theme.Design.Light"
-    />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/button_logout"
+            app:layout_constraintTop_toBottomOf="@+id/facebook_btn" />
 
-    <androidx.appcompat.widget.AppCompatButton
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button_logout"
             style="@style/Theme.Design.Light"
             android:layout_width="150dp"
@@ -132,10 +150,11 @@
             android:layout_gravity="center_horizontal"
             android:background="@drawable/button_styles"
             android:text="@string/logout"
-            app:layout_constraintStart_toStartOf="@+id/button_history"
-            app:layout_constraintEnd_toEndOf="@+id/button_history"
-            app:layout_constraintTop_toBottomOf="@+id/button_history"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintStart_toEndOf="@+id/button_history"
+            app:layout_constraintTop_toTopOf="@+id/button_history"
+            app:layout_constraintBottom_toBottomOf="@+id/button_history"
+            app:layout_constraintEnd_toEndOf="parent" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

@@ -12,19 +12,19 @@ class SearchTournamentsUseCase(
     private val repository: ArenaTournamentRepository
 ) : UseCaseWithParamsSuspending<SearchTournamentsUseCase.Params, List<TournamentEntity>> {
 
-    data class Params(val title: String, val gameIds: List<String>, val maxPage: Int = 1)
+    data class Params(val title: String, val gameId: String?, val maxPage: Int = 1)
 
     @FlowPreview
     override suspend fun buildAction(params: Params) =
         (0..params.maxPage)
             .asFlow()
-            .flatMapConcatIterable { repository.searchTournaments(params.title, params.gameIds, it) }
+            .flatMapConcatIterable { repository.searchTournaments(params.title, params.gameId, it) }
             .toList()
 
 
     @FlowPreview
-    suspend fun buildAction(title: String, gameIds: List<String> = emptyList(), maxPage: Int = 1) =
-        buildAction(Params(title, gameIds, maxPage))
+    suspend fun buildAction(title: String, gameId: String?, maxPage: Int = 1) =
+        buildAction(Params(title, gameId, maxPage))
 
 
 }

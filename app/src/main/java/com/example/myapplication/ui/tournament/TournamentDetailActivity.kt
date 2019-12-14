@@ -3,13 +3,16 @@ package com.example.myapplication.ui.tournament
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.ui.BaseActivity
 import com.example.myapplication.ui.IntentBuilderWithArguments
+import com.example.myapplication.ui.history.HistoryActivity
 import com.example.myapplication.ui.items.SimpleUserFlexibleItem
 import eu.davidea.flexibleadapter.FlexibleAdapter
 import kotlinx.android.synthetic.main.activity_tournament_detail.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 
 class TournamentDetailActivity : BaseActivity() {
@@ -18,6 +21,7 @@ class TournamentDetailActivity : BaseActivity() {
     private val viewModel by viewModelInstance<TournamentDetailViewModel>()
     private val adapter by lazy { FlexibleAdapter<SimpleUserFlexibleItem>(emptyList()) }
 
+    @ExperimentalCoroutinesApi
     @FlowPreview
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,12 +31,7 @@ class TournamentDetailActivity : BaseActivity() {
 
         with(viewModel) {
             model.observe { (tournament, users) ->
-                adapter.addItems(0, users.map { SimpleUserFlexibleItem(it) })
-                adapter.mItemClickListener = FlexibleAdapter.OnItemClickListener { _, position ->
-                    val userId = users[position]
-//                     TODO open user details
-                    true
-                }
+                adapter.addItems(0, users.map { SimpleUserFlexibleItem(it) { startActivity(HistoryActivity, it.id) } })
                 players_count_textview.text =
                     resources.getString(R.string.playes_in_tournament_numbers, users.size, tournament.playersNumber)
                 Glide.with(this@TournamentDetailActivity)

@@ -6,15 +6,18 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.entities.GameEntity
 import com.example.myapplication.entities.TournamentEntity
+import com.example.myapplication.usecases.game.GetAllGamesUseCase
 import com.example.myapplication.usecases.tournament.CreateTournamentUseCase
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.launch
 
 @FlowPreview
 class CreateTournamentViewModel(
-    private val createTournamentUseCase: CreateTournamentUseCase
+    private val createTournamentUseCase: CreateTournamentUseCase,
+    private val getAllGamesUseCase: GetAllGamesUseCase
 ) : ViewModel() {
 
+    val availableGames = MutableLiveData<List<GameEntity>>()
     val selectedGame = MutableLiveData<GameEntity>()
     val selectedPlayersNumber = MutableLiveData<Int>()
     val description = MutableLiveData<String>()
@@ -32,6 +35,10 @@ class CreateTournamentViewModel(
             selectedGame.value!!
         )
         lifecycleScope.launch { function(t) }
+    }
+
+    fun loadGames() = viewModelScope.launch {
+        availableGames.value = getAllGamesUseCase.buildAction()
     }
 
 }

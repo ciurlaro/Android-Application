@@ -1,4 +1,4 @@
-package com.example.myapplication.usecases.user.logout
+package com.example.myapplication.usecases.user.login
 
 import com.example.myapplication.repositories.ArenaTournamentRepository
 import com.example.myapplication.usecases.UseCaseSuspending

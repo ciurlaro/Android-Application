@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
-import com.example.myapplication.ui.game.GameViewModel
+import com.example.myapplication.ui.history.HistoryViewModel
 import com.example.myapplication.ui.home.HomeViewModel
 import com.example.myapplication.ui.login.SigninViewModel
 import com.example.myapplication.ui.match.MatchViewModel
@@ -34,11 +34,11 @@ object ViewModelModule : KodeinModuleProvider {
         bindViewModel<UserProfileViewModel>()
         bindViewModel<SigninViewModel>()
         bindViewModel<SignupViewModel>()
-        bindViewModel<GameViewModel>()
         bindViewModel<MatchViewModel>()
         bindViewModel<SelectGameDialogViewModel>()
         bindViewModel<CreateTournamentViewModel>()
         bindViewModel<TournamentDetailViewModel>()
+        bindViewModel<HistoryViewModel>()
 
     }
 

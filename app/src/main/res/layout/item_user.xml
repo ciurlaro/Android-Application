@@ -9,7 +9,7 @@
         tools:context="com.example.myapplication.ui.MainActivity">
 
     <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/history_user_image"
+            android:id="@+id/user_image"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_marginTop="45dp"
@@ -27,8 +27,8 @@
             android:textColor="#fff"
             android:textSize="21sp"
             android:textStyle="bold"
-            app:layout_constraintTop_toBottomOf="@id/history_user_image"
-            app:layout_constraintLeft_toLeftOf="@id/history_user_image"
-            app:layout_constraintRight_toRightOf="@id/history_user_image"/>
+            app:layout_constraintTop_toBottomOf="@id/user_image"
+            app:layout_constraintLeft_toLeftOf="@id/user_image"
+            app:layout_constraintRight_toRightOf="@id/user_image"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

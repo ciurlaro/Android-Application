@@ -17,8 +17,7 @@ import com.example.myapplication.usecases.user.creation.CreateAccountWithEmailAn
 import com.example.myapplication.usecases.user.creation.CreateAccountWithFacebookToken
 import com.example.myapplication.usecases.user.creation.CreateAccountWithGoogleToken
 import com.example.myapplication.usecases.user.info.GetCurrentUserInfoUseCase
-import com.example.myapplication.usecases.user.login.SigninUserUseCase
-import com.example.myapplication.usecases.user.logout.SignoutUserUseCase
+import com.example.myapplication.usecases.user.login.*
 import com.example.myapplication.usecases.user.update.UpdateUserEmailUseCase
 import com.example.myapplication.usecases.user.update.UpdateUserNicknameUseCase
 import com.example.myapplication.usecases.user.update.UpdateUserPasswordUseCase
@@ -80,7 +79,7 @@ object UseCasesModule : KodeinModuleProvider {
         bind<CreateRegistrationUseCase>() with singleton { CreateRegistrationUseCase(instance()) }
 
 
-        bind<SigninUserUseCase>() with singleton { SigninUserUseCase(instance()) }
+        bind<SigninWithEmailUseCase>() with singleton { SigninWithEmailUseCase(instance()) }
         bind<CreateAccountWithEmailAndPasswordUseCase>() with singleton {
             CreateAccountWithEmailAndPasswordUseCase(
                 instance()
@@ -101,7 +100,15 @@ object UseCasesModule : KodeinModuleProvider {
         bind<UpdateUserProfileImageUseCase>() with singleton { UpdateUserProfileImageUseCase(instance()) }
         bind<IsUserRegisteredUseCase>() with singleton { IsUserRegisteredUseCase(instance()) }
         bind<GetUsersByTournamentUseCase>() with singleton { GetUsersByTournamentUseCase(instance()) }
-        bind<SignoutUserUseCase>() with singleton { SignoutUserUseCase(instance()) }
+        bind<SignoutUserUseCase>() with singleton {
+            SignoutUserUseCase(
+                instance()
+            )
+        }
+        bind<SignInwithFacebookUseCase>() with singleton { SignInwithFacebookUseCase(instance()) }
+        bind<GetTournamentsByUserUseCase>() with singleton { GetTournamentsByUserUseCase(instance()) }
+        bind<LinkFbAccountUseCase>() with singleton { LinkFbAccountUseCase(instance()) }
+        bind<LinkEmailPasswordUseCase>() with singleton { LinkEmailPasswordUseCase(instance()) }
 
         bind<SearchTournamentsUseCase>() with singleton {
             SearchTournamentsUseCase(instance())

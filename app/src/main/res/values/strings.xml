@@ -71,12 +71,26 @@
     <string name="description">description</string>
     <string name="tournament_title">tournament title</string>
     <string name="players_number">Players #</string>
-    <string name="select_a_game">select a game</string>
+    <string name="select_a_game">Select a game</string>
     <string name="tournament_details">Tournament info</string>
     <string name="playes_in_tournament_numbers">Players: %1$d/%2$d</string>
     <string name="mail">user email</string>
+    <string name="history_of_user">History of %1$s</string>
     <string name="history">History</string>
-    <string name="history_of_user">History of</string>
+    <string name="link_account_with_google">Link with Google</string>
+    <string name="link_account_with_facebook">Link with Facebook</string>
+    <string name="provider_already_linked">Provider already linked</string>
+    <string name="players_with_number">Players: %1$s</string>
+    <string name="no_tournaments_for_user">This user has never been in a tournament yet!</string>
+    <string name="select_games">Select games</string>
+    <string name="all_games">All games</string>
+
+    <string name="facebook_app_id">660604807780881</string>
+    <string name="or">or</string>
+    <string name="facebook_connected">You can now login with Facebook!</string>
+    <string name="create_a_password">Create a password</string>
+    <string name="link_accounts">Link password</string>
+    <string name="email_connected">You can now login with email and password!</string>
 
     <string-array name="spinner_content_tournament_creation">
         <item>8</item>

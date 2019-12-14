@@ -1,5 +1,6 @@
 package com.example.myapplication.ui.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,20 +14,22 @@ import com.example.myapplication.databinding.FragmentSigninBinding
 import com.example.myapplication.exceptions.AuthException
 import com.example.myapplication.ui.BaseFragment
 import com.example.myapplication.ui.MainActivity
-import com.example.myapplication.usecases.user.login.SigninUserUseCase
+import com.facebook.*
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
 import kotlinx.android.synthetic.main.fragment_signin.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.launch
-import org.kodein.di.erased.instance
 
 @ExperimentalCoroutinesApi
-class SigninFragment : BaseFragment() {
+class SigninFragment : BaseFragment(), FacebookCallback<LoginResult> {
 
     private val args by navArgs<SigninFragmentArgs>()
     private val viewModel by viewModelInstance<SigninViewModel>()
-    private val signinUserUseCase by instance<SigninUserUseCase>()
+    private val callbackManager by lazy { CallbackManager.Factory.create()!! }
+    private val fbLoginManager by lazy { LoginManager.getInstance() }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
         FragmentSigninBinding.inflate(inflater, container, false).also {
@@ -40,17 +43,19 @@ class SigninFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         button_sign_in.setOnClickListener {
-            lifecycleScope.launch(Dispatchers.Main) {
-                onLoginButtonClicked()
-            }
+            onLoginButtonClicked()
         }
         create_account_textview.setOnClickListener {
             onCreateAccountTextViewClicked()
         }
+        facebook_login_button.setOnClickListener {
+            fbLoginManager.registerCallback(callbackManager, this)
+            fbLoginManager.logIn(this, listOf("email", "public_profile"))
+        }
     }
 
     @FlowPreview
-    private suspend fun onLoginButtonClicked() {
+    private fun onLoginButtonClicked() {
         var asErrored = false
 
         fun checkETV(etv: AppCompatEditText) {
@@ -70,8 +75,9 @@ class SigninFragment : BaseFragment() {
             signin_progress_bar.visibility = View.VISIBLE
 
             try {
-                signinUserUseCase.buildAction(viewModel.email.get()!!, viewModel.password.get()!!)
-                startActivity(MainActivity)
+                viewModel.signinWithEmail(lifecycleScope) {
+                    startActivity(MainActivity)
+                }
             } catch (e: AuthException.AuthMalformedEmailException) {
                 email_edit_textview.error = resources.getString(R.string.email_is_malformed)
             } catch (e: AuthException.AuthInvalidCredentialsException) {
@@ -104,5 +110,21 @@ class SigninFragment : BaseFragment() {
             requireActivity().finishAndRemoveTask()
         }
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        callbackManager.onActivityResult(requestCode, resultCode, data)
+    }
+
+    @FlowPreview
+    override fun onSuccess(result: LoginResult) {
+        viewModel.signinWithFb(result.accessToken.token, lifecycleScope) {
+            startActivity(MainActivity)
+        }
+    }
+
+    override fun onCancel() {}
+
+    override fun onError(error: FacebookException?) {}
 
 }

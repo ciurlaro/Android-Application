@@ -21,4 +21,6 @@ class CustomViewModelFactory(private val injector: DKodein) : ViewModelProvider.
             ?: constructors.firstOrNull { it.parameters.isEmpty() }?.call()
             ?: throw IllegalArgumentException("${modelClass.canonicalName} has not been implemented in this factory")
     }
+
+
 }

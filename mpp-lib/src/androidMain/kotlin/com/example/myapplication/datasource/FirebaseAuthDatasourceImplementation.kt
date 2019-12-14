@@ -15,10 +15,8 @@ actual class FirebaseAuthDatasourceImplementation actual constructor(
     private val currentFirebaseUser
         get() = firebaseAuth.currentUser ?: throw AuthNotAuthenticatedException()
 
-    override suspend fun isCurrentUserEmailVerified(): Boolean {
-        return true
-        // TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override suspend fun isCurrentUserEmailVerified() =
+        currentFirebaseUser.isEmailVerified
 
     override suspend fun getToken() =
         getUserToken()
@@ -70,7 +68,7 @@ actual class FirebaseAuthDatasourceImplementation actual constructor(
             if (GoogleAuthProvider.GOOGLE_SIGN_IN_METHOD in it.signInMethods!!)
                 res.add(AuthProviders.GOOGLE)
             if (FacebookAuthProvider.FACEBOOK_SIGN_IN_METHOD in it.signInMethods!!)
-                res.add(AuthProviders.GOOGLE)
+                res.add(AuthProviders.FACEBOOK)
             res
         }
 

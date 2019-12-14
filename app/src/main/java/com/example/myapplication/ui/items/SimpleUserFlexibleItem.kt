@@ -10,7 +10,8 @@ import eu.davidea.flexibleadapter.items.AbstractFlexibleItem
 import eu.davidea.flexibleadapter.items.IFlexible
 import kotlinx.android.synthetic.main.simple_item_user.view.*
 
-data class SimpleUserFlexibleItem(val user: UserEntity) : AbstractFlexibleItem<SimpleUserFlexibleItem.VH>() {
+data class SimpleUserFlexibleItem(val user: UserEntity, val onClick: (UserEntity) -> Unit) :
+    AbstractFlexibleItem<SimpleUserFlexibleItem.VH>() {
 
     override fun bindViewHolder(
         adapter: FlexibleAdapter<IFlexible<RecyclerView.ViewHolder>>,
@@ -22,12 +23,12 @@ data class SimpleUserFlexibleItem(val user: UserEntity) : AbstractFlexibleItem<S
     override fun createViewHolder(
         view: View,
         adapter: FlexibleAdapter<IFlexible<RecyclerView.ViewHolder>>?
-    ) = VH(view)
+    ) = VH(view, onClick)
 
     override fun getLayoutRes() =
         R.layout.simple_item_user
 
-    class VH(view: View) : RecyclerView.ViewHolder(view) {
+    class VH(view: View, val onClick: (UserEntity) -> Unit) : RecyclerView.ViewHolder(view) {
         fun render(data: UserEntity) = with(itemView) {
             data.image?.let {
                 Glide.with(context)
@@ -35,6 +36,7 @@ data class SimpleUserFlexibleItem(val user: UserEntity) : AbstractFlexibleItem<S
                     .into(user_image)
             }
             user_nickname.text = data.nickname
+            setOnClickListener { onClick(data) }
         }
     }
 }

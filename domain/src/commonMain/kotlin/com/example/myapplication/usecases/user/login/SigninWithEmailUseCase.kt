@@ -3,9 +3,9 @@ package com.example.myapplication.usecases.user.login
 import com.example.myapplication.repositories.ArenaTournamentRepository
 import com.example.myapplication.usecases.UseCaseWithParamsSuspending
 
-class SigninUserUseCase(
+class SigninWithEmailUseCase(
     private val repository: ArenaTournamentRepository
-) : UseCaseWithParamsSuspending<SigninUserUseCase.Params, Boolean> {
+) : UseCaseWithParamsSuspending<SigninWithEmailUseCase.Params, Boolean> {
 
     override suspend fun buildAction(params: Params) =
         repository.loginWithEmailAndPassword(params.email, params.password)

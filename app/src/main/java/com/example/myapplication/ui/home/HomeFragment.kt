@@ -1,10 +1,10 @@
 package com.example.myapplication.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.lifecycleScope
 import com.example.myapplication.R
 import com.example.myapplication.ui.BaseFragment
 import com.example.myapplication.ui.items.TournamentFlexibleItem
@@ -13,7 +13,6 @@ import eu.davidea.flexibleadapter.FlexibleAdapter
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.launch
 
 @ExperimentalCoroutinesApi
 @FlowPreview
@@ -35,6 +34,7 @@ class HomeFragment : BaseFragment() {
             tournaments.observe {
                 adapter.addItems(0, it.map { TournamentFlexibleItem(it) })
                 adapter.mItemClickListener = FlexibleAdapter.OnItemClickListener { _, position ->
+                    Log.d(TAG, "ciao papà")
                     startActivity(TournamentDetailActivity, it[position].id)
                     true
                 }

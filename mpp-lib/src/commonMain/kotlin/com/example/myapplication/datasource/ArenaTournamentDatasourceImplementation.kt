@@ -203,8 +203,8 @@ class ArenaTournamentDatasourceImplementation(
     override suspend fun getAccountSubscription(): SubscriptionStatusJSON =
         httpClient.authenticatedGet(endpoints.isAccountSubscribedUrl())
 
-    override suspend fun searchTournaments(title: String, gameIds: List<String>, page: Int): MultipleTournamentsJSON =
-        httpClient.authenticatedGet(endpoints.searchTournaments(title, gameIds, page))
+    override suspend fun searchTournaments(title: String, gameId: String?, page: Int): MultipleTournamentsJSON =
+        httpClient.authenticatedGet(endpoints.searchTournaments(title, gameId, page))
 
     @UseExperimental(InternalAPI::class)
     private suspend inline fun <reified T> HttpClient.authenticatedGet(url: Url) =

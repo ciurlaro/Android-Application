@@ -240,8 +240,8 @@ class ArenaTournamentRepositoryImplementation(
     override suspend fun getTournamentsContainingTitle(title: String, page: Int) =
         arenaTournamentDS.getTournamentsContainingTitle(title, page).transformTournaments()
 
-    override suspend fun searchTournaments(title: String, gameIds: List<String>, page: Int) =
-        arenaTournamentDS.searchTournaments(title, gameIds, page).transformTournaments()
+    override suspend fun searchTournaments(title: String, gameId: String?, page: Int) =
+        arenaTournamentDS.searchTournaments(title, gameId, page).transformTournaments()
 
     override suspend fun getMatchById(id: Long) =
         coroutineScope {
@@ -327,7 +327,9 @@ class ArenaTournamentRepositoryImplementation(
     override suspend fun getCurrentUser() = firebaseAuthDS.getCurrentAuthUser()?.let {
         coroutineScope {
             val claims = async { firebaseAuthDS.getCurrentUserClaims() }
-            val imageUrl = it.image?.let { async { firebaseStorageDS.getFileUrl(it) } }
+            val imageUrl = it.image?.let {
+                async { if (it.startsWith("http")) it else firebaseStorageDS.getFileUrl(it) }
+            }
 
             currentUserMapper.fromRemoteSingle(
                 it,

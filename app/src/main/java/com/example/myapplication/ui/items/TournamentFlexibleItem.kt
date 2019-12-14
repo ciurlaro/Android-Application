@@ -43,6 +43,8 @@ data class TournamentFlexibleItem(val tournamentEntity: TournamentEntity) :
                 .into(tournament_game_icon)
             tournament_name_tv.text = data.title
             tournament_description_tv.text = data.tournamentDescription
+            game_name.text = data.game.name
+            total_players.text = resources.getString(R.string.players_with_number, data.playersNumber)
         }
     }
 

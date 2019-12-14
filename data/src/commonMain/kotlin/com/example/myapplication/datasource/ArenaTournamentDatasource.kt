@@ -56,7 +56,7 @@ interface ArenaTournamentDatasource {
     suspend fun getUsersByMatchId(matchId: Long, page: Int): MultipleUsersJSON
     suspend fun getAccountVerificationStatus(): AccountStatusJSON
     suspend fun getAccountSubscription(): SubscriptionStatusJSON
-    suspend fun searchTournaments(title: String, gameIds: List<String>, page: Int): MultipleTournamentsJSON
+    suspend fun searchTournaments(title: String, gameId: String?, page: Int): MultipleTournamentsJSON
 
     interface Endpoints {
 
@@ -107,12 +107,11 @@ interface ArenaTournamentDatasource {
         fun registrationsByMatchIdUrl(matchId: Long, page: Int): Url
         fun registrationsByUserIdUrlAndMatchIdUrl(userId: String, matchId: Long, page: Int): Url
 
-        fun currentUserUrl(): Url
         fun userByIdUrl(userId: String): Url
         fun usersByMatchIdUrl(matchId: Long, page: Int): Url
         fun isAccountVerifiedUrl(): Url
         fun isAccountSubscribedUrl(): Url
-        fun searchTournaments(title: String, gameIds: List<String>, page: Int): Url
+        fun searchTournaments(title: String, gameId: String?, page: Int): Url
 
     }
 }
