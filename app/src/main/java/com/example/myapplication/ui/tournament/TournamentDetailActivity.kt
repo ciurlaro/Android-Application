@@ -23,6 +23,7 @@ class TournamentDetailActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tournament_detail)
         users_recyclerview.adapter = adapter
+        users_recyclerview.isNestedScrollingEnabled  = true
 
         with(viewModel) {
             model.observe { (tournament, users) ->
