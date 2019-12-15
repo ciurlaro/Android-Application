@@ -7,7 +7,7 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_fragments"
-        android:background="@color/colorPrimaryDark"
+        android:background="?attr/colorPrimary"
         android:layout_width="match_parent"
         android:layout_height="65dp"
         app:layout_constraintBottom_toTopOf="@id/matches_recyclerview"

@@ -32,29 +32,36 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.OnboardingActivity"
-                  android:theme="@style/AppTheme.NoActionBar"
-                  android:windowSoftInputMode="adjustResize"/>
+        <activity
+            android:name=".ui.OnboardingActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".ui.match.MatchActivity"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustResize"/>
 
         <activity android:name=".ui.tournament.CreateTournamentActivity"
-                  android:theme="@style/AppTheme.NoActionBar"
-                  android:windowSoftInputMode="adjustResize"/>
-
-        <activity android:name=".ui.tournament.TournamentDetailActivity"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustResize"/>
+            android:windowSoftInputMode="adjustResize" />
 
-        <activity android:name=".ui.history.HistoryActivity"
+        <activity
+            android:name=".ui.tournament.TournamentDetailActivity"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustResize"/>
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".ui.history.HistoryActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".ui.userprofile.CreatePasswordActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize" />
 
         <meta-data
-                android:name="preloaded_fonts"
-                android:resource="@array/preloaded_fonts"
-        />
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

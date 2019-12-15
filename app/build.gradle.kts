@@ -142,6 +142,8 @@ dependencies {
     val materialDesignVersion: String by project
     val socialButtonsVersion: String by project
     val facebookSdkVersion: String by project
+    val androidKeyboardHiderVersion: String by project
+    val googleAuthSdkVersion: String by project
 
     val junitVersion: String by project
     val espressoVersion: String by project
@@ -170,6 +172,8 @@ dependencies {
     implementation("com.google.android.material", "material", materialDesignVersion)
     implementation("in.championswimmer", "Android-SocialButtons", socialButtonsVersion)
     implementation("com.facebook.android", "facebook-android-sdk", facebookSdkVersion)
+    implementation("com.github.lamba92", "AndroidKeyboardHider", androidKeyboardHiderVersion)
+    implementation("com.google.android.gms", "play-services-auth", googleAuthSdkVersion)
 
     implementation("com.github.bumptech.glide", "glide", glideVersion)
     kapt("com.github.bumptech.glide", "compiler", glideVersion)

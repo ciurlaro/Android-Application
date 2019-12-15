@@ -86,11 +86,20 @@
     <string name="all_games">All games</string>
 
     <string name="facebook_app_id">660604807780881</string>
+    <string name="google_server_client_id">848647809387-vr3gqt50heqeocr88g2mjg7t2kcu7p78.apps.googleusercontent.com</string>
+
+
     <string name="or">or</string>
     <string name="facebook_connected">You can now login with Facebook!</string>
     <string name="create_a_password">Create a password</string>
     <string name="link_accounts">Link password</string>
     <string name="email_connected">You can now login with email and password!</string>
+    <string name="at_least_3_chars">Write at least 3 characters!</string>
+    <string name="something_went_wrong">Something went wrong!</string>
+    <string name="google_connected">You can now login with Google!</string>
+    <string name="oauth_collision_message">You already have an account with another provider. Login using it and then link the account!</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="confirm">Confirm</string>
 
     <string-array name="spinner_content_tournament_creation">
         <item>8</item>

@@ -19,17 +19,20 @@ fun Exception.asCustom() = when (this) {
     else -> this
 }
 
-fun <T, K> Task<T>.asCoroutine(cont: CancellableContinuation<K>, onSuccess: (T) -> K) =
+fun <T, K> Task<T>.addListeners(cont: CancellableContinuation<K>, onSuccess: (T) -> K) =
     addOnSuccessListener { cont.resume(onSuccess(it)) }
         .addOnFailureListener { cont.resumeWithException(it.asCustom()) }
         .addOnCanceledListener { cont.cancel() }
 
 suspend fun <T, K> wrapTask(taskProvider: () -> Task<T>, onSuccess: (T) -> K) =
     suspendCancellableCoroutine<K> {
-        taskProvider().asCoroutine(it, onSuccess)
+        taskProvider().addListeners(it, onSuccess)
     }
 
 suspend fun <T> wrapTask(taskProvider: () -> Task<T>) =
     suspendCancellableCoroutine<Boolean> {
-        taskProvider().asCoroutine(it) { true }
+        taskProvider().addListeners(it) { true }
     }
+
+suspend fun <T> Task<T>.await() =
+    wrapTask({ this }) { it }

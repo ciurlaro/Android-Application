@@ -13,7 +13,9 @@ import com.example.myapplication.ui.BaseFragment
 import com.example.myapplication.ui.items.TournamentFlexibleItem
 import com.example.myapplication.ui.tournament.TournamentDetailActivity
 import com.example.myapplication.ui.utils.buildGameChooserDialog
+import com.example.myapplication.ui.utils.resetLayoutErrorOnTextChanged
 import eu.davidea.flexibleadapter.FlexibleAdapter
+import it.lamba.android.utils.hideKeyboard
 import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -62,8 +64,14 @@ class SearchFragment : BaseFragment() {
             }
             search_button.setOnClickListener {
                 fragment_search_title_textview.text?.let {
-                    if (it.isNotBlank())
+                    if (it.isNotBlank() && it.length >= 3) {
                         loadTournaments(it.toString())
+                        fragment_search_title_textview.clearFocus()
+                        fragment_search_etv_layout.clearFocus()
+                        requireContext().hideKeyboard(fragment_search_title_textview)
+                    } else {
+                        fragment_search_etv_layout.error = resources.getString(R.string.at_least_3_chars)
+                    }
                 }
             }
             tournaments.observe {
@@ -75,6 +83,7 @@ class SearchFragment : BaseFragment() {
                     updateAdapter(it)
             }
         }
+        fragment_search_title_textview.resetLayoutErrorOnTextChanged(fragment_search_etv_layout)
     }
 
     private fun updateAdapter(it: List<TournamentEntity>) {

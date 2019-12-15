@@ -7,10 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.myapplication.entities.AuthProviders
 import com.example.myapplication.entities.UserEntity
 import com.example.myapplication.repositories.ArenaTournamentRepository
-import com.example.myapplication.usecases.user.login.LinkEmailPasswordUseCase
-import com.example.myapplication.usecases.user.login.LinkFbAccountUseCase
-import com.example.myapplication.usecases.user.login.SignInwithFacebookUseCase
-import com.example.myapplication.usecases.user.login.SignoutUserUseCase
+import com.example.myapplication.usecases.user.login.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -19,6 +16,7 @@ class UserProfileViewModel(
     private val signoutUserUseCase: SignoutUserUseCase,
     private val repository: ArenaTournamentRepository,
     private val linkFbAccountUseCase: LinkFbAccountUseCase,
+    private val linkGoogleAccountUseCase: LinkGoogleAccountUseCase,
     private val linkEmailPasswordUseCase: LinkEmailPasswordUseCase
 ) : ViewModel() {
 
@@ -29,6 +27,8 @@ class UserProfileViewModel(
     )
 
     val model = MutableLiveData<Model>()
+    val createPassword = MutableLiveData<String>("")
+    val repeatCreatePassword = MutableLiveData<String>("")
 
     @ExperimentalCoroutinesApi
     fun loadUserInfo() = viewModelScope.launch {
@@ -48,15 +48,24 @@ class UserProfileViewModel(
         lifecycleScope: LifecycleCoroutineScope,
         action: suspend (Boolean) -> Unit
     ) = viewModelScope.launch {
-        val t = linkFbAccountUseCase.buildAction(SignInwithFacebookUseCase.Params(token))
+        val t = linkFbAccountUseCase.buildAction(SignInWithFacebookUseCase.Params(token))
+        lifecycleScope.launch { action(t) }
+    }
+
+    fun linkGoogleAccount(
+        token: String,
+        lifecycleScope: LifecycleCoroutineScope,
+        action: suspend (Boolean) -> Unit
+    ) = viewModelScope.launch {
+        val t = linkGoogleAccountUseCase.buildAction(token)
         lifecycleScope.launch { action(t) }
     }
 
     fun linkEmailPasswordAccount(
-        password: String,lifecycleScope: LifecycleCoroutineScope,
+        lifecycleScope: LifecycleCoroutineScope,
         action: suspend (Boolean) -> Unit
     ) = viewModelScope.launch {
-        val t = linkEmailPasswordUseCase.buildAction(LinkEmailPasswordUseCase.Params(password))
+        val t = linkEmailPasswordUseCase.buildAction(LinkEmailPasswordUseCase.Params(createPassword.value!!))
         lifecycleScope.launch { action(t) }
     }
 

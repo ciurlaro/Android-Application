@@ -105,10 +105,12 @@ object UseCasesModule : KodeinModuleProvider {
                 instance()
             )
         }
-        bind<SignInwithFacebookUseCase>() with singleton { SignInwithFacebookUseCase(instance()) }
+        bind<SignInWithFacebookUseCase>() with singleton { SignInWithFacebookUseCase(instance()) }
+        bind<SignInWithGoogleUseCase>() with singleton { SignInWithGoogleUseCase(instance()) }
         bind<GetTournamentsByUserUseCase>() with singleton { GetTournamentsByUserUseCase(instance()) }
         bind<LinkFbAccountUseCase>() with singleton { LinkFbAccountUseCase(instance()) }
         bind<LinkEmailPasswordUseCase>() with singleton { LinkEmailPasswordUseCase(instance()) }
+        bind<LinkGoogleAccountUseCase>() with singleton { LinkGoogleAccountUseCase(instance()) }
 
         bind<SearchTournamentsUseCase>() with singleton {
             SearchTournamentsUseCase(instance())

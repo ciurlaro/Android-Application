@@ -1,7 +1,6 @@
 package com.example.myapplication.ui.signup
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.INVISIBLE
@@ -14,23 +13,20 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentSignupBinding
-import com.example.myapplication.exceptions.AuthException
+import com.example.myapplication.exceptions.AuthException.*
 import com.example.myapplication.ui.BaseFragment
 import com.example.myapplication.ui.MainActivity
-import com.example.myapplication.usecases.user.creation.CreateAccountWithCompleteInformation
 import kotlinx.android.synthetic.main.fragment_signup.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.launch
-import org.kodein.di.erased.instance
 
 @ExperimentalCoroutinesApi
 class SignupFragment : BaseFragment() {
 
     private val args by navArgs<SignupFragmentArgs>()
     private val viewModel by viewModelInstance<SignupViewModel>()
-    private val createAccountWithCompleteInformationUseCase by instance<CreateAccountWithCompleteInformation>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
         FragmentSignupBinding.inflate(inflater, container, false).also {
@@ -54,7 +50,7 @@ class SignupFragment : BaseFragment() {
     }
 
     @FlowPreview
-    private suspend fun onSignupButtonClicked() {
+    private fun onSignupButtonClicked() {
         var hasErrored = false
 
         fun checkEditTextviewBlankError(etv: AppCompatEditText) {
@@ -81,34 +77,29 @@ class SignupFragment : BaseFragment() {
         checkEqualsEditTextviews(password_edit_textview, confirm_password_edit_textview, R.string.password_must_match)
 
         if (!hasErrored) {
+
             button_sign_up.isClickable = false
             already_have_account_textview.isClickable = false
             button_sign_up.visibility = INVISIBLE
             signup_progress_bar.visibility = VISIBLE
-            try {
-                createAccountWithCompleteInformationUseCase.buildAction(
-                    viewModel.email.get()!!,
-                    viewModel.password.get()!!,
-                    viewModel.nickname.get()!!
-                )
-                startActivity(MainActivity)
-            } catch (e: AuthException.AuthUserCollisionException) {
-                Log.d(TAG, e.message, e)
-                email_edit_textview.error = resources.getString(R.string.email_already_exists)
-            } catch (e: AuthException.AuthWeakPasswordException) {
-                Log.d(TAG, e.message, e)
-                password_edit_textview.error = resources.getString(R.string.weak_password_exception)
-            } catch (e: AuthException.AuthMalformedEmailException) {
-                Log.d(TAG, e.message, e)
-                email_edit_textview.error = resources.getString(R.string.email_is_malformed)
-            } finally {
+
+            viewModel.createAccountWithEmailAndPassword(lifecycleScope, {
+                when (it) {
+                    is AuthUserCollisionException ->
+                        email_edit_textview.error = resources.getString(R.string.email_already_exists)
+                    is AuthWeakPasswordException ->
+                        password_edit_textview.error = resources.getString(R.string.weak_password_exception)
+                    is AuthMalformedEmailException ->
+                        email_edit_textview.error = resources.getString(R.string.email_is_malformed)
+                }
                 button_sign_up.isClickable = true
                 already_have_account_textview.isClickable = true
                 button_sign_up.visibility = VISIBLE
                 signup_progress_bar.visibility = INVISIBLE
+            }) {
+                startActivity(MainActivity)
             }
         }
-
     }
 
     private fun onSigninTextviewClicked() {

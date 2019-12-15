@@ -16,8 +16,9 @@
         android:background="@drawable/hearthstone">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_width="match_parent"
+            android:paddingBottom="16dp"
             android:orientation="vertical"
             tools:context="com.example.myapplication.ui.MainActivity"
             android:fitsSystemWindows="true">
@@ -34,35 +35,58 @@
                 app:layout_constraintRight_toRightOf="parent"
                 android:src="@drawable/at_logo_black" />
 
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/email_edit_textview"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/fragment_signin_email_layout"
+                style="@style/LoginMaterialEditTextStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="32dp"
+                android:gravity="center"
                 android:hint="@string/email_hint"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:maxLines="1"
-                android:layout_margin="32dp"
-                android:textSize="32sp"
-                android:text="@={viewModel.email}"
-                android:inputType="textEmailAddress"
+                android:textColorHint="@color/startblue"
+                app:errorEnabled="true"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/at_logo"
-                android:theme="@style/AppTheme.LoginEditTextTheme" />
+                app:layout_constraintTop_toBottomOf="@id/at_logo">
 
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/password_edit_textview"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/email_edit_textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:text="@={viewModel.email}"
+                    android:textColor="@color/white"
+                    android:textSize="32sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/fragment_signin_password_layout"
+                style="@style/LoginMaterialEditTextStyle"
                 android:layout_width="0dp"
-                android:hint="@string/pwd_hint"
                 android:layout_height="wrap_content"
-                android:maxLines="1"
-                android:inputType="textPassword"
-                android:layout_margin="32dp"
-                android:textSize="32sp"
-                android:text="@={viewModel.password}"
+                android:gravity="center"
+                android:hint="@string/pwd_hint"
+                android:textColorHint="@color/startblue"
+                app:endIconMode="password_toggle"
+                app:endIconTint="@color/white"
+                app:errorEnabled="true"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/email_edit_textview"
-                android:theme="@style/AppTheme.LoginEditTextTheme" />
+                app:layout_constraintEnd_toEndOf="@+id/fragment_signin_email_layout"
+                app:layout_constraintStart_toStartOf="@+id/fragment_signin_email_layout"
+                app:layout_constraintTop_toBottomOf="@id/fragment_signin_email_layout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/password_edit_textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:text="@={viewModel.password}"
+                    android:textColor="@color/white"
+                    android:textSize="32sp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <ProgressBar
                 android:id="@+id/signin_progress_bar"
@@ -88,7 +112,7 @@
                 android:text="@string/sign_in"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/password_edit_textview"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_signin_password_layout"
                 tools:visibility="invisible" />
 
             <androidx.appcompat.widget.AppCompatTextView
