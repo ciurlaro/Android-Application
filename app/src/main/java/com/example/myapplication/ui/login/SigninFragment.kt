@@ -35,6 +35,7 @@ import org.kodein.di.erased.instance
 
 
 @ExperimentalCoroutinesApi
+@FlowPreview
 class SigninFragment : BaseFragment(), FacebookCallback<LoginResult> {
 
     companion object {
@@ -56,7 +57,7 @@ class SigninFragment : BaseFragment(), FacebookCallback<LoginResult> {
             }
         }.root
 
-    @FlowPreview
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         button_sign_in.setOnClickListener {
@@ -66,12 +67,12 @@ class SigninFragment : BaseFragment(), FacebookCallback<LoginResult> {
             onCreateAccountTextViewClicked()
         }
         facebook_login_button.setOnClickListener {
-            showLoadingStuff()
+            showLoading()
             fbLoginManager.registerCallback(callbackManager, this)
             fbLoginManager.logIn(this, listOf("email", "public_profile"))
         }
         google_login_button.setOnClickListener {
-            showLoadingStuff()
+            showLoading()
             startActivityForResult(googleAuthClient.signInIntent, RC_SIGN_IN)
         }
         email_edit_textview.resetLayoutErrorOnTextChanged(fragment_signin_email_layout)
@@ -83,7 +84,7 @@ class SigninFragment : BaseFragment(), FacebookCallback<LoginResult> {
         fbLoginManager.unregisterCallback(callbackManager)
     }
 
-    private fun showLoadingStuff() {
+    private fun showLoading() {
         facebook_login_button.isClickable = false
         button_sign_in.isClickable = false
         create_account_textview.isClickable = false
@@ -91,7 +92,7 @@ class SigninFragment : BaseFragment(), FacebookCallback<LoginResult> {
         signin_progress_bar.visibility = View.VISIBLE
     }
 
-    private fun hideLoadingStuff() {
+    private fun hideLoading() {
         facebook_login_button.isClickable = true
         button_sign_in.visibility = View.VISIBLE
         signin_progress_bar.visibility = View.GONE
@@ -99,30 +100,35 @@ class SigninFragment : BaseFragment(), FacebookCallback<LoginResult> {
         create_account_textview.isClickable = true
     }
 
-    @FlowPreview
+
     private fun onLoginButtonClicked() {
         var asErrored = false
 
-        fun checkETV(etv: AppCompatEditText) {
+        fun checkEditTextViews(etv: AppCompatEditText) {
             if (etv.text.isNullOrEmpty()) {
                 etv.error = resources.getString(R.string.must_not_be_empty)
                 asErrored = true
             }
         }
 
-        checkETV(email_edit_textview)
-        checkETV(password_edit_textview)
+        checkEditTextViews(email_edit_textview)
+        checkEditTextViews(password_edit_textview)
 
         if (!asErrored) {
-            showLoadingStuff()
+            showLoading()
 
             viewModel.signinWithEmail(lifecycleScope, {
                 when (it) {
                     is AuthMalformedEmailException ->
                         fragment_signin_email_layout.error = resources.getString(R.string.email_is_malformed)
-                    is AuthInvalidCredentialsException -> {
-                        fragment_signin_email_layout.error = resources.getString(R.string.email_or_password_wrong)
+                    is AuthInvalidCredentialsException, is AuthInvalidUserException -> {
+                        fragment_signin_email_layout.error = " "
                         fragment_signin_password_layout.error = resources.getString(R.string.email_or_password_wrong)
+                        Snackbar.make(
+                            email_edit_textview,
+                            R.string.email_or_password_wrong,
+                            Snackbar.LENGTH_LONG
+                        ).show()
                     }
                     is AuthUserCollisionException ->
                         Snackbar.make(
@@ -132,7 +138,7 @@ class SigninFragment : BaseFragment(), FacebookCallback<LoginResult> {
                         ).show()
                     else -> throw it
                 }
-                hideLoadingStuff()
+                hideLoading()
             }) {
                 startActivity(MainActivity)
             }
@@ -158,7 +164,6 @@ class SigninFragment : BaseFragment(), FacebookCallback<LoginResult> {
         }
     }
 
-    @FlowPreview
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         callbackManager.onActivityResult(requestCode, resultCode, data)
@@ -173,7 +178,7 @@ class SigninFragment : BaseFragment(), FacebookCallback<LoginResult> {
                             R.string.oauth_collision_message,
                             Snackbar.LENGTH_LONG
                         ).show()
-                        hideLoadingStuff()
+                        hideLoading()
                     } else
                         viewModel.signinWithGoogle(account.idToken!!, lifecycleScope) {
                             startActivity(MainActivity)
@@ -181,13 +186,13 @@ class SigninFragment : BaseFragment(), FacebookCallback<LoginResult> {
                 } catch (e: Throwable) {
                     Log.d(TAG, e.message, e)
                     Snackbar.make(facebook_login_button, R.string.something_went_wrong, Snackbar.LENGTH_SHORT).show()
-                    hideLoadingStuff()
+                    hideLoading()
                 }
             }
 
     }
 
-    @FlowPreview
+
     override fun onSuccess(result: LoginResult) {
         viewModel.signinWithFb(result.accessToken.token, lifecycleScope, {
             when (it) {
@@ -195,19 +200,19 @@ class SigninFragment : BaseFragment(), FacebookCallback<LoginResult> {
                     Snackbar.make(email_edit_textview, R.string.oauth_collision_message, Snackbar.LENGTH_LONG).show()
                 else -> throw it
             }
-            hideLoadingStuff()
+            hideLoading()
         }) {
             startActivity(MainActivity)
         }
     }
 
     override fun onCancel() {
-        hideLoadingStuff()
+        hideLoading()
     }
 
     override fun onError(error: FacebookException?) {
         Snackbar.make(facebook_login_button, R.string.something_went_wrong, Snackbar.LENGTH_SHORT).show()
-        hideLoadingStuff()
+        hideLoading()
     }
 
 }

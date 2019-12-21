@@ -43,11 +43,9 @@ class SearchFragment : BaseFragment() {
                 select_game_button.setOnClickListener {
                     buildGameChooserDialog(requireContext(), games) {
                         selectedGame.value = it
-                    }
-                        .setOnCancelListener {
-                            selectedGame.value = null
-                        }
-                        .show()
+                    }.setOnCancelListener {
+                        selectedGame.value = null
+                    }.show()
                 }
             }
             selectedGame.observe {
@@ -67,10 +65,10 @@ class SearchFragment : BaseFragment() {
                     if (it.isNotBlank() && it.length >= 3) {
                         loadTournaments(it.toString())
                         fragment_search_title_textview.clearFocus()
-                        fragment_search_etv_layout.clearFocus()
+                        fragment_search_edit_textview_layout.clearFocus()
                         requireContext().hideKeyboard(fragment_search_title_textview)
                     } else {
-                        fragment_search_etv_layout.error = resources.getString(R.string.at_least_3_chars)
+                        fragment_search_edit_textview_layout.error = resources.getString(R.string.at_least_3_chars)
                     }
                 }
             }
@@ -83,7 +81,7 @@ class SearchFragment : BaseFragment() {
                     updateAdapter(it)
             }
         }
-        fragment_search_title_textview.resetLayoutErrorOnTextChanged(fragment_search_etv_layout)
+        fragment_search_title_textview.resetLayoutErrorOnTextChanged(fragment_search_edit_textview_layout)
     }
 
     private fun updateAdapter(it: List<TournamentEntity>) {

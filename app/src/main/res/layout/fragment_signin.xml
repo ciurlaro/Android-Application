@@ -24,16 +24,16 @@
             android:fitsSystemWindows="true">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/at_logo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="100dp"
-                android:contentDescription="@string/boh"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                android:src="@drawable/at_logo_black" />
+                    android:id="@+id/at_logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="50dp"
+                    android:contentDescription="@string/boh"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:src="@drawable/at_logo_black" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/fragment_signin_email_layout"
@@ -61,21 +61,22 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/fragment_signin_password_layout"
-                style="@style/LoginMaterialEditTextStyle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:hint="@string/pwd_hint"
-                android:textColorHint="@color/startblue"
-                app:endIconMode="password_toggle"
-                app:endIconTint="@color/white"
-                app:errorEnabled="true"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/fragment_signin_email_layout"
-                app:layout_constraintStart_toStartOf="@+id/fragment_signin_email_layout"
-                app:layout_constraintTop_toBottomOf="@id/fragment_signin_email_layout">
+                    android:id="@+id/fragment_signin_password_layout"
+                    style="@style/LoginMaterialEditTextStyle"
+                    android:maxLines="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:hint="@string/pwd_hint"
+                    android:textColorHint="@color/startblue"
+                    app:endIconMode="password_toggle"
+                    app:endIconTint="@color/white"
+                    app:errorEnabled="true"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/fragment_signin_email_layout"
+                    app:layout_constraintStart_toStartOf="@+id/fragment_signin_email_layout"
+                    app:layout_constraintTop_toBottomOf="@id/fragment_signin_email_layout">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/password_edit_textview"
@@ -116,27 +117,28 @@
                 tools:visibility="invisible" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_marginTop="8dp"
-                android:id="@+id/or_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/or"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="@+id/button_sign_in"
-                app:layout_constraintStart_toStartOf="@+id/button_sign_in"
-                app:layout_constraintTop_toBottomOf="@+id/button_sign_in" />
+                    android:layout_marginTop="8dp"
+                    android:id="@+id/or_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/or"
+                    android:textColor="@color/white"
+                    android:maxLines="1"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/button_sign_in"
+                    app:layout_constraintStart_toStartOf="@+id/button_sign_in"
+                    app:layout_constraintTop_toBottomOf="@+id/button_sign_in" />
 
             <in.championswimmer.libsocialbuttons.FabSocial
-                android:id="@+id/facebook_login_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/or_tv"
-                app:layout_constraintRight_toLeftOf="@id/google_login_button"
-                app:social="facebook" />
+                    android:id="@+id/facebook_login_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/or_textview"
+                    app:layout_constraintRight_toLeftOf="@id/google_login_button"
+                    app:social="facebook" />
 
             <in.championswimmer.libsocialbuttons.FabSocial
                 android:id="@+id/google_login_button"

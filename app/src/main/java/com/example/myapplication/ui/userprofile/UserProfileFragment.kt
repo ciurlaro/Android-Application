@@ -70,6 +70,15 @@ class UserProfileFragment : BaseFragment(), FacebookCallback<LoginResult> {
                 }
                 user_nickname.text = user.nickname
                 user_mail.text = user.email
+
+//                edit_profile_fab.setOnClickListener {
+//                    ImagePicker.with(this)
+//                        .crop()	    			//Crop image(Optional), Check Customization for more option
+//                        .compress(1024)			//Final image size will be less than 1 MB(Optional)
+//                        .maxResultSize(1080, 1080)	//Final image resolution will be less than 1080 x 1080(Optional)
+//                        .start()
+//                }
+
                 facebook_btn.setOnClickListener {
                     if (AuthProviders.FACEBOOK in providersLinked)
                         Snackbar.make(it, R.string.provider_already_linked, Snackbar.LENGTH_SHORT).show()

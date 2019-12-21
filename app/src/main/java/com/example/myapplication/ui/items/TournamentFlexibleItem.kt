@@ -1,11 +1,11 @@
 package com.example.myapplication.ui.items
 
+import android.annotation.SuppressLint
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.entities.TournamentEntity
-import com.example.myapplication.ui.match.MatchActivity
 import eu.davidea.flexibleadapter.FlexibleAdapter
 import eu.davidea.flexibleadapter.items.AbstractFlexibleItem
 import eu.davidea.flexibleadapter.items.IFlexible
@@ -36,13 +36,14 @@ data class TournamentFlexibleItem(val tournamentEntity: TournamentEntity) :
 
     class ViewHolder(view: View, adapter: FlexibleAdapter<*>) : FlexibleViewHolder(view, adapter) {
 
+        @SuppressLint("SetTextI18n")
         @ExperimentalCoroutinesApi
         fun render(data: TournamentEntity) = with(itemView) {
             Glide.with(itemView.context)
                 .load(data.game.icon)
                 .into(tournament_game_icon)
-            tournament_name_tv.text = data.title
-            tournament_description_tv.text = data.tournamentDescription
+            tournament_name_textview.text = data.title
+            tournament_description_textview.text = data.tournamentDescription
             game_name.text = data.game.name
             total_players.text = resources.getString(R.string.players_with_number, data.playersNumber)
         }

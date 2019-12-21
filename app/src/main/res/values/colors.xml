@@ -5,6 +5,7 @@
     <color name="colorSecondaryDark">#003366</color>
     <color name="colorAccent">#FFC800</color>
     <color name="black">#000</color>
+    <color name="light_yellow">#FFFD89</color>
     <color name="lightorange">#fdf2df</color>
     <color name="lightorangedark">#ebd6ab</color>
     <color name="startblue">#09c6df</color>

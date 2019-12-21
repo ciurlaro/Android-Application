@@ -12,11 +12,11 @@ class CreatePasswordDialog(private val passwordCallback: (String) -> Unit) : Bas
     override fun onCreateDialog(savedInstanceState: Bundle?) =
         AlertDialog.Builder(requireContext())
             .setView(R.layout.dialog_create_password)
-            .setPositiveButton(resources.getString(R.string.link_accounts)) { di, _ ->
+            .setPositiveButton(resources.getString(R.string.link_accounts)) { _, _ ->
                 requireDialog().checkPasswords()
             }
-            .setNegativeButton(resources.getString(R.string.com_facebook_loginview_cancel_action)) { di, _ ->
-                di.dismiss()
+            .setNegativeButton(resources.getString(R.string.com_facebook_loginview_cancel_action)) { dialog, _ ->
+                dialog.dismiss()
             }
             .create()!!
 

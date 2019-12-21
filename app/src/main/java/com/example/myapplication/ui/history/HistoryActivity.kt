@@ -29,7 +29,7 @@ class HistoryActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_history)
-        rv.adapter = adapter
+        history_recyclerview.adapter = adapter
         with(viewModel) {
             model.observe { (user, tournaments) ->
                 no_content_tv.visibility = if (tournaments.isEmpty()) VISIBLE else GONE

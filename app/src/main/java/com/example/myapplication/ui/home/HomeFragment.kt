@@ -1,7 +1,6 @@
 package com.example.myapplication.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,7 +33,6 @@ class HomeFragment : BaseFragment() {
             tournaments.observe {
                 adapter.addItems(0, it.map { TournamentFlexibleItem(it) })
                 adapter.mItemClickListener = FlexibleAdapter.OnItemClickListener { _, position ->
-                    Log.d(TAG, "ciao papà")
                     startActivity(TournamentDetailActivity, it[position].id)
                     true
                 }

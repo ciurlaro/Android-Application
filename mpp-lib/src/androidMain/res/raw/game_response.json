@@ -1,10 +1,10 @@
 {
-  "gameName": "wow",
+  "gameName": "Overwatch",
   "availableModes": [
     "OPEN_WORLD"
   ],
-  "image": "https://games.teeech.it/wp-content/uploads/sites/5/2019/11/overwatch-2.jpg",
-  "icon": "https://icon-library.net/images/overwatch-logo-icon/overwatch-logo-icon-13.jpg",
+  "image": "https://esportswales.org/wp-content/uploads/2019/02/overwatch-logo.png",
+  "icon": "https://www.freepnglogos.com/uploads/vintage-overwatch-logo-png-12.png",
   "_links": {
     "self": {
       "href": "http://localhost:8080/game/wow"

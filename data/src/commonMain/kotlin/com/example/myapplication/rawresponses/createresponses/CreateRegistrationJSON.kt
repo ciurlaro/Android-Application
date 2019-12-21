@@ -5,6 +5,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class CreateRegistrationJSON(
     val user: String,
-    val match: String,
+    val tournament: String,
     val outcome: String? = null
 )

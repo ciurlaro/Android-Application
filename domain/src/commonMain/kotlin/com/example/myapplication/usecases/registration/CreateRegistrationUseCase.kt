@@ -1,7 +1,7 @@
 package com.example.myapplication.usecases.registration
 
-import com.example.myapplication.entities.MatchEntity
 import com.example.myapplication.entities.RegistrationEntity
+import com.example.myapplication.entities.TournamentEntity
 import com.example.myapplication.entities.UserEntity
 import com.example.myapplication.repositories.ArenaTournamentRepository
 import com.example.myapplication.usecases.UseCaseWithParamsSuspending
@@ -13,14 +13,14 @@ class CreateRegistrationUseCase(
 
     @UseExperimental(FlowPreview::class)
     override suspend fun buildAction(params: Params): RegistrationEntity =
-        repository.createRegistration(params.user, params.match)
+        repository.createRegistration(params.user, params.tournament)
 
-    suspend fun buildAction(user: UserEntity, match: MatchEntity) =
-        buildAction(Params(user, match))
+    suspend fun buildAction(user: UserEntity, tournament: TournamentEntity) =
+        buildAction(Params(user, tournament))
 
     data class Params(
         val user: UserEntity,
-        val match: MatchEntity
+        val tournament: TournamentEntity
     )
 
 }

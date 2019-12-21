@@ -179,17 +179,17 @@ class ArenaTournamentRepositoryImplementation(
 
     override suspend fun createRegistration(
         user: UserEntity,
-        match: MatchEntity,
+        tournament: TournamentEntity,
         outcome: String?
     ) =
         arenaTournamentDS.createRegistration(
             CreateRegistrationJSON(
                 user = userLinkMapper.toRemoteSingle(user.id).toString(),
-                match = matchLinkMapper.toRemoteSingle(match.id).toString(),
+                tournament = tournamentLinkMapper.toRemoteSingle(tournament.id).toString(),
                 outcome = outcome
             )
         )
-            .let { return@let RegistrationEntity(user, match, outcome) }
+            .let { return@let RegistrationEntity(user, tournament, outcome) }
 
     override suspend fun getGameByName(name: String) =
         arenaTournamentDS.getGameByName(name)

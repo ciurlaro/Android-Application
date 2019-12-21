@@ -25,7 +25,7 @@ interface ArenaTournamentRepository {
 
     suspend fun createRegistration(
         user: UserEntity,
-        match: MatchEntity,
+        tournament: TournamentEntity,
         outcome: String? = null
     ): RegistrationEntity
 

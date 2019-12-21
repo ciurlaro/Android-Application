@@ -2,6 +2,8 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        maven("https://jitpack.io")
+        jcenter()
     }
     dependencies {
         val androidxNavigationVersion: String by project
@@ -150,6 +152,7 @@ dependencies {
     val androidTestRunnerVersion: String by project
     val flexibleAdapterVersion: String by project
     val androidxPagingVersion: String by project
+    val imagepickerVersion: String by project
 
     implementation(project(":mpp-lib"))
 
@@ -178,6 +181,7 @@ dependencies {
     implementation("com.github.bumptech.glide", "glide", glideVersion)
     kapt("com.github.bumptech.glide", "compiler", glideVersion)
     runtimeOnly("org.slf4j", "slf4j-android", slf4jAndroidVersion)
+    runtimeOnly("com.github.dhaval2404", "imagepicker", imagepickerVersion)
 
     testImplementation("junit", "junit", junitVersion)
     androidTestImplementation("androidx.test", "runner", androidTestRunnerVersion)

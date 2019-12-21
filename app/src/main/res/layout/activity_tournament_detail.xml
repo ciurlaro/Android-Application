@@ -79,6 +79,22 @@
                 app:layout_constraintTop_toBottomOf="@id/tournament_description"
                 tools:text="Players: 10/32"/>
 
+        <com.google.android.material.button.MaterialButton
+                android:id="@+id/activity_register_now_button"
+                style="@style/Theme.Design.Light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/register_now"
+                android:textAlignment="center"
+                android:textColor="#FFF"
+                android:layout_gravity="center"
+                android:background="@color/colorPrimary"
+                android:visibility="gone"
+                app:layout_constraintTop_toTopOf="@+id/players_count_textview"
+                app:layout_constraintBottom_toBottomOf="@+id/players_count_textview"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/players_count_textview"/>
+
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/users_recyclerview"
                 android:layout_width="match_parent"

@@ -53,7 +53,7 @@
     <string name="weak_password_exception">At least 6 chars</string>
     <string name="dialog_players_number"># players:</string>
     <string name="dialog_tournament_search">Search</string>
-    <string name="dialog_tournament_title">tournament title</string>
+    <string name="dialog_tournament_title">Tournament title</string>
     <string name="dialog_games">Choose a game</string>
     <string name="dialog_tournament_create">CREATE</string>
     <string name="select_date">SELECT DATE</string>
@@ -64,7 +64,6 @@
     <string name="home_string">Home</string>
     <string name="user_string">User</string>
     <string name="search_string">Search</string>
-    <string name="create_tournament_string">Create tournament</string>
     <string name="match_of_tournament_string">Match of</string>
     <string name="choose_a_game_string">Choose a game</string>
     <string name="match_number">Match #%1</string>
@@ -73,7 +72,7 @@
     <string name="players_number">Players #</string>
     <string name="select_a_game">Select a game</string>
     <string name="tournament_details">Tournament info</string>
-    <string name="playes_in_tournament_numbers">Players: %1$d/%2$d</string>
+    <string name="players_in_tournament_numbers">Players: %1$d/%2$d</string>
     <string name="mail">user email</string>
     <string name="history_of_user">History of %1$s</string>
     <string name="history">History</string>
@@ -97,9 +96,17 @@
     <string name="at_least_3_chars">Write at least 3 characters!</string>
     <string name="something_went_wrong">Something went wrong!</string>
     <string name="google_connected">You can now login with Google!</string>
-    <string name="oauth_collision_message">You already have an account with another provider. Login using it and then link the account!</string>
+    <string name="oauth_collision_message">You already have an account with another provider. Login using it and then
+        link the account!
+    </string>
     <string name="confirm_password">Confirm Password</string>
     <string name="confirm">Confirm</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="register_now">Register now</string>
+    <string name="confirm_registration">"Confirm registration"</string>
+    <string name="registration_question">Are you sure you want to register to this tournament?</string>
+    <string name="already_registered_user">You are already registered to this tournament</string>
+    <string name="successfully_registration">Registration successfully completed</string>
 
     <string-array name="spinner_content_tournament_creation">
         <item>8</item>

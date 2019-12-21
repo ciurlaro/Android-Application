@@ -4,9 +4,9 @@
       {
         "id": 1,
         "playersNumber": 16,
-        "tournamentDescription": "Description1",
+        "tournamentDescription": "Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book.",
         "tournamentMode": "RANKED",
-        "title": "Tournament1",
+        "title": "Very first tournament!",
         "_links": {
           "self": {
             "href": "http://localhost:8080/tournament/1"
@@ -25,9 +25,9 @@
       {
         "id": 2,
         "playersNumber": 32,
-        "tournamentDescription": "Description2",
+        "tournamentDescription": "Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book.",
         "tournamentMode": "FREE_FOR_ALL",
-        "title": "Tournament2",
+        "title": "Very second tournament!",
         "_links": {
           "self": {
             "href": "http://localhost:8080/tournament/2"

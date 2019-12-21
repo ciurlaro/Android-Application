@@ -15,11 +15,12 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="AllowBackup,GoogleAppIndexingWarning"
-            android:fullBackupContent="false">
+            android:fullBackupContent="false"
+            android:windowSoftInputMode="adjustResize">
 
         <meta-data
-            android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id"/>
+                android:name="com.facebook.sdk.ApplicationId"
+                android:value="@string/facebook_app_id"/>
 
         <activity
                 android:name=".ui.MainActivity"
@@ -55,9 +56,9 @@
             android:windowSoftInputMode="adjustResize" />
 
         <activity
-            android:name=".ui.userprofile.CreatePasswordActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustResize" />
+                android:name=".ui.userprofile.UpdateImageActivity"
+                android:theme="@style/AppTheme.NoActionBar"
+                android:windowSoftInputMode="adjustResize" />
 
         <meta-data
             android:name="preloaded_fonts"
