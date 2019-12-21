@@ -23,7 +23,7 @@
           "OPEN_WORLD"
         ],
         "image": "wow.png",
-        "icon": "https://icon-library.net//images/world-of-warcraft-icon-png/world-of-warcraft-icon-png-18.jpg",
+        "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/WoW_icon.svg/1024px-WoW_icon.svg.png",
         "_links": {
           "self": {
             "href": "http://localhost:8080/game/wow"

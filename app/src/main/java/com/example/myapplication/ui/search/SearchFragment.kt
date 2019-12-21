@@ -40,9 +40,21 @@ class SearchFragment : BaseFragment() {
         search_recyclerview.adapter = adapter
         with(viewModel) {
             availableGames.observe { games ->
-                select_game_button.setOnClickListener {
-                    buildGameChooserDialog(requireContext(), games) {
-                        selectedGame.value = it
+                search_button.setOnClickListener {
+                    buildGameChooserDialog(requireContext(), games) { game ->
+                        fragment_search_title_textview.text?.let {
+                            if (it.isNotBlank() && it.length >= 3) {
+                                selectedGame.value = game
+                                selected_game_text_view.visibility = VISIBLE
+                                loadTournaments(it.toString())
+                                fragment_search_title_textview.clearFocus()
+                                fragment_search_edit_textview_layout.clearFocus()
+                                requireContext().hideKeyboard(fragment_search_title_textview)
+                            } else {
+                                fragment_search_edit_textview_layout.error =
+                                    resources.getString(R.string.at_least_3_chars)
+                            }
+                        }
                     }.setOnCancelListener {
                         selectedGame.value = null
                     }.show()
@@ -58,18 +70,6 @@ class SearchFragment : BaseFragment() {
                 } else {
                     selected_game_icon.visibility = INVISIBLE
                     selected_game_text_view.text = resources.getString(R.string.all_games)
-                }
-            }
-            search_button.setOnClickListener {
-                fragment_search_title_textview.text?.let {
-                    if (it.isNotBlank() && it.length >= 3) {
-                        loadTournaments(it.toString())
-                        fragment_search_title_textview.clearFocus()
-                        fragment_search_edit_textview_layout.clearFocus()
-                        requireContext().hideKeyboard(fragment_search_title_textview)
-                    } else {
-                        fragment_search_edit_textview_layout.error = resources.getString(R.string.at_least_3_chars)
-                    }
                 }
             }
             tournaments.observe {
