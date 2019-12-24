@@ -11,6 +11,7 @@ import com.example.myapplication.usecases.user.login.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import java.io.File
 
 class UserProfileViewModel(
     private val signoutUserUseCase: SignoutUserUseCase,
@@ -32,10 +33,14 @@ class UserProfileViewModel(
 
     @ExperimentalCoroutinesApi
     fun loadUserInfo() = viewModelScope.launch {
-        val u = async { repository.getCurrentUser()!! }
-        val i = async { repository.isCurrentUserEmailVerified() }
-        val s = async { repository.getCurrentUserAuthMethods() }
-        model.value = Model(u.await(), i.await(), s.await())
+        val currentUser = async { repository.getCurrentUser()!! }
+        val isMailVerified = async { repository.isCurrentUserEmailVerified() }
+        val authMethods = async { repository.getCurrentUserAuthMethods() }
+        model.value = Model(currentUser.await(), isMailVerified.await(), authMethods.await())
+    }
+
+    fun updateProfileImage(data: File) = viewModelScope.launch {
+        repository.updateCurrentUserProfileImage(data.readBytes())
     }
 
     fun signOut(lifecycleScope: LifecycleCoroutineScope, action: suspend () -> Unit) = viewModelScope.launch {

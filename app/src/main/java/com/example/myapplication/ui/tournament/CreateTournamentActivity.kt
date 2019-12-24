@@ -62,7 +62,7 @@ class CreateTournamentActivity : BaseActivity() {
 
         activity_create_tournament_button.setOnClickListener {
             activity_create_tournament_button.isClickable = false
-            if (checkStuff()) {
+            if (checkCorrectness()) {
                 viewModel.createTournament(lifecycleScope) {
                     startActivity(TournamentDetailActivity, it.id)
                 }
@@ -72,7 +72,7 @@ class CreateTournamentActivity : BaseActivity() {
 
     }
 
-    private fun checkStuff(): Boolean {
+    private fun checkCorrectness(): Boolean {
         var isAllOk = true
         if (activity_item_title_text_view.text.isNullOrBlank()) {
             activity_item_title_text_view.error = resources.getString(R.string.empty_string)

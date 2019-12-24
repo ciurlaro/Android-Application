@@ -45,8 +45,7 @@ class HistoryActivity : BaseActivity() {
                         .fallback(R.drawable.doggo)
                         .into(user_image)
                 }
-                user_nickname.text = user.nickname
-                activity_title.text = resources.getString(R.string.history_of_user, user.nickname)
+                user_nickname.text = resources.getString(R.string.history_of_user, user.nickname + "\n")
             }
             loadUserInfo(userId)
         }

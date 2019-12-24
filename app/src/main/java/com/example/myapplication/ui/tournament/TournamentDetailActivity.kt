@@ -5,6 +5,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.View.VISIBLE
+import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.ui.BaseActivity
@@ -12,12 +13,14 @@ import com.example.myapplication.ui.IntentBuilderWithArguments
 import com.example.myapplication.ui.history.HistoryActivity
 import com.example.myapplication.ui.items.SimpleUserFlexibleItem
 import com.example.myapplication.ui.utils.buildRegistrationDialog
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import eu.davidea.flexibleadapter.FlexibleAdapter
 import kotlinx.android.synthetic.main.activity_tournament_detail.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 
+@FlowPreview
 class TournamentDetailActivity : BaseActivity() {
 
     private val tournamentId by lazy { intent.extras!!.getLong(TOURNAMENT_ID) }
@@ -25,7 +28,6 @@ class TournamentDetailActivity : BaseActivity() {
     private val adapter by lazy { FlexibleAdapter<SimpleUserFlexibleItem>(emptyList()) }
 
     @ExperimentalCoroutinesApi
-    @FlowPreview
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tournament_detail)
@@ -53,9 +55,26 @@ class TournamentDetailActivity : BaseActivity() {
                                 tournament.registrationByUser(currentUser)
                                 activity_register_now_button.isEnabled = false
                                 Snackbar.make(it, R.string.successfully_registration, Snackbar.LENGTH_SHORT).show()
+                                players_count_textview.text =
+                                    resources.getString(
+                                        R.string.players_in_tournament_numbers,
+                                        users.size + 1,
+                                        tournament.playersNumber
+                                    )
                             }).show()
                     }
                 }
+
+                players_button.visibility = VISIBLE
+                players_button.setOnClickListener {
+                    users_recyclerview.visibility = VISIBLE
+                    (users_recyclerview.parent as ViewGroup).removeView(users_recyclerview)
+                    MaterialAlertDialogBuilder(this@TournamentDetailActivity)
+                        .setView(users_recyclerview).show()
+                }
+
+                left_divider.visibility = VISIBLE
+                right_divider.visibility = VISIBLE
 
             }
             loadTournament(tournamentId)

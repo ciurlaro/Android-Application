@@ -1,5 +1,6 @@
 package com.example.myapplication.ui.userprofile
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -7,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.*
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -24,6 +26,7 @@ import com.example.myapplication.ui.utils.resetLayoutErrorOnTextChanged
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
 import com.facebook.login.LoginResult
+import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.material.snackbar.Snackbar
@@ -58,7 +61,7 @@ class UserProfileFragment : BaseFragment(), FacebookCallback<LoginResult> {
     @ExperimentalCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        hideCreatePasswordStuff()
+        hidePasswordCreationForm()
         with(viewModel) {
             model.observe { (user, _, providersLinked) ->
                 update_user_is_subscribed.visibility = if (user.isSubscriber) VISIBLE else INVISIBLE
@@ -71,13 +74,27 @@ class UserProfileFragment : BaseFragment(), FacebookCallback<LoginResult> {
                 user_nickname.text = user.nickname
                 user_mail.text = user.email
 
-//                edit_profile_fab.setOnClickListener {
-//                    ImagePicker.with(this)
-//                        .crop()	    			//Crop image(Optional), Check Customization for more option
-//                        .compress(1024)			//Final image size will be less than 1 MB(Optional)
-//                        .maxResultSize(1080, 1080)	//Final image resolution will be less than 1080 x 1080(Optional)
-//                        .start()
-//                }
+                edit_profile_fab.setOnClickListener {
+                    ImagePicker.with(this@UserProfileFragment)
+                        .start { resultCode, data ->
+                            when (resultCode) {
+                                Activity.RESULT_OK -> {
+                                    //Image Uri will not be null for RESULT_OK
+                                    val fileUri = data?.data
+                                    Log.d("LOLLOLO", fileUri.toString())
+                                    // val file = ImagePicker.getFile(data) // File object from intent
+                                    // val filePath = ImagePicker.getFilePath(data) // File Path from intent
+                                    viewModel.updateProfileImage(ImagePicker.getFile(data)!!)
+                                }
+                                ImagePicker.RESULT_ERROR -> {
+                                    Toast.makeText(context, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
+                                }
+                                else -> {
+                                    Toast.makeText(context, "Task Cancelled", Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                        }
+                }
 
                 facebook_btn.setOnClickListener {
                     if (AuthProviders.FACEBOOK in providersLinked)
@@ -98,7 +115,7 @@ class UserProfileFragment : BaseFragment(), FacebookCallback<LoginResult> {
                     if (AuthProviders.EMAIL_PASSWORD in providersLinked)
                         Snackbar.make(it, R.string.provider_already_linked, Snackbar.LENGTH_SHORT).show()
                     else
-                        showCreatePasswordStuff()
+                        showPasswordCreationForm()
                 }
                 button_history.setOnClickListener {
                     startActivity(HistoryActivity, user.id)
@@ -117,20 +134,20 @@ class UserProfileFragment : BaseFragment(), FacebookCallback<LoginResult> {
         }
 
         cancel_password_button.setOnClickListener {
-            hideCreatePasswordStuff()
+            hidePasswordCreationForm()
         }
 
         confirm_password_button.setOnClickListener {
-            if (!checkPasswords())
+            if (!checkPasswordsCorrectness())
                 viewModel.linkEmailPasswordAccount(lifecycleScope) {
                     Snackbar.make(confirm_password_button, R.string.email_connected, Snackbar.LENGTH_SHORT).show()
-                    hideCreatePasswordStuff()
+                    hidePasswordCreationForm()
                     viewModel.loadUserInfo()
                 }
         }
     }
 
-    private fun checkPasswords(): Boolean {
+    private fun checkPasswordsCorrectness(): Boolean {
         var hasErrored = false
         if (fragment_user_password_etv.text.isNullOrEmpty()) {
             fragment_user_password_etv_layout.error = resources.getString(R.string.must_not_be_empty)
@@ -147,14 +164,14 @@ class UserProfileFragment : BaseFragment(), FacebookCallback<LoginResult> {
         return hasErrored
     }
 
-    private fun showCreatePasswordStuff() {
+    private fun showPasswordCreationForm() {
         fragment_user_password_etv_layout.visibility = VISIBLE
         fragment_user_confirm_password_etv_layout.visibility = VISIBLE
         confirm_password_button.visibility = VISIBLE
         cancel_password_button.visibility = VISIBLE
     }
 
-    private fun hideCreatePasswordStuff() {
+    private fun hidePasswordCreationForm() {
         fragment_user_password_etv_layout.visibility = GONE
         fragment_user_confirm_password_etv_layout.visibility = GONE
         confirm_password_button.visibility = GONE

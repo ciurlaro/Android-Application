@@ -153,6 +153,7 @@ dependencies {
     val flexibleAdapterVersion: String by project
     val androidxPagingVersion: String by project
     val imagepickerVersion: String by project
+    val inlineActivityResultVersion: String by project
 
     implementation(project(":mpp-lib"))
 
@@ -178,10 +179,11 @@ dependencies {
     implementation("com.github.lamba92", "AndroidKeyboardHider", androidKeyboardHiderVersion)
     implementation("com.google.android.gms", "play-services-auth", googleAuthSdkVersion)
 
+    implementation("com.github.dhaval2404", "imagepicker", imagepickerVersion)
+    implementation("com.github.florent37", "inline-activity-result-kotlin", inlineActivityResultVersion)
     implementation("com.github.bumptech.glide", "glide", glideVersion)
     kapt("com.github.bumptech.glide", "compiler", glideVersion)
     runtimeOnly("org.slf4j", "slf4j-android", slf4jAndroidVersion)
-    runtimeOnly("com.github.dhaval2404", "imagepicker", imagepickerVersion)
 
     testImplementation("junit", "junit", junitVersion)
     androidTestImplementation("androidx.test", "runner", androidTestRunnerVersion)

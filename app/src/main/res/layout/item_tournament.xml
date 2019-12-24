@@ -8,7 +8,9 @@
         android:layout_height="wrap_content"
         android:layout_margin="4dp"
         android:elevation="2dp"
-        android:backgroundTint="@color/white"
+        app:strokeWidth="0.5dp"
+        app:strokeColor="@color/transparent_black"
+        app:rippleColor="@color/colorSecondaryDark"
         app:cardCornerRadius="5dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,6 +33,7 @@
                 app:layout_constraintLeft_toLeftOf="@id/tournament_game_icon"
                 app:layout_constraintRight_toRightOf="@id/tournament_game_icon"
                 app:layout_constraintTop_toBottomOf="@id/tournament_game_icon"
+                style="@style/Widget.MaterialComponents.TextView"
                 tools:text="World of Warcraft"
                 android:layout_marginTop="8dp"
                 android:gravity="center"
@@ -43,6 +46,7 @@
                 app:layout_constraintRight_toRightOf="@id/tournament_game_icon"
                 app:layout_constraintTop_toBottomOf="@id/game_name"
                 android:layout_marginTop="8dp"
+                style="@style/Widget.MaterialComponents.TextView"
                 tools:text="Players: 16"
                 android:gravity="center"
                 android:layout_height="wrap_content"/>
@@ -53,6 +57,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textSize="22sp"
+                style="@style/Widget.MaterialComponents.TextView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintLeft_toRightOf="@id/tournament_game_icon"
                 app:layout_constraintStart_toEndOf="@+id/tournament_game_icon"
@@ -65,6 +70,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
+                style="@style/Widget.MaterialComponents.TextView"
                 app:layout_constraintTop_toBottomOf="@+id/tournament_name_textview"
                 app:layout_constraintLeft_toRightOf="@+id/tournament_game_icon"
                 app:layout_constraintRight_toRightOf="parent"
@@ -83,6 +89,8 @@
                 android:layout_margin="8dp"
                 android:layout_marginStart="4dp"
                 android:textSize="15sp"
+                android:gravity="center"
+                style="@style/Widget.MaterialComponents.TextView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/tournament_game_icon"

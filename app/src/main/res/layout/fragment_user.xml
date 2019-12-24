@@ -25,6 +25,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="65dp"
                     android:background="?attr/colorPrimary"
+                    style="@style/Widget.MaterialComponents.Toolbar"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -35,6 +36,7 @@
                         android:text="@string/user_string"
                         android:textColor="@color/white"
                         android:textSize="25sp"
+                        style="@style/Widget.MaterialComponents.TextView"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="parent"/>
@@ -56,6 +58,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:scaleType="center"
+                    android:backgroundTint="@color/odnoklassniki"
                     app:fabSize="mini"
                     app:layout_constraintBottom_toBottomOf="@+id/user_image"
                     app:layout_constraintEnd_toEndOf="@+id/user_image"
@@ -84,6 +87,7 @@
                     android:textColor="@color/black"
                     android:textSize="32sp"
                     android:textStyle="bold"
+                    style="@style/Widget.MaterialComponents.TextView"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintLeft_toLeftOf="@id/user_image"
                     app:layout_constraintRight_toRightOf="@id/user_image"
@@ -99,6 +103,7 @@
                     android:textColor="@color/transparent_black"
                     android:textSize="18sp"
                     android:textStyle="bold"
+                    style="@style/Widget.MaterialComponents.TextView"
                     app:layout_constraintEnd_toEndOf="@+id/user_nickname"
                     app:layout_constraintStart_toStartOf="@+id/user_nickname"
                     app:layout_constraintTop_toBottomOf="@id/user_nickname"
@@ -109,6 +114,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
+                    android:backgroundTint="@color/googleplus"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/facebook_btn"
                     app:layout_constraintStart_toStartOf="parent"
@@ -119,6 +125,7 @@
                     android:id="@+id/facebook_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:backgroundTint="@color/com_facebook_blue"
                     app:layout_constraintBottom_toBottomOf="@+id/google_btn"
                     app:layout_constraintEnd_toStartOf="@id/email_btn"
                     app:layout_constraintStart_toEndOf="@+id/google_btn"
@@ -130,7 +137,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_email_black_24dp"
-                    android:tint="@color/white"
+                    android:backgroundTint="@color/vine"
                     app:layout_constraintBottom_toBottomOf="@+id/facebook_btn"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/facebook_btn"
@@ -155,6 +162,7 @@
                         android:hint="@string/pwd_hint"
                         android:inputType="textPassword"
                         android:maxLines="1"
+                        style="@style/Widget.MaterialComponents.TextView"
                         android:text="@={viewModel.createPassword}"/>
             </com.google.android.material.textfield.TextInputLayout>
 

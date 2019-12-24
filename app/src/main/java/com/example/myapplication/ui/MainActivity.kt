@@ -2,10 +2,8 @@ package com.example.myapplication.ui
 
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.ui.setupWithNavController
 import com.example.myapplication.R
@@ -19,7 +17,6 @@ import org.kodein.di.erased.instance
 
 @FlowPreview
 @ExperimentalCoroutinesApi
-@RequiresApi(Build.VERSION_CODES.HONEYCOMB)
 class MainActivity : BaseFragmentedActivity(R.id.nav_host_fragment) {
 
     private val repo by instance<ArenaTournamentRepository>()
@@ -33,6 +30,11 @@ class MainActivity : BaseFragmentedActivity(R.id.nav_host_fragment) {
                     with(new_tournament_button) {
                         visibility = VISIBLE
                         setOnClickListener {
+//                            FARE 3 BOTTONI
+//                            MaterialAlertDialogBuilder(context)
+//                                .setView(R.layout.activity_create_tournament)
+//                                .setPositiveButton("Create tournament") {}
+//                                .show()
                             startActivity(CreateTournamentActivity)
                         }
                     }

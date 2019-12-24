@@ -16,7 +16,7 @@
             android:theme="@style/AppTheme"
             tools:ignore="AllowBackup,GoogleAppIndexingWarning"
             android:fullBackupContent="false"
-            android:windowSoftInputMode="adjustResize">
+            android:windowSoftInputMode="adjustResize|stateHidden">
 
         <meta-data
                 android:name="com.facebook.sdk.ApplicationId"
@@ -37,6 +37,7 @@
             android:name=".ui.OnboardingActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan" />
+
         <activity android:name=".ui.match.MatchActivity"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustResize"/>
@@ -54,11 +55,6 @@
             android:name=".ui.history.HistoryActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize" />
-
-        <activity
-                android:name=".ui.userprofile.UpdateImageActivity"
-                android:theme="@style/AppTheme.NoActionBar"
-                android:windowSoftInputMode="adjustResize" />
 
         <meta-data
             android:name="preloaded_fonts"
