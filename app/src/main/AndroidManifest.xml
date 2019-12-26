@@ -42,9 +42,10 @@
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustResize"/>
 
-        <activity android:name=".ui.tournament.CreateTournamentActivity"
+        <activity
+            android:name=".ui.tournament.CreateTournamentActivity"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustPan" />
 
         <activity
             android:name=".ui.tournament.TournamentDetailActivity"
