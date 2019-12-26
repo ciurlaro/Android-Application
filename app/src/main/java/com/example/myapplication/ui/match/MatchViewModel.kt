@@ -14,6 +14,7 @@ import eu.davidea.flexibleadapter.FlexibleAdapter
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.launch
 
+@FlowPreview
 class MatchViewModel(
     private val getMatchesByTournamentUseCase: GetMatchesByTournamentUseCase,
     private val getCurrentUserInfoUseCase: GetCurrentUserInfoUseCase,
@@ -27,12 +28,11 @@ class MatchViewModel(
     val adapter
         get() = matchViewAdapter as RecyclerView.Adapter<*>
 
-    @FlowPreview
     fun getMatchesByTournament(tournament: TournamentEntity) = viewModelScope.launch {
         getMatchesByTournamentUseCase.buildAction(tournament)
             .onEach {
                 val alreadyRegistered =
-                    isUserRegisteredUseCase.buildAction(getCurrentUserInfoUseCase.buildAction()!!.id, it.id)
+                    isUserRegisteredUseCase.buildAction(getCurrentUserInfoUseCase.buildAction().id, it.id)
                 matchViewAdapter.addItem(MatchFlexibleItem(it, tournament.playersNumber, alreadyRegistered))
             }
     }

@@ -22,6 +22,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.launch
 
+@FlowPreview
 @ExperimentalCoroutinesApi
 class SignupFragment : BaseFragment() {
 
@@ -36,7 +37,6 @@ class SignupFragment : BaseFragment() {
             }
         }.root
 
-    @FlowPreview
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         button_sign_up.setOnClickListener {
@@ -49,7 +49,6 @@ class SignupFragment : BaseFragment() {
         }
     }
 
-    @FlowPreview
     private fun onSignupButtonClicked() {
         var hasErrored = false
 

@@ -80,7 +80,7 @@
     <string name="link_account_with_google">Link with Google</string>
     <string name="link_account_with_facebook">Link with Facebook</string>
     <string name="provider_already_linked">Provider already linked</string>
-    <string name="players_with_number">Players: %1$s</string>
+    <string name="players_with_number">Players: %1$d</string>
     <string name="no_tournaments_for_user">This user has never been in a tournament yet!</string>
     <string name="select_games">Select games</string>
     <string name="all_games">All games</string>
@@ -109,6 +109,8 @@
     <string name="already_registered_user">You are already registered to this tournament</string>
     <string name="successfully_registration">Registration successfully completed</string>
     <string name="Players">Players</string>
+    <string name="image_not_set">Error occurred while trying to set the profile image</string>
+    <string name="image_set">Image updating successfully completed</string>
 
     <string-array name="spinner_content_tournament_creation">
         <item>8</item>

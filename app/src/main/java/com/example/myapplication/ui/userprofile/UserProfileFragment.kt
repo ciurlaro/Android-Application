@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.*
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -37,6 +36,7 @@ import kotlinx.coroutines.launch
 import org.kodein.di.erased.instance
 
 
+@FlowPreview
 @ExperimentalCoroutinesApi
 class UserProfileFragment : BaseFragment(), FacebookCallback<LoginResult> {
 
@@ -57,14 +57,13 @@ class UserProfileFragment : BaseFragment(), FacebookCallback<LoginResult> {
         it.viewModel = viewModel
     }.root
 
-    @FlowPreview
-    @ExperimentalCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         hidePasswordCreationForm()
         with(viewModel) {
             model.observe { (user, _, providersLinked) ->
-                update_user_is_subscribed.visibility = if (user.isSubscriber) VISIBLE else INVISIBLE
+                update_user_is_subscribed.visibility =
+                    if (user.isSubscriber || true) VISIBLE else INVISIBLE // "true" temporary, until backend will be ready
                 user.image?.let {
                     Glide.with(requireContext())
                         .load(it)
@@ -79,18 +78,12 @@ class UserProfileFragment : BaseFragment(), FacebookCallback<LoginResult> {
                         .start { resultCode, data ->
                             when (resultCode) {
                                 Activity.RESULT_OK -> {
-                                    //Image Uri will not be null for RESULT_OK
-                                    val fileUri = data?.data
-                                    Log.d("LOLLOLO", fileUri.toString())
-                                    // val file = ImagePicker.getFile(data) // File object from intent
-                                    // val filePath = ImagePicker.getFilePath(data) // File Path from intent
                                     viewModel.updateProfileImage(ImagePicker.getFile(data)!!)
-                                }
-                                ImagePicker.RESULT_ERROR -> {
-                                    Toast.makeText(context, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
+                                    Snackbar.make(it, R.string.image_set, Snackbar.LENGTH_SHORT).show()
+
                                 }
                                 else -> {
-                                    Toast.makeText(context, "Task Cancelled", Toast.LENGTH_SHORT).show()
+                                    Snackbar.make(it, R.string.image_not_set, Snackbar.LENGTH_SHORT).show()
                                 }
                             }
                         }
@@ -191,7 +184,6 @@ class UserProfileFragment : BaseFragment(), FacebookCallback<LoginResult> {
         Snackbar.make(facebook_btn, R.string.something_went_wrong, Snackbar.LENGTH_SHORT).show()
     }
 
-    @FlowPreview
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         callbackManager.onActivityResult(requestCode, resultCode, data)

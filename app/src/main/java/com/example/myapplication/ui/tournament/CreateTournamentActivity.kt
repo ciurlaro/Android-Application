@@ -1,13 +1,10 @@
 package com.example.myapplication.ui.tournament
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
@@ -19,14 +16,13 @@ import kotlinx.android.synthetic.main.activity_create_tournament.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 
-@ExperimentalCoroutinesApi
+
 @FlowPreview
+@ExperimentalCoroutinesApi
 class CreateTournamentActivity : BaseActivity() {
 
     private val viewModel: CreateTournamentViewModel by viewModelInstance()
 
-    @SuppressLint("SetTextI18n")
-    @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

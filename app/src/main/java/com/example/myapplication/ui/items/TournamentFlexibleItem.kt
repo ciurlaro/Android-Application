@@ -13,10 +13,11 @@ import eu.davidea.viewholders.FlexibleViewHolder
 import kotlinx.android.synthetic.main.item_tournament.view.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
+@SuppressLint("SetTextI18n")
+@ExperimentalCoroutinesApi
 data class TournamentFlexibleItem(val tournamentEntity: TournamentEntity) :
     AbstractFlexibleItem<TournamentFlexibleItem.ViewHolder>() {
 
-    @ExperimentalCoroutinesApi
     override fun bindViewHolder(
         adapter: FlexibleAdapter<IFlexible<RecyclerView.ViewHolder>>,
         holder: ViewHolder,
@@ -36,8 +37,6 @@ data class TournamentFlexibleItem(val tournamentEntity: TournamentEntity) :
 
     class ViewHolder(view: View, adapter: FlexibleAdapter<*>) : FlexibleViewHolder(view, adapter) {
 
-        @SuppressLint("SetTextI18n")
-        @ExperimentalCoroutinesApi
         fun render(data: TournamentEntity) = with(itemView) {
             Glide.with(itemView.context)
                 .load(data.game.icon)

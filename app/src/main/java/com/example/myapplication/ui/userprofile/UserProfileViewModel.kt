@@ -13,6 +13,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import java.io.File
 
+@ExperimentalCoroutinesApi
 class UserProfileViewModel(
     private val signoutUserUseCase: SignoutUserUseCase,
     private val repository: ArenaTournamentRepository,
@@ -31,7 +32,7 @@ class UserProfileViewModel(
     val createPassword = MutableLiveData<String>("")
     val repeatCreatePassword = MutableLiveData<String>("")
 
-    @ExperimentalCoroutinesApi
+
     fun loadUserInfo() = viewModelScope.launch {
         val currentUser = async { repository.getCurrentUser()!! }
         val isMailVerified = async { repository.isCurrentUserEmailVerified() }
@@ -41,6 +42,7 @@ class UserProfileViewModel(
 
     fun updateProfileImage(data: File) = viewModelScope.launch {
         repository.updateCurrentUserProfileImage(data.readBytes())
+        loadUserInfo()
     }
 
     fun signOut(lifecycleScope: LifecycleCoroutineScope, action: suspend () -> Unit) = viewModelScope.launch {

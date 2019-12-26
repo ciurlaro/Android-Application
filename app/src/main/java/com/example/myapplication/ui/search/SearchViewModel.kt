@@ -11,6 +11,7 @@ import com.example.myapplication.usecases.tournament.SearchTournamentsUseCase
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.launch
 
+@FlowPreview
 class SearchViewModel(
     private val searchTournamentsUseCase: SearchTournamentsUseCase,
     private val getAllGamesUseCase: GetAllGamesUseCase
@@ -28,7 +29,6 @@ class SearchViewModel(
         availableGames.value = getAllGamesUseCase.buildAction(0)
     }
 
-    @FlowPreview
     fun loadTournaments(title: String) = viewModelScope.launch {
         tournaments.value = searchTournamentsUseCase.buildAction(
             title,

@@ -26,17 +26,10 @@ class MainActivity : BaseFragmentedActivity(R.id.nav_host_fragment) {
             if (repo.getCurrentUser() != null) {
                 setContentView(R.layout.activity_main)
                 bottom_nav_view.setupWithNavController(navController)
-                if (!repo.isCurrentUserSubscriber())
+                if (repo.isCurrentUserSubscriber() || true) // "true" temporary, until backend will be ready
                     with(new_tournament_button) {
                         visibility = VISIBLE
-                        setOnClickListener {
-//                            FARE 3 BOTTONI
-//                            MaterialAlertDialogBuilder(context)
-//                                .setView(R.layout.activity_create_tournament)
-//                                .setPositiveButton("Create tournament") {}
-//                                .show()
-                            startActivity(CreateTournamentActivity)
-                        }
+                        setOnClickListener { startActivity(CreateTournamentActivity) }
                     }
                 else new_tournament_button.visibility = GONE
             } else startActivity(OnboardingActivity)
@@ -52,7 +45,6 @@ class MainActivity : BaseFragmentedActivity(R.id.nav_host_fragment) {
             Intent(context, MainActivity::class.java).apply {
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
             }
-
     }
 
 }

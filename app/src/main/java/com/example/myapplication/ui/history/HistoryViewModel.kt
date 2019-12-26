@@ -11,6 +11,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
+@ExperimentalCoroutinesApi
 class HistoryViewModel(
     private val repository: ArenaTournamentRepository,
     private val getTournamentsByUserUseCase: GetTournamentsByUserUseCase
@@ -20,7 +21,6 @@ class HistoryViewModel(
 
     val model = MutableLiveData<Model>()
 
-    @ExperimentalCoroutinesApi
     fun loadUserInfo(userId: String)  = viewModelScope.launch {
         val u = async { repository.getUserById(userId) }
         val t = async { getTournamentsByUserUseCase.buildAction(userId) }
