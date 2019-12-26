@@ -75,7 +75,7 @@ class UserProfileFragment : BaseFragment(), FacebookCallback<LoginResult> {
                 user_mail.text = user.email
 
                 edit_profile_fab.setOnClickListener {
-                    ImagePicker.with(this@UserProfileFragment)
+                    ImagePicker.with(requireActivity())
                         .start { resultCode, data ->
                             when (resultCode) {
                                 Activity.RESULT_OK -> {

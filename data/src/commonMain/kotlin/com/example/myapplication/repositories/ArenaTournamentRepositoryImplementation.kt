@@ -60,7 +60,7 @@ class ArenaTournamentRepositoryImplementation(
         firebaseAuthDS.updateUserNickname(nickname)
 
     override suspend fun updateCurrentUserProfileImage(image: ByteArray) =
-        firebaseStorageDS.uploadFile(image, "users/${currentUserOrError()}/profile")
+        firebaseStorageDS.uploadFile(image, "users/${currentUserOrError().id}/profile")
 
     override suspend fun loginWithEmailAndPassword(email: String, password: String) =
         firebaseAuthDS.loginWithEmailAndPassword(email, password)
@@ -327,14 +327,14 @@ class ArenaTournamentRepositoryImplementation(
     override suspend fun getCurrentUser() = firebaseAuthDS.getCurrentAuthUser()?.let {
         coroutineScope {
             val claims = async { firebaseAuthDS.getCurrentUserClaims() }
-            val imageUrl = it.image?.let {
+            val imageUrl = it.storageImagePath.let {
                 async { if (it.startsWith("http")) it else firebaseStorageDS.getFileUrl(it) }
             }
 
             currentUserMapper.fromRemoteSingle(
                 it,
                 claims.await(),
-                imageUrl?.await()
+                imageUrl.await()
             )
         }
     }
