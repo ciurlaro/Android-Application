@@ -11,12 +11,12 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 
 @ExperimentalCoroutinesApi
+@FlowPreview
 class MatchActivity : BaseActivity() {
 
     private val viewModel: MatchViewModel by viewModelInstance()
     private val tournamentId by lazy { intent.extras!!.getLong(TOURNAMENT_TAG) }
 
-    @FlowPreview
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_match)

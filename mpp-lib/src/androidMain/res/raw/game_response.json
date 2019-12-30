@@ -1,16 +1,16 @@
 {
-  "gameName": "Overwatch",
+  "gameName": "Counter Strike: GO",
   "availableModes": [
     "OPEN_WORLD"
   ],
-  "image": "https://esportswales.org/wp-content/uploads/2019/02/overwatch-logo.png",
-  "icon": "https://www.freepnglogos.com/uploads/vintage-overwatch-logo-png-12.png",
+  "image": "https://logodix.com/logo/2115839.png",
+  "icon": "https://logodix.com/logo/2115839.png",
   "_links": {
     "self": {
-      "href": "http://localhost:8080/game/wow"
+      "href": "http://localhost:8080/game/go"
     },
     "gameEntity": {
-      "href": "http://localhost:8080/game/wow"
+      "href": "http://localhost:8080/game/go"
     }
   }
 }
