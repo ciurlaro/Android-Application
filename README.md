@@ -2,12 +2,12 @@
 
 
  - [Architecture](#Architecture)
-   - [Kodein](#introduction)
-   - [BaseActivity & BaseFragment](#BaseActivity and BaseFragment)
-   - [Structured and asynchronous concurrency](#Structured and asynchronous concurrency)
+   - [Kodein](#Kodein)
+   - [BaseActivity & BaseFragment](#BaseActivity%20and%20BaseFragment)
+   - [Structured and asynchronous concurrency](#Structured%20and%20asynchronous%20concurrency)
       - [Coroutines](#Coroutines) 
       - [Asynchronous Flows](#Asynchronous Flows)
-   - [Other goodies](#Other goodies) 
+   - [Other goodies](#Other%20goodies) 
    
 
 ## Architecture
