@@ -6,7 +6,7 @@
    - [BaseActivity & BaseFragment](#BaseActivity%20and%20BaseFragment)
    - [Structured and asynchronous concurrency](#Structured%20and%20asynchronous%20concurrency)
       - [Coroutines](#Coroutines) 
-      - [Asynchronous Flows](#Asynchronous Flows)
+      - [Asynchronous Flows](#Asynchronous%20Flows)
    - [Other goodies](#Other%20goodies) 
    
 
