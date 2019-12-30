@@ -151,6 +151,6 @@ class with _Dependency Injection_ cover mechanisms similar to the already previo
 The application also makes use of the [**DataBinding**](https://developer.android.com/topic/libraries/data-binding) support,
 to bind UI components in its layouts to data sources using a declarative, rather than programmatically, format.
 
-Furthermore, all the components usage moves around the full compatibility with all the Android versions, with a careful use of the Android 
+Furthermore, all the components usage moves around the full compatibility with all the Android versions, with a careful use of the 
 **[Support](https://developer.android.com/topic/libraries/support-library/index)** and 
 **[Androidx](https://developer.android.com/jetpack/androidx)** _libraries_.
