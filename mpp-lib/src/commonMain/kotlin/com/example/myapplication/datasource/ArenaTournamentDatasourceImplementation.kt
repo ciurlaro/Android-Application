@@ -17,13 +17,13 @@ import io.ktor.util.encodeBase64
 import kotlinx.serialization.UnstableDefault
 import kotlinx.serialization.json.Json
 
+@UseExperimental(UnstableDefault::class)
 class ArenaTournamentDatasourceImplementation(
     private val httpClient: HttpClient,
     private val endpoints: ArenaTournamentDatasource.Endpoints,
     private val firebaseAuthDS: FirebaseAuthDatasource
 ) : ArenaTournamentDatasource {
 
-    @UseExperimental(UnstableDefault::class)
     override suspend fun createGameMode(gameModeJSON: CreateGameModeJSON): ModeJSON =
         with(gameModeJSON) {
             httpClient.authenticatedPost(
@@ -32,7 +32,6 @@ class ArenaTournamentDatasourceImplementation(
             )
         }
 
-    @UseExperimental(UnstableDefault::class)
     override suspend fun createGame(gameJSON: CreateGameJSON): GameJSON =
         with(gameJSON) {
             httpClient.authenticatedPost(
@@ -41,7 +40,6 @@ class ArenaTournamentDatasourceImplementation(
             )
         }
 
-    @UseExperimental(UnstableDefault::class)
     override suspend fun createUser(userJSON: CreateUserJSON): UserJSON =
         with(userJSON) {
             httpClient.authenticatedPost(
@@ -50,7 +48,6 @@ class ArenaTournamentDatasourceImplementation(
             )
         }
 
-    @UseExperimental(UnstableDefault::class)
     override suspend fun createTournament(tournamentJSON: CreateTournamentJSON): TournamentJSON =
         with(tournamentJSON) {
             httpClient.authenticatedPost(
@@ -59,7 +56,6 @@ class ArenaTournamentDatasourceImplementation(
             )
         }
 
-    @UseExperimental(UnstableDefault::class)
     override suspend fun createMatch(matchJSON: CreateMatchJSON): MatchJSON =
         with(matchJSON) {
             httpClient.authenticatedPost(
@@ -68,7 +64,6 @@ class ArenaTournamentDatasourceImplementation(
             )
         }
 
-    @UseExperimental(UnstableDefault::class)
     override suspend fun createRegistration(registrationJSON: CreateRegistrationJSON): RegistrationJSON =
         with(registrationJSON) {
             httpClient.authenticatedPost(
@@ -76,7 +71,6 @@ class ArenaTournamentDatasourceImplementation(
                 Json.stringify(CreateRegistrationJSON.serializer(), this)
             )
         }
-
 
     override suspend fun getAllGames(page: Int): MultipleGamesJSON =
         httpClient.get(endpoints.allGamesUrl(page))
@@ -115,9 +109,6 @@ class ArenaTournamentDatasourceImplementation(
     ): MultipleTournamentsJSON =
         httpClient.get(endpoints.tournamentsByGameName(gameName, page))
 
-    /**
-     * Query sbagliata (????)
-     */
     override suspend fun getTournamentsByUser(userId: String, page: Int): MultipleTournamentsJSON =
         httpClient.get(endpoints.tournamentsByAdmin(userId, page))
 
@@ -218,7 +209,6 @@ class ArenaTournamentDatasourceImplementation(
             addAuth()
             content?.let { body = it }
         }
-
 
     @InternalAPI
     private suspend fun HttpRequestBuilder.addAuth() {

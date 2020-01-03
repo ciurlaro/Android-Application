@@ -99,9 +99,6 @@ interface ArenaTournamentDatasource {
         fun allRegistrationsUrl(page: Int): Url
         fun registrationByIdUrl(id: Long): Url
         fun matchesNotFullUrl(page: Int): Url
-        /**
-         * UserUrl oppure UserIdUrl
-         */
         fun registrationsByUserUrl(userId: String, page: Int): Url
 
         fun registrationsByMatchIdUrl(matchId: Long, page: Int): Url

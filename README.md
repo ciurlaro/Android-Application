@@ -8,6 +8,12 @@
       - [Coroutines](#Coroutines) 
       - [Asynchronous Flows](#Asynchronous-Flows)
    - [Other goodies](#Other-goodies) 
+- [Use Cases](#Use-Cases)
+    - [Requirements](#Requirements)
+    - [Implementation hierarchy](#Implementation-hierarchy)
+        - [Observation note](#Observation-note)
+    - [Repository](#Repository)
+    - [Data Sources](#Data-Sources)
    
 
 ## Architecture
@@ -22,7 +28,7 @@ It suggests some _best practises_ which target the creation of mid-level softwar
 
 The purpose is to facilitate development, deployment, usage and maintenance.
 
-In order to do so, the architecture of the system need to **elevate the use cases and the features**, 
+In order to do so, the architecture of the system need to **elevate the features**, 
 so that both the understanding of the system and, therefore, the aids in development and maintenance result simplified.
 
 The architecture should clearly ”scream” it’s purpose, beyond the details of its specific implementation.
@@ -31,13 +37,13 @@ This particolar subtask is based on the idea that frameworks are tools to be use
 which means that **a good software architecture allows decisions** about frameworks, databases, web servers, 
 other environmental issues and tools **to be deferred and delayed from the abstract layers**.
 
-The natural implication of this mindset is the judicious adoption of paradigms of responsibility division: 
-the implementation have to reflect different abstraction layers decoupling at the module level, in order to prove effectiveness.
+The natural implication of this mindset is the judicious adoption of paradigms of _responsibility division_: 
+the implementation has to reflect different abstraction layers decoupling at the module level, in order to prove effectiveness.
 
 The idea and scope is to partition the system into components such that some of them are core business rules and others 
 contain necessary functions not directly related to the core business. 
 
-A correct code arranging, such that dependencies point from lower-level details to higher-level abstractions,
+A **clean** code arranging, such that dependencies point from lower-level details to higher-level abstractions,
  can be recognized an application of the Dependency Inversion and Stable Abstractions principles.
  The business rules should remain pristine, unsullied by baser concerns such as the user interface or database used. 
  
@@ -67,7 +73,7 @@ The main idea is that **a context is aware of the content it has to provide and 
 Another usefull feature Kodein supply is the division of the context in subregions called modules, such that each module manage different needs.
 
 
-### BaseActivity and BaseFragment
+### Model-View-ViewModel pattern
 
 The division between `Views` and `ViewModels` is a notoriously almost mandatory Android pattern. 
 It surely handles an even more succesfull **separation of concern** than the one provided by the classical ModelViewController pattern, 
@@ -122,7 +128,9 @@ Since they are going to be the next default Android concurrency management tool,
 
 _ArenaTournament_ makes extensive use of multiple calls in order to get Entities.
 
-**e.g**
+
+> **e.g**
+> 
 > To get a `RegistrationEntity` object both the references to `TournamentEntity` and `UserEntity` are needed;
 > but the `TournamentEntity` needs in turn the reference to a `GameEntity`.
 
@@ -131,13 +139,14 @@ This pattern is **common** all over the calls, which also are very **frequent**.
 Since such multiple chained kind of calls are so central, to waste as few resources as possible, they need to be 
 **regulated so that the throughput results maximized**. 
 
-This is what **[`Flow`s](https://kotlinlang.org/docs/reference/coroutines/flow.html#flows)** are made for: 
+This is what a **[`Flow`](https://kotlinlang.org/docs/reference/coroutines/flow.html#flows)** is made for: 
 **asynchronous data collection and computing**.
 
 ---------------------------------------
 
 Both `Couroutine`s and `Asynchronous Flow`s exploit a **logical tree representation** 
 that only requires a simple programmatic explication of execution dependencies.
+
 
 
 #### Other goodies
@@ -149,8 +158,106 @@ Navigating to a destination is done using a **NavController**, whose instance is
 class with _Dependency Injection_ cover mechanisms similar to the already previously explained.
  
 The application also makes use of the [**DataBinding**](https://developer.android.com/topic/libraries/data-binding) support,
-to bind UI components in its layouts to data sources using a declarative, rather than programmatically, format.
+to bind UI components in its layouts to data sources using a _declarative_, rather than programmatical, _format_.
 
 Furthermore, all the components usage moves around the full compatibility with all the Android versions, with a careful use of the 
 **[Support](https://developer.android.com/topic/libraries/support-library/index)** and 
 **[Androidx](https://developer.android.com/jetpack/androidx)** _libraries_.
+
+
+## Use Cases
+
+### Requirements
+
+As already said,
+> a clean architecture **elevates the features** which, ideally,
+ should be the most independent and therefore the most abstract, reusable code in the system.
+
+also
+> the implementation has to reflect different abstraction layers **decoupling** at the module level, 
+> in order to prove effectiveness.
+
+
+The analysis of the most abstract - and therefore the use of which should have necessarily be made the simplest possible - 
+functionalities, led to the conclusion that the **use cases** were the features that had to be elevated.
+
+This clearly influenced the directionality of the abstraction and is the reason, 
+in conjunction with the fact that the application makes extensive use of network calls, for the so obtained stratification.
+
+The idea is that a single use case is the **atomic operation** that a user consumes; it may be the login, the updating 
+of its profile information, its subscription, the creation or the research of a tournament.
+
+It doesn't really matter **what** the user wants to do, the point is that each his operation needs to be supported 
+by a single method call.
+
+Also, whenever may happen the need to delete or add a feature, its implementation should **always** be as **simple** as 
+ delete or add a single `UseCase` implementation.
+
+### Implementation hierarchy
+
+The single method interface which rapresents these **user operations** is called `UseCase`.
+
+A class which implements both this interface and its method, `CreateTournamentUseCase` for example, **should directly 
+be used to apply the use case the user wants to perform**, in a perfect _clean architecture_ style.
+
+Under the hood, the method inside the `UseCase` implementation will likely accomplish more than a single operation.
+A common behaviour inside classes that implements this interface, for example, is the fetching of different pages.
+
+#### Observation note
+For the sake of completeness, it is useful to notice that in order to guarantee a standard data retrieval quality 
+ and to lighten the amount of both server and client wasted resources, it is a good practise not to send all avaiable data at once,
+ but to divide them in **chunks**, more properly called **pages**.
+
+> Infact, even if to a **client** were sent all the data, he might not be able to handle them at once, because of the 
+> computational or memory requirements. 
+>
+> On the other side, even on the **server** the operation would not be tradeoff free, since even supposing 
+> the unrealistic case of a limitless powerfull calculator, the network needed to complete a massive transition may
+> jeopardize the quality of other incoming and outgoing contemporary network calls, which is - of course - not acceptable
+> in a real context. 
+
+Even though the perfect way to handle such cases would indeed have been the usage of the 
+ [Android paging library](https://developer.android.com/topic/libraries/architecture/paging), the realist -
+ academic comprehension - usage of it, didn't really need the implementation of such shellproof leak protection. 
+ 
+Such architectural choice would have required further levels of abstractions and complexities, which have been 
+ considered unnecessary since the **unreal and unindustrial** specific context of this application.
+
+What has however been done, is the **client-side throughput performance maximization**, through the use of Flows, 
+ whose advantages have [previously](#Asynchronous-Flows) more thoroughly been illustrated. 
+
+
+### Repository
+
+The computational bricks `UseCase` implementations make use of, are taken from another - lower - abstraction layer,
+ called **repository**.
+
+The repository layer is responsible for making transparent the presence of multiple different communication channels to 
+ the use cases layer.
+
+This aspect of the application will be [deepened soon](#Data-Sources), but the concept that wants to pass in this section 
+ is that the repository acts like a funnel of all the possible abstractions present on the immediately lower layer, 
+ ready to the usage of the immediately following higher (and overall highest) layer.
+ 
+> In other words, the **only one** class dependency that a `UseCase` implementation will ever need is a `Repository` implementation 
+> or, at least, another `UseCase` as well.
+
+### Data Sources
+Since the application retrieves data from _different sources_ and in _different formats_, an abstraction that also covers 
+the necessity to correctly handle this behaviour is needed.
+
+
+#### Firebase and Firestore [TODO]
+
+This has been realized through the `DataSource` interface, which inherits from the _clean architecture_ the very same constructive
+ **single purpose philosophy** just like as also the `UseCase` interface does.
+
+This time, however, the purpose of the distinct `DataSource` implementations is to manage a single source and format communication 
+per implementation, thus once more getting a complete transparency to higher abstraction layers.
+
+ The application data sources and formats are 
+ - `ArenaTournamentDatasourceImplementation`, which directly communicates with the ArenaTournament server
+ - `FirebaseAuthDatasource`, which communicates with Firebase
+ - `FirebaseStorageDatasource`, which communicates with Firestore
+ 
+### ENDPOINTS [TODO]
