@@ -14,11 +14,16 @@
         - [Observation note](#Observation-note)
     - [Repository](#Repository)
     - [Data Sources](#Data-Sources)
+        - [ArenaTournament Server](#ArenaTournament-Server)
+            - [MockEngine](#MockEngine)
+        - [Firebase Authentication](#Firebase-Authentication)
+        - [Firebase Cloud Storage](#Firebase-Cloud-Storage)
    
 
 ## Architecture
 
-Robert Cecil Martin’s book _“Clean architecture”_ (who's pdf is freely avaiable **[here](https://github.com/AlexGalhardo/ICMC-USP/blob/master/Book%20-%20Clean%20Architecture%20-%20Robert%20Cecil%20Martin.pdf)**)
+Robert Cecil Martin’s book _“Clean architecture”_ (who's pdf is freely avaiable 
+**[here](https://github.com/AlexGalhardo/ICMC-USP/blob/master/Book%20-%20Clean%20Architecture%20-%20Robert%20Cecil%20Martin.pdf)**)
  inspired most of the architectural design of the application.
 
 It suggests some _best practises_ which target the creation of mid-level software that: 
@@ -132,7 +137,7 @@ _ArenaTournament_ makes extensive use of multiple calls in order to get Entities
 > **e.g**
 > 
 > To get a `RegistrationEntity` object both the references to `TournamentEntity` and `UserEntity` are needed;
-> but the `TournamentEntity` needs in turn the reference to a `GameEntity`.
+ but the `TournamentEntity` needs in turn the reference to a `GameEntity`.
 
 This pattern is **common** all over the calls, which also are very **frequent**. 
 
@@ -149,7 +154,7 @@ that only requires a simple programmatic explication of execution dependencies.
 
 
 
-#### Other goodies
+### Other goodies
 ArenaTournament makes use of the brand new [**Navigation**](https://developer.android.com/guide/navigation/navigation-getting-started) Component, 
 a directed navigation graph whose nodes (_“destinations”_) are fragments and edges (_“actions”_) are the possible paths starting from a given node.
 
@@ -175,7 +180,7 @@ As already said,
 
 also
 > the implementation has to reflect different abstraction layers **decoupling** at the module level, 
-> in order to prove effectiveness.
+  in order to prove effectiveness.
 
 
 The analysis of the most abstract - and therefore the use of which should have necessarily be made the simplest possible - 
@@ -205,16 +210,16 @@ A common behaviour inside classes that implements this interface, for example, i
 
 #### Observation note
 For the sake of completeness, it is useful to notice that in order to guarantee a standard data retrieval quality 
- and to lighten the amount of both server and client wasted resources, it is a good practise not to send all avaiable data at once,
+ and to lighten the amount of both Server and Client wasted resources, it is a good practise not to send all avaiable data at once,
  but to divide them in **chunks**, more properly called **pages**.
 
 > Infact, even if to a **client** were sent all the data, he might not be able to handle them at once, because of the 
 > computational or memory requirements. 
->
-> On the other side, even on the **server** the operation would not be tradeoff free, since even supposing 
-> the unrealistic case of a limitless powerfull calculator, the network needed to complete a massive transition may
-> jeopardize the quality of other incoming and outgoing contemporary network calls, which is - of course - not acceptable
-> in a real context. 
+
+> Even on the **server**, on the other side, the operation would not be _tradeoff free_, since even supposing 
+  the unrealistic case of a limitless powerfull calculator, the network needed to complete a massive transition may
+  jeopardize the quality of other incoming and outgoing contemporary network calls, which is - of course - not acceptable
+  in a real context. 
 
 Even though the perfect way to handle such cases would indeed have been the usage of the 
  [Android paging library](https://developer.android.com/topic/libraries/architecture/paging), the realist -
@@ -240,14 +245,11 @@ This aspect of the application will be [deepened soon](#Data-Sources), but the c
  ready to the usage of the immediately following higher (and overall highest) layer.
  
 > In other words, the **only one** class dependency that a `UseCase` implementation will ever need is a `Repository` implementation 
-> or, at least, another `UseCase` as well.
+  or, at least, another `UseCase` as well.
 
 ### Data Sources
 Since the application retrieves data from _different sources_ and in _different formats_, an abstraction that also covers 
 the necessity to correctly handle this behaviour is needed.
-
-
-#### Firebase and Firestore [TODO]
 
 This has been realized through the `DataSource` interface, which inherits from the _clean architecture_ the very same constructive
  **single purpose philosophy** just like as also the `UseCase` interface does.
@@ -257,7 +259,64 @@ per implementation, thus once more getting a complete transparency to higher abs
 
  The application data sources and formats are 
  - `ArenaTournamentDatasourceImplementation`, which directly communicates with the ArenaTournament server
- - `FirebaseAuthDatasource`, which communicates with Firebase
- - `FirebaseStorageDatasource`, which communicates with Firestore
+ - `FirebaseAuthDatasource`, which communicates with the Firebase Authentication service
+ - `FirebaseStorageDatasource`, which communicates with the Firebase Storage service
  
-### ENDPOINTS [TODO]
+---------------------------------------
+
+#### ArenaTournament Server
+
+Most of the **not security-sensible content** provided by ArenaTournament is managed through a Server Application written 
+ in Spring and with which arose the need to communicate.
+
+This has, at some point in the development, brought up the necessity for an infrastructure organized in such a way
+ that would allow easy and strucured network messages exchanges.
+ 
+Also in this case the _clean architecture_ guide helped manage a sensible hierarchy of responsibilities, which provided 
+ the chance to execute **different network calls types** (`POST`, `GET`, `PUT`, `DELETE`), 
+ with the possible presence of **parameters**.
+ 
+On the bottom side of the DataSource abstraction laids infact another layer, whose leading actors are:
+- **`Endpoints`**, which is an interface whose implementations specify a `protocol`, an `host`, a `port` and which methods
+ are responsible to **build an HTTP message**, comprehensive of _URL_ and _parameters_.  
+- **`HttpClient`**, an **HTTP Engine** - that is the object responsable for dispatching the messages that `Endpoints` 
+ implementations build. 
+ 
+These calls, whose application is **simple as a method invocation** inside the `ArenaTournamentDatasourceImplementation`,
+returns `JSON` objects, whose handling _responsibility is demanded to the higher abstraction layer_. 
+
+##### MockEngine
+
+Since the development of both Client and Server has parallelly been carried forward, a further abstraction level has 
+ been built on top of this: the **MockEngine**.
+ 
+ > MockEngine is a [Testing tool](https://ktor.io/clients/http-client/testing.html) which allows simulating HTTP 
+ calls without actually connecting to the endpoint. It also allows to set a code block, that can handle the request 
+ and generates a response.
+
+The _MockEngine_ has been used to **intercept HTTP messages** and check their correctness. Given a correct HTTP message,
+ it provides a response analogous to the one that the real Server would have provided.   
+
+#### Firebase Authentication
+
+ > **Authentication**  
+ A very desirable feature is the identification of a user. 
+ Knowing a user's identity allows an app to provide an **homogeneous personalized experience** across several different 
+ user's devices and over time.
+
+-  **Firebase Authentication** provides backend services SDKs and libraries to authenticate users. 
+ It supports authentication using passwords, phone numbers, popular federated identity providers like Google, 
+ Facebook and Twitter, and more; but also it leverages industry standards like _[OAuth 2.0](https://oauth.net/2/)_ and 
+ _[OpenID Connect](https://openid.net/connect/)_.
+
+
+#### Firebase Cloud Storage   
+ 
+> **Storage**  
+ In order to enrich the customized experience with **ad hoc user-generated content**, an _online allocation space_
+ is necessary. This space should be used to store and serve files whereas necessary.
+ 
+- **Firebase Cloud Storage** is a powerful object storage service built for Google scale. 
+ The Firebase SDKs for Cloud Storage add Google security to file uploads and downloads for Firebase apps, 
+ regardless of network quality. It is possibile to use SDKs to store images, audio, video, or 
+ other user-generated content. On the server, Google Cloud Storage allows files access.  
