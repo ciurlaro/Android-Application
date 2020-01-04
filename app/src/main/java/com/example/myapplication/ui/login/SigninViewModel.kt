@@ -1,7 +1,7 @@
 package com.example.myapplication.ui.login
 
 import androidx.databinding.ObservableField
-import androidx.lifecycle.LifecycleCoroutineScope
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.exceptions.AuthException
@@ -18,41 +18,31 @@ class SigninViewModel(
 
     val email = ObservableField("")
     val password = ObservableField("")
+    val loginError = MutableLiveData<AuthException>()
+    val isLoginSuccessful = MutableLiveData<Boolean>()
 
-    fun signinWithEmail(
-        lifecycleCoroutineScope: LifecycleCoroutineScope,
-        onError: suspend (AuthException) -> Unit = {},
-        action: suspend (Boolean) -> Unit
-    ) = viewModelScope.launch {
+    fun signinWithEmail() = viewModelScope.launch {
         try {
-            val r = signinWithEmailUseCase.buildAction(email.get()!!, password.get()!!)
-            lifecycleCoroutineScope.launch { action(r) }
+            isLoginSuccessful.value = signinWithEmailUseCase.buildAction(email.get()!!, password.get()!!)
         } catch (e: AuthException) {
-            onError(e)
+            loginError.value = e
         }
     }
 
-    fun signinWithFb(
-        token: String,
-        lifecycleCoroutineScope: LifecycleCoroutineScope,
-        onError: suspend (AuthException) -> Unit = {},
-        action: suspend (Boolean) -> Unit
-    ) = viewModelScope.launch {
+    fun signinWithFb(token: String) = viewModelScope.launch {
         try {
-            val r = signInWithFacebookUseCase.buildAction(SignInWithFacebookUseCase.Params(token))
-            lifecycleCoroutineScope.launch { action(r) }
+            isLoginSuccessful.value = signInWithFacebookUseCase.buildAction(SignInWithFacebookUseCase.Params(token))
         } catch (e: AuthException) {
-            lifecycleCoroutineScope.launch { onError(e) }
+            loginError.value = e
         }
     }
 
-    fun signinWithGoogle(
-        token: String,
-        lifecycleCoroutineScope: LifecycleCoroutineScope,
-        action: suspend (Boolean) -> Unit
-    ) = viewModelScope.launch {
-        val r = signInWithGoogleUseCase.buildAction(token)
-        lifecycleCoroutineScope.launch { action(r) }
+    fun signinWithGoogle(token: String, email: String) = viewModelScope.launch {
+        try {
+            isLoginSuccessful.value = signInWithGoogleUseCase.buildAction(token, email)
+        } catch (e: AuthException) {
+            loginError.value = e
+        }
     }
 
 }

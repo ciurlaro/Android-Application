@@ -80,6 +80,9 @@ class ArenaTournamentRepositoryImplementation(
     override suspend fun getCurrentUserAuthMethods() =
         firebaseAuthDS.getCurrentUserAuthMethods()
 
+    override suspend fun getAuthMethodsForEmail(email: String) =
+        firebaseAuthDS.getAuthMethodsForEmail(email)
+
     override suspend fun linkGoogleAuthProvider(token: String) =
         firebaseAuthDS.linkGoogleAuthProvider(token)
 

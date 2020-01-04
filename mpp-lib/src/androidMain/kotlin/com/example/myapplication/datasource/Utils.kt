@@ -34,5 +34,12 @@ suspend fun <T> wrapTask(taskProvider: () -> Task<T>) =
         taskProvider().addListeners(it) { true }
     }
 
-suspend fun <T> Task<T>.await() =
-    wrapTask({ this }) { it }
+suspend fun <T> Task<T>.await() = suspendCancellableCoroutine<T> { cont ->
+    addOnSuccessListener { cont.resume(it) }
+    addOnCanceledListener { cont.cancel() }
+    addOnFailureListener { cont.resumeWithException(it) }
+}
+
+suspend fun Task<Void>.awaitUnit() {
+    await()
+}

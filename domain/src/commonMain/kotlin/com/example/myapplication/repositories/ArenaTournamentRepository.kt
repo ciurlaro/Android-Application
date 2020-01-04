@@ -120,6 +120,12 @@ interface ArenaTournamentRepository {
     suspend fun getCurrentUserAuthMethods(): List<AuthProviders>
 
     /**
+     * Retrieves the current user linked authentication methods.
+     * @throws AuthNotAuthenticatedException when not authenticated.
+     */
+    suspend fun getAuthMethodsForEmail(email: String): List<AuthProviders>
+
+    /**
      * Adds Google authentication to the current user using a Google OAuth token
      * @param token the Google OAuth token.
      * @throws AuthInvalidCredentialsException thrown if the token is malformed or expired.

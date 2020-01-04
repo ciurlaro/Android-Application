@@ -56,21 +56,30 @@ actual class FirebaseAuthDatasourceImplementation actual constructor(
 
     override suspend fun logout() = firebaseAuth.signOut()
 
-
     override suspend fun createAccountWithEmailAndPassword(email: String, password: String) =
-        wrapTask { firebaseAuth.createUserWithEmailAndPassword(email, password) }
+        firebaseAuth.createUserWithEmailAndPassword(email, password).await().run { true }
+
+    private val SignInMethodQueryResult.authProviders: List<AuthProviders>
+        get() {
+            val res = mutableListOf<AuthProviders>()
+            if (EmailAuthProvider.EMAIL_PASSWORD_SIGN_IN_METHOD in signInMethods!!)
+                res.add(AuthProviders.EMAIL_PASSWORD)
+            if (GoogleAuthProvider.GOOGLE_SIGN_IN_METHOD in signInMethods!!)
+                res.add(AuthProviders.GOOGLE)
+            if (FacebookAuthProvider.FACEBOOK_SIGN_IN_METHOD in signInMethods!!)
+                res.add(AuthProviders.FACEBOOK)
+            return res
+        }
 
     override suspend fun getCurrentUserAuthMethods() =
-        wrapTask({ firebaseAuth.fetchSignInMethodsForEmail(currentFirebaseUser.email!!) }) {
-            val res = mutableListOf<AuthProviders>()
-            if (EmailAuthProvider.EMAIL_PASSWORD_SIGN_IN_METHOD in it.signInMethods!!)
-                res.add(AuthProviders.EMAIL_PASSWORD)
-            if (GoogleAuthProvider.GOOGLE_SIGN_IN_METHOD in it.signInMethods!!)
-                res.add(AuthProviders.GOOGLE)
-            if (FacebookAuthProvider.FACEBOOK_SIGN_IN_METHOD in it.signInMethods!!)
-                res.add(AuthProviders.FACEBOOK)
-            res
-        }
+        firebaseAuth.fetchSignInMethodsForEmail(currentFirebaseUser.email!!)
+            .await()
+            .authProviders
+
+    override suspend fun getAuthMethodsForEmail(email: String) =
+        firebaseAuth.fetchSignInMethodsForEmail(email)
+            .await()
+            .authProviders
 
     override suspend fun reauthenticateWithPassword(password: String) =
         reauthenticate(EmailAuthProvider.getCredential(currentFirebaseUser.email!!, password))

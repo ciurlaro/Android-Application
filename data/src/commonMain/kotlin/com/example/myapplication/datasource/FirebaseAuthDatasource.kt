@@ -180,4 +180,6 @@ interface FirebaseAuthDatasource {
 
     suspend fun isCurrentUserEmailVerified(): Boolean
 
+    suspend fun getAuthMethodsForEmail(email: String): List<AuthProviders>
+
 }
