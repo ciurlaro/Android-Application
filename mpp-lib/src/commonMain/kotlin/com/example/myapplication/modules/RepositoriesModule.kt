@@ -14,8 +14,7 @@ object RepositoriesModule : KodeinModuleProvider {
             ArenaTournamentRepositoryImplementation(
                 instance(), instance(), instance(), instance(), instance(),
                 instance(), instance(), instance(), instance(), instance(),
-                instance(), instance(), instance(), instance(), instance(),
-                instance(), instance(), instance()
+                instance(), instance(), instance(), instance(), instance()
             )
         }
     }

@@ -3,7 +3,6 @@ package com.example.myapplication.repositories
 
 import com.example.myapplication.entities.*
 import com.example.myapplication.exceptions.AuthException.*
-import com.soywiz.klock.DateTimeTz
 
 interface ArenaTournamentRepository {
 
@@ -15,13 +14,6 @@ interface ArenaTournamentRepository {
         image: String,
         icon: String
     ): GameEntity
-
-    suspend fun createMatch(
-        matchDateTime: DateTimeTz,
-        playersCount: Int,
-        isRegistrationPossible: Boolean,
-        tournament: TournamentEntity
-    ): MatchEntity
 
     suspend fun createRegistration(
         user: UserEntity,
@@ -57,17 +49,9 @@ interface ArenaTournamentRepository {
     suspend fun getTournamentsContainingTitle(title: String, page: Int): List<TournamentEntity>
     suspend fun searchTournaments(title: String, gameId: String?, page: Int): List<TournamentEntity>
 
-    suspend fun getMatchById(id: Long): MatchEntity
-    suspend fun getMatchesByTournament(tournamentId: Long, page: Int): List<MatchEntity>
-    suspend fun getMatchesByGame(gameName: String, page: Int): List<MatchEntity>
-    suspend fun getMatchesAfterDate(dateTime: DateTimeTz, page: Int): List<MatchEntity>
-    suspend fun getMatchesAvailable(page: Int): List<MatchEntity>
-    suspend fun getMatchesByUser(userId: String, page: Int): List<MatchEntity>
-
     suspend fun getRegistrationById(id: Long): RegistrationEntity
-    suspend fun getRegistrationsByMatch(matchId: Long, page: Int): List<RegistrationEntity>
     suspend fun getRegistrationsByUser(userId: String, page: Int): List<RegistrationEntity>
-    suspend fun getRegistrationByUserAndMatch(userId: String, matchId: Long, page: Int): RegistrationEntity?
+    suspend fun getRegistrationsByTournament(tournamentId: Long, page: Int): List<RegistrationEntity>
 
     suspend fun getUserById(id: String): UserEntity
 

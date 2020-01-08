@@ -18,8 +18,8 @@ data class TournamentEmbeddedJSON(
 data class TournamentJSON(
     val id: Long,
     val playersNumber: Int,
+    val title: String,
     val tournamentDescription: String,
     val tournamentMode: String,
-    val title: String,
     val _links: LinksJSON
 )

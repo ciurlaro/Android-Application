@@ -1,14 +1,11 @@
 package com.example.myapplication.datasource
 
-import com.example.myapplication.mappers.DateTimeMapper
-import com.soywiz.klock.DateTimeTz
 import io.ktor.http.*
 
 data class EndpointsImplementation(
     override val protocol: String,
     override val host: String,
-    override val port: Int,
-    private val dateTimeMapper: DateTimeMapper
+    override val port: Int
 ) : ArenaTournamentDatasource.Endpoints {
 
     private fun ParametersBuilder.append(name: String, value: Any) =
@@ -28,9 +25,6 @@ data class EndpointsImplementation(
 
     override fun createGameUrl() =
         buildUrl("/game")
-
-    override fun createMatchUrl() =
-        buildUrl("/match")
 
     override fun createRegistrationUrl() =
         buildUrl("/registration")
@@ -98,14 +92,12 @@ data class EndpointsImplementation(
             append("page", page)
         }
 
-    //TODO: to implement server side
     override fun searchTournamentsByNameUrl(query: String, page: Int) =
         buildUrl("/tournament/search/byName") {
             append("title", query)
             append("page", page)
         }
 
-    //TODO: to implement server side
     override fun getShowCaseTournaments(page: Int) =
         buildUrl("/tournament/search/byShowCase") {
             append("page", page)
@@ -114,49 +106,6 @@ data class EndpointsImplementation(
     override fun getTournamentsContainingTitle(title: String, page: Int) =
         buildUrl("/tournament/search/containingTitle") {
             append("title", title)
-            append("page", page)
-        }
-
-    override fun matchByIdUrl(id: Long) =
-        buildUrl("/match/$id")
-
-    override fun matchesByTournamentIdUrl(tournamentId: Long, page: Int) =
-        buildUrl("/match/search/byTournamentId") {
-            append("tournamentId", tournamentId)
-            append("page", page)
-        }
-
-    override fun matchesByGameNameUrl(gameName: String, page: Int) =
-        buildUrl("/match/search/byGameId") {
-            append("gameName", gameName)
-            append("page", page)
-        }
-
-    override fun allMatchesUrl(page: Int) =
-        buildUrl("/match") {
-            append("page", page)
-        }
-
-    override fun matchesAfterDateUrl(dateTime: DateTimeTz, page: Int) =
-        buildUrl("/match/search/byMatchDateTimeIsAfter") {
-            append("matchDateTime", dateTimeMapper.toRemoteSingle(dateTime))
-            append("page", page)
-        }
-
-    override fun matchesByUserIdUrl(userId: String, page: Int): Url =
-        buildUrl("/match/search/byUserId") {
-            append("userId", userId)
-            append("page", page)
-        }
-
-    //TODO: current time server side
-    override fun matchesAvailableUrl(page: Int) =
-        buildUrl("/match/search/availableMatches") {
-            append("page", page)
-        }
-
-    override fun matchesNotFullUrl(page: Int) =
-        buildUrl("/match/search/notFull") {
             append("page", page)
         }
 
@@ -174,27 +123,14 @@ data class EndpointsImplementation(
             append("page", page)
         }
 
-    override fun registrationsByMatchIdUrl(matchId: Long, page: Int) =
-        buildUrl("/registration/search/byMatchId") {
-            append("matchId", matchId)
-            append("page", page)
-        }
-
-    override fun registrationsByUserIdUrlAndMatchIdUrl(userId: String, matchId: Long, page: Int) =
-        buildUrl("/registration/search/byUserIdAndMatchId") {
-            append("userId", userId)
-            append("matchId", matchId)
+    override fun registrationsByTournamentUrl(tournamentId: Long, page: Int) =
+        buildUrl("/registration/search/byTournamentId") {
+            append("tournamentId", tournamentId)
             append("page", page)
         }
 
     override fun userByIdUrl(userId: String) =
         buildUrl("/user/$userId")
-
-    override fun usersByMatchIdUrl(matchId: Long, page: Int) =
-        buildUrl("/user/search/byMatchId") {
-            append("matchId", matchId)
-            append("page", page)
-        }
 
     override fun isAccountVerifiedUrl() =
         buildUrl("isAccountVerified")

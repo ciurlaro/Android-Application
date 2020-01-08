@@ -9,21 +9,20 @@ import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.toList
 
+@FlowPreview
 class GetUsersByTournamentUseCase(
     private val repository: ArenaTournamentRepository
 ) : UseCaseWithParamsSuspending<GetUsersByTournamentUseCase.Params, List<UserEntity>> {
 
-    data class Params(val tournamentId: Long)
+    data class Params(val tournamentId: Long, val page: Int)
 
-    @FlowPreview
     override suspend fun buildAction(params: Params) =
-        repository.getMatchesByTournament(params.tournamentId, 1)
+        (0 until params.page)
             .asFlow()
-            .flatMapConcatIterable { repository.getRegistrationsByMatch(it.id, 0) }
+            .flatMapConcatIterable { repository.getRegistrationsByTournament(params.tournamentId, it) }
             .map { it.user }
             .toList()
 
-    @FlowPreview
-    suspend fun buildAction(tournamentId: Long) =
-        buildAction(Params(tournamentId))
+    suspend fun buildAction(tournamentId: Long, maxPage: Int = 1) =
+        buildAction(Params(tournamentId, maxPage))
 }

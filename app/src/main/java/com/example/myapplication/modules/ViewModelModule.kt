@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.myapplication.ui.history.HistoryViewModel
 import com.example.myapplication.ui.home.HomeViewModel
 import com.example.myapplication.ui.login.SigninViewModel
-import com.example.myapplication.ui.match.MatchViewModel
 import com.example.myapplication.ui.search.SearchViewModel
 import com.example.myapplication.ui.signup.SignupViewModel
 import com.example.myapplication.ui.tournament.CreateTournamentViewModel
@@ -36,7 +35,6 @@ object ViewModelModule : KodeinModuleProvider {
         bindViewModel<UserProfileViewModel>()
         bindViewModel<SigninViewModel>()
         bindViewModel<SignupViewModel>()
-        bindViewModel<MatchViewModel>()
         bindViewModel<SelectGameDialogViewModel>()
         bindViewModel<CreateTournamentViewModel>()
         bindViewModel<TournamentDetailViewModel>()

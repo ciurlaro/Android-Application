@@ -6,18 +6,19 @@ import com.example.myapplication.datasource.FirebaseStorageDatasource
 import com.example.myapplication.entities.*
 import com.example.myapplication.exceptions.AuthException
 import com.example.myapplication.mappers.*
-import com.example.myapplication.mappers.entitieslinkmapper.*
-import com.example.myapplication.rawresponses.MultipleMatchJSON
+import com.example.myapplication.mappers.entitieslinkmapper.GameLinkMapper
+import com.example.myapplication.mappers.entitieslinkmapper.ModeLinkMapper
+import com.example.myapplication.mappers.entitieslinkmapper.TournamentLinkMapper
+import com.example.myapplication.mappers.entitieslinkmapper.UserLinkMapper
 import com.example.myapplication.rawresponses.MultipleRegistrationsJSON
 import com.example.myapplication.rawresponses.MultipleTournamentsJSON
-import com.example.myapplication.rawresponses.createresponses.*
-import com.example.myapplication.splitters.MatchSplitter
+import com.example.myapplication.rawresponses.createresponses.CreateGameJSON
+import com.example.myapplication.rawresponses.createresponses.CreateGameModeJSON
+import com.example.myapplication.rawresponses.createresponses.CreateRegistrationJSON
+import com.example.myapplication.rawresponses.createresponses.CreateTournamentJSON
 import com.example.myapplication.splitters.RegistrationSplitter
 import com.example.myapplication.splitters.TournamentSplitter
 import com.example.myapplication.utils.Quadruple
-import com.example.myapplication.utils.Quintuple
-import com.soywiz.klock.DateFormat
-import com.soywiz.klock.DateTimeTz
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
@@ -32,19 +33,16 @@ class ArenaTournamentRepositoryImplementation(
     private val firebaseStorageDS: FirebaseStorageDatasource,
     private val gameMapper: GameMapper,
     private val modeMapper: ModeMapper,
-    private val matchMapper: MatchMapper,
     private val tournamentMapper: TournamentMapper,
     private val registrationMapper: RegistrationMapper,
     private val userMapper: UserMapper,
     private val currentUserMapper: CurrentUserMapper,
     private val tournamentSplitter: TournamentSplitter,
-    private val matchSplitter: MatchSplitter,
     private val registrationSplitter: RegistrationSplitter,
     private val userLinkMapper: UserLinkMapper,
     private val gameLinkMapper: GameLinkMapper,
     private val modeLinkMapper: ModeLinkMapper,
-    private val tournamentLinkMapper: TournamentLinkMapper,
-    private val matchLinkMapper: MatchLinkMapper
+    private val tournamentLinkMapper: TournamentLinkMapper
 ) : ArenaTournamentRepository {
 
     private suspend fun currentUserOrError() =
@@ -155,30 +153,6 @@ class ArenaTournamentRepositoryImplementation(
                 )
             }
 
-    override suspend fun createMatch(
-        matchDateTime: DateTimeTz,
-        playersCount: Int,
-        isRegistrationPossible: Boolean,
-        tournament: TournamentEntity
-    ) =
-        arenaTournamentDS.createMatch(
-            CreateMatchJSON(
-                matchDateTime.format(DateFormat("yyyy-MM-dd'T'HH:mm:ss")),
-                playersCount,
-                isRegistrationPossible,
-                tournament = tournamentLinkMapper.toRemoteSingle(tournament.id).toString()
-            )
-        )
-            .let {
-                return@let MatchEntity(
-                    it.id,
-                    matchDateTime,
-                    playersCount,
-                    isRegistrationPossible,
-                    tournament
-                )
-            }
-
 
     override suspend fun createRegistration(
         user: UserEntity,
@@ -246,82 +220,26 @@ class ArenaTournamentRepositoryImplementation(
     override suspend fun searchTournaments(title: String, gameId: String?, page: Int) =
         arenaTournamentDS.searchTournaments(title, gameId, page).transformTournaments()
 
-    override suspend fun getMatchById(id: Long) =
-        coroutineScope {
-            arenaTournamentDS.getMatchById(id)
-                .let { it to arenaTournamentDS.getTournamentByLink(it._links.tournamentEntity!!.href) }
-                .let {
-                    Quadruple(
-                        it.first,
-                        it.second,
-                        async { arenaTournamentDS.getGameByLink(it.second._links.gameEntity!!.href) },
-                        async { arenaTournamentDS.getUserByLink(it.second._links.userEntity!!.href) }
-                    )
-                }
-                .let { Quadruple(it.first, it.second, it.third.await(), it.fourth.await()) }
-                .let { matchMapper.fromRemoteSingle(it) }
-        }
-
-    override suspend fun getMatchesByTournament(tournamentId: Long, page: Int) =
-        arenaTournamentDS.getMatchesByTournamentId(tournamentId, page).transformMatches()
-
-
-    override suspend fun getMatchesByGame(gameName: String, page: Int) =
-        arenaTournamentDS.getGameByName(gameName)
-            .let { arenaTournamentDS.getMatchesByGameName(it.gameName, page).transformMatches() }
-
-    override suspend fun getMatchesAfterDate(dateTime: DateTimeTz, page: Int) =
-        arenaTournamentDS.getMatchesAfterDate(dateTime, page).transformMatches()
-
-    override suspend fun getMatchesAvailable(page: Int) =
-        arenaTournamentDS.getMatchesAvailable(page).transformMatches()
-
-
-    override suspend fun getMatchesByUser(userId: String, page: Int) =
-        arenaTournamentDS.getMatchesByUser(userId, page).transformMatches()
-
     override suspend fun getRegistrationById(id: Long) = coroutineScope {
         arenaTournamentDS.getRegistrationById(id)
-            .let { it to arenaTournamentDS.getMatchByLink(it._links.matchEntity!!.href) }
+            .let { it to async { arenaTournamentDS.getTournamentByLink(it._links.tournamentEntity!!.href) } }
             .let {
-                Triple(
+                Quadruple(
                     it.first,
-                    it.second,
-                    arenaTournamentDS.getTournamentByLink(it.second._links.tournamentEntity!!.href)
-                )
-            }
-            .let {
-                Quintuple(
-                    it.first,
-                    it.second,
-                    it.third,
-                    async { arenaTournamentDS.getGameByLink(it.third._links.gameEntity!!.href) },
-                    async { arenaTournamentDS.getUserById(it.first._links.userEntity!!.href) }
-                )
-            }
-            .let {
-                Quintuple(
-                    it.first,
-                    it.second,
-                    it.third,
-                    it.fourth.await(),
-                    it.fifth.await()
+                    it.second.await(),
+                    arenaTournamentDS.getGameByLink(it.second.await()._links.gameEntity!!.href),
+                    arenaTournamentDS.getUserById(it.first._links.userEntity!!.href)
                 )
             }
             .let { registrationMapper.fromRemoteSingle(it) }
     }
 
-    override suspend fun getRegistrationsByMatch(matchId: Long, page: Int) =
-        arenaTournamentDS.getRegistrationsByMatchId(matchId, page).transformRegistrations()
-
 
     override suspend fun getRegistrationsByUser(userId: String, page: Int) =
         arenaTournamentDS.getRegistrationsByUser(userId, page).transformRegistrations()
 
-    override suspend fun getRegistrationByUserAndMatch(userId: String, matchId: Long, page: Int) =
-        arenaTournamentDS.getRegistrationByUserIdAndMatchId(userId, matchId, page)
-            .transformRegistrations()
-            .firstOrNull()
+    override suspend fun getRegistrationsByTournament(tournamentId: Long, page: Int) =
+        arenaTournamentDS.getRegistrationsByTournament(tournamentId, page).transformRegistrations()
 
     override suspend fun getUserById(id: String) =
         arenaTournamentDS.getUserById(id)
@@ -354,56 +272,20 @@ class ArenaTournamentRepositoryImplementation(
             .map { tournamentMapper.fromRemoteSingle(it) }
             .toList()
 
-    private suspend fun MultipleMatchJSON.transformMatches() =
-        matchSplitter(this)
-            .asFlow()
-            .map {
-                it to arenaTournamentDS.getTournamentByLink(it._links.tournament!!.href)
-            }
-            .scopedMap {
-                Quadruple(
-                    it.first,
-                    it.second,
-                    async { arenaTournamentDS.getGameByLink(it.second._links.game!!.href) },
-                    async { arenaTournamentDS.getUserByLink(it.second._links.admin!!.href) }
-                )
-            }
-            .map {
-                Quadruple(it.first, it.second, it.third.await(), it.fourth.await())
-            }
-            .map {
-                matchMapper.fromRemoteSingle(it)
-            }.toList()
 
     private suspend fun MultipleRegistrationsJSON.transformRegistrations() =
         registrationSplitter(this)
             .asFlow()
-            .map { it to arenaTournamentDS.getMatchByLink(it._links.match!!.href) }
-            .map {
-                Triple(
-                    it.first,
-                    it.second,
-                    arenaTournamentDS.getTournamentByLink(it.second._links.tournament!!.href)
-                )
-            }
             .scopedMap {
-                Quintuple(
-                    it.first,
-                    it.second,
-                    it.third,
-                    async { arenaTournamentDS.getGameByLink(it.third._links.game!!.href) },
-                    async { arenaTournamentDS.getUserByLink(it.first._links.user!!.href) }
+                val tournament = async { arenaTournamentDS.getTournamentByLink(it._links.tournament!!.href) }
+                Quadruple(
+                    it,
+                    tournament,
+                    async { arenaTournamentDS.getGameByLink(tournament.await()._links.game!!.href) },
+                    async { arenaTournamentDS.getUserByLink(it._links.user!!.href) }
                 )
             }
-            .map {
-                Quintuple(
-                    it.first,
-                    it.second,
-                    it.third,
-                    it.fourth.await(),
-                    it.fifth.await()
-                )
-            }
+            .map { Quadruple(it.first, it.second.await(), it.third.await(), it.fourth.await()) }
             .map { registrationMapper.fromRemoteSingle(it) }
             .toList()
 

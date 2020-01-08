@@ -295,7 +295,9 @@ Since the development of both Client and Server has parallelly been carried forw
  and generates a response.
 
 The _MockEngine_ has been used to **intercept HTTP messages** and check their correctness. Given a correct HTTP message,
- it provides a response analogous to the one that the real Server would have provided.   
+ it provides a response analogous to the one that the real Server would have provided.
+
+REST Standard used [TODO]
 
 #### Firebase Authentication
 

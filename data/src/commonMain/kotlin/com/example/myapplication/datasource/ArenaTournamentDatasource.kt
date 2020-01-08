@@ -2,19 +2,12 @@ package com.example.myapplication.datasource
 
 import com.example.myapplication.rawresponses.*
 import com.example.myapplication.rawresponses.createresponses.*
-import com.soywiz.klock.DateFormat
-import com.soywiz.klock.DateTimeTz
 import io.ktor.http.Url
 
 interface ArenaTournamentDatasource {
 
-    companion object {
-        val DEFAULT_DATE_TIME_PATTERN = DateFormat("yyyy-MM-dd'T'HH:mm:ss")
-    }
-
     suspend fun createGameMode(gameModeJSON: CreateGameModeJSON): ModeJSON
     suspend fun createGame(gameJSON: CreateGameJSON): GameJSON
-    suspend fun createMatch(matchJSON: CreateMatchJSON): MatchJSON
     suspend fun createRegistration(registrationJSON: CreateRegistrationJSON): RegistrationJSON
     suspend fun createTournament(tournamentJSON: CreateTournamentJSON): TournamentJSON
     suspend fun createUser(userJSON: CreateUserJSON): UserJSON
@@ -36,24 +29,13 @@ interface ArenaTournamentDatasource {
     suspend fun getShowCaseTournaments(page: Int): MultipleTournamentsJSON
     suspend fun getTournamentsContainingTitle(title: String, page: Int): MultipleTournamentsJSON
 
-    suspend fun getMatchById(id: Long): MatchJSON
-    suspend fun getMatchByLink(link: String): MatchJSON
-    suspend fun getMatchesByGameName(gameName: String, page: Int): MultipleMatchJSON
-    suspend fun getMatchesByUser(userId: String, page: Int): MultipleMatchJSON
-    suspend fun getMatchesAfterDate(dateTime: DateTimeTz, page: Int): MultipleMatchJSON
-    suspend fun getMatchesAvailable(page: Int): MultipleMatchJSON
-    suspend fun getMatchesByTournamentId(tournamentId: Long, page: Int): MultipleMatchJSON
-    suspend fun getMatchesNotFull(page: Int): MultipleMatchJSON
-
     suspend fun getRegistrationById(id: Long): RegistrationJSON
     suspend fun getRegistrationByLink(link: String): RegistrationJSON
-    suspend fun getRegistrationByUserIdAndMatchId(userId: String, matchId: Long, page: Int): MultipleRegistrationsJSON
     suspend fun getRegistrationsByUser(userId: String, page: Int): MultipleRegistrationsJSON
-    suspend fun getRegistrationsByMatchId(matchId: Long, page: Int): MultipleRegistrationsJSON
+    suspend fun getRegistrationsByTournament(tournamentId: Long, page: Int): MultipleRegistrationsJSON
 
     suspend fun getUserById(id: String): UserJSON
     suspend fun getUserByLink(link: String): UserJSON
-    suspend fun getUsersByMatchId(matchId: Long, page: Int): MultipleUsersJSON
     suspend fun getAccountVerificationStatus(): AccountStatusJSON
     suspend fun getAccountSubscription(): SubscriptionStatusJSON
     suspend fun searchTournaments(title: String, gameId: String?, page: Int): MultipleTournamentsJSON
@@ -66,7 +48,6 @@ interface ArenaTournamentDatasource {
 
         fun createGameModeUrl(): Url
         fun createGameUrl(): Url
-        fun createMatchUrl(): Url
         fun createRegistrationUrl(): Url
         fun createTournamentUrl(): Url
         fun createUserUrl(): Url
@@ -88,24 +69,12 @@ interface ArenaTournamentDatasource {
         fun getShowCaseTournaments(page: Int): Url
         fun getTournamentsContainingTitle(title: String, page: Int): Url
 
-        fun matchByIdUrl(id: Long): Url
-        fun matchesByTournamentIdUrl(tournamentId: Long, page: Int): Url
-        fun matchesByGameNameUrl(gameName: String, page: Int): Url
-        fun matchesByUserIdUrl(userId: String, page: Int): Url
-        fun allMatchesUrl(page: Int): Url
-        fun matchesAfterDateUrl(dateTime: DateTimeTz, page: Int): Url
-        fun matchesAvailableUrl(page: Int): Url
-
         fun allRegistrationsUrl(page: Int): Url
         fun registrationByIdUrl(id: Long): Url
-        fun matchesNotFullUrl(page: Int): Url
         fun registrationsByUserUrl(userId: String, page: Int): Url
-
-        fun registrationsByMatchIdUrl(matchId: Long, page: Int): Url
-        fun registrationsByUserIdUrlAndMatchIdUrl(userId: String, matchId: Long, page: Int): Url
+        fun registrationsByTournamentUrl(tournamentId: Long, page: Int): Url
 
         fun userByIdUrl(userId: String): Url
-        fun usersByMatchIdUrl(matchId: Long, page: Int): Url
         fun isAccountVerifiedUrl(): Url
         fun isAccountSubscribedUrl(): Url
         fun searchTournaments(title: String, gameId: String?, page: Int): Url

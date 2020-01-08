@@ -24,8 +24,7 @@ object DatasourcesModule : KodeinModuleProvider {
             EndpointsImplementation(
                 instance("serverProtocol"),
                 instance("serverUrl"),
-                instance("serverPort"),
-                instance()
+                instance("serverPort")
             )
         }
     }

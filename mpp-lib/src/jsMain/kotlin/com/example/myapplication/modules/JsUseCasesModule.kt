@@ -9,14 +9,9 @@ import com.example.myapplication.usecases.match.JsGetAllMatchesByUser
 import com.example.myapplication.usecases.match.JsGetMatchesByTournament
 import com.example.myapplication.usecases.mode.JsCreateGameMode
 import com.example.myapplication.usecases.registration.JsCreateRegistration
-import com.example.myapplication.usecases.registration.JsGetAllRegistrationsByMatch
 import com.example.myapplication.usecases.registration.JsGetRegistrationsByTournament
 import com.example.myapplication.usecases.registration.JsGetRegistrationsByUser
 import com.example.myapplication.usecases.tournament.*
-import com.example.myapplication.usecases.user.JsCreateUser
-import com.example.myapplication.usecases.user.JsGetAccountVerificationStatus
-import com.example.myapplication.usecases.user.JsGetUserInfo
-import com.example.myapplication.usecases.user.JsIsSubscribedAccount
 import org.kodein.di.Kodein
 import org.kodein.di.erased.bind
 import org.kodein.di.erased.instance
@@ -36,7 +31,6 @@ object JsUseCasesModule : KodeinModuleProvider {
         bind<JsGetMatchesByTournament>() with singleton { JsGetMatchesByTournament(instance()) }
 
         bind<JsCreateRegistration>() with singleton { JsCreateRegistration(instance()) }
-        bind<JsGetAllRegistrationsByMatch>() with singleton { JsGetAllRegistrationsByMatch(instance()) }
         bind<JsGetRegistrationsByTournament>() with singleton { JsGetRegistrationsByTournament(instance()) }
         bind<JsGetRegistrationsByUser>() with singleton { JsGetRegistrationsByUser(instance()) }
 
@@ -46,11 +40,6 @@ object JsUseCasesModule : KodeinModuleProvider {
         bind<JsGetTournamentsByMode>() with singleton { JsGetTournamentsByMode(instance()) }
         bind<JsGetTournamentsContainingTitle>() with singleton { JsGetTournamentsContainingTitle(instance()) }
         bind<JsGetCreatedTournamentsByAdmin>() with singleton { JsGetCreatedTournamentsByAdmin(instance()) }
-
-        bind<JsCreateUser>() with singleton { JsCreateUser(instance()) }
-        bind<JsGetUserInfo>() with singleton { JsGetUserInfo(instance()) }
-        bind<JsIsSubscribedAccount>() with singleton { JsIsSubscribedAccount(instance()) }
-        bind<JsGetAccountVerificationStatus>() with singleton { JsGetAccountVerificationStatus(instance()) }
     }
 }
 

@@ -8,8 +8,8 @@
     "registrationEntity": {
       "href": "http://localhost:8080/registration/1"
     },
-    "match": {
-      "href": "http://localhost:8080/registration/1/match"
+    "tournament": {
+      "href": "http://localhost:8080/registration/1/tournament"
     },
     "user": {
       "href": "http://localhost:8080/registration/1/user"

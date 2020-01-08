@@ -4,7 +4,6 @@ package com.example.myapplication.datasource
 import com.example.myapplication.exceptions.AuthException
 import com.example.myapplication.rawresponses.*
 import com.example.myapplication.rawresponses.createresponses.*
-import com.soywiz.klock.DateTimeTz
 import io.ktor.client.HttpClient
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.get
@@ -56,13 +55,6 @@ class ArenaTournamentDatasourceImplementation(
             )
         }
 
-    override suspend fun createMatch(matchJSON: CreateMatchJSON): MatchJSON =
-        with(matchJSON) {
-            httpClient.authenticatedPost(
-                endpoints.createMatchUrl(),
-                Json.stringify(CreateMatchJSON.serializer(), this)
-            )
-        }
 
     override suspend fun createRegistration(registrationJSON: CreateRegistrationJSON): RegistrationJSON =
         with(registrationJSON) {
@@ -124,48 +116,11 @@ class ArenaTournamentDatasourceImplementation(
     ): MultipleTournamentsJSON =
         httpClient.get(endpoints.getTournamentsContainingTitle(title, page))
 
-    override suspend fun getMatchById(id: Long): MatchJSON =
-        httpClient.get(endpoints.matchByIdUrl(id))
-
-    override suspend fun getMatchByLink(link: String): MatchJSON =
-        httpClient.get(link)
-
-    override suspend fun getMatchesByTournamentId(
-        tournamentId: Long,
-        page: Int
-    ): MultipleMatchJSON =
-        httpClient.get(endpoints.matchesByTournamentIdUrl(tournamentId, page))
-
-    override suspend fun getMatchesByGameName(gameName: String, page: Int): MultipleMatchJSON =
-        httpClient.get(endpoints.matchesByGameNameUrl(gameName, page))
-
-    override suspend fun getMatchesAfterDate(
-        dateTime: DateTimeTz,
-        page: Int
-    ): MultipleMatchJSON =
-        httpClient.get(endpoints.matchesAfterDateUrl(dateTime, page))
-
-    override suspend fun getMatchesAvailable(page: Int): MultipleMatchJSON =
-        httpClient.get(endpoints.matchesAvailableUrl(page))
-
-    override suspend fun getMatchesByUser(userId: String, page: Int): MultipleMatchJSON =
-        httpClient.get(endpoints.matchesByUserIdUrl(userId, page))
-
     override suspend fun getRegistrationById(id: Long): RegistrationJSON =
         httpClient.get(endpoints.registrationByIdUrl(id))
 
     override suspend fun getRegistrationByLink(link: String): RegistrationJSON =
         httpClient.get(link)
-
-    override suspend fun getRegistrationByUserIdAndMatchId(
-        userId: String,
-        matchId: Long,
-        page: Int
-    ): MultipleRegistrationsJSON =
-        httpClient.get(endpoints.registrationsByUserIdUrlAndMatchIdUrl(userId, matchId, page))
-
-    override suspend fun getMatchesNotFull(page: Int): MultipleMatchJSON =
-        httpClient.get(endpoints.matchesNotFullUrl(page))
 
     override suspend fun getRegistrationsByUser(
         userId: String,
@@ -173,20 +128,17 @@ class ArenaTournamentDatasourceImplementation(
     ): MultipleRegistrationsJSON =
         httpClient.get(endpoints.registrationsByUserUrl(userId, page))
 
-    override suspend fun getRegistrationsByMatchId(
-        matchId: Long,
+    override suspend fun getRegistrationsByTournament(
+        tournamentId: Long,
         page: Int
     ): MultipleRegistrationsJSON =
-        httpClient.get(endpoints.registrationsByMatchIdUrl(matchId, page))
+        httpClient.get(endpoints.registrationsByTournamentUrl(tournamentId, page))
 
     override suspend fun getUserById(id: String): UserJSON =
         httpClient.get(endpoints.userByIdUrl(id))
 
     override suspend fun getUserByLink(link: String): UserJSON =
         httpClient.get(link)
-
-    override suspend fun getUsersByMatchId(matchId: Long, page: Int): MultipleUsersJSON =
-        httpClient.get(endpoints.usersByMatchIdUrl(matchId, page))
 
     override suspend fun getAccountVerificationStatus(): AccountStatusJSON =
         httpClient.authenticatedGet(endpoints.isAccountVerifiedUrl())

@@ -12,13 +12,8 @@ import com.example.myapplication.usecases.match.JsGetAllMatchesByUser
 import com.example.myapplication.usecases.match.JsGetMatchesByTournament
 import com.example.myapplication.usecases.mode.JsCreateGameMode
 import com.example.myapplication.usecases.registration.JsCreateRegistration
-import com.example.myapplication.usecases.registration.JsGetAllRegistrationsByMatch
 import com.example.myapplication.usecases.registration.JsGetRegistrationsByTournament
 import com.example.myapplication.usecases.tournament.*
-import com.example.myapplication.usecases.user.JsCreateUser
-import com.example.myapplication.usecases.user.JsGetAccountVerificationStatus
-import com.example.myapplication.usecases.user.JsGetUserInfo
-import com.example.myapplication.usecases.user.JsIsSubscribedAccount
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.erased.instance
@@ -67,9 +62,6 @@ class  JsDependencyContainer(
     @JsName("createRegistration")
     val createRegistration by instance<JsCreateRegistration>()
 
-    @JsName("getAllRegistrationsByMatch")
-    val getAllRegistrationsByMatch by instance<JsGetAllRegistrationsByMatch>()
-
     @JsName("getAllRegistrationsByTournament")
     val getAllRegistrationsByTournament by instance<JsGetRegistrationsByTournament>()
 
@@ -96,16 +88,5 @@ class  JsDependencyContainer(
     val getTournamentsContainingTitle by instance<JsGetTournamentsContainingTitle>()
 
     /* User usecases  */
-    @JsName("createUser")
-    val createUser by instance<JsCreateUser>()
-
-    @JsName("getAccountVerificationStatusUseCase")
-    val getAccountVerificationStatusUseCase by instance<JsGetAccountVerificationStatus>()
-
-    @JsName("getUserInfo")
-    val getUserInfo by instance<JsGetUserInfo>()
-
-    @JsName("isSubscribed")
-    val isSubscribed by instance<JsIsSubscribedAccount>()
 
 }
