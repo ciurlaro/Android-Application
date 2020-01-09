@@ -37,7 +37,7 @@ The purpose is to facilitate development, deployment, usage and maintenance.
 In order to do so, the architecture of the system need to **elevate the features**, 
 so that both the understanding of the system and, therefore, the aids in development and maintenance result simplified.
 
-The architecture should clearly ”scream” it’s purpose, beyond the details of its specific implementation.
+The architecture should clearly _”scream”_ it’s purpose, beyond the details of its specific implementation.
 
 This particolar subtask is based on the idea that frameworks are tools to be used and not to be conditioned by; 
 which means that **a good software architecture allows decisions** about frameworks, databases, web servers, 
