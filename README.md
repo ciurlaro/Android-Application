@@ -15,7 +15,7 @@
     - [Repository](#Repository)
     - [Data Sources](#Data-Sources)
         - [ArenaTournament Server](#ArenaTournament-Server)
-            - [MockEngine](#MockEngine)
+            - [Testing](#Testing)
         - [Firebase Authentication](#Firebase-Authentication)
         - [Firebase Cloud Storage](#Firebase-Cloud-Storage)
    
@@ -153,6 +153,48 @@ Both `Couroutine`s and `Asynchronous Flow`s exploit a **logical tree representat
 that only requires a simple programmatic explication of execution dependencies.
 
 
+### Kotlin Multiplatform
+
+**Kotlin Multiplatform** is a Kotlin feature that allows different
+_targets compilations_:
+-	**Kotlin/JVM**, which _outputs JAR/AAR files_ to be used by Java based
+    Projects such as those in `Android`, or `Spring`.
+-	**Kotlin/JS**, which _outputs JavaScript files_ to be used in other
+    JavaScript based files and frameworks, like `Angular`, `React` or `Node`.
+-	**Kotlin/Native**, which _outputs binaries_ to be used by native platforms.
+    > Belong to this category, for example, _Apple_ frameworks
+        (which open Kotlin usage to targets like iOS and macOS)
+       or other native executables (like _Windows_ and _Linux_).
+    >
+    > It brings with it an important consequence: the possibility to write common code across different platforms.
+
+Sharing code between platforms is a powerful concept which exists in Android
+in different declinations.
+
+It may be hard to accomplish without a cross-platform framework like `Flutter` or `React Native`,
+but the **tradeoff** in the usage of these frameworks is **objectively salty**.
+
+The principle reasons are that
+- They need a **framework-specific training** to get accustomed.
+- They are just bridges to the native layer and consequently
+    they permit **lower control** and **mediocre performances** compared
+    to the native ones.
+
+Kotlin Multiplatform, actually, is the only existing native cross-platform approach.
+
+Instead of moving into another framework, it allows to share networking,
+caching, business and application logics.
+
+It perfectly **fits the clean architecture _modus operandi_**, since it
+states characteristics and relationships that the various modules of the
+ application must respect; it also delegates the specific implementation
+ to the lowest possible abstraction layer: the platform.
+
+It has thus been the most obvious choice to **minimize code rewriting**
+and **maximize code reusing**.
+
+
+
 
 ### Other goodies
 ArenaTournament makes use of the brand new [**Navigation**](https://developer.android.com/guide/navigation/navigation-getting-started) Component, 
@@ -285,12 +327,12 @@ On the bottom side of the DataSource abstraction laids infact another layer, who
 These calls, whose application is **simple as a method invocation** inside the `ArenaTournamentDatasourceImplementation`,
 returns `JSON` objects, whose handling _responsibility is demanded to the higher abstraction layer_. 
 
-##### MockEngine
+##### Testing
 
 Since the development of both Client and Server has parallelly been carried forward, a further abstraction level has 
  been built on top of this: the **MockEngine**.
  
- > MockEngine is a [Testing tool](https://ktor.io/clients/http-client/testing.html) which allows simulating HTTP 
+ > _MockEngine_ is a [Testing tool](https://ktor.io/clients/http-client/testing.html) which allows simulating HTTP
  calls without actually connecting to the endpoint. It also allows to set a code block, that can handle the request 
  and generates a response.
 
