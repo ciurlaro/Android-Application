@@ -5,12 +5,12 @@ import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.exceptions.AuthException
-import com.example.myapplication.usecases.user.creation.CreateAccountWithCompleteInformation
+import com.example.myapplication.usecases.user.creation.CreateAccountWithCompleteInformationUseCase
 import kotlinx.coroutines.launch
 
 
 class SignupViewModel(
-    private val createAccountWithCompleteInformation: CreateAccountWithCompleteInformation
+    private val createAccountWithCompleteInformationUseCase: CreateAccountWithCompleteInformationUseCase
 ) : ViewModel() {
 
     val email = ObservableField("")
@@ -25,7 +25,11 @@ class SignupViewModel(
         onSuccess: suspend (Boolean) -> Unit
     ) = viewModelScope.launch {
         try {
-            val r = createAccountWithCompleteInformation.buildAction(email.get()!!, password.get()!!, nickname.get()!!)
+            val r = createAccountWithCompleteInformationUseCase.buildAction(
+                email.get()!!,
+                password.get()!!,
+                nickname.get()!!
+            )
             lifecycleCoroutineScope.launch { onSuccess(r) }
         } catch (e: AuthException) {
             lifecycleCoroutineScope.launch { onError(e) }

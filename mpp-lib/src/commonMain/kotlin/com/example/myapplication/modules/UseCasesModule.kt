@@ -10,7 +10,7 @@ import com.example.myapplication.usecases.registration.GetRegistrationsByTournam
 import com.example.myapplication.usecases.registration.GetRegistrationsByUserUseCase
 import com.example.myapplication.usecases.tournament.*
 import com.example.myapplication.usecases.user.IsUserRegisteredUseCase
-import com.example.myapplication.usecases.user.creation.CreateAccountWithCompleteInformation
+import com.example.myapplication.usecases.user.creation.CreateAccountWithCompleteInformationUseCase
 import com.example.myapplication.usecases.user.creation.CreateAccountWithEmailAndPasswordUseCase
 import com.example.myapplication.usecases.user.creation.CreateAccountWithFacebookToken
 import com.example.myapplication.usecases.user.creation.CreateAccountWithGoogleToken
@@ -67,8 +67,8 @@ object UseCasesModule : KodeinModuleProvider {
                 instance()
             )
         }
-        bind<CreateAccountWithCompleteInformation>() with singleton {
-            CreateAccountWithCompleteInformation(
+        bind<CreateAccountWithCompleteInformationUseCase>() with singleton {
+            CreateAccountWithCompleteInformationUseCase(
                 instance(),
                 instance()
             )

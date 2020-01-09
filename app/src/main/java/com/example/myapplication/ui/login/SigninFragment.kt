@@ -37,7 +37,7 @@ import org.kodein.di.erased.instance
 class SigninFragment : BaseFragment(), FacebookCallback<LoginResult> {
 
     companion object {
-        const val RC_SIGN_IN = 1234
+        const val RC_SIGN_IN = 42
     }
 
     private val args by navArgs<SigninFragmentArgs>()

@@ -41,7 +41,7 @@ import org.kodein.di.erased.instance
 class UserProfileFragment : BaseFragment(), FacebookCallback<LoginResult> {
 
     companion object {
-        const val RC_SIGN_IN = 1234
+        const val RC_SIGN_IN = 42
     }
 
     private val viewModel: UserProfileViewModel by viewModelInstance()
@@ -63,7 +63,7 @@ class UserProfileFragment : BaseFragment(), FacebookCallback<LoginResult> {
         with(viewModel) {
             model.observe { (user, _, providersLinked) ->
                 update_user_is_subscribed.visibility =
-                    if (user.isSubscriber || true) VISIBLE else INVISIBLE // "true" temporary, until backend will be ready
+                    if (user.isSubscriber || true) VISIBLE else INVISIBLE // "true" temporary, until backend will be online
                 user.image?.let {
                     Glide.with(requireContext())
                         .load(it)

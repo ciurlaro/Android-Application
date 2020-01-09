@@ -374,9 +374,12 @@ Stateless Protocol**.
  Knowing a user's identity allows an app to provide an **homogeneous personalized experience** across several different 
  user's devices and over time.
 
--  **Firebase Authentication** provides backend services SDKs and libraries to authenticate users. 
- It supports authentication using passwords, phone numbers, popular federated identity providers like Google, 
- Facebook and Twitter, and more; but also it leverages industry standards like _[OAuth 2.0](https://oauth.net/2/)_ and 
+-  **Firebase Authentication** provides backend services SDKs and
+libraries to authenticate users.
+ It supports authentication using passwords, phone numbers,
+ popular federated identity providers like Google,
+ Facebook and Twitter, and more; but also it leverages industry
+ standards like _[OAuth 2.0](https://oauth.net/2/)_ and
  _[OpenID Connect](https://openid.net/connect/)_.
 
 

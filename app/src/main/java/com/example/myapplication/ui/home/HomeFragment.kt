@@ -40,5 +40,4 @@ class HomeFragment : BaseFragment() {
             viewModel.getShowcaseTournaments()
         }
     }
-
 }

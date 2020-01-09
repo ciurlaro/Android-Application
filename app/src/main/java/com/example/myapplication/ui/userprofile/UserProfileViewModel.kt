@@ -6,8 +6,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.entities.AuthProviders
 import com.example.myapplication.entities.UserEntity
-import com.example.myapplication.repositories.ArenaTournamentRepository
+import com.example.myapplication.usecases.user.info.GetCurrentUserAuthMethodsUseCase
+import com.example.myapplication.usecases.user.info.GetCurrentUserInfoUseCase
+import com.example.myapplication.usecases.user.info.IsCurrentUserVerifiedUseCase
 import com.example.myapplication.usecases.user.login.*
+import com.example.myapplication.usecases.user.update.UpdateUserProfileImageUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -16,7 +19,10 @@ import java.io.File
 @ExperimentalCoroutinesApi
 class UserProfileViewModel(
     private val signoutUserUseCase: SignoutUserUseCase,
-    private val repository: ArenaTournamentRepository,
+    private val getCurrentUserInfoUseCase: GetCurrentUserInfoUseCase,
+    private val isCurrentUserVerifiedUseCase: IsCurrentUserVerifiedUseCase,
+    private val getCurrentUserAuthMethods: GetCurrentUserAuthMethodsUseCase,
+    private val updateUserProfileImageUseCase: UpdateUserProfileImageUseCase,
     private val linkFbAccountUseCase: LinkFbAccountUseCase,
     private val linkGoogleAccountUseCase: LinkGoogleAccountUseCase,
     private val linkEmailPasswordUseCase: LinkEmailPasswordUseCase
@@ -34,14 +40,14 @@ class UserProfileViewModel(
 
 
     fun loadUserInfo() = viewModelScope.launch {
-        val currentUser = async { repository.getCurrentUser()!! }
-        val isMailVerified = async { repository.isCurrentUserEmailVerified() }
-        val authMethods = async { repository.getCurrentUserAuthMethods() }
+        val currentUser = async { getCurrentUserInfoUseCase.buildAction() }
+        val isMailVerified = async { isCurrentUserVerifiedUseCase.buildAction() }
+        val authMethods = async { getCurrentUserAuthMethods.buildAction() }
         model.value = Model(currentUser.await(), isMailVerified.await(), authMethods.await())
     }
 
     fun updateProfileImage(data: File) = viewModelScope.launch {
-        repository.updateCurrentUserProfileImage(data.readBytes())
+        updateUserProfileImageUseCase.buildAction(data.readBytes())
         loadUserInfo()
     }
 
