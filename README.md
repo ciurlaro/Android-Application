@@ -7,6 +7,7 @@
    - [Structured and asynchronous concurrency](#Structured-and-asynchronous-concurrency)
       - [Coroutines](#Coroutines) 
       - [Asynchronous Flows](#Asynchronous-Flows)
+   - [Kotlin Multiplatform](#Kotlin-Multiplatform)
    - [Other goodies](#Other-goodies) 
 - [Use Cases](#Use-Cases)
     - [Requirements](#Requirements)
@@ -84,6 +85,8 @@ The division between `Views` and `ViewModels` is a notoriously almost mandatory 
 It surely handles an even more succesfull **separation of concern** than the one provided by the classical ModelViewController pattern, 
 but it also adds **some objective difficulties** due to the Lifecycles, which developers must take into account.
 
+![mvvm](https://www.oreilly.com/library/view/learning-javascript-design/9781449334840/httpatomoreillycomsourceoreillyimages1547825.png)
+
 Above the previously mentioned difficulties, the unsafe access to the ModelViews is, without a doubt, the most painfull.
 
 An elegant _Clean Architecture_ way to take advantage of this pattern bypassing this issue, is the ViewModel **delegation** 
@@ -96,7 +99,9 @@ as it was an innate property inside them.
 Among the others, also the `startActivity` default method is **unpleasant in the use**, since it requires the construction
  of an `Intent` and increases the quantity of avoidable boilerplate code.
  To facilitate and clean the code usage, `BaseActivity` and `BaseFragment` also conceal `startActivity` methods, 
- succeeding to make this a **one liner task**, regardless of whether the change of Activity requires the exchange of parameters or not. 
+ succeeding to make this a **one liner task**, regardless of whether the change of Activity requires the exchange of parameters or not.
+
+ ![activities](https://github.com/CesareIurlaro/Android-Application/blob/master/images/Activities.png?raw=true)
 
 
 ### Structured and asynchronous concurrency
@@ -165,9 +170,15 @@ _targets compilations_:
     > Belong to this category, for example, _Apple_ frameworks
         (which open Kotlin usage to targets like iOS and macOS)
        or other native executables (like _Windows_ and _Linux_).
-    >
-    > It brings with it an important consequence: the possibility to write common code across different platforms.
 
+
+![Kotlin Multiplatform](https://github.com/CesareIurlaro/Android-Application/blob/master/images/Kotlin%20Multiplatform.png?raw=true)
+
+
+It brings with it an **important consequence**: the possibility
+to share **common behaviour code across different platforms**.
+
+---------------------------------------
 Sharing code between platforms is a powerful concept which exists in Android
 in different declinations.
 
@@ -218,29 +229,41 @@ Furthermore, all the components usage moves around the full compatibility with a
 
 As already said,
 > a clean architecture **elevates the features** which, ideally,
- should be the most independent and therefore the most abstract, reusable code in the system.
+ should be the most independent and therefore the most abstract,
+ reusable code in the system.
 
 also
-> the implementation has to reflect different abstraction layers **decoupling** at the module level, 
+> the implementation has to reflect different abstraction layers
+**decoupling** at the module level,
   in order to prove effectiveness.
 
 
-The analysis of the most abstract - and therefore the use of which should have necessarily be made the simplest possible - 
-functionalities, led to the conclusion that the **use cases** were the features that had to be elevated.
+The analysis of the most abstract - and therefore the use of which should
+have necessarily be made the simplest possible -
+functionalities, led to the conclusion that the **use cases** were the features
+that had to be elevated.
 
-This clearly influenced the directionality of the abstraction and is the reason, 
-in conjunction with the fact that the application makes extensive use of network calls, for the so obtained stratification.
+This clearly influenced the directionality of the abstraction and is the
+reason,
+in conjunction with the fact that the application makes extensive use of
+network calls, for the so obtained stratification.
 
-The idea is that a single use case is the **atomic operation** that a user consumes; it may be the login, the updating 
-of its profile information, its subscription, the creation or the research of a tournament.
+The idea is that a single use case is the **atomic operation** that a
+user consumes; it may be the login, the updating
+of its profile information, its subscription, the creation or the research
+of a tournament.
 
-It doesn't really matter **what** the user wants to do, the point is that each his operation needs to be supported 
+It doesn't really matter **what** the user wants to do, the point is
+that each his operation needs to be supported
 by a single method call.
 
-Also, whenever may happen the need to delete or add a feature, its implementation should **always** be as **simple** as 
+Also, whenever may happen the need to delete or add a feature,
+its implementation should **always** be as **simple** as
  delete or add a single `UseCase` implementation.
 
 ### Implementation hierarchy
+
+![hyerarchy](https://github.com/CesareIurlaro/Android-Application/blob/master/images/clean_architecture_reloaded_layers.png?raw=true)
 
 The single method interface which rapresents these **user operations** is called `UseCase`.
 
@@ -336,10 +359,13 @@ Since the development of both Client and Server has parallelly been carried forw
  calls without actually connecting to the endpoint. It also allows to set a code block, that can handle the request 
  and generates a response.
 
-The _MockEngine_ has been used to **intercept HTTP messages** and check their correctness. Given a correct HTTP message,
+The _MockEngine_ has been used to **intercept HTTP messages** and check
+their correctness. Given a correct HTTP message,
  it provides a response analogous to the one that the real Server would have provided.
 
-REST Standard used [TODO]
+In order to accomplish the correctness above mentioned, the HTTP messages
+have to comply with the **[REST](https://en.wikipedia.org/wiki/Representational_state_transfer)
+Stateless Protocol**.
 
 #### Firebase Authentication
 
