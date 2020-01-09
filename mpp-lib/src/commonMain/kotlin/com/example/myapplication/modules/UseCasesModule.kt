@@ -14,7 +14,10 @@ import com.example.myapplication.usecases.user.creation.CreateAccountWithComplet
 import com.example.myapplication.usecases.user.creation.CreateAccountWithEmailAndPasswordUseCase
 import com.example.myapplication.usecases.user.creation.CreateAccountWithFacebookToken
 import com.example.myapplication.usecases.user.creation.CreateAccountWithGoogleToken
+import com.example.myapplication.usecases.user.info.GetCurrentUserAuthMethodsUseCase
 import com.example.myapplication.usecases.user.info.GetCurrentUserInfoUseCase
+import com.example.myapplication.usecases.user.info.GetUserInfoByUidUseCase
+import com.example.myapplication.usecases.user.info.IsCurrentUserVerifiedUseCase
 import com.example.myapplication.usecases.user.login.*
 import com.example.myapplication.usecases.user.update.UpdateUserEmailUseCase
 import com.example.myapplication.usecases.user.update.UpdateUserNicknameUseCase
@@ -32,7 +35,9 @@ object UseCasesModule : KodeinModuleProvider {
     override fun provideModule(): Kodein.Builder.() -> Unit = {
         bind<GetGamesByModeUseCase>() with singleton { GetGamesByModeUseCase(instance()) }
         bind<GetGamesContainingNameUseCase>() with singleton { GetGamesContainingNameUseCase(instance()) }
+
         bind<GetTournamentsByGameUseCase>() with singleton { GetTournamentsByGameUseCase(instance()) }
+        bind<GetTournamentByIdUseCase>() with singleton { GetTournamentByIdUseCase(instance()) }
         bind<GetTournamentsByModeUseCase>() with singleton { GetTournamentsByModeUseCase(instance(), instance()) }
         bind<GetTournamentsByModePerPageUseCase>() with singleton { GetTournamentsByModePerPageUseCase(instance()) }
         bind<GetTournamentsContainingTitleUseCase>() with singleton {
@@ -48,6 +53,9 @@ object UseCasesModule : KodeinModuleProvider {
         }
 
         bind<GetCurrentUserInfoUseCase>() with singleton { GetCurrentUserInfoUseCase(instance()) }
+        bind<GetUserInfoByUidUseCase>() with singleton { GetUserInfoByUidUseCase(instance()) }
+        bind<IsCurrentUserVerifiedUseCase>() with singleton { IsCurrentUserVerifiedUseCase(instance()) }
+        bind<GetCurrentUserAuthMethodsUseCase>() with singleton { GetCurrentUserAuthMethodsUseCase(instance()) }
 
         bind<GetShowCaseTournamentsUseCase>() with singleton { GetShowCaseTournamentsUseCase(instance()) }
 
