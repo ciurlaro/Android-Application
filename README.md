@@ -222,6 +222,8 @@ Furthermore, all the components usage moves around the full compatibility with a
 **[Support](https://developer.android.com/topic/libraries/support-library/index)** and 
 **[Androidx](https://developer.android.com/jetpack/androidx)** _libraries_.
 
+Finally, it supports the **Android multilingual resource feature**, which allows it to run in both _english_ and _italian_ languages
+
 
 ## Use Cases
 
