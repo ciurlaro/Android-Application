@@ -2,8 +2,8 @@
     <string name="app_name">My Application</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_title" translatable="false">Android Studio</string>
+    <string name="nav_header_subtitle" translatable="false">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
@@ -21,16 +21,15 @@
     <string name="user_profile">Profile</string>
     <string name="date_text">Date: %1$s</string>
     <string name="time_text">Time: %1$s</string>
-    <string name="players_text_fraction">%1$d/%2$d</string>
+    <string name="players_text_fraction" translatable="false">%1$d/%2$d</string>
 
-    <string name="players_number_text">%1$d|%2$d</string>
-    <string name="sign_in">SIGN IN</string>
-    <string name="sign_up">SIGN UP</string>
-    <string name="boh">BOH</string>
+    <string name="players_number_text" translatable="false">%1$d|%2$d</string>
+    <string name="sign_in" translatable="false">SIGN IN</string>
+    <string name="sign_up" translatable="false">SIGN UP</string>
 
     <string name="email_hint">Email</string>
     <string name="nickname_hint">Nickname</string>
-    <string name="pwd_hint">Password</string>
+    <string name="pwd_hint" translatable="false">Password</string>
     <string name="pwd_conf_hint">Confirm Password</string>
 
     <string name="nickname">user nickname</string>
@@ -73,7 +72,7 @@
     </string>
     <string name="select_a_game">Select a game</string>
     <string name="tournament_details">Tournament info</string>
-    <string name="players_in_tournament_numbers">%1$d/%2$d</string>
+    <string name="players_in_tournament_numbers" translatable="false">%1$d/%2$d</string>
     <string name="mail">user email</string>
     <string name="history_of_user">%1$s History</string>
     <string name="history">History</string>
@@ -85,8 +84,10 @@
     <string name="select_games">Select games</string>
     <string name="all_games">All games</string>
 
-    <string name="facebook_app_id">660604807780881</string>
-    <string name="google_server_client_id">848647809387-vr3gqt50heqeocr88g2mjg7t2kcu7p78.apps.googleusercontent.com</string>
+    <string name="facebook_app_id" translatable="false">660604807780881</string>
+    <string name="google_server_client_id" translatable="false">
+        848647809387-vr3gqt50heqeocr88g2mjg7t2kcu7p78.apps.googleusercontent.com
+    </string>
 
 
     <string name="or">or</string>
