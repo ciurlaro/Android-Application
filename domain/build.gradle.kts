@@ -24,7 +24,6 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(kotlin("stdlib-common", kotlinVersion))
-                api("com.soywiz.korlibs.klock:klock:$klockVersion")
                 api("org.jetbrains.kotlinx:kotlinx-coroutines-core-common:$coroutinesVersion")
             }
         }
@@ -51,13 +50,3 @@ kotlin {
     }
 
 }
-
-//kt2ts {
-//    output {
-//        outputFile = file("$buildDir/ts/kt2ts.d.ts")
-//        annotations = listOf("kotlin.js.JsName")
-//    }
-//    withGroovyBuilder {
-//        setProperty("classFilesSources.compileTasks", "listOf(tasks.compileKotlin)")
-//    }
-//}

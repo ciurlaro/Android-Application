@@ -1,9 +1,3 @@
-val kotlinVersion: String by settings
-val androidGradlePluginVersion: String by settings
-val gmsGradlePluginVersion: String by settings
-val nodePluginVersion: String by settings
-val jar2npmVersion: String by settings
-
 pluginManagement {
 
     repositories {
@@ -15,6 +9,13 @@ pluginManagement {
 
     resolutionStrategy {
         eachPlugin {
+
+            val kotlinVersion: String by settings
+            val androidGradlePluginVersion: String by settings
+            val gmsGradlePluginVersion: String by settings
+            val nodePluginVersion: String by settings
+            val jar2npmVersion: String by settings
+
             when (requested.id.id) {
                 "org.jetbrains.kotlin.jvm", "org.jetbrains.kotlin.js", "org.jetbrains.kotlin.multiplatform", "org.jetbrains.kotlin.android", "org.jetbrains.kotlin.android.extensions" ->
                     useModule("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
@@ -29,6 +30,28 @@ pluginManagement {
 
 }
 
-include(":app", ":data", ":domain", "mpp-lib", "web-client")
+include(":app", ":data", ":domain", "core-impl", ":kodein-di", "web-client")
 rootProject.name = "my-application"
-//enableFeaturePreview("GRADLE_METADATA")
+
+//if (file("../FirebaseMultiplatform").run { exists() && isDirectory })
+//    includeFirebaseMultiplatform("../FirebaseMultiplatform")
+//else if (file("../firebase-multiplatform").run { exists() && isDirectory })
+//    includeFirebaseMultiplatform("../firebase-multiplatform")
+//
+//fun includeFirebaseMultiplatform(path: String) =
+//    includeBuild(path) {
+//        dependencySubstitution {
+//            substitute(module("com.github.lamba92:firebase-multiplatform-core")).with(project(":core"))
+//            substitute(module("com.github.lamba92:firebase-multiplatform-core-js")).with(project(":core"))
+//            substitute(module("com.github.lamba92:firebase-multiplatform-core-android")).with(project(":core"))
+//            substitute(module("com.github.lamba92:firebase-multiplatform-core-metadata")).with(project(":core"))
+//            substitute(module("com.github.lamba92:firebase-multiplatform-auth")).with(project(":auth"))
+//            substitute(module("com.github.lamba92:firebase-multiplatform-auth-js")).with(project(":auth"))
+//            substitute(module("com.github.lamba92:firebase-multiplatform-auth-android")).with(project(":auth"))
+//            substitute(module("com.github.lamba92:firebase-multiplatform-auth-metadata")).with(project(":auth"))
+//            substitute(module("com.github.lamba92:firebase-multiplatform-storage")).with(project(":storage"))
+//            substitute(module("com.github.lamba92:firebase-multiplatform-storage-js")).with(project(":storage"))
+//            substitute(module("com.github.lamba92:firebase-multiplatform-storage-android")).with(project(":storage"))
+//            substitute(module("com.github.lamba92:firebase-multiplatform-storage-metadata")).with(project(":storage"))
+//        }
+//    }

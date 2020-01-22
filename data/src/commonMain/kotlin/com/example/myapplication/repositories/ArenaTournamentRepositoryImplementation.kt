@@ -210,7 +210,6 @@ class ArenaTournamentRepositoryImplementation(
     override suspend fun getTournamentsByUser(userId: String, page: Int) =
         arenaTournamentDS.getTournamentsByUser(userId, page).transformTournaments()
 
-    //
     override suspend fun getShowCaseTournaments(page: Int) =
         arenaTournamentDS.getShowCaseTournaments(page).transformTournaments()
 
@@ -220,19 +219,18 @@ class ArenaTournamentRepositoryImplementation(
     override suspend fun searchTournaments(title: String, gameId: String?, page: Int) =
         arenaTournamentDS.searchTournaments(title, gameId, page).transformTournaments()
 
-    override suspend fun getRegistrationById(id: Long) = coroutineScope {
+    override suspend fun getRegistrationById(id: Long) =
         arenaTournamentDS.getRegistrationById(id)
-            .let { it to async { arenaTournamentDS.getTournamentByLink(it._links.tournamentEntity!!.href) } }
             .let {
+                val tournamentJson = arenaTournamentDS.getTournamentByLink(it._links.tournamentEntity!!.href)
                 Quadruple(
-                    it.first,
-                    it.second.await(),
-                    arenaTournamentDS.getGameByLink(it.second.await()._links.gameEntity!!.href),
-                    arenaTournamentDS.getUserById(it.first._links.userEntity!!.href)
+                    it,
+                    tournamentJson,
+                    arenaTournamentDS.getGameByLink(tournamentJson._links.gameEntity!!.href),
+                    arenaTournamentDS.getUserById(tournamentJson._links.userEntity!!.href)
                 )
             }
             .let { registrationMapper.fromRemoteSingle(it) }
-    }
 
 
     override suspend fun getRegistrationsByUser(userId: String, page: Int) =
@@ -264,11 +262,10 @@ class ArenaTournamentRepositoryImplementation(
         tournamentSplitter(this)
             .asFlow()
             .scopedMap {
-                Triple(it,
-                    async { arenaTournamentDS.getGameByLink(it._links.game!!.href) },
-                    async { arenaTournamentDS.getUserByLink(it._links.admin!!.href) })
+                val gameJson = async() { arenaTournamentDS.getGameByLink(it._links.game!!.href) }
+                val userJson = async { arenaTournamentDS.getUserByLink(it._links.admin!!.href) }
+                Triple(it, gameJson.await(), userJson.await())
             }
-            .map { Triple(it.first, it.second.await(), it.third.await()) }
             .map { tournamentMapper.fromRemoteSingle(it) }
             .toList()
 
@@ -277,15 +274,11 @@ class ArenaTournamentRepositoryImplementation(
         registrationSplitter(this)
             .asFlow()
             .scopedMap {
-                val tournament = async { arenaTournamentDS.getTournamentByLink(it._links.tournament!!.href) }
-                Quadruple(
-                    it,
-                    tournament,
-                    async { arenaTournamentDS.getGameByLink(tournament.await()._links.game!!.href) },
-                    async { arenaTournamentDS.getUserByLink(it._links.user!!.href) }
-                )
+                val tournamentJson = async { arenaTournamentDS.getTournamentByLink(it._links.tournament!!.href) }
+                val gameJson = async { arenaTournamentDS.getGameByLink(tournamentJson.await()._links.game!!.href) }
+                val userJson = async { arenaTournamentDS.getUserByLink(it._links.user!!.href) }
+                Quadruple(it, tournamentJson.await(), gameJson.await(), userJson.await())
             }
-            .map { Quadruple(it.first, it.second.await(), it.third.await(), it.fourth.await()) }
             .map { registrationMapper.fromRemoteSingle(it) }
             .toList()
 

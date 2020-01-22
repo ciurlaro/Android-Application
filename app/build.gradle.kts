@@ -92,7 +92,7 @@ android {
         create("mock") {
             isMinifyEnabled = false
             isDebuggable = true
-            matchingFallbacks = listOf("debug")
+            matchingFallbacks = listOf("release")
             buildConfigField("String", "SERVER_PROTOCOL", "\"http\"")
             buildConfigField("String", "SERVER_URL", "\"mock\"")
             buildConfigField("int", "SERVER_PORT", "42")
@@ -104,7 +104,7 @@ android {
             buildConfigField("String", "SERVER_PROTOCOL", "\"http\"")
             buildConfigField("String", "SERVER_URL", "\"localhost\"")
             buildConfigField("int", "SERVER_PORT", "8080")
-            matchingFallbacks = listOf("debug")
+            matchingFallbacks = listOf("release")
         }
 
     }
@@ -155,7 +155,7 @@ dependencies {
     val imagepickerVersion: String by project
     val inlineActivityResultVersion: String by project
 
-    implementation(project(":mpp-lib"))
+    implementation(project(":kodein-di"))
 
     implementation("androidx.appcompat", "appcompat", androidxAppCompatVersion)
     implementation("androidx.core", "core-ktx", androidxCoreVersion)

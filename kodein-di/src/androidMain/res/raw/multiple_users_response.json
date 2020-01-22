@@ -1,0 +1,43 @@
+{
+  "_embedded": {
+    "userEntities": [
+      {
+        "id": "Cesare_1",
+        "email": "cesare@cesare.cesare",
+        "nickname": "CESA_RHINO",
+        "image": "cesare.png",
+        "subscriber": true
+      },
+      {
+        "id": "Lamba_2",
+        "email": "lamba@lamba.lamba",
+        "nickname": "LAMBA92",
+        "image": "lamba.png",
+        "subscriber": false
+      },
+      {
+        "id": "Beppe_3",
+        "email": "beppe@beppe.beppe",
+        "nickname": "BEPPE95",
+        "image": "beppe.png",
+        "subscriber": false
+        }
+      }
+    ]
+  },
+  "_links": {
+    "self": {
+      "href": "http://localhost:8080/user{?page,size,sort}",
+      "templated": true
+    },
+    "profile": {
+      "href": "http://localhost:8080/profile/user"
+    }
+  },
+  "page": {
+    "size": 20,
+    "totalElements": 3,
+    "totalPages": 1,
+    "number": 0
+  }
+}

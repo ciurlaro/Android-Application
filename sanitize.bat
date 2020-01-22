@@ -23,7 +23,12 @@ rmdir /q /s web-client\.idea
 rmdir /q /s web-client\.gradle
 del /q /s web-client\*.iml
 
-rmdir /q /s mpp-lib\build
-rmdir /q /s mpp-lib\.idea
-rmdir /q /s mpp-lib\.gradle
-del /q /s mpp-lib\*.iml
+rmdir /q /s core\build
+rmdir /q /s core\.idea
+rmdir /q /s core\.gradle
+del /q /s core\*.iml
+
+rmdir /q /s kodein-di\build
+rmdir /q /s kodein-di\.idea
+rmdir /q /s kodein-di\.gradle
+del /q /s kodein-di\*.iml

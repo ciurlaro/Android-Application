@@ -30,6 +30,7 @@ subprojects {
         jcenter()
         mavenCentral()
         maven("https://jitpack.io")
+        maven("https://dl.bintray.com/lamba92/com.github.lamba92")
     }
 }
 

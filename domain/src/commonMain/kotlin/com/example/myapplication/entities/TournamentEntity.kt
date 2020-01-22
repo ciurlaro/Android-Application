@@ -3,7 +3,7 @@ package com.example.myapplication.entities
 import kotlin.js.JsName
 
 @JsName("TournamentEntity")
-class TournamentEntity(
+data class TournamentEntity(
     val id: Long,
     val playersNumber: Int,
     val title: String,
