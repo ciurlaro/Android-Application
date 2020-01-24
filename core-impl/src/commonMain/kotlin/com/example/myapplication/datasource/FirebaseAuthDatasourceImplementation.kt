@@ -3,10 +3,8 @@ package com.example.myapplication.datasource
 import com.example.myapplication.entities.AuthProviders
 import com.example.myapplication.entities.AuthUserEntity
 import com.example.myapplication.exceptions.AuthException
-import com.github.lamba92.firebasemultiplatform.auth.FacebookAuthProvider
+import com.github.lamba92.firebasemultiplatform.auth.*
 import com.github.lamba92.firebasemultiplatform.auth.FirebaseAuth
-import com.github.lamba92.firebasemultiplatform.auth.GoogleAuthProvider
-import com.github.lamba92.firebasemultiplatform.auth.UserProfileChangeRequest
 
 class FirebaseAuthDatasourceImplementation(val firebaseAuth: FirebaseAuth) : FirebaseAuthDatasource {
 
@@ -14,11 +12,12 @@ class FirebaseAuthDatasourceImplementation(val firebaseAuth: FirebaseAuth) : Fir
         get() = firebaseAuth.getCurrentUser() ?: throw AuthException.AuthNotAuthenticatedException()
 
     private val List<String>.authProviders
-        get() = map {
+        get() = mapNotNull {
             when (it) {
-                in GoogleAuthProvider.GITHUB_SIGN_IN_METHOD -> AuthProviders.GOOGLE
+                in GoogleAuthProvider.GOOGLE_SIGN_IN_METHOD -> AuthProviders.GOOGLE
                 in FacebookAuthProvider.FACEBOOK_SIGN_IN_METHOD -> AuthProviders.FACEBOOK
-                in EmailAuthProvider. -> AuthProviders.EMAIL_PASSWORD
+                in EmailAuthProvider.EMAIL_PASSWORD_SIGN_IN_METHOD -> AuthProviders.EMAIL_PASSWORD
+                else -> null
             }
         }
 
@@ -64,10 +63,10 @@ class FirebaseAuthDatasourceImplementation(val firebaseAuth: FirebaseAuth) : Fir
         userOrError.linkWithCredentials(FacebookAuthProvider.getCredential(token)).let { true }
 
     override suspend fun linkPasswordAuthProvider(password: String) =
-        userOrError.linkWithCredentials(EmailAuthProvider.getCredential(userOrError.email, password))
+        userOrError.linkWithCredentials(EmailAuthProvider.getCredentials(userOrError.email!!, password)).let { true }
 
     override suspend fun reauthenticateWithPassword(password: String) =
-        userOrError.reauthenticate(EmailAuthProvider.getCredential(userOrError.email, password)).let { true }
+        userOrError.reauthenticate(EmailAuthProvider.getCredentials(userOrError.email!!, password)).let { true }
 
     override suspend fun reauthenticateWithGoogleToken(token: String) =
         userOrError.reauthenticate(GoogleAuthProvider.getCredentials(token)).let { true }
@@ -91,9 +90,8 @@ class FirebaseAuthDatasourceImplementation(val firebaseAuth: FirebaseAuth) : Fir
         }
 
 
-    override suspend fun isCurrentUserEmailVerified(): Boolean {
-        userOrError.
-    }
+    override suspend fun isCurrentUserEmailVerified() =
+        userOrError.isEmailVerified
 
     override suspend fun getAuthMethodsForEmail(email: String) =
         firebaseAuth.fetchSignInMethodsForEmail(email)

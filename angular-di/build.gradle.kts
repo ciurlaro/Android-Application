@@ -5,6 +5,11 @@ plugins {
 kotlin {
     js {
         nodejs()
+        compilations.all {
+            kotlinOptions {
+                freeCompilerArgs += listOf("-Xir-produce-js", "-Xgenerate-dts")
+            }
+        }
     }
 
     sourceSets {

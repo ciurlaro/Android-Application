@@ -5,6 +5,7 @@ pluginManagement {
         jcenter()
         mavenCentral()
         gradlePluginPortal()
+        maven("https://dl.bintray.com/kotlin/kotlin-dev")
     }
 
     resolutionStrategy {
@@ -30,7 +31,7 @@ pluginManagement {
 
 }
 
-include(":app", ":data", ":domain", "core-impl", ":kodein-di", "web-client", "angular-di")
+include(":data", ":domain", "core-impl", ":kodein-di", "web-client", "angular-di")
 rootProject.name = "my-application"
 
 //if (file("../FirebaseMultiplatform").run { exists() && isDirectory })

@@ -1,4 +1,4 @@
-org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin
+import org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin
 
 buildscript {
     repositories {
@@ -33,12 +33,13 @@ subprojects {
         mavenCentral()
         maven("https://jitpack.io")
         maven("https://dl.bintray.com/lamba92/com.github.lamba92")
+        maven("https://dl.bintray.com/kotlin/kotlin-dev")
     }
 }
 
 task<Copy>("copyPackages") {
     group = "jsmerda"
-    listOf("domain", "data", "mpp-lib").forEach {
+    listOf("domain", "data", "core-impl", "angular-di").forEach {
         dependsOn("$it:compileKotlinJs")
     }
     from(file("$buildDir/js/packages")) {
@@ -67,6 +68,6 @@ task<Copy>("copyPackages") {
     into("web-client/packages")
 }
 
-org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin.apply(project).apply {
+NodeJsRootPlugin.apply(project).apply {
     versions.dukat.version = "0.0.25"
 }
