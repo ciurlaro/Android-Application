@@ -1,3 +1,5 @@
+org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin
+
 buildscript {
     repositories {
         mavenCentral()
@@ -63,4 +65,8 @@ task<Copy>("copyPackages") {
         includeEmptyDirs = false
     }
     into("web-client/packages")
+}
+
+org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootPlugin.apply(project).apply {
+    versions.dukat.version = "0.0.25"
 }

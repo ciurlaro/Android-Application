@@ -13,6 +13,15 @@ class FirebaseAuthDatasourceImplementation(val firebaseAuth: FirebaseAuth) : Fir
     private val userOrError
         get() = firebaseAuth.getCurrentUser() ?: throw AuthException.AuthNotAuthenticatedException()
 
+    private val List<String>.authProviders
+        get() = map {
+            when (it) {
+                in GoogleAuthProvider.GITHUB_SIGN_IN_METHOD -> AuthProviders.GOOGLE
+                in FacebookAuthProvider.FACEBOOK_SIGN_IN_METHOD -> AuthProviders.FACEBOOK
+                in EmailAuthProvider. -> AuthProviders.EMAIL_PASSWORD
+            }
+        }
+
     override suspend fun updateUserEmail(email: String) =
         userOrError.updateEmail(email).let { true }
 
@@ -38,60 +47,56 @@ class FirebaseAuthDatasourceImplementation(val firebaseAuth: FirebaseAuth) : Fir
     override suspend fun loginWithGoogleToken(token: String) =
         firebaseAuth.signInWithCredential(GoogleAuthProvider.getCredentials(token)).let { true }
 
-    override suspend fun logout() {
-        TODO("Not yet implemented")
+    override suspend fun logout() =
+        firebaseAuth.signOut()
+
+    override suspend fun createAccountWithEmailAndPassword(email: String, password: String) =
+        firebaseAuth.createUserWithEmailAndPassword(email, password).let { true }
+
+    override suspend fun getCurrentUserAuthMethods() =
+        firebaseAuth.fetchSignInMethodsForEmail(userOrError.email!!)
+            .authProviders
+
+    override suspend fun linkGoogleAuthProvider(token: String) =
+        userOrError.linkWithCredentials(GoogleAuthProvider.getCredentials(token, null)).let { true }
+
+    override suspend fun linkFacebookAuthProvider(token: String) =
+        userOrError.linkWithCredentials(FacebookAuthProvider.getCredential(token)).let { true }
+
+    override suspend fun linkPasswordAuthProvider(password: String) =
+        userOrError.linkWithCredentials(EmailAuthProvider.getCredential(userOrError.email, password))
+
+    override suspend fun reauthenticateWithPassword(password: String) =
+        userOrError.reauthenticate(EmailAuthProvider.getCredential(userOrError.email, password)).let { true }
+
+    override suspend fun reauthenticateWithGoogleToken(token: String) =
+        userOrError.reauthenticate(GoogleAuthProvider.getCredentials(token)).let { true }
+
+    override suspend fun reauthenticateWithFacebook(token: String) =
+        userOrError.reauthenticate(FacebookAuthProvider.getCredential(token)).let { true }
+
+    override suspend fun getToken() =
+        userOrError.getIdToken(true).token!!
+
+    override suspend fun getCurrentAuthUser() = firebaseAuth.getCurrentUser()?.let {
+        AuthUserEntity(it.uid, it.email!!, it.displayName!!)
     }
 
-    override suspend fun createAccountWithEmailAndPassword(email: String, password: String): Boolean {
-        TODO("Not yet implemented")
-    }
+    override suspend fun getCurrentUserClaims() =
+        userOrError.getIdToken(true).let {
+            val isSubscriber = it.claims["isSubscriber"] as? Boolean
+                ?: it.claims["isSubscriber"]?.toString()?.toBoolean()
+                ?: false
+            mapOf("isSubscriber" to isSubscriber)
+        }
 
-    override suspend fun getCurrentUserAuthMethods(): List<AuthProviders> {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun linkGoogleAuthProvider(token: String): Boolean {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun linkFacebookAuthProvider(token: String): Boolean {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun linkPasswordAuthProvider(password: String): Boolean {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun reauthenticateWithPassword(password: String): Boolean {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun reauthenticateWithGoogleToken(token: String): Boolean {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun reauthenticateWithFacebook(token: String): Boolean {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun getToken(): String {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun getCurrentAuthUser(): AuthUserEntity? {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun getCurrentUserClaims(): Map<String, Boolean> {
-        TODO("Not yet implemented")
-    }
 
     override suspend fun isCurrentUserEmailVerified(): Boolean {
-        TODO("Not yet implemented")
+        userOrError.
     }
 
-    override suspend fun getAuthMethodsForEmail(email: String): List<AuthProviders> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun getAuthMethodsForEmail(email: String) =
+        firebaseAuth.fetchSignInMethodsForEmail(email)
+            .authProviders
 
 }
