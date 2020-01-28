@@ -1,13 +1,3 @@
-buildscript {
-    repositories {
-        google()
-    }
-    dependencies {
-        val gmsVersion: String by project
-        classpath("com.google.gms:google-services:$gmsVersion")
-    }
-}
-
 plugins {
     id("com.android.library")
     kotlin("multiplatform")
@@ -34,8 +24,6 @@ android {
 
 }
 
-apply(plugin = "com.google.gms.google-services")
-
 kotlin {
     android {
         compilations.all {
@@ -60,6 +48,7 @@ kotlin {
 
         val androidMain by getting {
             dependencies {
+                api(project(":core-impl"))
                 api(kodein("core-jvm", kodeinVersion))
                 api(kodein("erased-jvm", kodeinVersion))
                 api(kodein("framework-android-x", kodeinVersion))
@@ -68,6 +57,7 @@ kotlin {
 
         val jsMain by getting {
             dependencies {
+                api(project(":core-impl"))
                 api(kodein("core-js", kodeinVersion))
                 api(kodein("erased-js", kodeinVersion))
             }

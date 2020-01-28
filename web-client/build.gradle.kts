@@ -1,18 +1,27 @@
 import com.moowork.gradle.node.yarn.YarnTask
 
 plugins {
-  id("com.moowork.node")
+  id("com.github.node-gradle.node")
 }
 
 node {
   download = true
+  version = "12.14.1"
+}
+
+val copyPackages: Sync by rootProject.tasks
+
+val moveCopiedPackages = task<Sync>("moveCopiedPackages") {
+  dependsOn(copyPackages)
+  from(copyPackages.destinationDir)
+  into("$buildDir/packages")
 }
 
 val yarnInstall by tasks.register<YarnTask>("yarnInstall") {
 
   group = "yarn"
 
-  dependsOn(rootProject.tasks["copyPackages"])
+  dependsOn(moveCopiedPackages)
 
   inputs.file("package.json")
   outputs.dir("node_modules")
@@ -20,7 +29,7 @@ val yarnInstall by tasks.register<YarnTask>("yarnInstall") {
   args = listOf("install")
 }
 
-task<YarnTask>("build") {
+val build = task<YarnTask>("build") {
 
   group = "ng"
 
@@ -38,6 +47,8 @@ task<YarnTask>("build") {
 
 
 task<YarnTask>("serve") {
+
+  dependsOn(build)
 
   group = "ng"
 

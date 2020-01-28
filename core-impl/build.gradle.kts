@@ -53,8 +53,6 @@ kotlin {
                 api(ktor("client-serialization", ktorVersion))
                 api(ktor("client-mock", ktorVersion))
                 api(ktor("client-logging", ktorVersion))
-                api(kodein("core", kodeinVersion))
-                api(kodein("erased", kodeinVersion))
                 api("com.github.lamba92:firebase-multiplatform-auth:$firebaseMultiplatformVersion")
                 api("com.github.lamba92:firebase-multiplatform-storage:$firebaseMultiplatformVersion")
             }
@@ -66,9 +64,6 @@ kotlin {
                 api(ktor("client-serialization-jvm", ktorVersion))
                 api(ktor("client-mock-jvm", ktorVersion))
                 api(ktor("client-logging-jvm", ktorVersion))
-                api(kodein("core-jvm", kodeinVersion))
-                api(kodein("erased-jvm", kodeinVersion))
-                api(kodein("framework-android-x", kodeinVersion))
                 api(kotlin("reflect", kotlinVersion))
             }
         }
@@ -79,8 +74,6 @@ kotlin {
                 api(ktor("client-serialization-js", ktorVersion))
                 api(ktor("client-mock-js", ktorVersion))
                 api(ktor("client-logging-js", ktorVersion))
-                api(kodein("core-js", kodeinVersion))
-                api(kodein("erased-js", kodeinVersion))
                 api(npm("text-encoding", textEncodingVersion))
                 api(npm("firebase", firebaseJsVersion))
             }
@@ -97,6 +90,3 @@ kotlin {
 fun KotlinDependencyHandler.ktor(module: String, version: String? = null): Any =
     "io.ktor:ktor-$module${version?.let { ":$version" } ?: ""}"
 
-@Suppress("unused")
-fun KotlinDependencyHandler.kodein(module: String, version: String? = null): Any =
-    "org.kodein.di:kodein-di-$module${version?.let { ":$version" } ?: ""}"

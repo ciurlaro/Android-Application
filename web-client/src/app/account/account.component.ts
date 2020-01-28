@@ -1,5 +1,4 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import JsDependencyContainer = com.example.myapplication.jsbindings.JsDependencyContainer;
 
 
 @Component({
@@ -11,7 +10,6 @@ export class AccountComponent implements OnInit, OnDestroy {
 
 
   constructor() {
-    new JsDependencyContainer()
   }
 
   ngOnInit() {

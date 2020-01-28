@@ -37,7 +37,7 @@ subprojects {
     }
 }
 
-task<Copy>("copyPackages") {
+task<Sync>("copyPackages") {
     group = "jsmerda"
     listOf("domain", "data", "core-impl", "angular-di").forEach {
         dependsOn("$it:compileKotlinJs")
@@ -65,7 +65,7 @@ task<Copy>("copyPackages") {
         }
         includeEmptyDirs = false
     }
-    into("web-client/packages")
+    into("$buildDir/copiedPackeges")
 }
 
 NodeJsRootPlugin.apply(project).apply {

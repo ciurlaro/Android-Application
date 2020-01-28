@@ -1,6 +1,6 @@
 plugins {
     kotlin("multiplatform")
-    id("se.jensim.kt2ts") version "0.11.0"
+//    id("se.jensim.kt2ts") version "0.11.0"
 }
 
 kotlin {

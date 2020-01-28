@@ -1,7 +1,0 @@
-{
-  "main": "kotlinx-io-kotlinx-coroutines-io.js",
-  "devDependencies": {},
-  "dependencies": {},
-  "name": "kotlinx-io-kotlinx-coroutines-io",
-  "version": "0.1.15"
-}

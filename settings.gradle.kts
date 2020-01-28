@@ -15,7 +15,7 @@ pluginManagement {
             val androidGradlePluginVersion: String by settings
             val gmsGradlePluginVersion: String by settings
             val nodePluginVersion: String by settings
-            val jar2npmVersion: String by settings
+            val nodePluginForkVersion: String by settings
 
             when (requested.id.id) {
                 "org.jetbrains.kotlin.jvm", "org.jetbrains.kotlin.js", "org.jetbrains.kotlin.multiplatform", "org.jetbrains.kotlin.android", "org.jetbrains.kotlin.android.extensions" ->
@@ -25,13 +25,14 @@ pluginManagement {
                 "com.google.gms.google-services" -> useModule("com.google.gms:google-services:$gmsGradlePluginVersion")
                 "org.jetbrains.kotlin.plugin.serialization" -> useModule("org.jetbrains.kotlin:kotlin-serialization:$kotlinVersion")
                 "com.moowork.node" -> useModule("com.moowork.gradle:gradle-node-plugin:$nodePluginVersion")
+                "com.github.node-gradle.node" -> useModule("com.github.node-gradle:gradle-node-plugin:$nodePluginForkVersion")
             }
         }
     }
 
 }
 
-include(":data", ":domain", "core-impl", ":kodein-di", "web-client", "angular-di")
+include(":data", ":domain", "core-impl", ":kodein-di", "web-client", "angular-di", ":app")
 rootProject.name = "my-application"
 
 //if (file("../FirebaseMultiplatform").run { exists() && isDirectory })

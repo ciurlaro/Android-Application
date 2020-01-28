@@ -4,9 +4,8 @@ import com.example.myapplication.entities.AuthProviders
 import com.example.myapplication.entities.AuthUserEntity
 import com.example.myapplication.exceptions.AuthException
 import com.github.lamba92.firebasemultiplatform.auth.*
-import com.github.lamba92.firebasemultiplatform.auth.FirebaseAuth
 
-class FirebaseAuthDatasourceImplementation(val firebaseAuth: FirebaseAuth) : FirebaseAuthDatasource {
+class FirebaseAuthDatasourceImplementation(private val firebaseAuth: FirebaseAuth) : FirebaseAuthDatasource {
 
     private val userOrError
         get() = firebaseAuth.getCurrentUser() ?: throw AuthException.AuthNotAuthenticatedException()

@@ -5,17 +5,18 @@ plugins {
 kotlin {
     js {
         nodejs()
-        compilations.all {
-            kotlinOptions {
-                freeCompilerArgs += listOf("-Xir-produce-js", "-Xgenerate-dts")
-            }
-        }
     }
 
     sourceSets {
-        val jsMain by getting {
+
+        val commonMain by getting {
             dependencies {
                 api(project(":core-impl"))
+            }
+        }
+
+        val jsMain by getting {
+            dependencies {
                 api(npm("@angular/core", "8.2.14"))
             }
         }

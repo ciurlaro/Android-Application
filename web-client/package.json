@@ -2,7 +2,7 @@
   "name": "web-client",
   "version": "0.0.0",
   "workspaces": [
-    "packages/*"
+    "build/packages/*"
   ],
   "scripts": {
     "ng": ".\\node_modules\\@angular\\cli\\bin\\ng",
@@ -26,7 +26,7 @@
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1",
-    "my-application-mpp-lib": "0.0.0-unspecified"
+    "my-application-angular-di": "0.0.0-unspecified"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.803.17",

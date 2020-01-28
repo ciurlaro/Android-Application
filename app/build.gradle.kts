@@ -12,6 +12,7 @@ buildscript {
         classpath("com.google.gms:google-services:$gmsVersion")
         classpath("androidx.navigation:navigation-safe-args-gradle-plugin:$androidxNavigationVersion")
 
+
         // From JDKK 9+ some classes have been moved to Maven. Kapt needs those classes
         // to parse xml and stuff. Load them manually if the current JDK do not contains
         // them.
@@ -128,6 +129,7 @@ android {
 }
 
 apply(plugin = "androidx.navigation.safeargs.kotlin")
+apply(plugin = "com.google.gms.google-services")
 
 dependencies {
 

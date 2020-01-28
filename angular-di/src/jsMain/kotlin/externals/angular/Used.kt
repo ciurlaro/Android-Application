@@ -1,6 +1,6 @@
 package externals.angular
 
-import InjectFlags
+//import InjectFlags
 
 external interface ValueProvider<T> : ValueSansProvider<T> {
     var provide: InjectionToken<T>
