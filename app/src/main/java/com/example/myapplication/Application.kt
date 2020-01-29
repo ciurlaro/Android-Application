@@ -8,6 +8,7 @@ import com.example.myapplication.modules.OAuthModule
 import com.example.myapplication.modules.ViewModelModule
 import com.example.myapplication.modules.buildCommonKodein
 import com.example.myapplication.modules.import
+import io.ktor.util.InternalAPI
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import org.kodein.di.Kodein
@@ -16,6 +17,7 @@ import org.kodein.di.android.x.androidXModule
 
 @FlowPreview
 @ExperimentalCoroutinesApi
+@InternalAPI
 open class Application : Application(), KodeinAware {
 
     override val kodein = Kodein.lazy {

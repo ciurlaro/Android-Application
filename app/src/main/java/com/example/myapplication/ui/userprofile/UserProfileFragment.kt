@@ -13,7 +13,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentUserBinding
-import com.example.myapplication.datasource.await
 import com.example.myapplication.entities.AuthProviders
 import com.example.myapplication.ui.BaseFragment
 import com.example.myapplication.ui.OnboardingActivity
@@ -26,6 +25,7 @@ import com.facebook.FacebookCallback
 import com.facebook.FacebookException
 import com.facebook.login.LoginResult
 import com.github.dhaval2404.imagepicker.ImagePicker
+import com.github.lamba92.firebasemultiplatform.core.await
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.material.snackbar.Snackbar

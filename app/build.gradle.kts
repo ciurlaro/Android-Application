@@ -68,12 +68,7 @@ android {
 
     buildTypes {
 
-        all {
-            signingConfig = signingConfigs["default"]
-        }
-
         getByName("release") {
-            isMinifyEnabled = true
             isDebuggable = false
             // TODO
             buildConfigField("String", "SERVER_PROTOCOL", "\"http\"")
@@ -82,7 +77,6 @@ android {
         }
 
         getByName("debug") {
-            isMinifyEnabled = false
             matchingFallbacks = listOf("release")
             // TODO
             buildConfigField("String", "SERVER_PROTOCOL", "\"http\"")
@@ -91,7 +85,6 @@ android {
         }
 
         create("mock") {
-            isMinifyEnabled = false
             isDebuggable = true
             matchingFallbacks = listOf("release")
             buildConfigField("String", "SERVER_PROTOCOL", "\"http\"")
@@ -100,12 +93,16 @@ android {
         }
 
         create("localTesting") {
-            isMinifyEnabled = false
             isDebuggable = true
             buildConfigField("String", "SERVER_PROTOCOL", "\"http\"")
             buildConfigField("String", "SERVER_URL", "\"localhost\"")
             buildConfigField("int", "SERVER_PORT", "8080")
             matchingFallbacks = listOf("release")
+        }
+
+        all {
+            isMinifyEnabled = false
+            signingConfig = signingConfigs["default"]
         }
 
     }
