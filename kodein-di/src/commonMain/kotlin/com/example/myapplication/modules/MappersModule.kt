@@ -1,7 +1,10 @@
 package com.example.myapplication.modules
 
 import com.example.myapplication.mappers.*
-import com.example.myapplication.mappers.entitieslinkmapper.*
+import com.example.myapplication.mappers.entitieslinkmapper.GameLinkMapper
+import com.example.myapplication.mappers.entitieslinkmapper.ModeLinkMapper
+import com.example.myapplication.mappers.entitieslinkmapper.TournamentLinkMapper
+import com.example.myapplication.mappers.entitieslinkmapper.UserLinkMapper
 import org.kodein.di.Kodein
 import org.kodein.di.erased.bind
 import org.kodein.di.erased.instance
@@ -14,7 +17,7 @@ object MappersModule : KodeinModuleProvider {
         bind<AccountSubscriptionMapper>() with singleton { AccountSubscriptionMapper() }
         bind<GameMapper>() with singleton { GameMapper() }
         bind<RegistrationMapper>() with singleton { RegistrationMapper(instance(), instance()) }
-        bind<TournamentMapper>() with singleton { TournamentMapper(instance()) }
+        bind<TournamentMapper>() with singleton { TournamentMapper(instance(), instance()) }
         bind<UserMapper>() with singleton { UserMapper() }
         bind<ModeMapper>() with singleton { ModeMapper() }
 

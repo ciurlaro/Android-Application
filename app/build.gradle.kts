@@ -103,6 +103,7 @@ android {
         all {
             isMinifyEnabled = false
             signingConfig = signingConfigs["default"]
+//            multiDexKeepFile = file("multidex-config.txt")
         }
 
     }

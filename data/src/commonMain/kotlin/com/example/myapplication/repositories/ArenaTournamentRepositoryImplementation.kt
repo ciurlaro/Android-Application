@@ -128,7 +128,7 @@ class ArenaTournamentRepositoryImplementation(
         title: String,
         tournamentDescription: String,
         tournamentMode: String,
-        admin: String,
+        admin: UserEntity,
         game: GameEntity
     ) =
         arenaTournamentDS.createTournament(
@@ -137,7 +137,7 @@ class ArenaTournamentRepositoryImplementation(
                 title,
                 tournamentDescription,
                 tournamentMode,
-                admin,
+                admin = userLinkMapper.toRemoteSingle(admin.nickname).toString(),
                 game = gameLinkMapper.toRemoteSingle(game.name).toString()
             )
         ).let {
@@ -259,7 +259,7 @@ class ArenaTournamentRepositoryImplementation(
         tournamentSplitter(this)
             .asFlow()
             .scopedMap {
-                val gameJson = async() { arenaTournamentDS.getGameByLink(it._links.game!!.href) }
+                val gameJson = async { arenaTournamentDS.getGameByLink(it._links.game!!.href) }
                 val userJson = async { arenaTournamentDS.getUserByLink(it._links.admin!!.href) }
                 Triple(it, gameJson.await(), userJson.await())
             }

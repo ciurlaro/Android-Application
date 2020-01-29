@@ -15,7 +15,7 @@ class CreateTournamentUseCase(
             params.title,
             params.tournamentDescription,
             "TODO",
-            repository.getCurrentUser()!!.nickname,
+            repository.getCurrentUser()!!,
             params.game
         )
 

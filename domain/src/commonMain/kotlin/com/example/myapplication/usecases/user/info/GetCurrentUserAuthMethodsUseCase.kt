@@ -3,7 +3,6 @@ package com.example.myapplication.usecases.user.info
 import com.example.myapplication.entities.AuthProviders
 import com.example.myapplication.repositories.ArenaTournamentRepository
 import com.example.myapplication.usecases.UseCaseSuspending
-import kotlinx.coroutines.FlowPreview
 
 class GetCurrentUserAuthMethodsUseCase(
     private val repository: ArenaTournamentRepository

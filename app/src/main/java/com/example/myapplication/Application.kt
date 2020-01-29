@@ -2,6 +2,7 @@
 
 package com.example.myapplication
 
+import android.annotation.SuppressLint
 import android.app.Application
 import com.example.myapplication.BuildConfig.*
 import com.example.myapplication.modules.OAuthModule
@@ -15,6 +16,7 @@ import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule
 
+@SuppressLint("Registered")
 @FlowPreview
 @ExperimentalCoroutinesApi
 @InternalAPI
@@ -34,7 +36,7 @@ open class Application : Application(), KodeinAware {
                     BuildTypes.DEBUG,
                     BuildTypes.LOCAL_TESTING
                 ).any { it == BuildTypes.current() }
-        ), true)
+            ), true)
         import(androidXModule(this@Application))
     }
 

@@ -1,5 +1,6 @@
 package com.example.myapplication.ui.tournament
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -17,6 +18,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 
 
+@SuppressLint("Registered")
 @FlowPreview
 @ExperimentalCoroutinesApi
 class CreateTournamentActivity : BaseActivity() {

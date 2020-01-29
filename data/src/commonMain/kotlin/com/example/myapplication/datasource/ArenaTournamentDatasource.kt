@@ -1,7 +1,10 @@
 package com.example.myapplication.datasource
 
 import com.example.myapplication.rawresponses.*
-import com.example.myapplication.rawresponses.createresponses.*
+import com.example.myapplication.rawresponses.createresponses.CreateGameJSON
+import com.example.myapplication.rawresponses.createresponses.CreateGameModeJSON
+import com.example.myapplication.rawresponses.createresponses.CreateRegistrationJSON
+import com.example.myapplication.rawresponses.createresponses.CreateTournamentJSON
 import io.ktor.http.Url
 
 interface ArenaTournamentDatasource {
@@ -10,7 +13,6 @@ interface ArenaTournamentDatasource {
     suspend fun createGame(gameJSON: CreateGameJSON): GameJSON
     suspend fun createRegistration(registrationJSON: CreateRegistrationJSON): RegistrationJSON
     suspend fun createTournament(tournamentJSON: CreateTournamentJSON): TournamentJSON
-    suspend fun createUser(userJSON: CreateUserJSON): UserJSON
 
     suspend fun getAllGames(page: Int): MultipleGamesJSON
     suspend fun getGameByName(gameName: String): GameJSON

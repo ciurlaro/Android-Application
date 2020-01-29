@@ -1,5 +1,6 @@
 package com.example.myapplication.ui
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.view.View.GONE
@@ -15,6 +16,7 @@ import kotlinx.coroutines.FlowPreview
 import org.kodein.di.erased.instance
 
 
+@SuppressLint("Registered")
 @FlowPreview
 @ExperimentalCoroutinesApi
 class MainActivity : BaseFragmentedActivity(R.id.nav_host_fragment) {

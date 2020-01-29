@@ -3,7 +3,10 @@ package com.example.myapplication.datasource
 
 import com.example.myapplication.exceptions.AuthException
 import com.example.myapplication.rawresponses.*
-import com.example.myapplication.rawresponses.createresponses.*
+import com.example.myapplication.rawresponses.createresponses.CreateGameJSON
+import com.example.myapplication.rawresponses.createresponses.CreateGameModeJSON
+import com.example.myapplication.rawresponses.createresponses.CreateRegistrationJSON
+import com.example.myapplication.rawresponses.createresponses.CreateTournamentJSON
 import io.ktor.client.HttpClient
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.get
@@ -37,14 +40,6 @@ class ArenaTournamentDatasourceImplementation(
             httpClient.authenticatedPost(
                 endpoints.createGameUrl(),
                 Json.stringify(CreateGameJSON.serializer(), this)
-            )
-        }
-
-    override suspend fun createUser(userJSON: CreateUserJSON): UserJSON =
-        with(userJSON) {
-            httpClient.authenticatedPost(
-                endpoints.createUserUrl(),
-                Json.stringify(CreateUserJSON.serializer(), this)
             )
         }
 

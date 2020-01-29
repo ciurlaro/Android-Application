@@ -41,7 +41,6 @@ kotlin {
 
         val ktorVersion: String by project
         val kotlinVersion: String by project
-        val kodeinVersion: String by project
         val textEncodingVersion: String by project
         val firebaseMultiplatformVersion: String by project
         val firebaseJsVersion: String by project

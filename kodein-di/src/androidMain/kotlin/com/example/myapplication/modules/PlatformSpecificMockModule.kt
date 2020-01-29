@@ -2,7 +2,7 @@ package com.example.myapplication.modules
 
 import android.content.res.Resources
 import androidx.annotation.RawRes
-import com.example.myapplication.R
+import com.example.myapplication.kodeindi.R
 import org.kodein.di.Kodein
 import org.kodein.di.bindings.NoArgSimpleBindingKodein
 import org.kodein.di.erased.bind

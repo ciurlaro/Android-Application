@@ -5,7 +5,6 @@ import com.example.myapplication.entities.TournamentEntity
 import com.example.myapplication.entities.UserEntity
 import com.example.myapplication.repositories.ArenaTournamentRepository
 import com.example.myapplication.usecases.UseCaseWithParamsSuspending
-import kotlinx.coroutines.FlowPreview
 
 class CreateRegistrationUseCase(
     private val repository: ArenaTournamentRepository
