@@ -8,7 +8,6 @@ class CreateAccountWithGoogleToken(
     private val repository: ArenaTournamentRepository
 ) : UseCaseWithParamsSuspending<CreateAccountWithGoogleToken.Params, Boolean> {
 
-    @UseExperimental(FlowPreview::class)
     override suspend fun buildAction(params: Params) =
         repository.loginWithGoogleToken(params.token)
 

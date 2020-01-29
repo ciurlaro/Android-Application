@@ -15,7 +15,6 @@ class CreateAccountWithEmailAndPasswordUseCase(
      * @throws AuthMalformedEmailException when email does not match its canonical form.
      * @return true if the operation ends without errors.
      */
-    @UseExperimental(FlowPreview::class)
     override suspend fun buildAction(params: Params) =
         repository.createAccountWithEmailAndPassword(params.email, params.password)
 

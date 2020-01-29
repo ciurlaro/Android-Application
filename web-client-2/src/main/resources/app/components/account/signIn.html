@@ -1,0 +1,82 @@
+<section class="engine"><a href="https://mobirise.info/u">bootstrap website templates</a></section>
+<section class="header1 cid-rDh6FrAckA mbr-parallax-background" id="header16-x">
+
+
+    <div class="mbr-overlay" style="opacity: 0.6; background-color: rgb(51, 51, 51);">
+    </div>
+
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-md-10 align-center">
+                <h1 class="mbr-section-title mbr-bold pb-3 mbr-fonts-style display-2">Account / Sign In </h1>
+
+
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<section class="mbr-section form1 cid-rDh5X1iCBQ" id="form1-v" style="padding-top: 20px !important;">
+
+
+    <div class="container">
+        <div class="row justify-content-center ">
+
+
+
+            <div class="alert alert-danger alert-dismissible col-12" ng-if="msg">
+                <button  class="close" data-dismiss="alert" aria-label="close">&times;</button>
+                {{msg}}
+            </div>
+
+
+            <div class="dragArea row ">
+
+                <form name="signInForm" class="form-group col-md-12" novalidate>
+
+                    <div class="form-field">
+                        <label for="user-mail-signin" class="form-control-label mbr-fonts-style display-7">Email</label>
+                        <input type="email" class="form-control display-7" id="user-mail-signin" name="mail"
+                               ng-model="user.mail"
+                               ng-minlength="4" ng-required="true">
+
+                        <div class="display-7 error" ng-show="signInForm.mail.$invalid  && signInForm.mail.$touched">
+                            Insert valid mail
+                        </div>
+                    </div>
+
+
+                    <div class="form-field">
+                        <label for="user-psw-signin"
+                               class="form-control-label mbr-fonts-style display-7">Password</label>
+                        <input type="password" class="form-control display-7" name="psw" id="user-psw-signin"
+                               ng-model="user.psw"
+                               ng-minlength="6" required>
+                        <div class="display-7 error" ng-show="signInForm.psw.$invalid && signInForm.psw.$touched">
+                            Insert valid psw
+                        </div>
+                    </div>
+
+
+                </form>
+
+
+
+                <div class="col-md-12  align-center">
+                    <button class="btn  btn-round btn-success display-4 " ng-click="signIn(user.mail,user.psw)"  ng-disabled="signInForm.$invalid">SIGN
+                        IN
+                    </button>
+                </div>
+                <div class="col-md-12  align-center"><a href="#!/account/signUp"
+                                                        class="btn  btn-success display-4 btn-round">SIGN UP</a></div>
+            </div>
+
+        </div>
+    </div>
+
+</section>
+
+
+
+

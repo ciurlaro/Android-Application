@@ -6,8 +6,7 @@ import com.example.myapplication.rawresponses.TournamentJSON
 import com.example.myapplication.rawresponses.UserJSON
 
 class TournamentMapper(
-    private val gameMapper: GameMapper,
-    private val userMapper: UserMapper
+    private val gameMapper: GameMapper
 ) : SingleFromRemoteMapper<Triple<TournamentJSON, GameJSON, UserJSON>, TournamentEntity>{
 
     override fun fromRemoteSingle(remote: Triple<TournamentJSON, GameJSON, UserJSON>) =
@@ -18,7 +17,7 @@ class TournamentMapper(
                 first.title,
                 first.tournamentDescription,
                 first.tournamentMode,
-                userMapper.fromRemoteSingle(third),
+                third.nickname,
                 gameMapper.fromRemoteSingle(second)
             )
         }

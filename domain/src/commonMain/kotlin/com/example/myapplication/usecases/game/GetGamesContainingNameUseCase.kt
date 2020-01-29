@@ -8,11 +8,11 @@ import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.toList
 
+@FlowPreview
 class GetGamesContainingNameUseCase(
     private val repository: ArenaTournamentRepository
 ) : UseCaseWithParamsSuspending<GetGamesContainingNameUseCase.Params, List<GameEntity>> {
 
-    @UseExperimental(FlowPreview::class)
     override suspend fun buildAction(params: Params) =
         (0 until params.maxPage)
             .asFlow()

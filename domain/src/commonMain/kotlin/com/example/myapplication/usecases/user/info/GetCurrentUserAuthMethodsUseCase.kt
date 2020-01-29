@@ -5,7 +5,6 @@ import com.example.myapplication.repositories.ArenaTournamentRepository
 import com.example.myapplication.usecases.UseCaseSuspending
 import kotlinx.coroutines.FlowPreview
 
-@UseExperimental(FlowPreview::class)
 class GetCurrentUserAuthMethodsUseCase(
     private val repository: ArenaTournamentRepository
 ) : UseCaseSuspending<List<AuthProviders>> {

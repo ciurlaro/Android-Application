@@ -128,7 +128,7 @@ class ArenaTournamentRepositoryImplementation(
         title: String,
         tournamentDescription: String,
         tournamentMode: String,
-        admin: UserEntity,
+        admin: String,
         game: GameEntity
     ) =
         arenaTournamentDS.createTournament(
@@ -137,22 +137,20 @@ class ArenaTournamentRepositoryImplementation(
                 title,
                 tournamentDescription,
                 tournamentMode,
-                admin = userLinkMapper.toRemoteSingle(admin.id).toString(),
+                admin,
                 game = gameLinkMapper.toRemoteSingle(game.name).toString()
             )
-        )
-            .let {
-                return@let TournamentEntity(
-                    it.id,
-                    playersNumber,
-                    title,
-                    tournamentDescription,
-                    tournamentMode,
-                    admin,
-                    game
-                )
-            }
-
+        ).let {
+            return@let TournamentEntity(
+                it.id,
+                playersNumber,
+                title,
+                tournamentDescription,
+                tournamentMode,
+                admin,
+                game
+            )
+        }
 
     override suspend fun createRegistration(
         user: UserEntity,
@@ -165,8 +163,7 @@ class ArenaTournamentRepositoryImplementation(
                 tournament = tournamentLinkMapper.toRemoteSingle(tournament.id).toString(),
                 outcome = outcome
             )
-        )
-            .let { return@let RegistrationEntity(user, tournament, outcome) }
+        ).let { return@let RegistrationEntity(user, tournament, outcome) }
 
     override suspend fun getGameByName(name: String) =
         arenaTournamentDS.getGameByName(name)

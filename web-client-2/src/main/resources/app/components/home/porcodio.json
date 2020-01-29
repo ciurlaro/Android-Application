@@ -1,0 +1,75 @@
+[
+  {
+    "id": 0,
+    "title": "magic tournament",
+    "date": "32/12/2020",
+    "time": "12:00",
+    "players": "32",
+    "busy": "12",
+    "img": "assets/images/ow-match.png",
+    "game": "ow"
+  },
+  {
+    "id": 1,
+    "title": "hots tournament",
+    "date": "03/12/2020",
+    "time": "13:00",
+    "players": "12",
+    "busy": "2",
+    "img": "assets/images/hs-1024x576.jpg",
+    "game": "wow"
+  },
+  {
+    "id": 2,
+    "title": "wow tournament",
+    "date": "05/12/2020",
+    "time": "12:30",
+    "players": "10",
+    "busy": "5",
+    "img": "assets/images/thumb-1920-886179-1920x1080.jpg",
+    "game": "hs"
+  },
+  {
+    "id": 3,
+    "title": "wow tournament",
+    "date": "05/12/2020",
+    "time": "12:30",
+    "players": "10",
+    "busy": "5",
+    "img": "assets/images/tourn.jpg",
+    "game": "hs"
+  },
+  {
+    "id": 4,
+    "title": "wow tournament",
+    "date": "05/12/2020",
+    "time": "12:30",
+    "players": "10",
+    "busy": "5",
+    "img": "assets/images/tourn.jpg",
+    "game": "hs",
+    "subscribed": ["playerA","playerB","playerC"]
+  },
+  {
+    "id": 5,
+    "title": "hots tournament",
+    "date": "03/12/2020",
+    "time": "13:00",
+    "players": "12",
+    "busy": "2",
+    "img": "assets/images/hs-1024x576.jpg",
+    "game": "wow",
+    "subscribed": ["playerA","playerB","playerC"]
+  },
+  {
+    "id": 6,
+    "title": "magic tournament",
+    "date": "32/12/2020",
+    "time": "12:00",
+    "players": "32",
+    "busy": "12",
+    "img": "assets/images/ow-match.png",
+    "game": "ow",
+    "subscribed": ["playerA","playerB","playerC"]
+  }
+]

@@ -9,7 +9,6 @@ class GetCurrentUserInfoUseCase(
     private val repository: ArenaTournamentRepository
 ) : UseCaseSuspending<UserEntity?> {
 
-    @UseExperimental(FlowPreview::class)
     override suspend fun buildAction() =
         repository.getCurrentUser()!!
 

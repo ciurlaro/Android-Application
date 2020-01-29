@@ -11,7 +11,6 @@ class CreateRegistrationUseCase(
     private val repository: ArenaTournamentRepository
 ) : UseCaseWithParamsSuspending<CreateRegistrationUseCase.Params, RegistrationEntity> {
 
-    @UseExperimental(FlowPreview::class)
     override suspend fun buildAction(params: Params): RegistrationEntity =
         repository.createRegistration(params.user, params.tournament)
 

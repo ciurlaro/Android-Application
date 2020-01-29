@@ -8,7 +8,6 @@ class CreateAccountWithFacebookToken(
     private val repository: ArenaTournamentRepository
 ) : UseCaseWithParamsSuspending<CreateAccountWithFacebookToken.Params, Boolean> {
 
-    @UseExperimental(FlowPreview::class)
     override suspend fun buildAction(params: Params) =
         repository.loginWithFacebookToken(params.token)
 

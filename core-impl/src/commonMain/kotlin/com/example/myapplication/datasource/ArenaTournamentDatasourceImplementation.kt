@@ -16,7 +16,8 @@ import io.ktor.util.encodeBase64
 import kotlinx.serialization.UnstableDefault
 import kotlinx.serialization.json.Json
 
-@UseExperimental(UnstableDefault::class)
+@UnstableDefault
+@InternalAPI
 class ArenaTournamentDatasourceImplementation(
     private val httpClient: HttpClient,
     private val endpoints: ArenaTournamentDatasource.Endpoints,
@@ -149,20 +150,17 @@ class ArenaTournamentDatasourceImplementation(
     override suspend fun searchTournaments(title: String, gameId: String?, page: Int): MultipleTournamentsJSON =
         httpClient.authenticatedGet(endpoints.searchTournaments(title, gameId, page))
 
-    @UseExperimental(InternalAPI::class)
     private suspend inline fun <reified T> HttpClient.authenticatedGet(url: Url) =
         get<T>(url) {
             addAuth()
         }
 
-    @UseExperimental(InternalAPI::class)
     private suspend inline fun <reified T> HttpClient.authenticatedPost(url: Url, content: Any?) =
         post<T>(url) {
             addAuth()
             content?.let { body = it }
         }
 
-    @InternalAPI
     private suspend fun HttpRequestBuilder.addAuth() {
         try {
             header(HttpHeaders.Authorization, "Bearer: ${"${firebaseAuthDS.getToken()}:".encodeBase64()}")

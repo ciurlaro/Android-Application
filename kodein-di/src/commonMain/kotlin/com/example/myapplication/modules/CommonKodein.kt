@@ -1,9 +1,13 @@
 package com.example.myapplication.modules
 
 import io.ktor.client.features.logging.LogLevel
+import io.ktor.util.InternalAPI
+import kotlinx.coroutines.FlowPreview
 import org.kodein.di.Kodein
 import org.kodein.di.erased.with
 
+@InternalAPI
+@FlowPreview
 fun buildCommonKodein(
     serverProtocol: String,
     serverUrl: String,

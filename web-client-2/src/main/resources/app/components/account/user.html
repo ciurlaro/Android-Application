@@ -1,0 +1,176 @@
+<section class="engine"><a href="https://mobirise.info/o">portfolio site templates</a></section>
+<section class="header1 cid-rDhcY8fZj2 mbr-parallax-background" id="header16-1a">
+
+    <div class="mbr-overlay" style="opacity: 0.6; background-color: rgb(51, 51, 51);">
+    </div>
+
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-md-10 align-center">
+                <h1 class="mbr-section-title mbr-bold pb-3 mbr-fonts-style display-2">{{emailUser}}</h1>
+
+
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<section class="testimonials1 cid-rDPWjRAqro" id="testimonials1-1t">
+
+
+    <div class="container">
+        <div class="media-container-row">
+            <div class="title col-12 align-center">
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container pt-3 mt-2">
+        <div class="media-container-row">
+            <div class="mbr-testimonial p-3 align-center col-12 col-md-6">
+                <div class="panel-item p-3">
+                    <div class="card-block">
+                        <div class="testimonial-photo">
+                            <img src="assets/images/default-avatar-240x240.png" alt="" title="">
+                        </div>
+                        <p class="mbr-text mbr-fonts-style display-7">email: {{emailUser}}
+                            <br>verified:{{veryUser}}&nbsp;<br></p>
+                    </div>
+                    <div class="card-footer">
+
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</section>
+
+<section class="mbr-section content8 cid-rDPZ3FDsY6" id="content8-1x">
+
+
+    <div class="container">
+        <div class="media-container-row title">
+            <div class="col-12 col-md-8">
+                <div class="mbr-section-btn align-center">
+                    <button class="btn btn-success display-4 btn-round" ng-click="signOut()">LOGOUT</button>
+                    <button class="btn btn-black-outline display-4 btn-round" ng-click="openUpdateUserModal()">UPDATE INFO</button>
+                    <button class="btn btn-black-outline display-4 btn-round" ng-click="openNewTournamentModal()">NEW TOURNAMENT</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="toggle1 cid-rDQpbEm03N" id="toggle1-2t">
+
+    <div class="container container-table">
+        <h2 class="mbr-section-title mbr-fonts-style align-center pb-3 display-5"><strong>
+            ACTIVE TOURNAMENTS (created tournament for ADMIN)</strong></h2>
+
+        <div class="table-wrapper">
+
+
+            <div class="container scroll">
+                <table class="table isSearch" cellspacing="0">
+                    <thead>
+                    <tr class="table-heads ">
+
+
+                        <th class="head-item mbr-fonts-style display-7">
+                            NAME
+                        </th>
+                        <th class="head-item mbr-fonts-style display-7">GAME</th>
+                        <th class="head-item mbr-fonts-style display-7">
+                            DATE
+                        </th>
+                        <th class="head-item mbr-fonts-style display-7">
+                            ACTION
+                        </th>
+
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                    <tr ng-repeat="match in tournaments | filter : search">
+                        <td class="body-item mbr-fonts-style display-7">{{match.title}}</td>
+                        <td class="body-item mbr-fonts-style display-7">{{match.game}}</td>
+                        <td class="body-item mbr-fonts-style display-7">{{match.date}}</td>
+                        <td class="body-item mbr-fonts-style display-7"><a href="#"
+                                                                           style="color: #ff6357">Unsubscribe </a> / <a
+                                href="" ng-click="openManageTournamentModal(match.title)">Manage </a></td>
+                    </tr>
+
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<section class="section-table cid-rDQ5CSoJJT" id="table1-1y">
+
+
+    <div class="container container-table">
+        <h2 class="mbr-section-title mbr-fonts-style align-center pb-3 display-5"><strong>REGISTERED
+            TOURNAMENTS</strong></h2>
+
+        <div class="table-wrapper">
+            <div class="container">
+                <div class="row search">
+                    <div class="col-md-6"></div>
+                    <div class="col-md-6">
+                        <div class="dataTables_filter">
+                            <label class="searchInfo mbr-fonts-style display-7 ">Search:</label>
+                            <input class="form-control input-sm" ng-model="search">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container scroll">
+                <table class="table isSearch" cellspacing="0">
+                    <thead>
+                    <tr class="table-heads ">
+
+
+                        <th class="head-item mbr-fonts-style display-7">
+                            NAME
+                        </th>
+                        <th class="head-item mbr-fonts-style display-7">GAME</th>
+                        <th class="head-item mbr-fonts-style display-7">
+                            DATE
+                        </th>
+                        <th class="head-item mbr-fonts-style display-7">POSITION</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+
+                    <tr ng-repeat="match in tournaments | filter : search">
+                        <td class="body-item mbr-fonts-style display-7">{{match.title}}</td>
+                        <td class="body-item mbr-fonts-style display-7">{{match.game}}</td>
+                        <td class="body-item mbr-fonts-style display-7">{{match.date}}</td>
+                        <td class="body-item mbr-fonts-style display-7">{{match.placeholder}}</td>
+                    </tr>
+
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+
+</section>
+

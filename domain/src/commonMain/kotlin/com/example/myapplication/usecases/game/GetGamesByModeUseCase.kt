@@ -9,19 +9,18 @@ import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.toList
 
+@FlowPreview
 class GetGamesByModeUseCase(
     private val repository: ArenaTournamentRepository
 ) : UseCaseWithParamsSuspending<GetGamesByModeUseCase.Params, List<GameEntity>> {
 
-    @InternalCoroutinesApi
-    @UseExperimental(FlowPreview::class)
     override suspend fun buildAction(params: Params) =
         (0 until params.maxPage)
             .asFlow()
             .flatMapConcatIterable { repository.getGamesByMode(params.mode, it) }
             .toList()
 
-    @InternalCoroutinesApi
+
     suspend fun buildAction(mode: String, maxPage: Int = 1) =
         buildAction(Params(mode, maxPage))
 

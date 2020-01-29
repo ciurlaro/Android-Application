@@ -26,7 +26,7 @@ interface ArenaTournamentRepository {
         title: String,
         tournamentDescription: String,
         tournamentMode: String,
-        admin: UserEntity,
+        admin: String,
         game: GameEntity
     ): TournamentEntity
 

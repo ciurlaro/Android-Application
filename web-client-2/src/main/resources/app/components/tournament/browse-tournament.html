@@ -1,0 +1,128 @@
+<section class="engine"><a href="https://mobirise.info/x">css templates</a></section>
+<section class="header1 cid-rDQcZ8PFzk mbr-parallax-background" id="header16-22">
+
+
+    <div class="mbr-overlay" style="opacity: 0.6; background-color: rgb(51, 51, 51);">
+    </div>
+
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="col-md-10 align-center">
+                <h1 class="mbr-section-title mbr-bold pb-3 mbr-fonts-style display-2">Browse Tournament</h1>
+
+
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<section class="features3 cid-rDubsQUCDh" id="features3-1m">
+
+
+    <div class="container">
+
+
+        <div class="row">
+            <div class="title col-12 align-center">
+                <h2 class="pb-3 mbr-fonts-style display-2"><strong>
+                    BROWSE OUR FANTASTIC TOURNAMENTS
+                </strong></h2>
+                <h3 class="mbr-section-subtitle mbr-light pb-3 mbr-fonts-style display-5">
+                    This theme is based on Bootstrap 4 - most powerful mobile first framework
+                </h3>
+            </div>
+
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-12" style="margin: auto;text-align: center">
+
+                        <img class="games" src="assets/images/ow.png" alt="" style="height: 50px" ng-click=
+                                "selectGameCategory('ow')">
+                        <img class="games" src="assets/images/hs.png" alt="" style="height: 50px"
+                             ng-click="selectGameCategory('hs')">
+                        <img class="games" src="assets/images/wow.png" alt="" style="height: 50px"
+                             ng-click="selectGameCategory('wow')">
+                        <button class="btn btn-sm btn-success display-4 btn-round" ng-click="selectGameCategory('')">
+                            All
+                        </button>
+
+
+                        <hr>
+                        <div class="row">
+                            <div class="col-2"></div>
+                            <div class="col-8" style="margin-bottom: 40px;">
+                                <div class="dataTables_filter">
+                                    <label class="searchInfo mbr-fonts-style display-7 "  >Search:</label>
+                                    <input class="form-control input-sm" ng-model="search" >
+                                </div>
+                            </div>
+                            <div class="col-2"></div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+
+        <div class="media-container-row row">
+
+            <a class="card p-3 col-md-4 match-wrapper"
+               ng-repeat="match in tournaments | filter: { game: selectedCategory } | filter : search"   ng-href="#!browse-tournament/{{match.id}}">
+                <div class="card-wrapper">
+                    <div class="card-img">
+                        <img ng-src="{{match.img}}" alt="Mobirise" style="height: 200px">
+                    </div>
+                    <div class="card-box">
+                        <h4 class="card-title mbr-fonts-style display-7"
+                            style="margin-top: 20px; text-transform: uppercase;font-weight: bold">
+                            {{match.title}}
+                            <hr>
+                        </h4>
+                        <div class="mbr-text mbr-fonts-style display-7">
+
+                            <div class="row ">
+                                <div class="col-6">
+                                    DATE: {{match.date}}
+                                </div>
+                                <div class="col-6">
+                                    TIME: {{match.time}}
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="col-6">
+                                    PLAYERS: {{match.busy}}/{{match.players}}
+                                </div>
+                                <div class="col-6">
+                                    GAME: {{match.game}}
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+            </a>
+
+            <!--<a href="#!/browse" class="card p-3 col-12 col-md-6 col-lg-4">
+                <div class="card-wrapper">
+                    <div class="card-img">
+                        <img src="assets/images/hs-1024x576.jpg" alt="Mobirise">
+                    </div>
+                    <div class="card-box">
+                        <h4 class="card-title mbr-fonts-style display-7" style="margin-top: 20px; padding: 50px">
+
+                            MORE...
+                        </h4>
+                    </div>
+                </div>
+            </a>-->
+
+        </div>
+    </div>
+</section>

@@ -9,6 +9,6 @@ data class TournamentEntity(
     val title: String,
     val tournamentDescription: String,
     val tournamentMode: String,
-    val admin: UserEntity,
+    val admin: String,
     val game: GameEntity
 )

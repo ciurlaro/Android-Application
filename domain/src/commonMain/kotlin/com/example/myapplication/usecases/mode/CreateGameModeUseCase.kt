@@ -9,7 +9,6 @@ class CreateGameModeUseCase(
     private val repository: ArenaTournamentRepository
 ) : UseCaseWithParamsSuspending<CreateGameModeUseCase.Params, ModeEntity> {
 
-    @UseExperimental(FlowPreview::class)
     override suspend fun buildAction(params: Params): ModeEntity =
         repository.createGameMode(params.modeName)
 

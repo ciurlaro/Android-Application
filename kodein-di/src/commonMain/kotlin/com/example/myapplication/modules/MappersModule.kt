@@ -14,7 +14,7 @@ object MappersModule : KodeinModuleProvider {
         bind<AccountSubscriptionMapper>() with singleton { AccountSubscriptionMapper() }
         bind<GameMapper>() with singleton { GameMapper() }
         bind<RegistrationMapper>() with singleton { RegistrationMapper(instance(), instance()) }
-        bind<TournamentMapper>() with singleton { TournamentMapper(instance(), instance()) }
+        bind<TournamentMapper>() with singleton { TournamentMapper(instance()) }
         bind<UserMapper>() with singleton { UserMapper() }
         bind<ModeMapper>() with singleton { ModeMapper() }
 
@@ -25,13 +25,7 @@ object MappersModule : KodeinModuleProvider {
                 instance("serverPort")
             )
         }
-        bind<MatchLinkMapper>() with singleton {
-            MatchLinkMapper(
-                instance("serverProtocol"),
-                instance("serverUrl"),
-                instance("serverPort")
-            )
-        }
+
         bind<TournamentLinkMapper>() with singleton {
             TournamentLinkMapper(
                 instance("serverProtocol"),

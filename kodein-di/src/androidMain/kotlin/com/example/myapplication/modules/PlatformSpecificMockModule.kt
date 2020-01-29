@@ -22,9 +22,6 @@ actual object PlatformSpecificMockModule : KodeinModuleProvider {
         bind<String>("single_tournament_response") with singleton { rawFromRes(R.raw.tournament_response) }
         bind<String>("multiple_tournament_response") with singleton { rawFromRes(R.raw.multiple_tournaments_response) }
 
-        bind<String>("single_match_response") with singleton { rawFromRes(R.raw.match_response) }
-        bind<String>("multiple_match_response") with singleton { rawFromRes(R.raw.multiple_matches_response) }
-
         bind<String>("single_registration_response") with singleton { rawFromRes(R.raw.registration_response) }
         bind<String>("multiple_registration_response") with singleton { rawFromRes(R.raw.multiple_registrations_response) }
 

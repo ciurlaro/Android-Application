@@ -11,7 +11,11 @@ import externals.angular.ValueProvider
 import io.ktor.client.HttpClient
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
+import io.ktor.util.InternalAPI
+import kotlinx.serialization.UnstableDefault
 
+@InternalAPI
+@UnstableDefault
 object DITokens {
 
     val endpointsToken = InjectionToken<ArenaTournamentDatasource.Endpoints>("ArenaTournamentEndpoints")

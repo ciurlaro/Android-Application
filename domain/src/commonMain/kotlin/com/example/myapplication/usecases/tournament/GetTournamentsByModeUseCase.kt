@@ -9,7 +9,6 @@ import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.toList
 
 @FlowPreview
-@UseExperimental(FlowPreview::class)
 class GetTournamentsByModeUseCase(
     private val getTournamentsByModePerPageUseCase: GetTournamentsByModePerPageUseCase,
     private val getRegistrationsByTournamentUseCase: GetRegistrationsByTournamentUseCase
