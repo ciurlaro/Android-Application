@@ -9,6 +9,10 @@ kotlin {
 
     sourceSets {
 
+        val angularCoreVersion: String by project
+        val zoneJsVersion: String by project
+        val rxjsVersion: String by project
+
         val commonMain by getting {
             dependencies {
                 api(project(":core-impl"))
@@ -17,7 +21,9 @@ kotlin {
 
         val jsMain by getting {
             dependencies {
-                api(npm("@angular/core", "8.2.14"))
+                api(npm("@angular/core", angularCoreVersion))
+                api(npm("rxjs", rxjsVersion))
+                api(npm("zone.js", zoneJsVersion))
             }
         }
     }

@@ -26,6 +26,11 @@ plugins {
     id("com.android.application") apply false
 }
 
+allprojects {
+    group = "com.example.mayapplication"
+    version = "0.0.1-SNAPSHOT"
+}
+
 subprojects {
     repositories {
         google()
