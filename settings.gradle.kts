@@ -32,7 +32,7 @@ pluginManagement {
 
 }
 
-include(":data", ":domain", "core-impl", ":kodein-di", "web-client-2", "angular-di", ":app")
+include(":data", ":domain", "core-impl", ":kodein-di", "web-client", "angular-di", ":app")
 rootProject.name = "my-application"
 
 //if (file("../FirebaseMultiplatform").run { exists() && isDirectory })
