@@ -18,7 +18,10 @@ pluginManagement {
             val nodePluginForkVersion: String by settings
 
             when (requested.id.id) {
-                "org.jetbrains.kotlin.jvm", "org.jetbrains.kotlin.js", "org.jetbrains.kotlin.multiplatform", "org.jetbrains.kotlin.android", "org.jetbrains.kotlin.android.extensions" ->
+                "org.jetbrains.kotlin.jvm", "org.jetbrains.kotlin.js", "org.jetbrains.kotlin.multiplatform",
+                "org.jetbrains.kotlin.android", "org.jetbrains.kotlin.android.extensions",
+                "org.jetbrains.kotlin.plugin.spring", "org.jetbrains.kotlin.plugin.jpa", "org.jetbrains.kotlin.plugin.allopen"
+                ->
                     useModule("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
                 "com.android.application", "com.android.library" ->
                     useModule("com.android.tools.build:gradle:$androidGradlePluginVersion")
@@ -32,7 +35,7 @@ pluginManagement {
 
 }
 
-include(":data", ":domain", "core-impl", ":kodein-di", "web-client", "angular-di", ":app")
+include(":data", ":domain", "core-impl", ":kodein-di", "web-client", "angular-di", ":app", "server-backend")
 rootProject.name = "my-application"
 
 //if (file("../FirebaseMultiplatform").run { exists() && isDirectory })

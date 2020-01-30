@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Welcome page</title>
+    </head>
+
+    <body>
+        <br> Welcome! <br>
+
+        <form action="/api/users" method="post">
+            Get All Users:
+            <input type="submit" value="Submit">
+        </form>
+
+        <form action="/api/get-user/" method="post">
+            Find By Id:
+            <input type="number" name="id" required>
+            <input type="submit" value="Submit">
+        </form>
+
+        <form action="/api/new-user" method="post">
+            Add New User:
+            <input type = "email" name="mailAddress" required>
+            <input type = "password" name="password" required>
+            <input type ="submit" value="Submit">
+        </form>
+
+        <form action="/api/update-user" method="post">
+            Update User Password:
+            <input type = "number" name="id" required>
+            <input type = "password" name="password" required>
+            <input type ="submit" value="Submit">
+        </form>
+
+        <form action="/api/delete-user" method="post">
+            Delete User:
+            <input type = "number" name="id" required>
+            <input type ="submit" value="Submit">
+        </form>
+
+
+        <form action="/model-user" method="post">
+            Easter Egg:
+            <input type="submit" value="Submit" />
+        </form>
+
+        <form action="/login" method="get">
+            Go to login page:
+            <input type="submit" value="Submit" />
+        </form>
+
+    </body>
+</html>
