@@ -59,3 +59,5 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+/server-backend/src/main/resources/unito-taas-project-firebase-adminsdk.json
