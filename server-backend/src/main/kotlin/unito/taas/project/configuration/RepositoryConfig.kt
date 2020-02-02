@@ -10,10 +10,15 @@ import kotlin.reflect.KClass
 @Configuration
 class RepositoryConfig : RepositoryRestConfigurer {
     override fun configureRepositoryRestConfiguration(config: RepositoryRestConfiguration): Unit = with(config) {
-        exposeIdsFor(UserEntity::class, TournamentEntity::class, MatchEntity::class,
-                RegistrationEntity::class, GameEntity::class, ModeEntity::class)
+        exposeIdsFor(
+            UserEntity::class,
+            TournamentEntity::class,
+            RegistrationEntity::class,
+            GameEntity::class,
+            ModeEntity::class
+        )
     }
 
     private fun RepositoryRestConfiguration.exposeIdsFor(vararg kClasses: KClass<*>) =
-            exposeIdsFor(*kClasses.map { it.java }.toTypedArray())
+        exposeIdsFor(*kClasses.map { it.java }.toTypedArray())
 }
