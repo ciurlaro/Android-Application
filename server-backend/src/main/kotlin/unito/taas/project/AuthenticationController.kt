@@ -39,7 +39,7 @@ class AuthenticationController(
     @GetMapping("reset-user-password", produces = ["application/json"])
     fun resetUserPassword() =
         // confrontare uid e mail
-        auth.generatePasswordResetLink("cesareiurlaro@gmail.com")!!
+        auth.generatePasswordResetLink("cesareiurlaro@gmail.com").orEmpty()
 
 
     @PostMapping("grants-claims", produces = ["application/json"])
