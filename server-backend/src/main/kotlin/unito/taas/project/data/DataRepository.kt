@@ -5,40 +5,40 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource
 import org.springframework.data.rest.core.annotation.RestResource
 
 @RepositoryRestResource(path = "game")
-interface GameRepository : JpaRepository<GameEntity, String> {
+interface GameRepository : JpaRepository<SpringGame, String> {
 
     @RestResource(path = "byGameName")
-    fun getGameEntityByGameNameIgnoreCase(gameName: String): GameEntity
+    fun getGameEntityByGameNameIgnoreCase(gameName: String): SpringGame
 
     @RestResource(path = "byGameNameStartsWith")
-    fun getGameEntitiesByGameNameStartsWithIgnoreCase(gameName: String): List<GameEntity>
+    fun getGameEntitiesByGameNameStartsWithIgnoreCase(gameName: String): List<SpringGame>
 
     @RestResource(path = "byGameNameContaining")
-    fun getGameEntitiesByGameNameContainingIgnoreCase(gameName: String): List<GameEntity>
+    fun getGameEntitiesByGameNameContainingIgnoreCase(gameName: String): List<SpringGame>
 
 }
 
 @RepositoryRestResource(path = "tournament")
-interface TournamentRepository : JpaRepository<TournamentEntity, Long> {
+interface TournamentRepository : JpaRepository<SpringTournament, Long> {
 
     @RestResource(path = "byGame")
-    fun getTournamentEntitiesByGame(game: GameEntity): List<TournamentEntity>
+    fun getTournamentEntitiesByGame(springGame: SpringGame): List<SpringTournament>
 
     @RestResource(path = "byMode")
-    fun getTournamentEntitiesByTournamentModeIgnoreCase(tournamentMode: String): List<TournamentEntity>
+    fun getTournamentEntitiesByTournamentModeIgnoreCase(tournamentMode: String): List<SpringTournament>
 
 }
 
 @RepositoryRestResource(path = "registration")
-interface RegistrationRepository : JpaRepository<RegistrationEntity, Long> {
+interface RegistrationRepository : JpaRepository<SpringRegistration, Long> {
 
     @RestResource(path = "byTournament")
-    fun getRegistrationEntitiesByTournament(Tournament: TournamentEntity): List<RegistrationEntity>
+    fun getRegistrationEntitiesByTournament(springTournament: SpringTournament): List<SpringRegistration>
 
 }
 
 @RepositoryRestResource(path = "user")
-interface UserRepository : JpaRepository<UserEntity, String>
+interface UserRepository : JpaRepository<SpringUser, String>
 
 @RepositoryRestResource(path = "mode")
-interface ModeRepository : JpaRepository<ModeEntity, String>
+interface ModeRepository : JpaRepository<SpringMode, String>

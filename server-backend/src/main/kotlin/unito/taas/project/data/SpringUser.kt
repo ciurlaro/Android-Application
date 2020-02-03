@@ -2,7 +2,7 @@ package unito.taas.project.data
 
 import javax.validation.constraints.NotBlank
 
-data class UserEntity(
+data class SpringUser(
     @NotBlank val id: String,
     @NotBlank val email: String,
     @NotBlank val nickname: String,

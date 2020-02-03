@@ -11,11 +11,11 @@ import kotlin.reflect.KClass
 class RepositoryConfig : RepositoryRestConfigurer {
     override fun configureRepositoryRestConfiguration(config: RepositoryRestConfiguration): Unit = with(config) {
         exposeIdsFor(
-            UserEntity::class,
-            TournamentEntity::class,
-            RegistrationEntity::class,
-            GameEntity::class,
-            ModeEntity::class
+            SpringUser::class,
+            SpringTournament::class,
+            SpringRegistration::class,
+            SpringGame::class,
+            SpringMode::class
         )
     }
 

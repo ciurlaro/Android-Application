@@ -1,5 +1,4 @@
 import com.example.myapplication.modules.buildCommonKodein
-import com.github.lamba92.firebasemultiplatform.auth.FirebaseAuth
 import com.github.lamba92.firebasemultiplatform.core.FirebaseApp
 import com.github.lamba92.firebasemultiplatform.core.initializeApp
 import io.ktor.util.InternalAPI
@@ -15,7 +14,7 @@ val container by Kodein.lazy {
     bind<FirebaseApp>() with singleton {
         FirebaseApp.initializeApp {
             apiKey = "AIzaSyBxp-apzgy-EsK_wwrFh3rJPI32hjUWSA4"
-            authDomain = "unito-taas-project.firebaseapp.com"            // corretto?????
+            authDomain = "unito-taas-project.firebaseapp.com"
             databaseUrl = "https://unito-taas-project.firebaseio.com"
             projectId = "unito-taas-project"
             storageBucket = "unito-taas-project.appspot.com"
@@ -24,14 +23,19 @@ val container by Kodein.lazy {
             measurementId = "G-6HSSE0RCW1"
         }
     }
-    bind<FirebaseAuth>() with singleton {
-        FirebaseAuth.
-    }
+
+
+//    bind<ArenaTournamentRepository>() with singleton {
+//        ArenaTournamentRepositoryImplementation(
+//            instance(), instance(), instance(), instance(), instance(),
+//            instance(), instance(), instance(), instance(), instance(),
+//            instance(), instance(), instance(), instance(), instance()
+//        )
+//    }
+
 }
 
 suspend fun main() {
-
-    container.
 
 }
 
