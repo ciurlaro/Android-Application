@@ -11,7 +11,7 @@ kotlin {
         }
     }
     js {
-        browser()
+        nodejs()
     }
 
     sourceSets {

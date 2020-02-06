@@ -5,6 +5,7 @@ pluginManagement {
         jcenter()
         mavenCentral()
         gradlePluginPortal()
+        maven("https://dl.bintray.com/kotlin/kotlin-eap")
         maven("https://dl.bintray.com/kotlin/kotlin-dev")
     }
 
@@ -51,7 +52,6 @@ include(
     ":kodein-di",
     "web-client",
     "web-client-2",
-    "angular-di",
     ":app",
     "server-backend"
 )

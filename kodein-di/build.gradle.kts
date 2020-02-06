@@ -1,3 +1,10 @@
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.google.gson.JsonObject
+import com.google.gson.JsonParser
+import groovy.json.JsonSlurper
+import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
+
 plugins {
     id("com.android.library")
     kotlin("multiplatform")
@@ -31,8 +38,27 @@ kotlin {
         }
     }
     js {
-        browser()
+        nodejs()
+        compilations.all {
+            kotlinOptions {
+                freeCompilerArgs += listOf("-Xir-produce-js", "-Xgenerate-dts")
+            }
+
+            compileKotlinTask.doLast {
+//                val workingDir = "${rootProject.buildDir}/js/packages/${rootProject.name}-${project.name}"
+//                copy {
+//                    from("declarations")
+//                    into(workingDir)
+//                }
+//                val jsonFile = file("$workingDir/package.json")
+//                val gson = GsonBuilder().setPrettyPrinting().create()
+//                val jsonObj = JsonParser().parse(jsonFile.readText()).asJsonObject
+//                jsonObj.addProperty("typings", "index.d.ts")
+//                jsonFile.writeText(gson.toJson(jsonObj))
+            }
+        }
     }
+
 
     sourceSets {
 
@@ -70,5 +96,6 @@ kotlin {
 }
 
 @Suppress("unused")
-fun org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler.kodein(module: String, version: String? = null): Any =
+fun KotlinDependencyHandler.kodein(module: String, version: String? = null): Any =
     "org.kodein.di:kodein-di-$module${version?.let { ":$version" } ?: ""}"
+

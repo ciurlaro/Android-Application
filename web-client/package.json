@@ -26,7 +26,7 @@
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1",
-    "my-application-angular-di": "0.0.0-unspecified"
+    "my-application-kodein-di": "0.0.1-SNAPSHOT"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.803.17",

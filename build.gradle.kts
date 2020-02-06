@@ -38,13 +38,14 @@ subprojects {
         mavenCentral()
         maven("https://jitpack.io")
         maven("https://dl.bintray.com/lamba92/com.github.lamba92")
+        maven("https://dl.bintray.com/kotlin/kotlin-eap")
         maven("https://dl.bintray.com/kotlin/kotlin-dev")
     }
 }
 
 task<Sync>("copyPackages") {
     group = "jsmerda"
-    listOf("domain", "data", "core-impl", "angular-di").forEach {
+    listOf("domain", "data", "core-impl", "kodein-di").forEach {
         dependsOn("$it:compileKotlinJs")
     }
     from(file("$buildDir/js/packages")) {
