@@ -29,14 +29,6 @@ import kotlin.browser.window
 //    }
 //}
 
-
-
-
-
-
-
-
-
 @FlowPreview
 @InternalAPI
 val container by Kodein.lazy {
@@ -46,7 +38,6 @@ val container by Kodein.lazy {
 @FlowPreview
 @InternalAPI
 suspend fun main() {
-//    val loginUseCase by container.instance<SigninWithEmailUseCase>()
-//    loginUseCase.buildAction("test@test.test", "testtest")
-
+    val loginUseCase by container.instance<SigninWithEmailUseCase>()
+    loginUseCase.buildAction("test@test.test", "testtest")
 }
