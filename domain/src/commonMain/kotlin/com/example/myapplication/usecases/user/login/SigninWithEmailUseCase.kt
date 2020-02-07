@@ -2,7 +2,9 @@ package com.example.myapplication.usecases.user.login
 
 import com.example.myapplication.repositories.ArenaTournamentRepository
 import com.example.myapplication.usecases.UseCaseWithParamsSuspending
+import kotlin.js.JsName
 
+@JsName("SigninWithEmailUseCase")
 class SigninWithEmailUseCase(
     private val repository: ArenaTournamentRepository
 ) : UseCaseWithParamsSuspending<SigninWithEmailUseCase.Params, Boolean> {
@@ -13,9 +15,10 @@ class SigninWithEmailUseCase(
     suspend fun buildAction(email: String, password: String) =
         buildAction(Params(email, password))
 
+    @JsName("Params")
     data class Params(
-        val email: String,
-        val password: String
+        @JsName("email") val email: String,
+        @JsName("password") val password: String
     )
 
 }

@@ -40,6 +40,7 @@ subprojects {
         maven("https://dl.bintray.com/lamba92/com.github.lamba92")
         maven("https://dl.bintray.com/kotlin/kotlin-eap")
         maven("https://dl.bintray.com/kotlin/kotlin-dev")
+        mavenLocal()
     }
 }
 

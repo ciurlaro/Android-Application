@@ -34,7 +34,12 @@ kotlin {
         }
     }
     js {
-        nodejs()
+        browser()
+        compilations.all {
+            kotlinOptions {
+                moduleKind = "commonjs"
+            }
+        }
     }
 
     sourceSets {
@@ -44,6 +49,10 @@ kotlin {
         val textEncodingVersion: String by project
         val firebaseMultiplatformVersion: String by project
         val firebaseJsVersion: String by project
+        val bufferutilVersion: String by project
+        val wsVersion: String by project
+        val zlibVersion: String by project
+        val cryptoVersion: String by project
 
         val commonMain by getting {
             dependencies {
@@ -75,6 +84,10 @@ kotlin {
                 api(ktor("client-logging-js", ktorVersion))
                 api(npm("text-encoding", textEncodingVersion))
                 api(npm("firebase", firebaseJsVersion))
+                api(npm("bufferutil", bufferutilVersion))
+                api(npm("ws", wsVersion))
+                api(npm("zlib", zlibVersion))
+//                api(npm("crypto", cryptoVersion))
             }
         }
 

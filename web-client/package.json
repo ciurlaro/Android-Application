@@ -26,7 +26,10 @@
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1",
-    "my-application-kodein-di": "0.0.1-SNAPSHOT"
+    "my-application-kodein-di": "0.0.1-SNAPSHOT",
+    "ws": "7.2.1",
+    "zlib": "1.0.5",
+    "firebase": "7.8.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.803.17",

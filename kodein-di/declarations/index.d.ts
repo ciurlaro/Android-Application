@@ -1,10 +1,12 @@
-export declare namespace com.example.myapplication {
+declare namespace com.myapplication.example {
 
     namespace usecases {
         namespace user {
             namespace login {
                 namespace SigninWithEmailUseCase {
-                    class Params {
+                    export class Params {
+                        readonly email: string;
+                        readonly password: string;
                         constructor(email: string, password: string)
                     }
                 }
@@ -12,12 +14,12 @@ export declare namespace com.example.myapplication {
         }
     }
 
-
     namespace jscontainer {
 
-        import Params = com.example.myapplication.usecases.user.login.SigninWithEmailUseCase.Params;
+        import Params = com.myapplication.example.usecases.user.login.SigninWithEmailUseCase.Params;
 
-        class JsDependencyContainer {
+        export class JsDependencyContainer {
+
             constructor(
                 serverProtocol: string,
                 serverUrl: string,
@@ -31,4 +33,3 @@ export declare namespace com.example.myapplication {
         }
     }
 }
-

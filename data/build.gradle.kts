@@ -13,7 +13,12 @@ kotlin {
         }
     }
     js {
-        nodejs()
+        browser()
+        compilations.all {
+            kotlinOptions {
+                moduleKind = "commonjs"
+            }
+        }
     }
 
     sourceSets {

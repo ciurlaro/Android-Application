@@ -38,23 +38,26 @@ kotlin {
         }
     }
     js {
-        nodejs()
+        browser()
         compilations.all {
             kotlinOptions {
-                freeCompilerArgs += listOf("-Xir-produce-js", "-Xgenerate-dts")
+                moduleKind = "commonjs"
             }
+//            kotlinOptions {
+//                freeCompilerArgs += listOf("-Xir-produce-js", "-Xgenerate-dts")
+//            }
 
             compileKotlinTask.doLast {
-//                val workingDir = "${rootProject.buildDir}/js/packages/${rootProject.name}-${project.name}"
-//                copy {
-//                    from("declarations")
-//                    into(workingDir)
-//                }
-//                val jsonFile = file("$workingDir/package.json")
-//                val gson = GsonBuilder().setPrettyPrinting().create()
-//                val jsonObj = JsonParser().parse(jsonFile.readText()).asJsonObject
-//                jsonObj.addProperty("typings", "index.d.ts")
-//                jsonFile.writeText(gson.toJson(jsonObj))
+                val workingDir = "${rootProject.buildDir}/js/packages/${rootProject.name}-${project.name}"
+                copy {
+                    from("declarations")
+                    into(workingDir)
+                }
+                val jsonFile = file("$workingDir/package.json")
+                val gson = GsonBuilder().setPrettyPrinting().create()
+                val jsonObj = JsonParser().parse(jsonFile.readText()).asJsonObject
+                jsonObj.addProperty("typings", "index.d.ts")
+                jsonFile.writeText(gson.toJson(jsonObj))
             }
         }
     }

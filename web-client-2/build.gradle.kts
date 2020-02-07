@@ -11,6 +11,21 @@ repositories {
     jcenter()
 }
 
+kotlin {
+    sourceSets {
+        val main by getting {
+            dependencies {
+
+                val firebaseJsVersion: String by project
+                val wsVersion: String by project
+
+                implementation(npm("firebase", firebaseJsVersion))
+                implementation(npm("ws", wsVersion))
+            }
+        }
+    }
+}
+
 dependencies {
     implementation(kotlin("stdlib-js"))
     implementation("org.jetbrains.kotlinx:kotlinx-html-js:0.6.12")
@@ -18,8 +33,5 @@ dependencies {
 }
 
 kotlin.target.browser {
-    webpackTask {
-
-    }
 
 }
