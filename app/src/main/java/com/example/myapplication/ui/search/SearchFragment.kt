@@ -21,6 +21,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 
 @ExperimentalCoroutinesApi
+@FlowPreview
 class SearchFragment : BaseFragment() {
 
     private val viewModel: SearchViewModel by viewModelInstance()
@@ -83,6 +84,7 @@ class SearchFragment : BaseFragment() {
         }
         fragment_search_title_textview.resetLayoutErrorOnTextChanged(fragment_search_edit_textview_layout)
     }
+
 
     private fun updateAdapter(it: List<TournamentEntity>) {
         adapter.clear()

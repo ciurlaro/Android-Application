@@ -158,7 +158,7 @@ class ArenaTournamentDatasourceImplementation(
 
     private suspend fun HttpRequestBuilder.addAuth() {
         try {
-            header(HttpHeaders.Authorization, "Bearer: ${"${firebaseAuthDS.getToken()}:".encodeBase64()}")
+            header(HttpHeaders.Authorization, "Bearer: ${"${firebaseAuthDS.getToken()}:"}")
         } catch (e: AuthException) {
             println(e)
         }

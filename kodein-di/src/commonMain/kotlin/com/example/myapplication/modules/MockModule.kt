@@ -67,8 +67,7 @@ object MockModule : KodeinModuleProvider {
                 "search" -> "multiple_${words[0]}_response"
                 else ->
                     when {
-                        listOf("game", "tournament", "registration", "match", "user").contains(words.last()) ->
-                            "single_${words.last()}_response"
+                        listOf("game", "tournament", "registration", "match", "user").contains(words.last()) -> "single_${words.last()}_response"
                         words.last() == "admin" -> "single_user_response"
                         else -> error("$request cannot be handled by the mock engine")
                     }

@@ -3,11 +3,15 @@
 
  - [Architecture](#Architecture)
    - [Kodein](#Kodein)
-   - [BaseActivity & BaseFragment](#BaseActivity-and-BaseFragment)
+   - [Model View ViewModel pattern](#Model-View-ViewModel-pattern)
    - [Structured and asynchronous concurrency](#Structured-and-asynchronous-concurrency)
       - [Coroutines](#Coroutines) 
       - [Asynchronous Flows](#Asynchronous-Flows)
    - [Kotlin Multiplatform](#Kotlin-Multiplatform)
+   - [Spring Boot](#Spring-Boot)
+      - [Micro Service Architecture](#Micro-Service-Architecture)
+      - [Guiding Principles of REST](#Guiding-Principles-of-REST)
+   - [Angular ngx](#Angular-ngx)
    - [Other goodies](#Other-goodies) 
 - [Use Cases](#Use-Cases)
     - [Requirements](#Requirements)
@@ -79,7 +83,7 @@ The main idea is that **a context is aware of the content it has to provide and 
 Another usefull feature Kodein supply is the division of the context in subregions called modules, such that each module manage different needs.
 
 
-### Model-View-ViewModel pattern
+### Model View ViewModel pattern
 
 The division between `Views` and `ViewModels` is a notoriously almost mandatory Android pattern. 
 It surely handles an even more succesfull **separation of concern** than the one provided by the classical ModelViewController pattern, 
@@ -205,6 +209,80 @@ It has thus been the most obvious choice to **minimize code rewriting**
 and **maximize code reusing**.
 
 
+### Spring Boot
+
+Spring Boot is an **open source Java-based framework** built on top of the Java EE (Enterprise Edition) platform.
+Although it does not impose any specific programming model, it also comes with a build-in **inversion of control**
+inclination, which allows to easily exploit depencency-injection-like patterns and therefore to develop _clean_ but yet
+powerful applications.
+
+It also provides its own **Data access framework**, which addresses with a common approach lots of different Java Data Frameworks
+such as JDBC, iBatis/MyBatis, Hibernate, Java Data Objects (JDO), Java Persistence API (JPA) and more.
+
+This common approach consists in a set of features provided within a completely transparent usage of the **Template Pattern**.
+
+Teh result is that, trivially, the mere declaration of an implementation and/or extension of an interface or an abstract
+class provides at runtime:
+
+**Resource management** - automatic acquiring and releasing of database resources.
+**Exception handling** - entities hierarchy data access.
+**Transaction participation** - transparent participation in ongoing transactions.
+**Resource unwrapping** - pool wrappers database objects retrival from connection .
+
+#### Micro Service Architecture
+
+Bringing together all the just expressed features is not hard to comprehend why it increasingly has emerged as leading
+Micro Service software development tool.
+
+_Micro Service_ is an architecture that allows independence between development and deployment phases.
+
+The idea behind it is that each running service has its own process and this achieves the lightweight model to support
+business applications.
+
+One of its most common declinations involves the usage of **REST**, which is acronym for **RE**presentational **S**tate
+ **T**ransfer and is and architectural style for distributed hypermedia systems.
+
+REST does have it’s own guiding constraints which must be satisfied such that an interface may be referred as RESTful.
+
+These principles are listed below.
+
+#### Guiding Principles of REST
+
+- **Client–server:** user interface concerns and data storage concerns needs to stay separated, in order to _improve
+portability and scalability_ across multiple platforms by __simplifying the server components__.
+
+- **Stateless:** each client-to-server request must contain all of the information necessary to understand the request
+ and cannot take advantage of any stored context on the server.
+
+- **Cacheable data:** a response to a request must within implicitly or explicitly be labeled as cacheable or non-cacheable.
+
+- **Uniform interface:** four architectural constraints are needed to guide the behavior of components:
+    - identification of resources;
+    - manipulation of resources through representations;
+    - self-descriptive messages;
+    - hypermedia as the engine of application state.
+
+- **Layered system:** each component cannot “see” beyond the immediate layer with which it is interacting.
+
+Along many other functionalities, Spring Boot provides a transparent and easy to use RESTful approach, and therefore
+facilitated the realization of this aspect of the application.
+
+
+### Angular ngx
+
+**Angular ngx** (_x_ stands for 2 and more, to distinguish before and after 2.0 version releasing) is an app design
+ and development framework for creating **single-page apps**, both desktop and web.
+
+ As  
+
+Angular applications are built using **TypeScript** language, a superscript for JavaScript, which ensures **higher security**
+ as it __supports types__ (primitives, interfaces, etc.). Also, It helps catching and eliminating errors early
+ when writing the code or performing maintenance tasks.
+
+Angular framework also is embedded with the **MVVC** (Model-View-ViewModel) software architectural setup; however, it is not
+ according to the established standards.It works through the abstraction of each component as a POJO class, each one
+ responsable of its own aspect and logic (HTML + CSS and TypeScript, respectively) and entrusting the routing runtime of the
+ flow control.
 
 
 ### Other goodies
@@ -284,7 +362,7 @@ For the sake of completeness, it is useful to notice that in order to guarantee 
 > computational or memory requirements. 
 
 > Even on the **server**, on the other side, the operation would not be _tradeoff free_, since even supposing 
-  the unrealistic case of a limitless powerfull calculator, the network needed to complete a massive transition may
+  the unrealistic case of a limitless powerful calculator, the network needed to complete a massive transition may
   jeopardize the quality of other incoming and outgoing contemporary network calls, which is - of course - not acceptable
   in a real context. 
 

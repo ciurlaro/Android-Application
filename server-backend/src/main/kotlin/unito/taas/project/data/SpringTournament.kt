@@ -11,5 +11,5 @@ data class SpringTournament(
     @NotBlank val tournamentDescription: String,
     @NotBlank val tournamentMode: String,
     @NotBlank @ManyToOne @JoinColumn(name = "admin") val admin: SpringUser,
-    @NotBlank @ManyToOne @JoinColumn(name = "game") val springGame: SpringGame
+    @NotBlank @ManyToOne @JoinColumn(name = "game") val game: SpringGame
 )

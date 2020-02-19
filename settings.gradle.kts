@@ -45,16 +45,7 @@ pluginManagement {
 
 }
 
-include(
-    ":data",
-    ":domain",
-    "core-impl",
-    ":kodein-di",
-    "web-client",
-    "web-client-2",
-    ":app",
-    "server-backend"
-)
+include(":data", ":domain", "core-impl", ":kodein-di", ":app", "server-backend")
 
 rootProject.name = "my-application"
 
@@ -63,20 +54,20 @@ rootProject.name = "my-application"
 //else if (file("../firebase-multiplatform").run { exists() && isDirectory })
 //    includeFirebaseMultiplatform("../firebase-multiplatform")
 
-fun includeFirebaseMultiplatform(path: String) =
-    includeBuild(path) {
-        dependencySubstitution {
-            substitute(module("com.github.lamba92:firebase-multiplatform-core")).with(project(":core"))
-            substitute(module("com.github.lamba92:firebase-multiplatform-core-js")).with(project(":core"))
-            substitute(module("com.github.lamba92:firebase-multiplatform-core-android")).with(project(":core"))
-            substitute(module("com.github.lamba92:firebase-multiplatform-core-metadata")).with(project(":core"))
-            substitute(module("com.github.lamba92:firebase-multiplatform-auth")).with(project(":auth"))
-            substitute(module("com.github.lamba92:firebase-multiplatform-auth-js")).with(project(":auth"))
-            substitute(module("com.github.lamba92:firebase-multiplatform-auth-android")).with(project(":auth"))
-            substitute(module("com.github.lamba92:firebase-multiplatform-auth-metadata")).with(project(":auth"))
-            substitute(module("com.github.lamba92:firebase-multiplatform-storage")).with(project(":storage"))
-            substitute(module("com.github.lamba92:firebase-multiplatform-storage-js")).with(project(":storage"))
-            substitute(module("com.github.lamba92:firebase-multiplatform-storage-android")).with(project(":storage"))
-            substitute(module("com.github.lamba92:firebase-multiplatform-storage-metadata")).with(project(":storage"))
-        }
-    }
+//fun includeFirebaseMultiplatform(path: String) =
+//    includeBuild(path) {
+//        dependencySubstitution {
+//            substitute(module("com.github.lamba92:firebase-multiplatform-core")).with(project(":core"))
+//            substitute(module("com.github.lamba92:firebase-multiplatform-core-js")).with(project(":core"))
+//            substitute(module("com.github.lamba92:firebase-multiplatform-core-android")).with(project(":core"))
+//            substitute(module("com.github.lamba92:firebase-multiplatform-core-metadata")).with(project(":core"))
+//            substitute(module("com.github.lamba92:firebase-multiplatform-auth")).with(project(":auth"))
+//            substitute(module("com.github.lamba92:firebase-multiplatform-auth-js")).with(project(":auth"))
+//            substitute(module("com.github.lamba92:firebase-multiplatform-auth-android")).with(project(":auth"))
+//            substitute(module("com.github.lamba92:firebase-multiplatform-auth-metadata")).with(project(":auth"))
+//            substitute(module("com.github.lamba92:firebase-multiplatform-storage")).with(project(":storage"))
+//            substitute(module("com.github.lamba92:firebase-multiplatform-storage-js")).with(project(":storage"))
+//            substitute(module("com.github.lamba92:firebase-multiplatform-storage-android")).with(project(":storage"))
+//            substitute(module("com.github.lamba92:firebase-multiplatform-storage-metadata")).with(project(":storage"))
+//        }
+//    }
