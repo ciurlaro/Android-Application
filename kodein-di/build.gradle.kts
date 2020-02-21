@@ -1,8 +1,5 @@
-import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.google.gson.JsonObject
 import com.google.gson.JsonParser
-import groovy.json.JsonSlurper
 import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
 
 plugins {
@@ -18,7 +15,7 @@ android {
     }
 
     compileSdkVersion(29)
-    buildToolsVersion("29.0.2")
+    buildToolsVersion("30.0.0-rc1")
 
     sourceSets.all {
         java.srcDirs(file("src/android${name.capitalize()}/kotlin"))
@@ -37,30 +34,34 @@ kotlin {
             kotlinOptions.jvmTarget = "1.8"
         }
     }
-    js {
-        browser()
-        compilations.all {
-            kotlinOptions {
-                moduleKind = "commonjs"
-            }
+
+    val isJsEnabled: String by project
+
+    if (isJsEnabled.toBoolean())
+        js {
+            browser()
+            compilations.all {
+                kotlinOptions {
+                    moduleKind = "commonjs"
+                }
 //            kotlinOptions {
 //                freeCompilerArgs += listOf("-Xir-produce-js", "-Xgenerate-dts")
 //            }
 
-            compileKotlinTask.doLast {
-                val workingDir = "${rootProject.buildDir}/js/packages/${rootProject.name}-${project.name}"
-                copy {
-                    from("declarations")
-                    into(workingDir)
+                compileKotlinTask.doLast {
+                    val workingDir = "${rootProject.buildDir}/js/packages/${rootProject.name}-${project.name}"
+                    copy {
+                        from("declarations")
+                        into(workingDir)
+                    }
+                    val jsonFile = file("$workingDir/package.json")
+                    val gson = GsonBuilder().setPrettyPrinting().create()
+                    val jsonObj = JsonParser().parse(jsonFile.readText()).asJsonObject
+                    jsonObj.addProperty("typings", "index.d.ts")
+                    jsonFile.writeText(gson.toJson(jsonObj))
                 }
-                val jsonFile = file("$workingDir/package.json")
-                val gson = GsonBuilder().setPrettyPrinting().create()
-                val jsonObj = JsonParser().parse(jsonFile.readText()).asJsonObject
-                jsonObj.addProperty("typings", "index.d.ts")
-                jsonFile.writeText(gson.toJson(jsonObj))
             }
         }
-    }
 
 
     sourceSets {
@@ -83,15 +84,15 @@ kotlin {
                 api(kodein("framework-android-x", kodeinVersion))
             }
         }
-
-        val jsMain by getting {
-            dependencies {
-                api(project(":core-impl"))
-                api(kodein("core-js", kodeinVersion))
-                api(kodein("erased-js", kodeinVersion))
+        if (isJsEnabled.toBoolean()) {
+            val jsMain by getting {
+                dependencies {
+                    api(project(":core-impl"))
+                    api(kodein("core-js", kodeinVersion))
+                    api(kodein("erased-js", kodeinVersion))
+                }
             }
         }
-
         all {
             languageSettings.useExperimentalAnnotation("kotlin.Experimental")
         }

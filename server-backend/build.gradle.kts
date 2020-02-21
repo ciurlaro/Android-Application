@@ -20,6 +20,9 @@ application {
 
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 
+kotlin.sourceSets["main"].resources.srcDir("$buildDir/generated/resources")
+
+
 dependencies {
 
     val jacksonKotlinVersion: String by project
@@ -38,18 +41,25 @@ dependencies {
     implementation("com.google.firebase", "firebase-admin", firebaseAdminJvmVersion)
     implementation("org.jvnet.mimepull", "mimepull", mimePullVersion)
 
-
-    // developmentOnly("org.springframework.boot:spring-boot-devtools")
     implementation("com.h2database", "h2", h2Version)
     implementation(springBoot("tomcat"))
     testImplementation(springBoot("test"))
 
-    testImplementation("org.junit.jupiter", "junit-jupiter-api", junitJupiterVersion)
-    testImplementation("org.junit.jupiter", "junit-jupiter-engine", junitJupiterVersion)
+    testImplementation(jupiter("api"))
+    testImplementation(jupiter("engine"))
 
 }
 
+val copyWebFrontendInResources = task<Sync>("copyWebFrontendInResources") {
+    group = "copy frontend"
+    dependsOn(":web-client:build")
+    from("${rootProject.childProjects["web-client"]!!.buildDir}/spa")
+    into("${kotlin.sourceSets["main"].resources.srcDirs.first()}/static")
+//    into("$buildDir/generated/resources/static")
+}
+
 tasks.withType<KotlinCompile> {
+    dependsOn(copyWebFrontendInResources)
     kotlinOptions {
         freeCompilerArgs = listOf("-Xjsr305=strict")
         jvmTarget = "1.8"
@@ -60,8 +70,19 @@ tasks.withType<Test> {
     useJUnitPlatform()
 }
 
+
+
 fun DependencyHandlerScope.springBoot(
     module: String,
     version: String = findProperty("springframeworkBootVersion") as String
 ) =
     "org.springframework.boot:spring-boot-starter-$module:$version"
+
+fun DependencyHandlerScope.jupiter(
+    module: String,
+    version: String = findProperty("junitJupiterVersion") as String
+) =
+    "org.junit.jupiter:junit-jupiter-$module:$version"
+
+
+

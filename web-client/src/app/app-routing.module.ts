@@ -1,16 +1,19 @@
 import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
-import {AccountComponent} from './account/account.component';
+import {RouterModule, Routes} from '@angular/router';
+import {LoginComponent} from './login/login.component';
 import {HomeComponent} from './home/home.component';
-import {BrowseComponent} from './browse/browse.component';
+import {LoginGuard} from './guards/login-guard.service';
+import {HomeGuard} from './guards/home.guard';
+import {ProfileComponent} from './home/profile/profile.component';
+import {TournamentDetailComponent} from './home/tournament-detail/tournament-detail.component';
 
 
 const routes: Routes = [
-  {path: 'home', component: HomeComponent},
-  {path: 'account/signIn', component: AccountComponent},
-  {path: 'browse-tournament', component: BrowseComponent}
-
-
+  {path: '', redirectTo: 'home', pathMatch: 'full'},
+  {path: 'home', component: HomeComponent, canActivate: [HomeGuard]},
+  {path: 'tournament/:id', component: TournamentDetailComponent, canActivate: [HomeGuard]},
+  {path: 'profile', component: ProfileComponent, canActivate: [HomeGuard]},
+  {path: 'login', component: LoginComponent, canActivate: [LoginGuard]}
 ];
 
 @NgModule({

@@ -1,0 +1,23 @@
+<!--suppress HtmlFormInputWithoutLabel -->
+<mat-toolbar class="navbar mat-elevation-z3" color="primary">
+  <span [routerLink]="'home'" class="cursor-pointer">Arena Tournament</span>
+
+  <mat-icon *ngIf="isLoggedIn" [routerLink]="'profile'" class="toolbar-icon cursor-pointer">person</mat-icon>
+  <mat-icon (click)="createTournament()" *ngIf="isLoggedIn && true" class="toolbar-icon cursor-pointer">add</mat-icon>
+
+  <mat-form-field *ngIf="isLoggedIn" appearance="standard" color="accent" class="search-field">
+    <mat-label class="nav-item">Search tournament</mat-label>
+    <!--suppress TypeScriptUnresolvedVariable -->
+    <input (input)="onSearchTournamentTextChanged($event.target.value)" matInput>
+  </mat-form-field>
+
+  <span class="spacer"></span>
+
+  <mat-icon (click)="logout()" *ngIf="isLoggedIn" class="toolbar-icon cursor-pointer" color="accent">exit_to_app
+  </mat-icon>
+
+</mat-toolbar>
+
+
+
+

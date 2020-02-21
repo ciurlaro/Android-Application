@@ -12,14 +12,18 @@ kotlin {
             kotlinOptions.jvmTarget = "1.8"
         }
     }
-    js {
-        browser()
-        compilations.all {
-            kotlinOptions {
-                moduleKind = "commonjs"
+
+    val isJsEnabled: String by project
+
+    if (isJsEnabled.toBoolean())
+        js {
+            browser()
+            compilations.all {
+                kotlinOptions {
+                    moduleKind = "commonjs"
+                }
             }
         }
-    }
 
     sourceSets {
 
@@ -43,11 +47,13 @@ kotlin {
             }
         }
 
-        val jsMain by getting {
-            dependencies {
-                api(ktor("http-js", ktorVersion))
-                api(ktor("utils-js", ktorVersion))
-                api(serialization("runtime-js", kotlinxSerializationVersion))
+        if (isJsEnabled.toBoolean()) {
+            val jsMain by getting {
+                dependencies {
+                    api(ktor("http-js", ktorVersion))
+                    api(ktor("utils-js", ktorVersion))
+                    api(serialization("runtime-js", kotlinxSerializationVersion))
+                }
             }
         }
 

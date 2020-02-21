@@ -47,7 +47,7 @@ android {
     }
 
     compileSdkVersion(29)
-    buildToolsVersion("29.0.2")
+    buildToolsVersion("30.0.0-rc1")
     defaultConfig {
         applicationId = "com.example.myapplication"
         minSdkVersion(22)

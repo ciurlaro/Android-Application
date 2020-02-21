@@ -1,0 +1,12 @@
+<mat-card (mouseout)="hoover = ''" (mouseover)="hoover = 'mat-elevation-z8'"
+          [ngClass]="hoover"
+          [routerLink]="['/tournament', tournament.id]"
+          class="tournament-card"
+>
+  <mat-card-header>
+    <div [ngStyle]="getGameIconStyle()" mat-card-avatar></div>
+    <mat-card-title>{{tournament.title}}</mat-card-title>
+    <mat-card-subtitle>{{tournament.game.name}}</mat-card-subtitle>
+  </mat-card-header>
+  <img alt="game_image" mat-card-image src="{{tournament.game.image}}">
+</mat-card>

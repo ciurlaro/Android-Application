@@ -1,10 +1,7 @@
+<app-navbar [isLoggedIn]=showLoginStuff></app-navbar>
 
-<app-header></app-header>
+<mat-progress-bar *ngIf="showLoadingLoginBar" color="warn" mode="indeterminate"></mat-progress-bar>
 
-
-<app-home></app-home>
-
-
-<app-footer></app-footer>
-
-
+<div class="d-flex justify-content-center">
+  <router-outlet></router-outlet>
+</div>

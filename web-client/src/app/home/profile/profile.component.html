@@ -1,0 +1,40 @@
+<!--<mat-card class="example-card">-->
+<!--  <mat-card-header>-->
+<!--    <div mat-card-avatar class="example-header-image"></div>-->
+<!--    <mat-card-title>username</mat-card-title>-->
+<!--    <mat-card-subtitle>email</mat-card-subtitle>-->
+<!--  </mat-card-header>-->
+<!--  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg">-->
+<!--  <mat-card-footer>-->
+<!--    <div class="d-flex justify-content-center">-->
+<!--      <app-create-tournament-button></app-create-tournament-button>-->
+<!--    </div>-->
+<!--  </mat-card-footer>-->
+<!--</mat-card>-->
+
+<!--suppress HtmlRequiredAltAttribute, AngularInvalidExpressionResultType -->
+<div *ngIf="currentUser != null" class="profile-container">
+  <div class="d-flex justify-content-center">
+    <mat-icon *ngIf="currentUser.isSubscriber" class="crown" color="warn" svgIcon="crown-outline"></mat-icon>
+  </div>
+  <div class="d-flex justify-content-center">
+    <img [src]="currentUser.image" class="user-image">
+  </div>
+  <div class="d-flex justify-content-center margin-top-16px">
+    <p class="mat-display-3 margin-bottom-0">{{currentUser.nickname}}</p>
+  </div>
+  <div class="d-flex justify-content-center">
+    <p class="mat-subheading-2">{{currentUser.email}}</p>
+  </div>
+  <div *ngIf="currentUserAuthProviders.length != 0" class="d-flex justify-content-around">
+    <button (click)="startLinkFLow('Google')" [color]="'google-color'" class="margin-16px" mat-fab>
+      <mat-icon svgIcon="google"></mat-icon>
+    </button>
+    <button (click)="startLinkFLow('Facebook')" [color]="'facebook-color'" class="margin-16px" mat-fab>
+      <mat-icon svgIcon="facebook"></mat-icon>
+    </button>
+    <button (click)="startLinkFLow('Email')" [color]="'email-color'" class="margin-16px" mat-fab>
+      <mat-icon>email</mat-icon>
+    </button>
+  </div>
+</div>

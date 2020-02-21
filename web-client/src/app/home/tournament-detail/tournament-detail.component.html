@@ -1,0 +1,12 @@
+<div *ngIf="tournament" class="d-flex space-between">
+  <p class="mat-h1" style="align-self: flex-start">{{tournament.title}}</p>
+  <div style="display: flex">
+    <mat-icon [svgIcon]="tournament.game.name" style="margin-right: 16px; align-self: center"></mat-icon>
+    <span style="align-self: center">{{tournament.game.name}} | Players: {{tournament.playersNumber}}</span>
+  </div>
+</div>
+<div *ngIf="tournament" class="d-flex justify-content-center">
+  <p class="mat-h4">{{tournament.description}}</p>
+</div>
+<!--suppress HtmlRequiredAltAttribute -->
+<img *ngIf="tournament" [src]="tournament.game.image" class="tournament-image">

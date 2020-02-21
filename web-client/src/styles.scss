@@ -1,1 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+html, body {
+  font-family: Roboto, Arial, sans-serif;
+  height: 100%;
+  width: 100%;
+}
+
+.margin-16px {
+  margin: 16px;
+}
+
+:focus {
+  outline: none;
+  border: 0;
+}
+
+.mat-fab.mat-google-color {
+  color: #f0fff3;
+  background-color: #dd4b39;
+}
+
+.mat-fab.mat-facebook-color {
+  color: #f0fff3;
+  background-color: #3B5998;
+}
+
+.mat-fab.mat-email-color {
+  color: #f0fff3;
+  background-color: #ffe800;
+}

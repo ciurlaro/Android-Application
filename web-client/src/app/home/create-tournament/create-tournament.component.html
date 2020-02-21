@@ -1,0 +1,48 @@
+<!--suppress HtmlFormInputWithoutLabel -->
+<p class="mat-h1">Create a Tournament</p>
+<ng-form [formGroup]="createTournamentFormGroup" class="full-width">
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Tournament title</mat-label>
+    <input [formControl]="tournamentTitleControl" matInput required>
+    <mat-error *ngIf="tournamentTitleControl.hasError('minlength') && !tournamentTitleControl.hasError('required')">
+      Must be at least 3 characters.
+    </mat-error>
+    <mat-error *ngIf="tournamentTitleControl.hasError('required')">
+      Enter a title.
+    </mat-error>
+  </mat-form-field>
+  <div class="selectors-line">
+    <mat-form-field appearance="outline" style="width: 60%; margin-right: 10%">
+      <mat-label>Game</mat-label>
+      <mat-error *ngIf="tournamentGameControl.hasError('required')">
+        Select a game!
+      </mat-error>
+      <mat-select [formControl]="tournamentGameControl" required>
+        <mat-option *ngFor="let game of availableGames" [value]="game">
+          <mat-icon [svgIcon]="game.name"></mat-icon>
+          {{game.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline" style="width: 30%">
+      <mat-label>Players</mat-label>
+      <mat-error *ngIf="tournamentPlayersControl.hasError('required')">
+        Required
+      </mat-error>
+      <mat-select [formControl]="tournamentPlayersControl" required>
+        <mat-option *ngFor="let number of playerNumbers" [value]="number">
+          {{number}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Tournament description</mat-label>
+    <textarea [formControl]="tournamentDescriptionControl" matInput rows="3"></textarea>
+  </mat-form-field>
+  <div class="button-container">
+    <button (click)="dialogRef.close(null)" color="warn" mat-raised-button style="margin-right: 16px">Cancel</button>
+    <button (click)="submit()" [disabled]="createTournamentFormGroup.invalid" color="primary" mat-raised-button>Submit
+    </button>
+  </div>
+</ng-form>

@@ -1,0 +1,17 @@
+{
+  "gameName": "Counter Strike GO",
+  "availableModes": [
+    "OPEN_WORLD"
+  ],
+  "image": "https://logodix.com/logo/2115839.png",
+  "icon": "https://logodix.com/logo/2115839.png",
+  "icon_svg": "http://localhost:4200/mock/icons/wow.svg",
+  "_links": {
+    "self": {
+      "href": "http://localhost:8080/game/go"
+    },
+    "game": {
+      "href": "http://localhost:8080/game/go"
+    }
+  }
+}

@@ -141,7 +141,7 @@ class ArenaTournamentRepositoryImplementation(
                 game = gameLinkMapper.toRemoteSingle(game.name).toString()
             )
         ).let {
-            return@let TournamentEntity(
+            TournamentEntity(
                 it.id,
                 playersNumber,
                 title,
@@ -238,7 +238,9 @@ class ArenaTournamentRepositoryImplementation(
 
     override suspend fun getUserById(id: String) =
         arenaTournamentDS.getUserById(id)
-            .let { userMapper.fromRemoteSingle(it) }
+            .let { userMapper.fromRemo
+
+                teSingle(it) }
 
     override suspend fun getCurrentUser() = firebaseAuthDS.getCurrentAuthUser()?.let {
         coroutineScope {

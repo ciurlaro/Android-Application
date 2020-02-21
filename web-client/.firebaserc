@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "unito-taas-project": {
+      "hosting": {
+        "arena-tournament-spa": [
+          "unito-taas-project"
+        ]
+      }
+    }
+  }
+}

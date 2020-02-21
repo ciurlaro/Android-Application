@@ -33,14 +33,18 @@ kotlin {
             kotlinOptions.jvmTarget = "1.8"
         }
     }
-    js {
-        browser()
-        compilations.all {
-            kotlinOptions {
-                moduleKind = "commonjs"
+
+    val isJsEnabled: String by project
+
+    if (isJsEnabled.toBoolean())
+        js {
+            browser()
+            compilations.all {
+                kotlinOptions {
+                    moduleKind = "commonjs"
+                }
             }
         }
-    }
 
     sourceSets {
 
@@ -76,21 +80,22 @@ kotlin {
             }
         }
 
-        val jsMain by getting {
-            dependencies {
-                api(ktor("client-js", ktorVersion))
-                api(ktor("client-serialization-js", ktorVersion))
-                api(ktor("client-mock-js", ktorVersion))
-                api(ktor("client-logging-js", ktorVersion))
-                api(npm("text-encoding", textEncodingVersion))
-                api(npm("firebase", firebaseJsVersion))
-                api(npm("bufferutil", bufferutilVersion))
-                api(npm("ws", wsVersion))
-                api(npm("zlib", zlibVersion))
+        if (isJsEnabled.toBoolean()) {
+            val jsMain by getting {
+                dependencies {
+                    api(ktor("client-js", ktorVersion))
+                    api(ktor("client-serialization-js", ktorVersion))
+                    api(ktor("client-mock-js", ktorVersion))
+                    api(ktor("client-logging-js", ktorVersion))
+                    api(npm("text-encoding", textEncodingVersion))
+                    api(npm("firebase", firebaseJsVersion))
+                    api(npm("bufferutil", bufferutilVersion))
+                    api(npm("ws", wsVersion))
+                    api(npm("zlib", zlibVersion))
 //                api(npm("crypto", cryptoVersion))
+                }
             }
         }
-
         all {
             languageSettings.useExperimentalAnnotation("kotlin.Experimental")
         }

@@ -44,37 +44,41 @@ subprojects {
     }
 }
 
-task<Sync>("copyPackages") {
-    group = "jsmerda"
-    listOf("domain", "data", "core-impl", "kodein-di").forEach {
-        dependsOn("$it:compileKotlinJs")
-    }
-    from(file("$buildDir/js/packages")) {
-        exclude("**/yarn.lock")
-        exclude("**/node_modules")
-        exclude("**/*.json.hash")
-        exclude("package.json")
-    }
-    from(file("$buildDir/js/packages_imported")) {
-        exclude("**/yarn.lock")
-        exclude(".visited")
-        exclude("**/node_modules")
-        exclude("**/*.json.hash")
-        exclude("package.json")
-        eachFile {
-            relativePath = RelativePath(
-                true,
-                *relativePath.segments
-                    .toMutableList()
-                    .apply { removeAt(1) }
-                    .toTypedArray()
-            )
-        }
-        includeEmptyDirs = false
-    }
-    into("$buildDir/copiedPackeges")
-}
+val isJsEnabled: String by project
 
-NodeJsRootPlugin.apply(project).apply {
-    versions.dukat.version = "0.0.25"
+if (isJsEnabled.toBoolean()) {
+    task<Sync>("copyPackages") {
+        group = "js stuff"
+        listOf("domain", "data", "core-impl", "kodein-di").forEach {
+            dependsOn("$it:compileKotlinJs")
+        }
+        from(file("$buildDir/js/packages")) {
+            exclude("**/yarn.lock")
+            exclude("**/node_modules")
+            exclude("**/*.json.hash")
+            exclude("package.json")
+        }
+        from(file("$buildDir/js/packages_imported")) {
+            exclude("**/yarn.lock")
+            exclude(".visited")
+            exclude("**/node_modules")
+            exclude("**/*.json.hash")
+            exclude("package.json")
+            eachFile {
+                relativePath = RelativePath(
+                    true,
+                    *relativePath.segments
+                        .toMutableList()
+                        .apply { removeAt(1) }
+                        .toTypedArray()
+                )
+            }
+            includeEmptyDirs = false
+        }
+        into("$buildDir/copiedPackeges")
+    }
+
+    NodeJsRootPlugin.apply(project).apply {
+        versions.dukat.version = "0.0.28"
+    }
 }

@@ -10,21 +10,23 @@ kotlin {
             kotlinOptions.jvmTarget = "1.8"
         }
     }
-    js {
-        browser()
-        compilations.all {
-            kotlinOptions {
-                moduleKind = "commonjs"
+
+    val isJsEnabled: String by project
+
+    if (isJsEnabled.toBoolean())
+        js {
+            browser()
+            compilations.all {
+                kotlinOptions {
+                    moduleKind = "commonjs"
+                }
             }
         }
-    }
 
     sourceSets {
 
         val kotlinVersion: String by project
         val coroutinesVersion: String by project
-        val klockVersion: String by project
-        val rxjsVersion: String by project
 
         val commonMain by getting {
             dependencies {
@@ -40,11 +42,12 @@ kotlin {
 
             }
         }
-
-        val jsMain by getting {
-            dependencies {
-                api(kotlin("stdlib-js", kotlinVersion))
-                api("org.jetbrains.kotlinx:kotlinx-coroutines-core-js:$coroutinesVersion")
+        if (isJsEnabled.toBoolean()) {
+            val jsMain by getting {
+                dependencies {
+                    api(kotlin("stdlib-js", kotlinVersion))
+                    api("org.jetbrains.kotlinx:kotlinx-coroutines-core-js:$coroutinesVersion")
+                }
             }
         }
 

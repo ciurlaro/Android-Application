@@ -9,19 +9,21 @@ node {
   version = "12.14.1"
 }
 
-val copyPackages: Sync by rootProject.tasks
+val isJsEnabled: String by project
 
-val moveCopiedPackages = task<Sync>("moveCopiedPackages") {
-  dependsOn(copyPackages)
-  from(copyPackages.destinationDir)
-  into("$buildDir/packages")
-}
+val moveCopiedPackages = if (isJsEnabled.toBoolean())
+  task<Sync>("moveCopiedPackages") {
+    val copyPackages: Sync by rootProject.tasks
+    dependsOn(copyPackages)
+    from(copyPackages.destinationDir)
+    into("$buildDir/packages")
+  }  else null
 
 val yarnInstall by tasks.register<YarnTask>("yarnInstall") {
 
   group = "yarn"
 
-  dependsOn(moveCopiedPackages)
+  moveCopiedPackages?.let { dependsOn(it) }
 
   inputs.file("package.json")
   outputs.dir("node_modules")
@@ -39,9 +41,25 @@ val build = task<YarnTask>("build") {
   inputs.file("angular.json")
 
   inputs.dir("../build/js/packages")
-  outputs.dir("dist")
+  outputs.dir("$buildDir/spa")
 
   args = listOf("run", "build")
+
+}
+
+val buildMock = task<YarnTask>("buildMock") {
+
+  group = "ng"
+
+  dependsOn(yarnInstall)
+
+  inputs.dir("src")
+  inputs.file("angular.json")
+
+  inputs.dir("../build/js/packages")
+  outputs.dir("$buildDir/spa")
+
+  args = listOf("run", "build", "-c=mock")
 
 }
 
@@ -53,6 +71,15 @@ task<YarnTask>("serve") {
   group = "ng"
 
   args = listOf("run", "start")
+}
+
+task<YarnTask>("serveMock") {
+
+  dependsOn(build)
+
+  group = "ng"
+
+  args = listOf("run", "mock")
 }
 
 

@@ -1,0 +1,19 @@
+{
+  "hosting": [
+    {
+      "target": "arena-tournament-spa",
+      "public": "dist/arena-tournament-spa",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  ]
+}
