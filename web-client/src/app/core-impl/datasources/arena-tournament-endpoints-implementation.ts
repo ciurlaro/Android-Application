@@ -69,7 +69,7 @@ export class ArenaTournamentEndpointsImplementation extends ArenaTournamentEndpo
   }
 
   getShowCaseTournaments(page: number): Url {
-    return this.urlBuilderService.buildUrl(`tournament/search/byShowCase`, (params) => {
+    return this.urlBuilderService.buildUrl(`tournament`, (params) => {
       params.append('page', page.toString());
     });
   }
@@ -156,7 +156,7 @@ export class ArenaTournamentEndpointsImplementation extends ArenaTournamentEndpo
   }
 
   userByIdUrl(userId: string): Url {
-    return this.urlBuilderService.buildUrl(`user/${userId}`);
+    return this.urlBuilderService.buildUrl(`user?id=${userId}`);
   }
 
 }

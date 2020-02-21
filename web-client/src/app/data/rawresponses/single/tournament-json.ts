@@ -6,5 +6,6 @@ export interface TournamentJSON {
   readonly title: string;
   readonly tournamentDescription: string;
   readonly tournamentMode: string;
+  readonly admin: string;
   readonly _links?: LinksJSON;
 }

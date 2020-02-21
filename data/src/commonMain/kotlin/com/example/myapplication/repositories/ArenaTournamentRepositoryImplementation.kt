@@ -208,7 +208,7 @@ class ArenaTournamentRepositoryImplementation(
         arenaTournamentDS.getTournamentsByUser(userId, page).transformTournaments()
 
     override suspend fun getShowCaseTournaments(page: Int) =
-        arenaTournamentDS.getShowCaseTournaments(page).transformTournaments()
+        arenaTournamentDS.getAllTournaments(page).transformTournaments()
 
     override suspend fun getTournamentsContainingTitle(title: String, page: Int) =
         arenaTournamentDS.getTournamentsContainingTitle(title, page).transformTournaments()
@@ -238,9 +238,7 @@ class ArenaTournamentRepositoryImplementation(
 
     override suspend fun getUserById(id: String) =
         arenaTournamentDS.getUserById(id)
-            .let { userMapper.fromRemo
-
-                teSingle(it) }
+            .let { userMapper.fromRemoteSingle(it) }
 
     override suspend fun getCurrentUser() = firebaseAuthDS.getCurrentAuthUser()?.let {
         coroutineScope {

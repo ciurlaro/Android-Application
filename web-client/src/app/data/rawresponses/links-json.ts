@@ -14,5 +14,4 @@ export interface LinksJSON {
   readonly mode?: HrefJSON;
   readonly registration?: HrefJSON;
   readonly user?: HrefJSON;
-  readonly admin?: HrefJSON;
 }

@@ -341,10 +341,11 @@ export class ArenaTournamentRepositoryImplementation extends ArenaTournamentRepo
   }
 
   private fromTournamentJsonToEntity(tournamentsJSON: TournamentJSON): Observable<TournamentEntity> {
+    console.log(tournamentsJSON);
     return zip(
       of(tournamentsJSON),
       this.arenaTournamentDs.getGameByLink(tournamentsJSON._links.game.href),
-      this.arenaTournamentDs.getUserByLink(tournamentsJSON._links.admin.href)
+      this.arenaTournamentDs.getUserById(tournamentsJSON.admin)
     ).pipe(
       map((triple) => this.tournamentMapper.fromRemoteSingle(triple))
     );
