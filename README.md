@@ -273,7 +273,8 @@ facilitated the realization of this aspect of the application.
 **Angular ngx** (_x_ stands for 2 and more, to distinguish before and after 2.0 version releasing) is an app design
  and development framework for creating **single-page apps**, both desktop and web.
 
- As  
+ The web-apps primary benefit, unlike simple web-sites, it that they allows a more complex but therefore more versatile
+ software structure; this consequently involves better code maintenance and reusage over time.
 
 Angular applications are built using **TypeScript** language, a superscript for JavaScript, which ensures **higher security**
  as it __supports types__ (primitives, interfaces, etc.). Also, It helps catching and eliminating errors early
