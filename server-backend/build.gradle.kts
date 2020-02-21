@@ -83,6 +83,3 @@ fun DependencyHandlerScope.jupiter(
     version: String = findProperty("junitJupiterVersion") as String
 ) =
     "org.junit.jupiter:junit-jupiter-$module:$version"
-
-
-

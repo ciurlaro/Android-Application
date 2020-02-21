@@ -40,7 +40,6 @@ val build = task<YarnTask>("build") {
   inputs.dir("src")
   inputs.file("angular.json")
 
-  inputs.dir("../build/js/packages")
   outputs.dir("$buildDir/spa")
 
   args = listOf("run", "build")
@@ -56,7 +55,6 @@ val buildMock = task<YarnTask>("buildMock") {
   inputs.dir("src")
   inputs.file("angular.json")
 
-  inputs.dir("../build/js/packages")
   outputs.dir("$buildDir/spa")
 
   args = listOf("run", "build", "-c=mock")
