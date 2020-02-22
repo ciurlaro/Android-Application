@@ -4,8 +4,10 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.rest.core.annotation.RepositoryRestResource
 import org.springframework.data.rest.core.annotation.RestResource
 import org.springframework.format.annotation.DateTimeFormat
+import org.springframework.web.bind.annotation.CrossOrigin
 import java.time.LocalDateTime
 
+@CrossOrigin(origins = ["http://localhost:4200"])
 @RepositoryRestResource(path = "game")
 interface GameRepository : JpaRepository<GameEntity, String> {
 
@@ -20,6 +22,7 @@ interface GameRepository : JpaRepository<GameEntity, String> {
 
 }
 
+@CrossOrigin(origins = ["http://localhost:4200"])
 @RepositoryRestResource(path = "tournament")
 interface TournamentRepository : JpaRepository<TournamentEntity, Long> {
 
@@ -34,6 +37,7 @@ interface TournamentRepository : JpaRepository<TournamentEntity, Long> {
 
 }
 
+@CrossOrigin(origins = ["http://localhost:4200"])
 @RepositoryRestResource(path = "registration")
 interface RegistrationRepository : JpaRepository<RegistrationEntity, Long> {
 
@@ -45,5 +49,6 @@ interface RegistrationRepository : JpaRepository<RegistrationEntity, Long> {
 
 }
 
+@CrossOrigin(origins = ["http://localhost:4200"])
 @RepositoryRestResource(path = "mode")
 interface ModeRepository : JpaRepository<ModeEntity, String>

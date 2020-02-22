@@ -17,5 +17,6 @@ data class LinksJSON(
     val mode: HrefJSON? = null,
     val registration: HrefJSON? = null,
     val user: HrefJSON? = null,
-    val admin: HrefJSON? = null
+    val admin: HrefJSON? = null,
+    val availableModes: HrefJSON? = null
 )

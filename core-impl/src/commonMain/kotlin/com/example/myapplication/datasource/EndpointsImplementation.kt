@@ -15,7 +15,11 @@ data class EndpointsImplementation(
         buildUrl(path, Parameters.build(builder))
 
     private fun buildUrl(path: String, parameters: Parameters = parametersOf()) =
-        Url(URLProtocol(protocol, port), host, port, path, parameters, "", null, null, false)
+        Url(when (protocol) {
+            "http" -> URLProtocol.HTTP
+            "https" -> URLProtocol.HTTPS
+            else -> error("Unknown protocol")
+        }, host, port, path, parameters, "", null, null, false)
 
     /*
     * Post endpoints
@@ -104,7 +108,7 @@ data class EndpointsImplementation(
         }
 
     override fun getTournamentsContainingTitle(title: String, page: Int) =
-        buildUrl("/tournament/search/containingTitle") {
+        buildUrl("/tournament/search/byTitleContaining") {
             append("title", title)
             append("page", page)
         }
@@ -130,7 +134,9 @@ data class EndpointsImplementation(
         }
 
     override fun userByIdUrl(userId: String) =
-        buildUrl("/user/$userId")
+        buildUrl("/user") {
+            append("id", userId)
+        }
 
     override fun isAccountVerifiedUrl() =
         buildUrl("isAccountVerified")
@@ -139,8 +145,9 @@ data class EndpointsImplementation(
         buildUrl("isAccountSubscribed")
 
     override fun searchTournaments(title: String, gameId: String?, page: Int) =
-        buildUrl("tournament/search/byNameAndGames") {
+        buildUrl("tournament/search/byTitleContaining") {
             append("title", title)
+            append("page", page)
             gameId?.let { append("gameIds", gameId) }
         }
 }

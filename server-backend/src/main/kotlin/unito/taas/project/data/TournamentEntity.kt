@@ -10,6 +10,6 @@ data class TournamentEntity(
         @NotBlank val title: String,
         @NotBlank val tournamentDescription: String,
         @NotBlank val tournamentMode: String = "",
-        @NotBlank @JoinColumn(name = "admin") val admin: String,
+        @NotBlank val admin: String,
         @NotBlank @ManyToOne @JoinColumn(name = "game") val game: GameEntity
 )

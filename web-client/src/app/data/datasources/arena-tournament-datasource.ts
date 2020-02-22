@@ -48,8 +48,6 @@ export abstract class ArenaTournamentDatasource {
 
   abstract getTournamentsByUser(userId: string, page: number): Observable<MultipleTournamentsJSON>;
 
-  abstract searchTournamentsByName(name: string, page: number): Observable<MultipleTournamentsJSON>;
-
   abstract getShowCaseTournaments(page: number): Observable<MultipleTournamentsJSON>;
 
   abstract getTournamentsContainingTitle(title: string, page: number): Observable<MultipleTournamentsJSON>;
@@ -70,5 +68,5 @@ export abstract class ArenaTournamentDatasource {
 
   abstract getAccountSubscription(): Observable<SubscriptionStatusJSON>;
 
-  abstract searchTournaments(title: string, page: number): Observable<MultipleTournamentsJSON>;
+  abstract searchTournamentsByTitle(title: string, page: number): Observable<MultipleTournamentsJSON>;
 }

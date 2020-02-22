@@ -7,7 +7,7 @@ import kotlinx.serialization.UnstableDefault
 import org.kodein.di.Kodein
 import org.kodein.di.erased.with
 
-@OptIn(UnstableDefault::class)
+//@OptIn(UnstableDefault::class)
 @InternalAPI
 @FlowPreview
 fun buildCommonKodein(

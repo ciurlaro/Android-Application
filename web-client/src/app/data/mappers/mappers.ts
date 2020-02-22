@@ -40,7 +40,7 @@ interface MultipleToRemoteMapper<MultipleRemote, SingleRemote, Entity> extends S
 })
 export class GameMapper implements MultipleFromRemoteMapper<MultipleGamesJSON, GameJSON, GameEntity> {
   fromRemoteSingle(remote: GameJSON): GameEntity {
-    return new GameEntity(remote.gameName, remote.availableModes, remote.image, remote.icon, remote.icon_svg);
+    return new GameEntity(remote.gameName, remote.availableModes, remote.image, remote.icon, remote.svgIcon);
   }
 
   fromRemoteMultiple(remote: MultipleGamesJSON): GameEntity[] {
@@ -156,7 +156,7 @@ export class UserLinkMapper extends AbstractLinkMapper<UserEntity> {
 
   toRemoteSingle(entity: UserEntity): Url {
     return {
-      path: `${this.protocol}://${this.host}${this.port !== 80 ? `:${this.port}` : ''}/user/${entity.id}`
+      path:  encodeURI(`${this.protocol}://${this.host}${this.port !== 80 ? `:${this.port}` : ''}/user/${entity.id}`)
     };
   }
 }
@@ -168,7 +168,7 @@ export class GameLinkMapper extends AbstractLinkMapper<GameEntity> {
 
   toRemoteSingle(entity: GameEntity): Url {
     return {
-      path: `${this.protocol}://${this.host}${this.port !== 80 ? `:${this.port}` : ''}/game/${entity.name}`
+      path: encodeURI(`${this.protocol}://${this.host}${this.port !== 80 ? `:${this.port}` : ''}/game/${entity.name}`)
     };
   }
 }
@@ -180,7 +180,7 @@ export class TournamentLinkMapper extends AbstractLinkMapper<TournamentEntity> {
 
   toRemoteSingle(entity: TournamentEntity): Url {
     return {
-      path: `${this.protocol}://${this.host}${this.port !== 80 ? `:${this.port}` : ''}/tournament/${entity.id}`
+      path:  encodeURI(`${this.protocol}://${this.host}${this.port !== 80 ? `:${this.port}` : ''}/tournament/${entity.id}`)
     };
   }
 }

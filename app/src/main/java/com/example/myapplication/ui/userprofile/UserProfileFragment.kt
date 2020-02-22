@@ -63,7 +63,7 @@ class UserProfileFragment : BaseFragment(), FacebookCallback<LoginResult> {
         with(viewModel) {
             model.observe { (user, _, providersLinked) ->
                 update_user_is_subscribed.visibility =
-                    if (user.isSubscriber || true) VISIBLE else INVISIBLE // "true" temporary, until backend will be online
+                    if (user.isSubscriber) VISIBLE else INVISIBLE
                 user.image?.let {
                     Glide.with(requireContext())
                         .load(it)

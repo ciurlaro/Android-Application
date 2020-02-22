@@ -19,7 +19,7 @@ class GetCreatedTournamentsByAdminUseCase(
         (0 until params.maxPage)
             .asFlow()
             .flatMapConcatIterable {
-                repository.getTournamentsByUser(getCurrentUserInfoUseCase.buildAction().id, it)
+                repository.getTournamentsByUser(getCurrentUserInfoUseCase.buildAction()!!.id, it)
             }.toList()
 
     @FlowPreview

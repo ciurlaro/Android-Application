@@ -60,5 +60,5 @@ testem.log
 .DS_Store
 Thumbs.db
 
-/server-backend/src/main/resources/unito-taas-project-firebase-adminsdk.json
+unito-taas-project-firebase-adminsdk.json
 /server-backend/src/main/resources/static/

@@ -17,8 +17,8 @@ data class GameEmbeddedJSON(
 @Serializable
 data class GameJSON(
     val gameName: String,
-    val availableModes: List<String>,
     val image: String,
     val icon: String,
+    val svgIcon: String,
     val _links: LinksJSON
 )

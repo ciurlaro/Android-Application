@@ -27,7 +27,7 @@ dependencies {
 
     val jacksonKotlinVersion: String by project
     val firebaseAdminJvmVersion: String by project
-    val h2Version: String by project
+    val mySqlDriverVersion: String by project
     val junitJupiterVersion: String by project
     val mimePullVersion: String by project
 
@@ -41,7 +41,7 @@ dependencies {
     implementation("com.google.firebase", "firebase-admin", firebaseAdminJvmVersion)
     implementation("org.jvnet.mimepull", "mimepull", mimePullVersion)
 
-    implementation("com.h2database", "h2", h2Version)
+    implementation("mysql", "mysql-connector-java", mySqlDriverVersion)
     implementation(springBoot("tomcat"))
     testImplementation(springBoot("test"))
 

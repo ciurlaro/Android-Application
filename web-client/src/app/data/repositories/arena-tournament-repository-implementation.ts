@@ -172,7 +172,6 @@ export class ArenaTournamentRepositoryImplementation extends ArenaTournamentRepo
     game: GameEntity
   ): Observable<TournamentEntity> {
 
-    const userUrl = this.userLinkMapper.toRemoteSingle(admin);
     const gameUrl = this.gameLinkMapper.toRemoteSingle(game);
 
     return this.arenaTournamentDs.createTournament({
@@ -180,7 +179,7 @@ export class ArenaTournamentRepositoryImplementation extends ArenaTournamentRepo
       title,
       tournamentDescription: description,
       tournamentMode: mode,
-      admin: userUrl.path,
+      admin: admin.id,
       game: gameUrl.path
     }).pipe(
       flatMap((tournamentJson) => this.getTournamentById(tournamentJson.id))
@@ -254,32 +253,6 @@ export class ArenaTournamentRepositoryImplementation extends ArenaTournamentRepo
     );
   }
 
-
-  getTournamentsByGame(gameName: string, page: number): Observable<TournamentEntity[]> {
-    return this.arenaTournamentDs.getTournamentsByGameName(gameName, page).pipe(
-      flatMap((multipleTournamentsJson) => this.transformTournaments(multipleTournamentsJson))
-    );
-  }
-
-  getTournamentsByMode(mode: string, page: number): Observable<TournamentEntity[]> {
-    return this.arenaTournamentDs.getTournamentsByMode(mode, page).pipe(
-      flatMap((multipleTournamentsJson) => this.transformTournaments(multipleTournamentsJson))
-    );
-  }
-
-  getTournamentsByUser(userId: string, page: number): Observable<TournamentEntity[]> {
-    return this.arenaTournamentDs.getTournamentsByUser(userId, page).pipe(
-      flatMap((multipleTournamentsJson) => this.transformTournaments(multipleTournamentsJson))
-    );
-
-  }
-
-  getTournamentsContainingTitles(title: string, page: number): Observable<TournamentEntity[]> {
-    return this.arenaTournamentDs.getTournamentsContainingTitle(title, page).pipe(
-      flatMap((multipleTournamentsJson) => this.transformTournaments(multipleTournamentsJson))
-    );
-  }
-
   getUserById(id: string): Observable<UserEntity> {
     return this.arenaTournamentDs.getUserById(id).pipe(
       map((userJson) => this.userMapper.fromRemoteSingle(userJson))
@@ -292,8 +265,8 @@ export class ArenaTournamentRepositoryImplementation extends ArenaTournamentRepo
     );
   }
 
-  searchTournamentsByName(title: string, page: number): Observable<TournamentEntity[]> {
-    return this.arenaTournamentDs.searchTournaments(title, page).pipe(
+  searchTournamentsByTitle(name: string, page: number): Observable<TournamentEntity[]> {
+    return this.arenaTournamentDs.searchTournamentsByTitle(name, page).pipe(
       flatMap((multipleTournamentsJson) => this.transformTournaments(multipleTournamentsJson))
     );
   }

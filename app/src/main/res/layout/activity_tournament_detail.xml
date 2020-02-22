@@ -11,7 +11,6 @@
         android:background="?android:attr/selectableItemBackgroundBorderless"
         style="@style/Widget.MaterialComponents.CardView">
 
-
     <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar_fragments"
             android:background="?attr/colorPrimary"
@@ -57,6 +56,13 @@
             android:maxLines="2"
             tools:text="My Tournament Title"/>
 
+    <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:id="@+id/game_image"
+            app:layout_constraintTop_toBottomOf="@+id/game_icon"
+            android:layout_margin="16dp"/>
+
     <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tournament_description"
             android:layout_width="0dp"
@@ -67,21 +73,21 @@
             android:textAlignment="center"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/game_icon"
+            app:layout_constraintTop_toBottomOf="@id/game_image"
             tools:text="@tools:sample/lorem/random"/>
 
-    <com.google.android.material.button.MaterialButton
-            android:id="@+id/players_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:text="@string/Players"
-            android:textAllCaps="false"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            app:layout_constraintTop_toBottomOf="@+id/players_count_textview"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/players_count_textview"/>
+    <!--    <com.google.android.material.button.MaterialButton-->
+    <!--            android:id="@+id/players_button"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:visibility="gone"-->
+    <!--            android:text="@string/Players"-->
+    <!--            android:textAllCaps="false"-->
+    <!--            style="@style/Widget.MaterialComponents.Button.OutlinedButton"-->
+    <!--            app:layout_constraintTop_toBottomOf="@+id/players_count_textview"-->
+    <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--            app:layout_constraintStart_toStartOf="parent"-->
+    <!--            app:layout_constraintEnd_toEndOf="@+id/players_count_textview"/>-->
 
     <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/players_count_textview"
@@ -93,34 +99,34 @@
             app:layout_constraintTop_toBottomOf="@+id/tournament_description"
             app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"/>
 
-    <com.google.android.material.button.MaterialButton
-            android:id="@+id/activity_register_now_button"
-            style="@style/Theme.Design.Light"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/register_now"
-            android:textAlignment="center"
-            android:textColor="#FFF"
-            android:layout_gravity="center"
-            android:background="@color/colorPrimary"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="@+id/players_button"
-            app:layout_constraintTop_toTopOf="@+id/players_button"
-            app:layout_constraintStart_toStartOf="@+id/players_count_textview"/>
+    <!--    <com.google.android.material.button.MaterialButton-->
+    <!--            android:id="@+id/activity_register_now_button"-->
+    <!--            style="@style/Theme.Design.Light"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:text="@string/register_now"-->
+    <!--            android:textAlignment="center"-->
+    <!--            android:textColor="#FFF"-->
+    <!--            android:layout_gravity="center"-->
+    <!--            android:background="@color/colorPrimary"-->
+    <!--            android:visibility="gone"-->
+    <!--            app:layout_constraintEnd_toEndOf="parent"-->
+    <!--            app:layout_constraintBottom_toBottomOf="@+id/players_button"-->
+    <!--            app:layout_constraintTop_toTopOf="@+id/players_button"-->
+    <!--            app:layout_constraintStart_toStartOf="@+id/players_count_textview"/>-->
 
-    <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/users_recyclerview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="16dp"
-            android:elevation="3dp"
-            android:visibility="gone"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="parent"
-            tools:listitem="@layout/simple_item_user"/>
+    <!--    <androidx.recyclerview.widget.RecyclerView-->
+    <!--            android:id="@+id/users_recyclerview"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:layout_margin="16dp"-->
+    <!--            android:elevation="3dp"-->
+    <!--            android:visibility="gone"-->
+    <!--            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+    <!--            app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--            app:layout_constraintRight_toRightOf="parent"-->
+    <!--            app:layout_constraintTop_toBottomOf="parent"-->
+    <!--            tools:listitem="@layout/simple_item_user"/>-->
 
     <View
             android:id="@+id/left_divider"

@@ -43,7 +43,7 @@ class UserProfileViewModel(
         val currentUser = async { getCurrentUserInfoUseCase.buildAction() }
         val isMailVerified = async { isCurrentUserVerifiedUseCase.buildAction() }
         val authMethods = async { getCurrentUserAuthMethods.buildAction() }
-        model.value = Model(currentUser.await(), isMailVerified.await(), authMethods.await())
+        model.value = Model(currentUser.await()!!, isMailVerified.await(), authMethods.await())
     }
 
     fun updateProfileImage(data: File) = viewModelScope.launch {

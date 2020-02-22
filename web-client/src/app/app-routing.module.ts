@@ -13,7 +13,8 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent, canActivate: [HomeGuard]},
   {path: 'tournament/:id', component: TournamentDetailComponent, canActivate: [HomeGuard]},
   {path: 'profile', component: ProfileComponent, canActivate: [HomeGuard]},
-  {path: 'login', component: LoginComponent, canActivate: [LoginGuard]}
+  {path: 'login', component: LoginComponent, canActivate: [LoginGuard]},
+  {path: '*', redirectTo: 'home'}
 ];
 
 @NgModule({

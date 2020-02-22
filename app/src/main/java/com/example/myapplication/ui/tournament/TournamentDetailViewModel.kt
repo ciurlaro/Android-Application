@@ -15,30 +15,20 @@ import kotlinx.coroutines.launch
 @FlowPreview
 class TournamentDetailViewModel(
     private val getTournamentByIdUseCase: GetTournamentByIdUseCase,
-    private val getUsersByTournamentUseCase: GetUsersByTournamentUseCase,
-    private val getCurrentUserInfoUseCase: GetCurrentUserInfoUseCase,
-    private val createRegistrationUseCase: CreateRegistrationUseCase
+    private val getCurrentUserInfoUseCase: GetCurrentUserInfoUseCase
 ) : ViewModel() {
 
     data class Model(
         val tournament: TournamentEntity,
-        val users: List<UserEntity>,
-        val currentUser: UserEntity,
-        val isUserRegistered: Boolean
+        val currentUser: UserEntity
     )
 
     val model = MutableLiveData<Model>()
 
     fun loadTournament(id: Long) = viewModelScope.launch {
         val tournament = getTournamentByIdUseCase.buildAction(id)
-        val users = getUsersByTournamentUseCase.buildAction(tournament.id)
-        val currentUser = getCurrentUserInfoUseCase.buildAction()
-        val isUserRegistered = users.contains(currentUser)
-        model.value = Model(tournament, users, currentUser, isUserRegistered)
-    }
-
-    fun TournamentEntity.registrationByUser(user: UserEntity) = viewModelScope.launch {
-        createRegistrationUseCase.buildAction(user, this@registrationByUser)
+        val currentUser = getCurrentUserInfoUseCase.buildAction()!!
+        model.value = Model(tournament, currentUser)
     }
 
 }

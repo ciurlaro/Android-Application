@@ -41,7 +41,7 @@
     <string name="link_account_with_google">Collegati con Google</string>
     <string name="link_accounts">Collegati con password</string>
     <string name="login_activity">Attiità di Login</string>
-    <string name="logout">Attività di Logout</string>
+    <string name="logout">Logout</string>
     <string name="mail">Email dell\'utente</string>
     <string name="match_number">Match #</string>
     <string name="match_of_tournament_string">Match di</string>

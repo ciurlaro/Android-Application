@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, Injectable, OnDestroy, OnInit} from '@angular/core';
 import {EMPTY, Observable, Subscription} from 'rxjs';
 import {SearchTournamentFlowService} from './services/search-tournament-flow.service';
 import {ArenaTournamentRepository} from './domain/repositories/arena-tournament-repository';
@@ -13,6 +13,21 @@ import {fromPromise} from 'rxjs/internal-compatibility';
 import {MatIconRegistry} from '@angular/material/icon';
 import {DomSanitizer} from '@angular/platform-browser';
 import {GetAllGamesUseCase} from './domain/usecases/games/get-all-games-use-case.service';
+import {AbstractLinkMapper} from "./data/mappers/mappers";
+import {Url} from "./data/datasources/arena-tournament-endpoints";
+import {fromArray} from "rxjs/internal/observable/fromArray";
+
+@Injectable({
+  providedIn: `root`
+})
+export class IconsUrlBuilder extends AbstractLinkMapper<string> {
+  toRemoteSingle(path: string): Url {
+    return {
+      path: `${this.protocol}://${this.host}${this.port !== 80 ? `:${this.port}` : ''}/${path}`
+    };
+  }
+
+}
 
 @Component({
   selector: 'app-root',
@@ -31,14 +46,16 @@ export class AppComponent implements OnInit, OnDestroy {
     private router: Router,
     private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer,
+    private iconsUrlBuilder: IconsUrlBuilder,
     getAllGamesUseCase: GetAllGamesUseCase
   ) {
 
     const add = (iconName: string, iconUrl?: string) => {
       matIconRegistry.addSvgIcon(
         iconName,
-        domSanitizer.bypassSecurityTrustResourceUrl(
+        domSanitizer.bypassSecurityTrustResourceUrl(iconsUrlBuilder.toRemoteSingle(
           iconUrl ? iconUrl : `assets/icons/${iconName}.svg`
+          ).path
         )
       );
     };
@@ -47,7 +64,8 @@ export class AppComponent implements OnInit, OnDestroy {
       .forEach(value => add(value));
 
     getAllGamesUseCase.buildAction()
-      .subscribe((games) => games.forEach(game => add(game.name, game.iconSvg)));
+      .pipe(flatMap(games => fromArray(games)))
+      .subscribe(game => add(game.name, game.iconSvg));
 
   }
 

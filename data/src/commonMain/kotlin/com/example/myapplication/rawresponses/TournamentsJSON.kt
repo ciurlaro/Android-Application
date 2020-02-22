@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 data class MultipleTournamentsJSON(
     val _embedded: TournamentEmbeddedJSON,
     val _links: LinksJSON,
-    val page: PageJSON
+    val page: PageJSON? = null
 )
 
 @Serializable
@@ -19,6 +19,7 @@ data class TournamentJSON(
     val id: Long,
     val playersNumber: Int,
     val title: String,
+    val admin: String,
     val tournamentDescription: String,
     val tournamentMode: String,
     val _links: LinksJSON

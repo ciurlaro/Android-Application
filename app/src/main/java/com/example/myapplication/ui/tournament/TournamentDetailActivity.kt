@@ -7,6 +7,9 @@ import android.os.Bundle
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
 import com.example.myapplication.R
 import com.example.myapplication.ui.BaseActivity
 import com.example.myapplication.ui.IntentBuilderWithArguments
@@ -25,54 +28,27 @@ class TournamentDetailActivity : BaseActivity() {
 
     private val tournamentId by lazy { intent.extras!!.getLong(TOURNAMENT_ID) }
     private val viewModel by viewModelInstance<TournamentDetailViewModel>()
-    private val adapter by lazy { FlexibleAdapter<SimpleUserFlexibleItem>(emptyList()) }
 
     @ExperimentalCoroutinesApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tournament_detail)
-        users_recyclerview.adapter = adapter
-        users_recyclerview.isNestedScrollingEnabled = true
 
         with(viewModel) {
-            model.observe { (tournament, users, currentUser, isUserRegistered) ->
-                adapter.addItems(0, users.map { SimpleUserFlexibleItem(it) { startActivity(HistoryActivity, it.id) } })
+            model.observe { (tournament, _) ->
                 players_count_textview.text =
-                    resources.getString(R.string.players_in_tournament_numbers, users.size, tournament.playersNumber)
+                    resources.getString(R.string.players_with_number, tournament.playersNumber)
                 Glide.with(this@TournamentDetailActivity)
                     .load(tournament.game.icon)
                     .into(game_icon)
+                Glide.with(this@TournamentDetailActivity)
+                    .load(tournament.game.image)
+                    .apply(RequestOptions().apply {
+                        transform(CenterCrop(), RoundedCorners(16))
+                    })
+                    .into(game_image)
                 tournament_title.text = tournament.title
                 tournament_description.text = tournament.tournamentDescription
-
-                activity_register_now_button.visibility = VISIBLE
-                activity_register_now_button.setOnClickListener {
-                    if (isUserRegistered) {
-                        Snackbar.make(it, R.string.already_registered_user, Snackbar.LENGTH_SHORT).show()
-                    } else {
-                        buildRegistrationDialog(this@TournamentDetailActivity,
-                            DialogInterface.OnClickListener { _, _ ->
-                                tournament.registrationByUser(currentUser)
-                                activity_register_now_button.isEnabled = false
-                                Snackbar.make(it, R.string.successfully_registration, Snackbar.LENGTH_SHORT).show()
-                                players_count_textview.text =
-                                    resources.getString(
-                                        R.string.players_in_tournament_numbers,
-                                        users.size + 1,
-                                        tournament.playersNumber
-                                    )
-                            }).show()
-                    }
-                }
-
-                players_button.visibility = VISIBLE
-                players_button.setOnClickListener {
-                    users_recyclerview.visibility = VISIBLE
-                    (users_recyclerview.parent as ViewGroup).removeView(users_recyclerview)
-                    MaterialAlertDialogBuilder(this@TournamentDetailActivity)
-                        .setView(users_recyclerview).show()
-                }
-
                 left_divider.visibility = VISIBLE
                 right_divider.visibility = VISIBLE
 

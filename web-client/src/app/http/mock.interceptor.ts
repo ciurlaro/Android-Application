@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
+import {HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpParams, HttpRequest} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {CustomHttpRequestBuilderService} from './custom-http-request-builder.service';
 
@@ -13,10 +13,8 @@ export class MockInterceptor implements HttpInterceptor {
     try {
       const builtUrlData = this.urlBuilderService.buildUrl(
         `/mock/${this.handleMockResponse(request)}.json`,
-        (_) => {},
-        (headers) => {
-          headers.append('Content-Type', 'application/json');
-        }
+        () => new HttpParams(),
+        () => new HttpHeaders().set('Content-Type', 'application/json')
       );
       console.info(builtUrlData);
       return next.handle(request.clone({

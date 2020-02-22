@@ -15,7 +15,13 @@ object MappersModule : KodeinModuleProvider {
     override fun provideModule(): Kodein.Builder.() -> Unit = {
         bind<AccountStatusMapper>() with singleton { AccountStatusMapper() }
         bind<AccountSubscriptionMapper>() with singleton { AccountSubscriptionMapper() }
-        bind<GameMapper>() with singleton { GameMapper() }
+        bind<GameMapper>() with singleton {
+            GameMapper(
+                instance("serverProtocol"),
+                instance("serverUrl"),
+                instance("serverPort")
+            )
+        }
         bind<RegistrationMapper>() with singleton { RegistrationMapper(instance(), instance()) }
         bind<TournamentMapper>() with singleton { TournamentMapper(instance(), instance()) }
         bind<UserMapper>() with singleton { UserMapper() }

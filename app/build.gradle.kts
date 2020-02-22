@@ -1,3 +1,5 @@
+import java.net.InetAddress
+
 buildscript {
     repositories {
         google()
@@ -50,7 +52,7 @@ android {
     buildToolsVersion("30.0.0-rc1")
     defaultConfig {
         applicationId = "com.example.myapplication"
-        minSdkVersion(22)
+        minSdkVersion(24)
         targetSdkVersion(29)
         versionCode = 1
         versionName = "1.0"
@@ -70,7 +72,7 @@ android {
 
         getByName("release") {
             isDebuggable = false
-            // TODO
+            isMinifyEnabled = true
             buildConfigField("String", "SERVER_PROTOCOL", "\"http\"")
             buildConfigField("String", "SERVER_URL", "\"\"")
             buildConfigField("int", "SERVER_PORT", "0")
@@ -78,7 +80,8 @@ android {
 
         getByName("debug") {
             matchingFallbacks = listOf("release")
-            // TODO
+            isMinifyEnabled = false
+            isDebuggable = true
             buildConfigField("String", "SERVER_PROTOCOL", "\"http\"")
             buildConfigField("String", "SERVER_URL", "\"\"")
             buildConfigField("int", "SERVER_PORT", "0")
@@ -86,6 +89,7 @@ android {
 
         create("mock") {
             isDebuggable = true
+            isMinifyEnabled = false
             matchingFallbacks = listOf("release")
             buildConfigField("String", "SERVER_PROTOCOL", "\"http\"")
             buildConfigField("String", "SERVER_URL", "\"mock\"")
@@ -94,16 +98,17 @@ android {
 
         create("localTesting") {
             isDebuggable = true
+            isMinifyEnabled = false
+            val serverUrl = InetAddress.getLocalHost().hostAddress
+            println("Building for host: $serverUrl")
             buildConfigField("String", "SERVER_PROTOCOL", "\"http\"")
-            buildConfigField("String", "SERVER_URL", "\"localhost\"")
+            buildConfigField("String", "SERVER_URL", "\"$serverUrl\"")
             buildConfigField("int", "SERVER_PORT", "8080")
             matchingFallbacks = listOf("release")
         }
 
         all {
-            isMinifyEnabled = false
             signingConfig = signingConfigs["default"]
-//            multiDexKeepFile = file("multidex-config.txt")
         }
 
     }

@@ -77,7 +77,7 @@ class FirebaseAuthDatasourceImplementation(private val firebaseAuth: FirebaseAut
         userOrError.getIdToken(true).token!!
 
     override suspend fun getCurrentAuthUser() = firebaseAuth.getCurrentUser()?.let {
-        AuthUserEntity(it.uid, it.email!!, it.displayName!!)
+        AuthUserEntity(it.uid, it.email!!, it.displayName!!, it.photoUrl)
     }
 
     override suspend fun getCurrentUserClaims() =

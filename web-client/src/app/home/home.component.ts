@@ -26,7 +26,7 @@ export class SearchTournamentsUseCase implements UseCaseWithParams<string, Tourn
   }
 
   buildAction(tournamentName: string): Observable<TournamentEntity[]> {
-    return this.repo.searchTournamentsByName(tournamentName, 0);
+    return this.repo.searchTournamentsByTitle(tournamentName, 0);
   }
 }
 
@@ -40,6 +40,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   private searchSub: Subscription;
   searchedTournaments: TournamentEntity[] = [];
   showcaseTournaments: TournamentEntity[] = [];
+  showSearched = false;
   private showcaseSub: Subscription;
 
   constructor(
@@ -53,7 +54,15 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.searchSub = this.searchTournamentFlowService.getFlow()
       .pipe(
         debounce(() => interval(500)),
-        flatMap((searchedText: string) => searchedText.length === 0 ? of([]) : this.searchTournamentsUseCase.buildAction(searchedText))
+        flatMap((searchedText: string) =>  {
+          if (searchedText.length === 0) {
+            this.showSearched = false;
+            return of([]);
+          } else {
+            this.showSearched = true;
+            return this.searchTournamentsUseCase.buildAction(searchedText)
+          }
+        })
       )
       .subscribe((tournaments: TournamentEntity[]) => this.searchedTournaments = tournaments);
     this.showcaseSub = this.getShowCaseTournamentsUseCase.buildAction()

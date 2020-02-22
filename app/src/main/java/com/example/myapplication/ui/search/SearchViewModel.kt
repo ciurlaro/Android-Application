@@ -21,18 +21,14 @@ class SearchViewModel(
         Log.d(this::class.simpleName!!, "I am being created")
     }
 
-    val availableGames = MutableLiveData<List<GameEntity>>()
-    val selectedGame = MutableLiveData<GameEntity>()
+//    val availableGames = MutableLiveData<List<GameEntity>>()
+//    val selectedGame = MutableLiveData<GameEntity>()
     val tournaments = MutableLiveData<List<TournamentEntity>>()
-
-    fun loadGames() = viewModelScope.launch {
-        availableGames.value = getAllGamesUseCase.buildAction(0)
-    }
 
     fun loadTournaments(title: String) = viewModelScope.launch {
         tournaments.value = searchTournamentsUseCase.buildAction(
             title,
-            selectedGame.value?.name
+            null
         )
     }
 }

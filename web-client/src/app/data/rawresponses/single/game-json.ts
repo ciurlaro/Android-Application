@@ -5,6 +5,6 @@ export interface GameJSON {
   readonly availableModes: string[];
   readonly image: string;
   readonly icon: string;
-  readonly icon_svg: string;
+  readonly svgIcon: string;
   readonly _links?: LinksJSON;
 }

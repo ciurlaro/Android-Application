@@ -17,15 +17,12 @@ export class CustomHttpRequestBuilderService {
 
   buildUrl(
     encodedPath: string,
-    paramsBuilder: ((params: HttpParams) => void) = (_) => {
-    },
-    headersBuilder: ((headers: HttpHeaders) => void) = (_) => {
-    }
+    paramsBuilder: (() => HttpParams) = () => new HttpParams(),
+    headersBuilder: (() => HttpHeaders) = () => new HttpHeaders()
   ): Url {
-    const params = new HttpParams();
-    paramsBuilder(params);
-    const headers = new HttpHeaders();
-    headersBuilder(headers);
+
+    const params = paramsBuilder();
+    const headers = headersBuilder();
     let finalEncodedPath = encodedPath;
     if (finalEncodedPath[0] !== '/') {
       finalEncodedPath = `/${finalEncodedPath}`;
@@ -35,5 +32,6 @@ export class CustomHttpRequestBuilderService {
       params,
       headers
     };
+
   }
 }

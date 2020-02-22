@@ -46,17 +46,9 @@ export abstract class ArenaTournamentRepository {
 
   abstract getTournamentById(tournamentId: number): Observable<TournamentEntity>;
 
-  abstract getTournamentsByMode(mode: string, page: number): Observable<TournamentEntity[]>;
-
-  abstract getTournamentsByGame(gameName: string, page: number): Observable<TournamentEntity[]>;
-
-  abstract getTournamentsByUser(userId: string, page: number): Observable<TournamentEntity[]>;
-
   abstract getShowcaseTournaments(page: number): Observable<TournamentEntity[]>;
 
-  abstract getTournamentsContainingTitles(title: string, page: number): Observable<TournamentEntity[]>;
-
-  abstract searchTournamentsByName(title: string, page: number): Observable<TournamentEntity[]>;
+  abstract searchTournamentsByTitle(name: string, page: number): Observable<TournamentEntity[]>;
 
   abstract getRegistrationById(registrationId: number): Observable<RegistrationEntity>;
 

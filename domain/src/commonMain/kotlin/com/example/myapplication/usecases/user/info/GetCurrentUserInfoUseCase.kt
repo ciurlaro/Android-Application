@@ -9,6 +9,6 @@ class GetCurrentUserInfoUseCase(
 ) : UseCaseSuspending<UserEntity?> {
 
     override suspend fun buildAction() =
-        repository.getCurrentUser()!!
+        repository.getCurrentUser()
 
 }

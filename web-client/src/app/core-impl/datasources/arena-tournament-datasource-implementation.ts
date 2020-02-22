@@ -138,7 +138,7 @@ export class ArenaTournamentDatasourceImplementation extends ArenaTournamentData
   }
 
   getTournamentsContainingTitle(title: string, page: number): Observable<MultipleTournamentsJSON> {
-    const url = this.endpoints.getTournamentsContainingTitle(title, page);
+    const url = this.endpoints.getTournamentsByTitleUrl(title, page);
     return this.httpClient.get<MultipleTournamentsJSON>(url.path, {params: url.params});
   }
 
@@ -156,13 +156,8 @@ export class ArenaTournamentDatasourceImplementation extends ArenaTournamentData
     return this.httpClient.get<MultipleGamesJSON>(url.path, {params: url.params});
   }
 
-  searchTournaments(title: string, page: number): Observable<MultipleTournamentsJSON> {
-    const url = this.endpoints.searchTournaments(title, page);
-    return this.httpClient.get<MultipleTournamentsJSON>(url.path, {params: url.params});
-  }
-
-  searchTournamentsByName(name: string, page: number): Observable<MultipleTournamentsJSON> {
-    const url = this.endpoints.searchTournamentsByNameUrl(name, page);
+  searchTournamentsByTitle(title: string, page: number): Observable<MultipleTournamentsJSON> {
+    const url = this.endpoints.getTournamentsByTitleUrl(title, page);
     return this.httpClient.get<MultipleTournamentsJSON>(url.path, {params: url.params});
   }
 

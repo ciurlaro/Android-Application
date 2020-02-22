@@ -1,6 +1,6 @@
-<div *ngIf="searchedTournaments.length === 0" class="tournament-cards-container">
+<div *ngIf="!showSearched" class="tournament-cards-container">
   <app-tournament-card *ngFor="let tournament of showcaseTournaments" [tournament]="tournament"></app-tournament-card>
 </div>
-<div *ngIf="searchedTournaments.length !== 0" class="tournament-cards-container">
+<div *ngIf="showSearched" class="tournament-cards-container">
   <app-tournament-card *ngFor="let tournament of searchedTournaments" [tournament]="tournament"></app-tournament-card>
 </div>

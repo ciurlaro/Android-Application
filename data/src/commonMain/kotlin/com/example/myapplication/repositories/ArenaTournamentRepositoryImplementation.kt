@@ -191,7 +191,7 @@ class ArenaTournamentRepositoryImplementation(
                 Triple(
                     it,
                     async { arenaTournamentDS.getGameByLink(it._links.game!!.href) },
-                    async { arenaTournamentDS.getUserByLink(it._links.admin!!.href) }
+                    async { arenaTournamentDS.getUserById(it.admin) }
                 )
             }
             .let { Triple(it.first, it.second.await(), it.third.await()) }
@@ -243,14 +243,14 @@ class ArenaTournamentRepositoryImplementation(
     override suspend fun getCurrentUser() = firebaseAuthDS.getCurrentAuthUser()?.let {
         coroutineScope {
             val claims = async { firebaseAuthDS.getCurrentUserClaims() }
-            val imageUrl = it.storageImagePath.let {
+            val imageUrl = it.imageUrl?.let {
                 async { if (it.startsWith("http")) it else firebaseStorageDS.getFileUrl(it) }
             }
 
             currentUserMapper.fromRemoteSingle(
                 it,
                 claims.await(),
-                imageUrl.await()
+                imageUrl?.await()
             )
         }
     }
@@ -260,7 +260,7 @@ class ArenaTournamentRepositoryImplementation(
             .asFlow()
             .scopedMap {
                 val gameJson = async { arenaTournamentDS.getGameByLink(it._links.game!!.href) }
-                val userJson = async { arenaTournamentDS.getUserByLink(it._links.admin!!.href) }
+                val userJson = async { arenaTournamentDS.getUserById(it.admin) }
                 Triple(it, gameJson.await(), userJson.await())
             }
             .map { tournamentMapper.fromRemoteSingle(it) }

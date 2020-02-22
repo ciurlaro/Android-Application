@@ -28,12 +28,6 @@ class MainActivity : BaseFragmentedActivity(R.id.nav_host_fragment) {
             if (repo.getCurrentUser() != null) {
                 setContentView(R.layout.activity_main)
                 bottom_nav_view.setupWithNavController(navController)
-                if (repo.isCurrentUserSubscriber() || true) // "true" temporary, until backend will be ready
-                    with(new_tournament_button) {
-                        visibility = VISIBLE
-                        setOnClickListener { startActivity(CreateTournamentActivity) }
-                    }
-                else new_tournament_button.visibility = GONE
             } else startActivity(OnboardingActivity)
         }
     }

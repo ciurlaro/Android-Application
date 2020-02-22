@@ -40,7 +40,7 @@ export abstract class ArenaTournamentEndpoints {
 
   abstract getShowCaseTournaments(page: number): Url;
 
-  abstract getTournamentsContainingTitle(title: string, page: number): Url;
+  abstract getTournamentsByTitleUrl(title: string, page: number): Url;
 
   abstract allRegistrationsUrl(page: number): Url;
 
@@ -56,7 +56,6 @@ export abstract class ArenaTournamentEndpoints {
 
   abstract isAccountSubscribedUrl(): Url;
 
-  abstract searchTournaments(title: string, page: number, gameId?: string): Url;
 
 
 }
