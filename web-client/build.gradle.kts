@@ -42,7 +42,7 @@ val build = task<YarnTask>("build") {
 
   outputs.dir("$buildDir/spa")
 
-  args = listOf("run", "build")
+  args = listOf("run", "build", "--prod")
 
 }
 
@@ -63,20 +63,14 @@ val buildMock = task<YarnTask>("buildMock") {
 
 
 task<YarnTask>("serve") {
-
-  dependsOn(build)
-
+  dependsOn(yarnInstall)
   group = "ng"
-
   args = listOf("run", "start")
 }
 
 task<YarnTask>("serveMock") {
-
-  dependsOn(build)
-
+  dependsOn(yarnInstall)
   group = "ng"
-
   args = listOf("run", "mock")
 }
 

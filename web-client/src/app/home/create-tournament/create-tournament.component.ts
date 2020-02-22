@@ -30,6 +30,7 @@ export class CreateTournamentComponent implements OnInit, OnDestroy {
   tournamentDescriptionControl = new FormControl('');
   tournamentGameControl = new FormControl(null, [Validators.required]);
   tournamentPlayersControl = new FormControl(null, [Validators.required]);
+  showLoadingLoginBar = false;
 
   availableGames: GameEntity[] = [];
   createTournamentFormGroup: FormGroup;
@@ -70,6 +71,7 @@ export class CreateTournamentComponent implements OnInit, OnDestroy {
       this.tournamentPlayersControl.value,
       this.tournamentGameControl.value
     );
+    this.showLoadingLoginBar = true;
     this.subs.push(
       this.createTournamentUseCase.buildAction(params)
         .subscribe((tournament) => this.dialogRef.close(tournament))

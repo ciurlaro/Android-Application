@@ -4,7 +4,8 @@ enum class MockJson {
 
     SINGLE_GAME_RESPONSE, MULTIPLE_GAME_RESPONSE, SINGLE_GAME_MODE_RESPONSE, MULTIPLE_GAME_MODES_RESPONSE,
     SINGLE_TOURNAMENT_RESPONSE, MULTIPLE_TOURNAMENTS_RESPONSE, SINGLE_REGISTRATION_RESPONSE,
-    MULTIPLE_REGISTRATIONS_RESPONSE, VERIFICATION_STATUS_RESPONSE, SUBSCRIPTION_STATUS_RESPONSE;
+    MULTIPLE_REGISTRATIONS_RESPONSE, VERIFICATION_STATUS_RESPONSE, SUBSCRIPTION_STATUS_RESPONSE,
+    SINGLE_USER_RESPONSE;
 
     companion object {
         fun fromString(string: String) = when (string) {
@@ -18,6 +19,7 @@ enum class MockJson {
             "multiple_registration_response" -> MULTIPLE_REGISTRATIONS_RESPONSE
             "verification_status_response" -> VERIFICATION_STATUS_RESPONSE
             "subscription_status_response" -> SUBSCRIPTION_STATUS_RESPONSE
+            "single_user_response" -> SINGLE_USER_RESPONSE
             else -> error("$string have no corresponding MockJson value.")
         }
     }

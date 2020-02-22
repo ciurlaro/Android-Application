@@ -1,72 +1,103 @@
 {
-  "_embedded": {
-    "gameEntities": [
-      {
-        "gameName": "Counter Strike: GO",
-        "availableModes": [
-          "FREE_FOR_ALL"
-        ],
-        "image": "csgo.png",
-        "icon": "https://www.freeiconspng.com/uploads/csgo-icon-6.png",
-        "_links": {
-          "self": {
-            "href": "http://localhost:8080/game/csgo"
-          },
-          "gameEntity": {
-            "href": "http://localhost:8080/game/csgo"
-          }
-        }
-      },
-      {
-        "gameName": "World of Warcraft",
-        "availableModes": [
-          "OPEN_WORLD"
-        ],
-        "image": "wow.png",
-        "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/WoW_icon.svg/1024px-WoW_icon.svg.png",
-        "_links": {
-          "self": {
-            "href": "http://localhost:8080/game/wow"
-          },
-          "gameEntity": {
-            "href": "http://localhost:8080/game/wow"
-          }
-        }
-      },
-      {
-        "gameName": "Heroes of The Storm",
-        "availableModes": [
-          "RANKED"
-        ],
-        "image": "hots.png",
-        "icon": "https://cdn6.aptoide.com/imgs/0/9/4/094ee1175eab5284bcc800e9adf9078c_icon.png?w=120",
-        "_links": {
-          "self": {
-            "href": "http://localhost:8080/game/lol"
-          },
-          "gameEntity": {
-            "href": "http://localhost:8080/game/lol"
-          }
+  "_embedded" : {
+    "gameEntities" : [ {
+      "gameName" : "Diablo III",
+      "image" : "assets/images/diablo-III.jpg",
+      "icon" : "assets/icons/diablo-III.png",
+      "svgIcon" : "assets/icons/diablo-III.svg",
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8080/api/game/Diablo%20III"
+        },
+        "gameEntity" : {
+          "href" : "http://localhost:8080/api/game/Diablo%20III"
+        },
+        "availableModes" : {
+          "href" : "http://localhost:8080/api/game/Diablo%20III/availableModes"
         }
       }
-    ]
+    }, {
+      "gameName" : "Hearthstone",
+      "image" : "assets/images/hearthstone.jpg",
+      "icon" : "assets/icons/hearthstone.png",
+      "svgIcon" : "assets/icons/hearthstone.svg",
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8080/api/game/Hearthstone"
+        },
+        "gameEntity" : {
+          "href" : "http://localhost:8080/api/game/Hearthstone"
+        },
+        "availableModes" : {
+          "href" : "http://localhost:8080/api/game/Hearthstone/availableModes"
+        }
+      }
+    }, {
+      "gameName" : "Heroes of the Storm",
+      "image" : "assets/images/hots.jpg",
+      "icon" : "assets/icons/hots.png",
+      "svgIcon" : "assets/icons/hots.svg",
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8080/api/game/Heroes%20of%20the%20Storm"
+        },
+        "gameEntity" : {
+          "href" : "http://localhost:8080/api/game/Heroes%20of%20the%20Storm"
+        },
+        "availableModes" : {
+          "href" : "http://localhost:8080/api/game/Heroes%20of%20the%20Storm/availableModes"
+        }
+      }
+    }, {
+      "gameName" : "Overwatch",
+      "image" : "assets/images/overwatch.png",
+      "icon" : "assets/icons/overwatch.png",
+      "svgIcon" : "assets/icons/overwatch.svg",
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8080/api/game/Overwatch"
+        },
+        "gameEntity" : {
+          "href" : "http://localhost:8080/api/game/Overwatch"
+        },
+        "availableModes" : {
+          "href" : "http://localhost:8080/api/game/Overwatch/availableModes"
+        }
+      }
+    }, {
+      "gameName" : "World of Warcraft",
+      "image" : "assets/images/wow.png",
+      "icon" : "assets/icons/wow.png",
+      "svgIcon" : "assets/icons/wow.svg",
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8080/api/game/World%20of%20Warcraft"
+        },
+        "gameEntity" : {
+          "href" : "http://localhost:8080/api/game/World%20of%20Warcraft"
+        },
+        "availableModes" : {
+          "href" : "http://localhost:8080/api/game/World%20of%20Warcraft/availableModes"
+        }
+      }
+    } ]
   },
-  "_links": {
-    "self": {
-      "href": "http://localhost:8080/game{?page,size,sort}",
-      "templated": true
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/api/game{?page,size,sort}",
+      "templated" : true
     },
-    "profile": {
-      "href": "http://localhost:8080/profile/game"
+    "profile" : {
+      "href" : "http://localhost:8080/api/profile/game"
     },
-    "search": {
-      "href": "http://localhost:8080/game/search"
+    "search" : {
+      "href" : "http://localhost:8080/api/game/search"
     }
   },
-  "page": {
-    "size": 20,
-    "totalElements": 3,
-    "totalPages": 1,
-    "number": 0
+  "page" : {
+    "size" : 20,
+    "totalElements" : 5,
+    "totalPages" : 1,
+    "number" : 0
   }
 }

@@ -19,7 +19,7 @@ data class EndpointsImplementation(
             "http" -> URLProtocol.HTTP
             "https" -> URLProtocol.HTTPS
             else -> error("Unknown protocol")
-        }, host, port, path, parameters, "", null, null, false)
+        }, host, port, "/api$path", parameters, "", null, null, false)
 
     /*
     * Post endpoints
@@ -139,13 +139,13 @@ data class EndpointsImplementation(
         }
 
     override fun isAccountVerifiedUrl() =
-        buildUrl("isAccountVerified")
+        buildUrl("/isAccountVerified")
 
     override fun isAccountSubscribedUrl() =
-        buildUrl("isAccountSubscribed")
+        buildUrl("/isAccountSubscribed")
 
     override fun searchTournaments(title: String, gameId: String?, page: Int) =
-        buildUrl("tournament/search/byTitleContaining") {
+        buildUrl("/tournament/search/byTitleContaining") {
             append("title", title)
             append("page", page)
             gameId?.let { append("gameIds", gameId) }

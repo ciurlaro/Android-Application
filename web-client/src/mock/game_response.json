@@ -1,17 +1,17 @@
 {
-  "gameName": "Counter Strike GO",
-  "availableModes": [
-    "OPEN_WORLD"
-  ],
-  "image": "https://logodix.com/logo/2115839.png",
-  "icon": "https://logodix.com/logo/2115839.png",
-  "icon_svg": "http://localhost:4200/mock/icons/wow.svg",
+  "gameName": "Diablo III",
+  "image": "assets/images/diablo-III.jpg",
+  "icon": "assets/icons/diablo-III.png",
+  "svgIcon": "assets/icons/diablo-III.svg",
   "_links": {
     "self": {
-      "href": "http://localhost:8080/game/go"
+      "href": "http://localhost:8080/api/game/Diablo%20III"
     },
-    "game": {
-      "href": "http://localhost:8080/game/go"
+    "gameEntity": {
+      "href": "http://localhost:8080/api/game/Diablo%20III"
+    },
+    "availableModes": {
+      "href": "http://localhost:8080/api/game/Diablo%20III/availableModes"
     }
   }
 }

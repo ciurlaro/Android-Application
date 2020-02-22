@@ -78,9 +78,9 @@
               "vendorChunk": false,
               "buildOptimizer": false,
               "assets": [
+                "src/assets",
                 "src/mock",
-                "src/favicon.ico",
-                "src/assets"
+                "src/favicon.ico"
               ]
             }
           }

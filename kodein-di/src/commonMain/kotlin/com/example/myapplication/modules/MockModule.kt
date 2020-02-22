@@ -50,15 +50,17 @@ object MockModule : KodeinModuleProvider {
         val words = request.url.fullPath.removePrefix("/").split("/")
 
         return when (request.url.fullPath) {
-            "/isAccountVerified" -> MockJson.VERIFICATION_STATUS_RESPONSE
-            "/isAccountSubscribed" -> MockJson.SUBSCRIPTION_STATUS_RESPONSE
-            else -> singleOrMultipleResponse(request, words)
+            "api/isAccountVerified" -> MockJson.VERIFICATION_STATUS_RESPONSE
+            "api/isAccountSubscribed" -> MockJson.SUBSCRIPTION_STATUS_RESPONSE
+            else -> singleOrMultipleResponse(request, words.subList(1, words.size))
         }.let { respondJsonFromRawResources(it) }
     }
 
     private fun singleOrMultipleResponse(request: HttpRequestData, words: List<String>) =
         when (words.size) {
-            1 -> when (request.method) {
+            1 -> if (words[0].split("?")[0] == "user")
+                "single_user_response"
+            else when (request.method) {
                 HttpMethod.Get -> "multiple_${words[0].split("?")[0]}_response"
                 else -> "single_${words[0]}_response"
             }
@@ -67,7 +69,13 @@ object MockModule : KodeinModuleProvider {
                 "search" -> "multiple_${words[0]}_response"
                 else ->
                     when {
-                        listOf("game", "tournament", "registration", "match", "user").contains(words.last()) -> "single_${words.last()}_response"
+                        listOf(
+                            "game",
+                            "tournament",
+                            "registration",
+                            "match",
+                            "user"
+                        ).contains(words.last()) -> "single_${words.last()}_response"
                         words.last() == "admin" -> "single_user_response"
                         else -> error("$request cannot be handled by the mock engine")
                     }

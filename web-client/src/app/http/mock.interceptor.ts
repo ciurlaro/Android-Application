@@ -10,30 +10,33 @@ export class MockInterceptor implements HttpInterceptor {
   }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    try {
-      const builtUrlData = this.urlBuilderService.buildUrl(
-        `/mock/${this.handleMockResponse(request)}.json`,
-        () => new HttpParams(),
-        () => new HttpHeaders().set('Content-Type', 'application/json')
-      );
-      console.info(builtUrlData);
-      return next.handle(request.clone({
-        method: 'GET',
-        headers: builtUrlData.headers,
-        url: builtUrlData.path,
-        params: builtUrlData.params
-      }));
+    const words = request.url.split('/');
+    if (words[3] === 'api') {
+      try {
+        const builtUrlData = this.urlBuilderService.buildUrl(
+          `/mock/${this.handleMockResponse(request, words.splice(4))}.json`,
+          () => new HttpParams(),
+          () => new HttpHeaders().set('Content-Type', 'application/json')
+        );
+        return next.handle(request.clone({
+          method: 'GET',
+          headers: builtUrlData.headers,
+          url: builtUrlData.path,
+          params: builtUrlData.params
+        }));
 
-    } catch (e) {
-      console.error(request);
-      console.error(e);
+      } catch (e) {
+        console.error(request);
+        console.error(e);
+        return next.handle(request);
+      }
+    } else {
       return next.handle(request);
     }
   }
 
 
-  handleMockResponse(request: HttpRequest<unknown>): string {
-    const words = request.url.split('/').slice(3);
+  handleMockResponse(request: HttpRequest<unknown>, words: string[]): string {
     switch (request.url) {
       case '/isAccountVerified':
         return 'verification_status_response.json';

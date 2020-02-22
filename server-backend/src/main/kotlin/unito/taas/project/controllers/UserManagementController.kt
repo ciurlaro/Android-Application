@@ -3,10 +3,12 @@ package unito.taas.project.controllers
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.*
 
 @CrossOrigin(origins = ["http://localhost:4200"])
 @RestController
+@RequestMapping("api")
 class UserManagementController(
         @Autowired private val app: FirebaseApp,
         @Autowired val auth: FirebaseAuth
@@ -33,7 +35,7 @@ class UserManagementController(
             auth.getUser(id).customClaims.containsKey("isSubscriber")
 
 
-    @PostMapping("/isAccountVerified", produces = ["application/json"])
+    @PostMapping("isAccountVerified", produces = ["application/json"])
     fun getVerificationStatus(@RequestParam id: String) =
             auth.getUser(id).isEmailVerified
 

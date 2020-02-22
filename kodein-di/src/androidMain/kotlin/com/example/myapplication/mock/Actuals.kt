@@ -22,6 +22,7 @@ val MockJson.correspondingResource
         MULTIPLE_REGISTRATIONS_RESPONSE -> R.raw.multiple_registrations_response
         VERIFICATION_STATUS_RESPONSE -> R.raw.verification_status_response
         SUBSCRIPTION_STATUS_RESPONSE -> R.raw.subscription_status_response
+        SINGLE_USER_RESPONSE -> R.raw.user_response
     }
 
 actual fun Kodein.Builder.bindMock(mockJson: MockJson) =

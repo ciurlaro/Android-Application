@@ -25,7 +25,7 @@ export class CustomHttpRequestBuilderService {
     const headers = headersBuilder();
     let finalEncodedPath = encodedPath;
     if (finalEncodedPath[0] !== '/') {
-      finalEncodedPath = `/${finalEncodedPath}`;
+      finalEncodedPath = `/api/${finalEncodedPath}`;
     }
     return {
       path: `${this.protocol}://${this.host}${this.port !== 80 ? `:${this.port}` : ''}${finalEncodedPath}`,

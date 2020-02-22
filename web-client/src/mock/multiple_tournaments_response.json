@@ -6,19 +6,17 @@
         "playersNumber": 16,
         "tournamentDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sed neque at diam rhoncus lacinia in in est. Aliquam turpis magna, tincidunt pharetra laoreet vitae, tempus luctus urna. Duis sit amet ullamcorper orci. Vestibulum et accumsan orci. Sed lacinia blandit odio a luctus. Pellentesque sit amet lorem iaculis, posuere turpis non, dignissim est. Nullam maximus fermentum velit, nec iaculis erat aliquam quis. Phasellus sed augue mi. Maecenas sed nisi lorem. Donec rhoncus dolor lectus, non ultricies massa vehicula ac. In pharetra quam urna, ac ornare neque rutrum quis. Phasellus ultricies lacinia nulla, at ultricies augue accumsan vitae. Praesent sodales magna vel placerat placerat.",
         "tournamentMode": "RANKED",
+        "admin": "mock",
         "title": "My Mock Tournament 1",
         "_links": {
           "self": {
-            "href": "http://localhost:8080/tournament/1"
+            "href": "http://localhost:8080/api/tournament/1"
           },
           "tournamentEntity": {
-            "href": "http://localhost:8080/tournament/1"
+            "href": "http://localhost:8080/api/tournament/1"
           },
           "game": {
-            "href": "http://localhost:8080/tournament/1/game"
-          },
-          "admin": {
-            "href": "http://localhost:8080/tournament/1/admin"
+            "href": "http://localhost:8080/api/tournament/1/game"
           }
         }
       },
@@ -27,19 +25,17 @@
         "playersNumber": 16,
         "tournamentDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sed neque at diam rhoncus lacinia in in est. Aliquam turpis magna, tincidunt pharetra laoreet vitae, tempus luctus urna. Duis sit amet ullamcorper orci. Vestibulum et accumsan orci. Sed lacinia blandit odio a luctus. Pellentesque sit amet lorem iaculis, posuere turpis non, dignissim est. Nullam maximus fermentum velit, nec iaculis erat aliquam quis. Phasellus sed augue mi. Maecenas sed nisi lorem. Donec rhoncus dolor lectus, non ultricies massa vehicula ac. In pharetra quam urna, ac ornare neque rutrum quis. Phasellus ultricies lacinia nulla, at ultricies augue accumsan vitae. Praesent sodales magna vel placerat placerat.",
         "tournamentMode": "RANKED",
-        "title": "My Mock Tournament 1",
+        "title": "My Mock Tournament 2",
+        "admin": "mock",
         "_links": {
           "self": {
-            "href": "http://localhost:8080/tournament/1"
+            "href": "http://localhost:8080/api/tournament/1"
           },
           "tournamentEntity": {
-            "href": "http://localhost:8080/tournament/1"
+            "href": "http://localhost:8080/api/tournament/1"
           },
           "game": {
-            "href": "http://localhost:8080/tournament/1/game"
-          },
-          "admin": {
-            "href": "http://localhost:8080/tournament/1/admin"
+            "href": "http://localhost:8080/api/tournament/1/game"
           }
         }
       },
@@ -48,19 +44,17 @@
         "playersNumber": 16,
         "tournamentDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sed neque at diam rhoncus lacinia in in est. Aliquam turpis magna, tincidunt pharetra laoreet vitae, tempus luctus urna. Duis sit amet ullamcorper orci. Vestibulum et accumsan orci. Sed lacinia blandit odio a luctus. Pellentesque sit amet lorem iaculis, posuere turpis non, dignissim est. Nullam maximus fermentum velit, nec iaculis erat aliquam quis. Phasellus sed augue mi. Maecenas sed nisi lorem. Donec rhoncus dolor lectus, non ultricies massa vehicula ac. In pharetra quam urna, ac ornare neque rutrum quis. Phasellus ultricies lacinia nulla, at ultricies augue accumsan vitae. Praesent sodales magna vel placerat placerat.",
         "tournamentMode": "RANKED",
-        "title": "My Mock Tournament 1",
+        "admin": "mock",
+        "title": "My Mock Tournament 3",
         "_links": {
           "self": {
-            "href": "http://localhost:8080/tournament/1"
+            "href": "http://localhost:8080/api/tournament/1"
           },
           "tournamentEntity": {
-            "href": "http://localhost:8080/tournament/1"
+            "href": "http://localhost:8080/api/tournament/1"
           },
           "game": {
-            "href": "http://localhost:8080/tournament/1/game"
-          },
-          "admin": {
-            "href": "http://localhost:8080/tournament/1/admin"
+            "href": "http://localhost:8080/api/tournament/1/game"
           }
         }
       },
@@ -69,19 +63,17 @@
         "playersNumber": 16,
         "tournamentDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sed neque at diam rhoncus lacinia in in est. Aliquam turpis magna, tincidunt pharetra laoreet vitae, tempus luctus urna. Duis sit amet ullamcorper orci. Vestibulum et accumsan orci. Sed lacinia blandit odio a luctus. Pellentesque sit amet lorem iaculis, posuere turpis non, dignissim est. Nullam maximus fermentum velit, nec iaculis erat aliquam quis. Phasellus sed augue mi. Maecenas sed nisi lorem. Donec rhoncus dolor lectus, non ultricies massa vehicula ac. In pharetra quam urna, ac ornare neque rutrum quis. Phasellus ultricies lacinia nulla, at ultricies augue accumsan vitae. Praesent sodales magna vel placerat placerat.",
         "tournamentMode": "RANKED",
-        "title": "My Mock Tournament 1",
+        "admin": "mock",
+        "title": "My Mock Tournament 4",
         "_links": {
           "self": {
-            "href": "http://localhost:8080/tournament/1"
+            "href": "http://localhost:8080/api/tournament/1"
           },
           "tournamentEntity": {
-            "href": "http://localhost:8080/tournament/1"
+            "href": "http://localhost:8080/api/tournament/1"
           },
           "game": {
-            "href": "http://localhost:8080/tournament/1/game"
-          },
-          "admin": {
-            "href": "http://localhost:8080/tournament/1/admin"
+            "href": "http://localhost:8080/api/tournament/1/game"
           }
         }
       },
@@ -90,19 +82,17 @@
         "playersNumber": 16,
         "tournamentDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sed neque at diam rhoncus lacinia in in est. Aliquam turpis magna, tincidunt pharetra laoreet vitae, tempus luctus urna. Duis sit amet ullamcorper orci. Vestibulum et accumsan orci. Sed lacinia blandit odio a luctus. Pellentesque sit amet lorem iaculis, posuere turpis non, dignissim est. Nullam maximus fermentum velit, nec iaculis erat aliquam quis. Phasellus sed augue mi. Maecenas sed nisi lorem. Donec rhoncus dolor lectus, non ultricies massa vehicula ac. In pharetra quam urna, ac ornare neque rutrum quis. Phasellus ultricies lacinia nulla, at ultricies augue accumsan vitae. Praesent sodales magna vel placerat placerat.",
         "tournamentMode": "RANKED",
-        "title": "My Mock Tournament 1",
+        "title": "My Mock Tournament 5",
+        "admin": "mock",
         "_links": {
           "self": {
-            "href": "http://localhost:8080/tournament/1"
+            "href": "http://localhost:8080/api/tournament/1"
           },
           "tournamentEntity": {
-            "href": "http://localhost:8080/tournament/1"
+            "href": "http://localhost:8080/api/tournament/1"
           },
           "game": {
-            "href": "http://localhost:8080/tournament/1/game"
-          },
-          "admin": {
-            "href": "http://localhost:8080/tournament/1/admin"
+            "href": "http://localhost:8080/api/tournament/1/game"
           }
         }
       },
@@ -111,19 +101,17 @@
         "playersNumber": 16,
         "tournamentDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sed neque at diam rhoncus lacinia in in est. Aliquam turpis magna, tincidunt pharetra laoreet vitae, tempus luctus urna. Duis sit amet ullamcorper orci. Vestibulum et accumsan orci. Sed lacinia blandit odio a luctus. Pellentesque sit amet lorem iaculis, posuere turpis non, dignissim est. Nullam maximus fermentum velit, nec iaculis erat aliquam quis. Phasellus sed augue mi. Maecenas sed nisi lorem. Donec rhoncus dolor lectus, non ultricies massa vehicula ac. In pharetra quam urna, ac ornare neque rutrum quis. Phasellus ultricies lacinia nulla, at ultricies augue accumsan vitae. Praesent sodales magna vel placerat placerat.",
         "tournamentMode": "RANKED",
-        "title": "My Mock Tournament 1",
+        "admin": "mock",
+        "title": "My Mock Tournament 6",
         "_links": {
           "self": {
-            "href": "http://localhost:8080/tournament/1"
+            "href": "http://localhost:8080/api/tournament/1"
           },
           "tournamentEntity": {
-            "href": "http://localhost:8080/tournament/1"
+            "href": "http://localhost:8080/api/tournament/1"
           },
           "game": {
-            "href": "http://localhost:8080/tournament/1/game"
-          },
-          "admin": {
-            "href": "http://localhost:8080/tournament/1/admin"
+            "href": "http://localhost:8080/api/tournament/1/game"
           }
         }
       },
@@ -131,20 +119,18 @@
         "id": 7,
         "playersNumber": 16,
         "tournamentDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sed neque at diam rhoncus lacinia in in est. Aliquam turpis magna, tincidunt pharetra laoreet vitae, tempus luctus urna. Duis sit amet ullamcorper orci. Vestibulum et accumsan orci. Sed lacinia blandit odio a luctus. Pellentesque sit amet lorem iaculis, posuere turpis non, dignissim est. Nullam maximus fermentum velit, nec iaculis erat aliquam quis. Phasellus sed augue mi. Maecenas sed nisi lorem. Donec rhoncus dolor lectus, non ultricies massa vehicula ac. In pharetra quam urna, ac ornare neque rutrum quis. Phasellus ultricies lacinia nulla, at ultricies augue accumsan vitae. Praesent sodales magna vel placerat placerat.",
+        "admin": "mock",
         "tournamentMode": "RANKED",
-        "title": "My Mock Tournament 1",
+        "title": "My Mock Tournament 7",
         "_links": {
           "self": {
-            "href": "http://localhost:8080/tournament/1"
+            "href": "http://localhost:8080/api/tournament/1"
           },
           "tournamentEntity": {
-            "href": "http://localhost:8080/tournament/1"
+            "href": "http://localhost:8080/api/tournament/1"
           },
           "game": {
-            "href": "http://localhost:8080/tournament/1/game"
-          },
-          "admin": {
-            "href": "http://localhost:8080/tournament/1/admin"
+            "href": "http://localhost:8080/api/tournament/1/game"
           }
         }
       },
@@ -153,19 +139,17 @@
         "playersNumber": 16,
         "tournamentDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sed neque at diam rhoncus lacinia in in est. Aliquam turpis magna, tincidunt pharetra laoreet vitae, tempus luctus urna. Duis sit amet ullamcorper orci. Vestibulum et accumsan orci. Sed lacinia blandit odio a luctus. Pellentesque sit amet lorem iaculis, posuere turpis non, dignissim est. Nullam maximus fermentum velit, nec iaculis erat aliquam quis. Phasellus sed augue mi. Maecenas sed nisi lorem. Donec rhoncus dolor lectus, non ultricies massa vehicula ac. In pharetra quam urna, ac ornare neque rutrum quis. Phasellus ultricies lacinia nulla, at ultricies augue accumsan vitae. Praesent sodales magna vel placerat placerat.",
         "tournamentMode": "RANKED",
-        "title": "My Mock Tournament 1",
+        "admin": "mock",
+        "title": "My Mock Tournament 8",
         "_links": {
           "self": {
-            "href": "http://localhost:8080/tournament/1"
+            "href": "http://localhost:8080/api/tournament/1"
           },
           "tournamentEntity": {
-            "href": "http://localhost:8080/tournament/1"
+            "href": "http://localhost:8080/api/tournament/1"
           },
           "game": {
-            "href": "http://localhost:8080/tournament/1/game"
-          },
-          "admin": {
-            "href": "http://localhost:8080/tournament/1/admin"
+            "href": "http://localhost:8080/api/tournament/1/game"
           }
         }
       },
@@ -174,19 +158,17 @@
         "playersNumber": 16,
         "tournamentDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sed neque at diam rhoncus lacinia in in est. Aliquam turpis magna, tincidunt pharetra laoreet vitae, tempus luctus urna. Duis sit amet ullamcorper orci. Vestibulum et accumsan orci. Sed lacinia blandit odio a luctus. Pellentesque sit amet lorem iaculis, posuere turpis non, dignissim est. Nullam maximus fermentum velit, nec iaculis erat aliquam quis. Phasellus sed augue mi. Maecenas sed nisi lorem. Donec rhoncus dolor lectus, non ultricies massa vehicula ac. In pharetra quam urna, ac ornare neque rutrum quis. Phasellus ultricies lacinia nulla, at ultricies augue accumsan vitae. Praesent sodales magna vel placerat placerat.",
         "tournamentMode": "RANKED",
-        "title": "My Mock Tournament 1",
+        "admin": "mock",
+        "title": "My Mock Tournament 9",
         "_links": {
           "self": {
-            "href": "http://localhost:8080/tournament/1"
+            "href": "http://localhost:8080/api/tournament/1"
           },
           "tournamentEntity": {
-            "href": "http://localhost:8080/tournament/1"
+            "href": "http://localhost:8080/api/tournament/1"
           },
           "game": {
-            "href": "http://localhost:8080/tournament/1/game"
-          },
-          "admin": {
-            "href": "http://localhost:8080/tournament/1/admin"
+            "href": "http://localhost:8080/api/tournament/1/game"
           }
         }
       }
@@ -194,14 +176,14 @@
   },
   "_links": {
     "self": {
-      "href": "http://localhost:8080/tournament{?page,size,sort}",
+      "href": "http://localhost:8080/api/tournament{?page,size,sort}",
       "templated": true
     },
     "profile": {
-      "href": "http://localhost:8080/profile/tournament"
+      "href": "http://localhost:8080/api/profile/tournament"
     },
     "search": {
-      "href": "http://localhost:8080/tournament/search"
+      "href": "http://localhost:8080/api/tournament/search"
     }
   },
   "page": {

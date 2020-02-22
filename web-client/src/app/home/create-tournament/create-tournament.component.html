@@ -1,5 +1,6 @@
 <!--suppress HtmlFormInputWithoutLabel -->
 <p class="mat-h1">Create a Tournament</p>
+<mat-progress-bar *ngIf="showLoadingLoginBar" color="warn" mode="indeterminate"></mat-progress-bar>
 <ng-form [formGroup]="createTournamentFormGroup" class="full-width">
   <mat-form-field appearance="outline" class="full-width">
     <mat-label>Tournament title</mat-label>
