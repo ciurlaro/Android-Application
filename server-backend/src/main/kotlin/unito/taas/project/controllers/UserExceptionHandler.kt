@@ -18,12 +18,16 @@ class UserExceptionHandler {
     @GetMapping("{res:\\w+}")
     fun serve(@PathVariable res: String) =
         try {
-            ResponseEntity.ok().header("Content-Type", if (res.endsWith(".js")) "application/javascript" else "text/html")
-                .body(ClassPathResource("static/${res}").file.readText())
+            ResponseEntity.ok().apply {
+                if (res.endsWith(".js"))
+                    header("Content-Type", "application/javascript")
+                body(ClassPathResource("static/${res}").file.readText())
+            }
         } catch (e: Throwable) {
             content
         }
+
     @GetMapping("tournament/**")
-    fun serve2() = content
+    fun serve() = content
 
 }
