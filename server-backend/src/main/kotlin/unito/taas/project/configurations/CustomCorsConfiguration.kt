@@ -1,4 +1,4 @@
-package unito.taas.project
+package unito.taas.project.configurations
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean
 import org.springframework.context.annotation.Bean
