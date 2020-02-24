@@ -344,7 +344,7 @@ its implementation should **always** be as **simple** as
 
 ### Implementation hierarchy
 
-![hyerarchy](https://github.com/CesareIurlaro/Android-Application/blob/master/images/clean_architecture_reloaded_layers.png?raw=true)
+![hyerarchy](https://github.com/CesareIurlaro/Android-Application/blob/master/images/clean_architecture_layers.png.png?raw=true)
 
 The single method interface which rapresents these **user operations** is called `UseCase`.
 
